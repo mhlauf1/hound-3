@@ -2,13 +2,6 @@ import {CogIcon} from '@sanity/icons'
 import {defineArrayMember, defineField, defineType} from 'sanity'
 import type {Link, Settings} from '../../../sanity.types'
 
-import * as demo from '../../lib/initialValues'
-
-/**
- * Settings schema Singleton.  Singletons are single documents that are displayed not in a collection, handy for things like site settings and other global configurations.
- * Learn more: https://www.sanity.io/docs/create-a-link-to-a-single-edit-page-in-your-main-document-type-list
- */
-
 export const settings = defineType({
   name: 'settings',
   title: 'Settings',
@@ -17,20 +10,18 @@ export const settings = defineType({
   fields: [
     defineField({
       name: 'title',
-      description: 'This field is the title of your blog.',
+      description: 'Site title',
       title: 'Title',
       type: 'string',
-      initialValue: demo.title,
+      initialValue: 'Hound Around Resort',
       validation: (rule) => rule.required(),
     }),
     defineField({
       name: 'description',
-      description: 'Used on the Homepage',
+      description: 'Used for SEO meta description',
       title: 'Description',
       type: 'array',
-      initialValue: demo.description,
       of: [
-        // Define a minified block content field for the description. https://www.sanity.io/docs/block-content
         defineArrayMember({
           type: 'block',
           options: {},
@@ -53,7 +44,6 @@ export const settings = defineType({
                       list: [
                         {title: 'URL', value: 'href'},
                         {title: 'Page', value: 'page'},
-                        {title: 'Post', value: 'post'},
                       ],
                       layout: 'radio',
                     },
@@ -88,21 +78,6 @@ export const settings = defineType({
                       }),
                   }),
                   defineField({
-                    name: 'post',
-                    title: 'Post',
-                    type: 'reference',
-                    to: [{type: 'post'}],
-                    hidden: ({parent}) => parent?.linkType !== 'post',
-                    validation: (Rule) =>
-                      Rule.custom((value, context) => {
-                        const parent = context.parent as Link
-                        if (parent?.linkType === 'post' && !value) {
-                          return 'Post reference is required when Link Type is Post'
-                        }
-                        return true
-                      }),
-                  }),
-                  defineField({
                     name: 'openInNewTab',
                     title: 'Open in new tab',
                     type: 'boolean',
@@ -114,6 +89,98 @@ export const settings = defineType({
           },
         }),
       ],
+    }),
+    defineField({
+      name: 'logo',
+      title: 'Logo',
+      type: 'image',
+      description: 'Site logo image',
+    }),
+    defineField({
+      name: 'navItems',
+      title: 'Navigation Items',
+      type: 'array',
+      of: [
+        defineArrayMember({
+          type: 'object',
+          fields: [
+            defineField({name: 'label', title: 'Label', type: 'string', validation: (Rule) => Rule.required()}),
+            defineField({name: 'link', title: 'Link', type: 'link'}),
+            defineField({
+              name: 'children',
+              title: 'Dropdown Items',
+              type: 'array',
+              of: [
+                defineArrayMember({
+                  type: 'object',
+                  fields: [
+                    defineField({name: 'label', title: 'Label', type: 'string'}),
+                    defineField({name: 'link', title: 'Link', type: 'link'}),
+                  ],
+                  preview: {select: {title: 'label'}},
+                }),
+              ],
+            }),
+          ],
+          preview: {select: {title: 'label'}},
+        }),
+      ],
+    }),
+    defineField({
+      name: 'ctaButton',
+      title: 'Header CTA Button',
+      type: 'button',
+    }),
+    defineField({
+      name: 'footerTagline',
+      title: 'Footer Tagline',
+      type: 'text',
+      rows: 2,
+    }),
+    defineField({
+      name: 'footerColumns',
+      title: 'Footer Columns',
+      type: 'array',
+      of: [
+        defineArrayMember({
+          type: 'object',
+          fields: [
+            defineField({name: 'title', title: 'Column Title', type: 'string'}),
+            defineField({
+              name: 'links',
+              title: 'Links',
+              type: 'array',
+              of: [
+                defineArrayMember({
+                  type: 'object',
+                  fields: [
+                    defineField({name: 'label', title: 'Label', type: 'string'}),
+                    defineField({name: 'link', title: 'Link', type: 'link'}),
+                  ],
+                  preview: {select: {title: 'label'}},
+                }),
+              ],
+            }),
+          ],
+          preview: {select: {title: 'title'}},
+        }),
+      ],
+    }),
+    defineField({
+      name: 'contactInfo',
+      title: 'Contact Information',
+      type: 'object',
+      fields: [
+        defineField({name: 'address', title: 'Address', type: 'text', rows: 2}),
+        defineField({name: 'phone', title: 'Phone', type: 'string'}),
+        defineField({name: 'email', title: 'Email', type: 'string'}),
+      ],
+    }),
+    defineField({
+      name: 'footerText',
+      title: 'Footer Copyright Text',
+      type: 'string',
+      description: 'e.g. "2025 Hound Around Resort. All rights reserved."',
     }),
     defineField({
       name: 'ogImage',

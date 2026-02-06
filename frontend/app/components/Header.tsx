@@ -1,55 +1,161 @@
-import Link from 'next/link'
-import {settingsQuery} from '@/sanity/lib/queries'
-import {sanityFetch} from '@/sanity/lib/live'
+'use client'
 
-export default async function Header() {
-  const {data: settings} = await sanityFetch({
-    query: settingsQuery,
-  })
+import Link from 'next/link'
+import {useState, useEffect} from 'react'
+import Button from '@/app/components/ui/Button'
+
+type NavChild = {
+  _key: string
+  label?: string
+  link?: any
+}
+
+type NavItem = {
+  _key: string
+  label?: string
+  link?: any
+  children?: NavChild[]
+}
+
+type HeaderProps = {
+  navItems?: NavItem[]
+  ctaButton?: {buttonText?: string; link?: any}
+}
+
+export default function Header({navItems, ctaButton}: HeaderProps) {
+  const [scrolled, setScrolled] = useState(false)
+  const [mobileOpen, setMobileOpen] = useState(false)
+  const [dropdownOpen, setDropdownOpen] = useState<string | null>(null)
+
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 20)
+    window.addEventListener('scroll', handleScroll, {passive: true})
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
 
   return (
-    <header className="fixed z-50 h-24 inset-0 bg-white/80 flex items-center backdrop-blur-lg">
-      <div className="container py-6 px-2 sm:px-6">
-        <div className="flex items-center justify-between gap-5">
-          <Link className="flex items-center gap-2" href="/">
-            <span className="text-lg sm:text-2xl pl-2 font-semibold">
-              {settings?.title || 'Sanity + Next.js'}
+    <header
+      className={`fixed top-0 left-0 right-0 z-50 transition-colors duration-300 ${
+        scrolled ? 'bg-tan/95 backdrop-blur-sm' : 'bg-transparent'
+      }`}
+    >
+      <div className="container">
+        <div className="flex items-center justify-between h-[72px]">
+          {/* Logo */}
+          <Link href="/" className="flex flex-col items-start border border-dark/20 rounded-lg px-4 py-1.5">
+            <span className="font-serif text-xl leading-tight tracking-tight">Hound Around</span>
+            <span className="font-sans text-[10px] font-medium uppercase tracking-[0.2em] leading-tight">
+              Resort
             </span>
           </Link>
 
-          <nav>
-            <ul
-              role="list"
-              className="flex items-center gap-4 md:gap-6 leading-5 text-xs sm:text-base tracking-tight font-mono"
-            >
-              <li>
-                <Link href="/about" className="hover:underline">
-                  About
-                </Link>
-              </li>
-
-              <li className="sm:before:w-[1px] sm:before:bg-gray-200 before:block flex sm:gap-4 md:gap-6">
-                <Link
-                  className="rounded-full flex gap-4 items-center bg-black hover:bg-blue focus:bg-blue py-2 px-4 justify-center sm:py-3 sm:px-6 text-white transition-colors duration-200"
-                  href="https://github.com/sanity-io/sanity-template-nextjs-clean"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <span className="whitespace-nowrap">View on GitHub</span>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    fill="currentColor"
-                    className="hidden sm:block h-4 sm:h-6"
+          {/* Desktop Nav */}
+          <nav className="hidden md:flex items-center gap-8">
+            {navItems?.map((item) => (
+              <div key={item._key} className="relative">
+                {item.children && item.children.length > 0 ? (
+                  <button
+                    onClick={() => setDropdownOpen(dropdownOpen === item._key ? null : item._key)}
+                    onBlur={() => setTimeout(() => setDropdownOpen(null), 200)}
+                    className="flex items-center gap-1 font-sans text-[16px] text-dark hover:text-dark/70 transition-colors"
                   >
-                    <path d="M12.001 2C6.47598 2 2.00098 6.475 2.00098 12C2.00098 16.425 4.86348 20.1625 8.83848 21.4875C9.33848 21.575 9.52598 21.275 9.52598 21.0125C9.52598 20.775 9.51348 19.9875 9.51348 19.15C7.00098 19.6125 6.35098 18.5375 6.15098 17.975C6.03848 17.6875 5.55098 16.8 5.12598 16.5625C4.77598 16.375 4.27598 15.9125 5.11348 15.9C5.90098 15.8875 6.46348 16.625 6.65098 16.925C7.55098 18.4375 8.98848 18.0125 9.56348 17.75C9.65098 17.1 9.91348 16.6625 10.201 16.4125C7.97598 16.1625 5.65098 15.3 5.65098 11.475C5.65098 10.3875 6.03848 9.4875 6.67598 8.7875C6.57598 8.5375 6.22598 7.5125 6.77598 6.1375C6.77598 6.1375 7.61348 5.875 9.52598 7.1625C10.326 6.9375 11.176 6.825 12.026 6.825C12.876 6.825 13.726 6.9375 14.526 7.1625C16.4385 5.8625 17.276 6.1375 17.276 6.1375C17.826 7.5125 17.476 8.5375 17.376 8.7875C18.0135 9.4875 18.401 10.375 18.401 11.475C18.401 15.3125 16.0635 16.1625 13.8385 16.4125C14.201 16.725 14.5135 17.325 14.5135 18.2625C14.5135 19.6 14.501 20.675 14.501 21.0125C14.501 21.275 14.6885 21.5875 15.1885 21.4875C19.259 20.1133 21.9999 16.2963 22.001 12C22.001 6.475 17.526 2 12.001 2Z"></path>
-                  </svg>
-                </Link>
-              </li>
-            </ul>
+                    {item.label}
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" className="mt-0.5">
+                      <path d="M3 5L6 8L9 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                    </svg>
+                  </button>
+                ) : (
+                  <Link
+                    href={resolveNavLink(item.link) || '#'}
+                    className="font-sans text-[16px] text-dark hover:text-dark/70 transition-colors"
+                  >
+                    {item.label}
+                  </Link>
+                )}
+
+                {/* Dropdown */}
+                {item.children && item.children.length > 0 && dropdownOpen === item._key && (
+                  <div className="absolute top-full left-0 mt-2 bg-white rounded-md shadow-card-hover py-2 min-w-[160px] border border-border-light">
+                    {item.children.map((child) => (
+                      <Link
+                        key={child._key}
+                        href={resolveNavLink(child.link) || '#'}
+                        className="block px-4 py-2 text-[15px] font-sans text-dark hover:bg-lavender/30 transition-colors"
+                      >
+                        {child.label}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </div>
+            ))}
           </nav>
+
+          {/* Desktop CTA */}
+          <div className="hidden md:block">
+            {ctaButton?.buttonText && (
+              <Button variant="primary" link={ctaButton.link}>
+                {ctaButton.buttonText}
+              </Button>
+            )}
+          </div>
+
+          {/* Mobile hamburger */}
+          <button
+            onClick={() => setMobileOpen(!mobileOpen)}
+            className="md:hidden flex flex-col gap-1.5 p-2"
+            aria-label="Toggle menu"
+          >
+            <span className={`block w-6 h-[2px] bg-dark transition-transform ${mobileOpen ? 'rotate-45 translate-y-[5px]' : ''}`} />
+            <span className={`block w-6 h-[2px] bg-dark transition-opacity ${mobileOpen ? 'opacity-0' : ''}`} />
+            <span className={`block w-6 h-[2px] bg-dark transition-transform ${mobileOpen ? '-rotate-45 -translate-y-[5px]' : ''}`} />
+          </button>
         </div>
       </div>
+
+      {/* Mobile menu */}
+      {mobileOpen && (
+        <div className="md:hidden bg-tan border-t border-border-light">
+          <div className="container py-6 flex flex-col gap-4">
+            {navItems?.map((item) => (
+              <div key={item._key}>
+                <Link
+                  href={resolveNavLink(item.link) || '#'}
+                  className="block font-sans text-[18px] text-dark py-2"
+                  onClick={() => setMobileOpen(false)}
+                >
+                  {item.label}
+                </Link>
+                {item.children?.map((child) => (
+                  <Link
+                    key={child._key}
+                    href={resolveNavLink(child.link) || '#'}
+                    className="block font-sans text-[16px] text-text-muted pl-4 py-1.5"
+                    onClick={() => setMobileOpen(false)}
+                  >
+                    {child.label}
+                  </Link>
+                ))}
+              </div>
+            ))}
+            {ctaButton?.buttonText && (
+              <div className="pt-2">
+                <Button variant="primary" link={ctaButton.link} className="w-full">
+                  {ctaButton.buttonText}
+                </Button>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
     </header>
   )
+}
+
+function resolveNavLink(link: any): string | null {
+  if (!link) return null
+  if (link.linkType === 'href' && link.href) return link.href
+  if (link.linkType === 'page' && link.page) return `/${link.page}`
+  if (link.href) return link.href
+  return null
 }

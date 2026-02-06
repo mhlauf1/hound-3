@@ -1,0 +1,88 @@
+import {PortableText} from '@portabletext/react'
+import type {PortableTextBlock} from 'next-sanity'
+import Image from '@/app/components/SanityImage'
+import ResolvedLink from '@/app/components/ResolvedLink'
+import {stegaClean} from '@sanity/client/stega'
+
+type SplitContentProps = {
+  block: {
+    heading?: string
+    body?: PortableTextBlock[]
+    link?: {label?: string; link?: any}
+    badge?: {asset?: {_ref: string}}
+    image?: {asset?: {_ref: string}; crop?: any}
+    imagePosition?: 'left' | 'right'
+    backgroundColor?: 'tan' | 'lavender' | 'dark'
+  }
+  index: number
+  pageId: string
+  pageType: string
+}
+
+const bgColors: Record<string, string> = {
+  tan: 'bg-tan text-dark',
+  lavender: 'bg-lavender text-dark',
+  dark: 'bg-dark text-cream',
+}
+
+export default function SplitContent({block}: SplitContentProps) {
+  const {heading, body, link, badge, image, imagePosition, backgroundColor} = block
+  const isImageLeft = stegaClean(imagePosition) === 'left'
+  const bg = bgColors[stegaClean(backgroundColor) || 'lavender'] || bgColors.lavender
+
+  return (
+    <section className={`${bg}`}>
+      <div className="container py-[80px] lg:py-[120px]">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
+          {/* Text side */}
+          <div className={isImageLeft ? 'lg:order-2' : 'lg:order-1'}>
+            {heading && (
+              <h2 className="font-serif text-[36px] md:text-[48px] lg:text-[56px] leading-[95%] tracking-[-0.005em] mb-6">
+                {heading}
+              </h2>
+            )}
+
+            {body && (
+              <div className="font-sans text-[16px] lg:text-[18px] font-light leading-[150%] opacity-80 mb-6 prose prose-p:mb-3">
+                <PortableText value={body} />
+              </div>
+            )}
+
+            {link?.label && link?.link && (
+              <div className="mb-6">
+                <ResolvedLink
+                  link={link.link}
+                  className="font-sans text-[16px] font-medium underline underline-offset-4 hover:opacity-70 transition-opacity"
+                >
+                  {link.label}
+                </ResolvedLink>
+              </div>
+            )}
+
+            {badge?.asset?._ref && (
+              <Image
+                id={badge.asset._ref}
+                alt="Badge"
+                width={80}
+                className="h-16 w-auto"
+              />
+            )}
+          </div>
+
+          {/* Image side */}
+          <div className={isImageLeft ? 'lg:order-1' : 'lg:order-2'}>
+            {image?.asset?._ref && (
+              <Image
+                id={image.asset._ref}
+                alt={heading || 'Section image'}
+                width={600}
+                crop={image.crop}
+                className="rounded-lg w-full object-cover"
+              />
+            )}
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}

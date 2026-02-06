@@ -2,7 +2,8 @@ import './globals.css'
 
 import {SpeedInsights} from '@vercel/speed-insights/next'
 import type {Metadata} from 'next'
-import {Inter, IBM_Plex_Mono} from 'next/font/google'
+import {EB_Garamond} from 'next/font/google'
+import {GeistSans} from 'geist/font/sans'
 import {draftMode} from 'next/headers'
 import {toPlainText} from 'next-sanity'
 import {VisualEditing} from 'next-sanity/visual-editing'
@@ -11,24 +12,18 @@ import {Toaster} from 'sonner'
 import DraftModeToast from '@/app/components/DraftModeToast'
 import Footer from '@/app/components/Footer'
 import Header from '@/app/components/Header'
-import * as demo from '@/sanity/lib/demo'
 import {sanityFetch, SanityLive} from '@/sanity/lib/live'
 import {settingsQuery} from '@/sanity/lib/queries'
 import {resolveOpenGraphImage} from '@/sanity/lib/utils'
 import {handleError} from '@/app/client-utils'
 
-/**
- * Generate metadata for the page.
- * Learn more: https://nextjs.org/docs/app/api-reference/functions/generate-metadata#generatemetadata-function
- */
 export async function generateMetadata(): Promise<Metadata> {
   const {data: settings} = await sanityFetch({
     query: settingsQuery,
-    // Metadata should never contain stega
     stega: false,
   })
-  const title = settings?.title || demo.title
-  const description = settings?.description || demo.description
+  const title = settings?.title || 'Hound Around Resort'
+  const description = settings?.description
 
   const ogImage = resolveOpenGraphImage(settings?.ogImage)
   let metadataBase: URL | undefined = undefined
@@ -45,48 +40,49 @@ export async function generateMetadata(): Promise<Metadata> {
       template: `%s | ${title}`,
       default: title,
     },
-    description: toPlainText(description),
+    description: description ? toPlainText(description) : '',
     openGraph: {
       images: ogImage ? [ogImage] : [],
     },
   }
 }
 
-const inter = Inter({
-  variable: '--font-inter',
+const ebGaramond = EB_Garamond({
+  variable: '--font-serif',
   subsets: ['latin'],
   display: 'swap',
-})
-
-const ibmPlexMono = IBM_Plex_Mono({
-  variable: '--font-ibm-plex-mono',
-  weight: ['400'],
-  subsets: ['latin'],
-  display: 'swap',
+  weight: ['400', '500', '600', '700', '800'],
 })
 
 export default async function RootLayout({children}: {children: React.ReactNode}) {
   const {isEnabled: isDraftMode} = await draftMode()
+  const {data: settings} = await sanityFetch({query: settingsQuery})
 
   return (
-    <html lang="en" className={`${inter.variable} ${ibmPlexMono.variable} bg-white text-black`}>
+    <html
+      lang="en"
+      className={`${ebGaramond.variable} ${GeistSans.variable} bg-tan text-dark`}
+    >
       <body>
-        <section className="min-h-screen pt-24">
-          {/* The <Toaster> component is responsible for rendering toast notifications used in /app/client-utils.ts and /app/components/DraftModeToast.tsx */}
-          <Toaster />
-          {isDraftMode && (
-            <>
-              <DraftModeToast />
-              {/*  Enable Visual Editing, only to be rendered when Draft Mode is enabled */}
-              <VisualEditing />
-            </>
-          )}
-          {/* The <SanityLive> component is responsible for making all sanityFetch calls in your application live, so should always be rendered. */}
-          <SanityLive onError={handleError} />
-          <Header />
-          <main className="">{children}</main>
-          <Footer />
-        </section>
+        <Toaster />
+        {isDraftMode && (
+          <>
+            <DraftModeToast />
+            <VisualEditing />
+          </>
+        )}
+        <SanityLive onError={handleError} />
+        <Header
+          navItems={settings?.navItems as any}
+          ctaButton={settings?.ctaButton as any}
+        />
+        <main className="pt-[72px]">{children}</main>
+        <Footer
+          tagline={settings?.footerTagline ?? undefined}
+          columns={settings?.footerColumns as any}
+          contactInfo={settings?.contactInfo as any}
+          footerText={settings?.footerText ?? undefined}
+        />
         <SpeedInsights />
       </body>
     </html>

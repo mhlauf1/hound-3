@@ -13,27 +13,9 @@
  */
 
 // Source: ../sanity.schema.json
-export type PageReference = {
-  _ref: string
-  _type: 'reference'
-  _weak?: boolean
-  [internalGroqTypeReferenceTo]?: 'page'
-}
-
-export type PostReference = {
-  _ref: string
-  _type: 'reference'
-  _weak?: boolean
-  [internalGroqTypeReferenceTo]?: 'post'
-}
-
-export type Link = {
-  _type: 'link'
-  linkType?: 'href' | 'page' | 'post'
-  href?: string
-  page?: PageReference
-  post?: PostReference
-  openInNewTab?: boolean
+export type SplitContentLink = {
+  label?: string
+  link?: Link
 }
 
 export type SanityImageAssetReference = {
@@ -41,6 +23,172 @@ export type SanityImageAssetReference = {
   _type: 'reference'
   _weak?: boolean
   [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+}
+
+export type SplitContent = {
+  _type: 'splitContent'
+  heading: string
+  body?: BlockContent
+  link?: SplitContentLink
+  badge?: {
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    _type: 'image'
+  }
+  image?: {
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    _type: 'image'
+  }
+  imagePosition?: 'left' | 'right'
+  backgroundColor?: 'tan' | 'lavender' | 'dark'
+}
+
+export type CtaBanner = {
+  _type: 'ctaBanner'
+  heading: string
+  backgroundImage?: {
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    _type: 'image'
+  }
+  cta?: Button
+  showRating?: boolean
+  ratingText?: string
+}
+
+export type TestimonialReference = {
+  _ref: string
+  _type: 'reference'
+  _weak?: boolean
+  [internalGroqTypeReferenceTo]?: 'testimonial'
+}
+
+export type Testimonials = {
+  _type: 'testimonials'
+  heading: string
+  reviews?: Array<
+    {
+      _key: string
+    } & TestimonialReference
+  >
+  googleRating?: string
+  googleReviewCount?: number
+}
+
+export type WebcamPreview = {
+  _type: 'webcamPreview'
+  eyebrow?: string
+  heading: string
+  previewImage?: {
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    _type: 'image'
+  }
+  passwordProtected?: boolean
+  webcamUrl?: string
+}
+
+export type StatsBar = {
+  _type: 'statsBar'
+  stats?: Array<{
+    value: string
+    label: string
+    _key: string
+  }>
+  showLogo?: boolean
+}
+
+export type ServiceReference = {
+  _ref: string
+  _type: 'reference'
+  _weak?: boolean
+  [internalGroqTypeReferenceTo]?: 'service'
+}
+
+export type ServiceTabs = {
+  _type: 'serviceTabs'
+  eyebrow?: string
+  heading: string
+  tabs?: Array<
+    {
+      _key: string
+    } & ServiceReference
+  >
+}
+
+export type FeatureCards = {
+  _type: 'featureCards'
+  heading: string
+  features?: Array<{
+    icon?: string
+    title: string
+    description?: string
+    _key: string
+  }>
+  cta?: Button
+  trustLine?: string
+  darkMode?: boolean
+}
+
+export type ImageRow = {
+  _type: 'imageRow'
+  images?: Array<{
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    alt?: string
+    _type: 'image'
+    _key: string
+  }>
+}
+
+export type Hero = {
+  _type: 'hero'
+  eyebrow?: string
+  heading: string
+  subtext?: string
+  primaryCta?: Button
+  secondaryCta?: Button
+  trustLine?: string
+  heroImage?: {
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    _type: 'image'
+  }
+  backgroundImage?: {
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    _type: 'image'
+  }
+}
+
+export type PageReference = {
+  _ref: string
+  _type: 'reference'
+  _weak?: boolean
+  [internalGroqTypeReferenceTo]?: 'page'
+}
+
+export type Link = {
+  _type: 'link'
+  linkType?: 'href' | 'page'
+  href?: string
+  page?: PageReference
+  openInNewTab?: boolean
 }
 
 export type CallToAction = {
@@ -97,10 +245,9 @@ export type BlockContent = Array<
       style?: 'normal' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'blockquote'
       listItem?: 'bullet' | 'number'
       markDefs?: Array<{
-        linkType?: 'href' | 'page' | 'post'
+        linkType?: 'href' | 'page'
         href?: string
         page?: PageReference
-        post?: PostReference
         openInNewTab?: boolean
         _type: 'link'
         _key: string
@@ -125,6 +272,59 @@ export type Button = {
   link?: Link
 }
 
+export type Testimonial = {
+  _id: string
+  _type: 'testimonial'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  quote: string
+  authorName: string
+  authorLabel?: string
+  rating?: number
+}
+
+export type Service = {
+  _id: string
+  _type: 'service'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  title: string
+  slug?: Slug
+  shortDescription?: string
+  tabImage?: {
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    _type: 'image'
+  }
+  tabCta?: Button
+}
+
+export type SanityImageCrop = {
+  _type: 'sanity.imageCrop'
+  top: number
+  bottom: number
+  left: number
+  right: number
+}
+
+export type SanityImageHotspot = {
+  _type: 'sanity.imageHotspot'
+  x: number
+  y: number
+  height: number
+  width: number
+}
+
+export type Slug = {
+  _type: 'slug'
+  current: string
+  source?: string
+}
+
 export type Settings = {
   _id: string
   _type: 'settings'
@@ -142,10 +342,9 @@ export type Settings = {
     style?: 'normal'
     listItem?: never
     markDefs?: Array<{
-      linkType?: 'href' | 'page' | 'post'
+      linkType?: 'href' | 'page'
       href?: string
       page?: PageReference
-      post?: PostReference
       openInNewTab?: boolean
       _type: 'link'
       _key: string
@@ -154,6 +353,40 @@ export type Settings = {
     _type: 'block'
     _key: string
   }>
+  logo?: {
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    _type: 'image'
+  }
+  navItems?: Array<{
+    label: string
+    link?: Link
+    children?: Array<{
+      label?: string
+      link?: Link
+      _key: string
+    }>
+    _key: string
+  }>
+  ctaButton?: Button
+  footerTagline?: string
+  footerColumns?: Array<{
+    title?: string
+    links?: Array<{
+      label?: string
+      link?: Link
+      _key: string
+    }>
+    _key: string
+  }>
+  contactInfo?: {
+    address?: string
+    phone?: string
+    email?: string
+  }
+  footerText?: string
   ogImage?: {
     asset?: SanityImageAssetReference
     media?: unknown
@@ -163,22 +396,6 @@ export type Settings = {
     metadataBase?: string
     _type: 'image'
   }
-}
-
-export type SanityImageCrop = {
-  _type: 'sanity.imageCrop'
-  top: number
-  bottom: number
-  left: number
-  right: number
-}
-
-export type SanityImageHotspot = {
-  _type: 'sanity.imageHotspot'
-  x: number
-  y: number
-  height: number
-  width: number
 }
 
 export type Page = {
@@ -198,60 +415,34 @@ export type Page = {
     | ({
         _key: string
       } & InfoSection)
+    | ({
+        _key: string
+      } & Hero)
+    | ({
+        _key: string
+      } & ImageRow)
+    | ({
+        _key: string
+      } & FeatureCards)
+    | ({
+        _key: string
+      } & ServiceTabs)
+    | ({
+        _key: string
+      } & StatsBar)
+    | ({
+        _key: string
+      } & WebcamPreview)
+    | ({
+        _key: string
+      } & Testimonials)
+    | ({
+        _key: string
+      } & CtaBanner)
+    | ({
+        _key: string
+      } & SplitContent)
   >
-}
-
-export type PersonReference = {
-  _ref: string
-  _type: 'reference'
-  _weak?: boolean
-  [internalGroqTypeReferenceTo]?: 'person'
-}
-
-export type Post = {
-  _id: string
-  _type: 'post'
-  _createdAt: string
-  _updatedAt: string
-  _rev: string
-  title: string
-  slug: Slug
-  content?: BlockContent
-  excerpt?: string
-  coverImage?: {
-    asset?: SanityImageAssetReference
-    media?: unknown
-    hotspot?: SanityImageHotspot
-    crop?: SanityImageCrop
-    alt?: string
-    _type: 'image'
-  }
-  date?: string
-  author?: PersonReference
-}
-
-export type Person = {
-  _id: string
-  _type: 'person'
-  _createdAt: string
-  _updatedAt: string
-  _rev: string
-  firstName: string
-  lastName: string
-  picture: {
-    asset?: SanityImageAssetReference
-    media?: unknown
-    hotspot?: SanityImageHotspot
-    crop?: SanityImageCrop
-    alt?: string
-    _type: 'image'
-  }
-}
-
-export type Slug = {
-  _type: 'slug'
-  current: string
-  source?: string
 }
 
 export type SanityAssistInstructionTask = {
@@ -488,23 +679,33 @@ export type Geopoint = {
 }
 
 export type AllSanitySchemaTypes =
-  | PageReference
-  | PostReference
-  | Link
+  | SplitContentLink
   | SanityImageAssetReference
+  | SplitContent
+  | CtaBanner
+  | TestimonialReference
+  | Testimonials
+  | WebcamPreview
+  | StatsBar
+  | ServiceReference
+  | ServiceTabs
+  | FeatureCards
+  | ImageRow
+  | Hero
+  | PageReference
+  | Link
   | CallToAction
   | InfoSection
   | BlockContentTextOnly
   | BlockContent
   | Button
-  | Settings
+  | Testimonial
+  | Service
   | SanityImageCrop
   | SanityImageHotspot
-  | Page
-  | PersonReference
-  | Post
-  | Person
   | Slug
+  | Settings
+  | Page
   | SanityAssistInstructionTask
   | SanityAssistTaskStatus
   | SanityAssistSchemaTypeAnnotations

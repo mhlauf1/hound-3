@@ -13,6 +13,7 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
+    "@iconify/react": "^6.0.2",
     "@sanity/client": "^7.13.2",
     "@sanity/image-url": "^1.2.0",
     "@sanity/uuid": "^3.0.2",
@@ -21,6 +22,7 @@
     "@vercel/speed-insights": "^1.2.0",
     "autoprefixer": "^10.4.22",
     "date-fns": "^4.1.0",
+    "geist": "^1.5.1",
     "next": "16.1.1",
     "next-sanity": "^12.0.5",
     "postcss": "^8.5.6",
