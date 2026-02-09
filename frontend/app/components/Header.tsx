@@ -34,17 +34,13 @@ export default function Header({navItems, ctaButton}: HeaderProps) {
   }, [])
 
   return (
-    <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-colors duration-300 ${
-        scrolled ? 'bg-tan/95 backdrop-blur-sm' : 'bg-transparent'
-      }`}
-    >
-      <div className="container">
-        <div className="flex items-center justify-between h-[72px]">
+    <header className="fixed top-0 left-0 right-0 z-50 transition-colors duration-300">
+      <div className="px-2 md:px-20">
+        <div className="flex border  bg-tan/95 backdrop-blur-sm border-dark/20 rounded-md mt-4 pl-4 md:pl-12 pr-2 md:pr-6 items-center justify-between py-3">
           {/* Logo */}
-          <Link href="/" className="flex flex-col items-start border border-dark/20 rounded-lg px-4 py-1.5">
+          <Link href="/" className="flex flex-col items-center  gap-1">
             <span className="font-serif text-xl leading-tight tracking-tight">Hound Around</span>
-            <span className="font-sans text-[10px] font-medium uppercase tracking-[0.2em] leading-tight">
+            <span className="font-sans text-[8px] font-semibold uppercase tracking-[0.2em] leading-tight">
               Resort
             </span>
           </Link>
@@ -61,7 +57,12 @@ export default function Header({navItems, ctaButton}: HeaderProps) {
                   >
                     {item.label}
                     <svg width="12" height="12" viewBox="0 0 12 12" fill="none" className="mt-0.5">
-                      <path d="M3 5L6 8L9 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                      <path
+                        d="M3 5L6 8L9 5"
+                        stroke="currentColor"
+                        strokeWidth="1.5"
+                        strokeLinecap="round"
+                      />
                     </svg>
                   </button>
                 ) : (
@@ -106,9 +107,15 @@ export default function Header({navItems, ctaButton}: HeaderProps) {
             className="md:hidden flex flex-col gap-1.5 p-2"
             aria-label="Toggle menu"
           >
-            <span className={`block w-6 h-[2px] bg-dark transition-transform ${mobileOpen ? 'rotate-45 translate-y-[5px]' : ''}`} />
-            <span className={`block w-6 h-[2px] bg-dark transition-opacity ${mobileOpen ? 'opacity-0' : ''}`} />
-            <span className={`block w-6 h-[2px] bg-dark transition-transform ${mobileOpen ? '-rotate-45 -translate-y-[5px]' : ''}`} />
+            <span
+              className={`block w-6 h-[2px] bg-dark transition-transform ${mobileOpen ? 'rotate-45 translate-y-[5px]' : ''}`}
+            />
+            <span
+              className={`block w-6 h-[2px] bg-dark transition-opacity ${mobileOpen ? 'opacity-0' : ''}`}
+            />
+            <span
+              className={`block w-6 h-[2px] bg-dark transition-transform ${mobileOpen ? '-rotate-45 -translate-y-[5px]' : ''}`}
+            />
           </button>
         </div>
       </div>

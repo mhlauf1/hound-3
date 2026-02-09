@@ -1,6 +1,6 @@
 'use client'
 
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
 import Badge from '@/app/components/ui/Badge'
 import Button from '@/app/components/ui/Button'
 import Image from '@/app/components/SanityImage'
@@ -28,6 +28,15 @@ type ServiceTabsProps = {
 export default function ServiceTabs({block}: ServiceTabsProps) {
   const {eyebrow, heading, tabs} = block
   const [activeTab, setActiveTab] = useState(0)
+  const tabCount = tabs?.length ?? 0
+
+  useEffect(() => {
+    if (tabCount < 2) return
+    const timer = setTimeout(() => {
+      setActiveTab((t) => (t + 1) % tabCount)
+    }, 7000)
+    return () => clearTimeout(timer)
+  }, [activeTab, tabCount])
 
   if (!tabs || tabs.length === 0) return null
 
@@ -35,44 +44,51 @@ export default function ServiceTabs({block}: ServiceTabsProps) {
 
   return (
     <section className="bg-tan">
-      <div className="container py-[80px] lg:py-[120px]">
+      <div className="px-6 md:px-24 flex flex-col items-center py-[80px] lg:py-[120px]">
         <div className="text-center mb-10">
           {eyebrow && <Badge className="mb-4">{eyebrow}</Badge>}
           {heading && (
-            <h2 className="font-serif text-[36px] md:text-[48px] lg:text-[56px] leading-[95%] tracking-[-0.005em]">
+            <h2 className="font-serif text-[36px] md:max-w-[20ch] md:text-[48px] lg:text-[56px] leading-[95%] tracking-[-0.005em]">
               {heading}
             </h2>
           )}
         </div>
 
         {/* Tab bar */}
-        <div className="flex border-b border-border-light mb-10 lg:mb-14 overflow-x-auto">
+        <div className="flex border-b w-full border-border-light mb-10 mt-4 lg:mb-14 overflow-x-auto">
           {tabs.map((tab, i) => (
             <button
               key={tab._id}
               onClick={() => setActiveTab(i)}
-              className={`flex-1 min-w-[120px] pb-3 font-sans text-[16px] lg:text-[18px] transition-colors border-b-2 ${
-                i === activeTab
-                  ? 'border-dark text-dark font-medium'
-                  : 'border-transparent text-text-muted hover:text-dark'
+              className={`relative flex-1 min-w-[120px] p-2 md:p-4 font-serif text-start text-[16px] md:text-2xl lg:text-3xl transition-colors ${
+                i === activeTab ? 'text-dark' : 'text-text-muted hover:text-dark'
               }`}
             >
               {tab.title}
+              {i === activeTab && (
+                <span
+                  key={activeTab}
+                  className="absolute bottom-0 left-0 h-[2px] bg-dark animate-progress"
+                />
+              )}
             </button>
           ))}
         </div>
 
         {/* Tab content */}
         {activeService && (
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-            <div>
+          <div
+            key={activeTab}
+            className="grid grid-cols-1 bg-dark/10 rounded-lg  lg:grid-cols-2 gap-8 lg:gap-12 items-center animate-fade-in"
+          >
+            <div className="pb-4 pt-16 px-8 md:pl-24">
               {activeService.title && (
                 <h3 className="font-serif text-[28px] md:text-[36px] lg:text-[48px] leading-[95%] mb-4">
                   {activeService.title}
                 </h3>
               )}
               {activeService.shortDescription && (
-                <p className="font-sans text-[16px] lg:text-[18px] font-light text-text-muted leading-[150%] mb-6">
+                <p className="font-sans text-[16px] lg:text-[18px] text-text-muted max-w-[46ch] leading-[150%] mb-6">
                   {activeService.shortDescription}
                 </p>
               )}

@@ -8,6 +8,12 @@ export const testimonials = defineType({
   icon: StarIcon,
   fields: [
     defineField({
+      name: 'icon',
+      title: 'Icon',
+      type: 'image',
+      description: 'Optional icon/illustration displayed above the heading',
+    }),
+    defineField({
       name: 'heading',
       title: 'Heading',
       type: 'string',

@@ -24,7 +24,7 @@ export default function WebcamPreview({block}: WebcamPreviewProps) {
 
   return (
     <section className="bg-tan">
-      <div className="container py-[80px] lg:py-[120px]">
+      <div className="px-8 md:px-24 py-[80px] lg:py-[120px]">
         <div className="text-center mb-10 lg:mb-14">
           {eyebrow && <Badge className="mb-4">{eyebrow}</Badge>}
           {heading && (
@@ -34,17 +34,17 @@ export default function WebcamPreview({block}: WebcamPreviewProps) {
           )}
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-10 items-center max-w-4xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-[2fr_3fr]  lg:gap-4 items-center">
           {/* Password form */}
           {passwordProtected && (
-            <div className="border border-border-light rounded-lg p-8 bg-white">
-              <div className="space-y-4">
+            <div className="border border-dark flex w-full items-center rounded-lg p-8 h-full">
+              <div className="space-y-4 w-full px-12">
                 <input
                   type="password"
                   placeholder="Enter Your Password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="w-full px-4 py-3 bg-lavender/40 border border-border-light rounded-sm font-sans text-[16px] placeholder:text-text-muted focus:outline-none focus:ring-2 focus:ring-lavender"
+                  className="w-full px-4 py-3 bg-lavender/40 text-center border border-border-light rounded-sm font-sans text-[16px] placeholder:text-text-muted focus:outline-none focus:ring-2 focus:ring-lavender"
                 />
                 <Button variant="outline" className="w-full">
                   Submit

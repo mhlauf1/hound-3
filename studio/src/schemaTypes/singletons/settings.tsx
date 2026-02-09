@@ -180,7 +180,33 @@ export const settings = defineType({
       name: 'footerText',
       title: 'Footer Copyright Text',
       type: 'string',
-      description: 'e.g. "2025 Hound Around Resort. All rights reserved."',
+      description: 'e.g. "© 2026 Hound Around Resort. Part of the Embark Pet Services family."',
+    }),
+    defineField({
+      name: 'footerTextLink',
+      title: 'Footer Copyright Link',
+      type: 'object',
+      description: 'Optional link embedded in the copyright text (e.g. "Embark Pet Services")',
+      fields: [
+        defineField({name: 'label', title: 'Link Text', type: 'string'}),
+        defineField({name: 'href', title: 'URL', type: 'url'}),
+      ],
+    }),
+    defineField({
+      name: 'footerBottomLinks',
+      title: 'Footer Bottom Links',
+      type: 'array',
+      description: 'Legal links like Privacy Policy, Terms of Service',
+      of: [
+        defineArrayMember({
+          type: 'object',
+          fields: [
+            defineField({name: 'label', title: 'Label', type: 'string'}),
+            defineField({name: 'link', title: 'Link', type: 'link'}),
+          ],
+          preview: {select: {title: 'label'}},
+        }),
+      ],
     }),
     defineField({
       name: 'ogImage',

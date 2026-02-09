@@ -37,6 +37,11 @@ export const settingsQuery = defineQuery(`*[_type == "settings"][0]{
   contactInfo,
   footerTagline,
   footerText,
+  footerTextLink,
+  footerBottomLinks[]{
+    ...,
+    ${linkFields}
+  },
   logo
 }`)
 

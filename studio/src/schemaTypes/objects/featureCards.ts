@@ -14,6 +14,18 @@ export const featureCards = defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
+      name: 'stickerLeft',
+      title: 'Left Sticker',
+      type: 'image',
+      description: 'Dog sticker displayed to the left of the heading',
+    }),
+    defineField({
+      name: 'stickerRight',
+      title: 'Right Sticker',
+      type: 'image',
+      description: 'Dog sticker displayed to the right of the heading',
+    }),
+    defineField({
       name: 'features',
       title: 'Features',
       type: 'array',

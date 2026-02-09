@@ -1,10 +1,12 @@
 import {Icon} from '@iconify/react'
 import Button from '@/app/components/ui/Button'
-import DecorativeCurve from '@/app/components/ui/DecorativeCurve'
+import Image from '@/app/components/SanityImage'
 
 type FeatureCardsProps = {
   block: {
     heading?: string
+    stickerLeft?: {asset?: {_ref: string}}
+    stickerRight?: {asset?: {_ref: string}}
     features?: Array<{
       _key: string
       icon?: string
@@ -21,56 +23,57 @@ type FeatureCardsProps = {
 }
 
 export default function FeatureCards({block}: FeatureCardsProps) {
-  const {heading, features, cta, trustLine} = block
+  const {heading, stickerLeft, stickerRight, features, cta, trustLine} = block
 
   return (
-    <section className="relative bg-dark text-cream rounded-t-[48px] -mt-12 z-10 overflow-hidden">
-      {/* Decorative curves */}
-      <DecorativeCurve color="white" position="top-right" className="w-[600px] h-[400px]" />
-      <DecorativeCurve color="white" position="bottom-left" className="w-[400px] h-[300px]" />
+    <section className="relative bg-dark text-cream rounded-[48px] -mt-12 z-10 overflow-hidden">
+      <div className="px-6 md:px-28 relative z-10 py-[80px] lg:py-[148px]">
+        <div className="flex flex-row justify-between items-center mb-12 lg:mb-16">
+          {heading && (
+            <h2 className="font-serif text-[36px] md:text-[56px] lg:text-[84px] leading-[100%] tracking-[-0.01em] text-lavender max-w-2xl">
+              {heading}
+            </h2>
+          )}
 
-      {/* Dog face illustrations placeholder */}
-      <div className="absolute top-8 right-8 lg:top-12 lg:right-16 w-24 h-24 lg:w-32 lg:h-32 opacity-90" aria-hidden="true">
-        <svg viewBox="0 0 100 100" className="w-full h-full">
-          {/* Golden dog face */}
-          <circle cx="35" cy="50" r="22" fill="#D4A96A" />
-          <circle cx="28" cy="44" r="3" fill="#201A25" />
-          <circle cx="42" cy="44" r="3" fill="#201A25" />
-          <ellipse cx="35" cy="52" rx="4" ry="3" fill="#3D2E1A" />
-          {/* White dog face */}
-          <circle cx="65" cy="50" r="18" fill="#F5F0E8" />
-          <circle cx="60" cy="46" r="2.5" fill="#201A25" />
-          <circle cx="70" cy="46" r="2.5" fill="#201A25" />
-          <ellipse cx="65" cy="52" rx="3" ry="2.5" fill="#E8A0B0" />
-        </svg>
-      </div>
-
-      <div className="container relative z-10 py-[80px] lg:py-[120px]">
-        {heading && (
-          <h2 className="font-serif text-[36px] md:text-[56px] lg:text-[84px] leading-[90%] tracking-[-0.01em] text-cream mb-12 lg:mb-16 max-w-2xl">
-            {heading}
-          </h2>
-        )}
+          <div className="hidden md:flex items-center gap-2 shrink-0">
+            {stickerLeft?.asset?._ref && (
+              <Image
+                id={stickerLeft.asset._ref}
+                alt=""
+                width={160}
+                className="w-[100px] lg:w-[160px] h-auto"
+              />
+            )}
+            {stickerRight?.asset?._ref && (
+              <Image
+                id={stickerRight.asset._ref}
+                alt=""
+                width={160}
+                className="w-[100px] lg:w-[160px] h-auto"
+              />
+            )}
+          </div>
+        </div>
 
         {features && features.length > 0 && (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-12 lg:mb-16">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-12 lg:mb-16">
             {features.map((feature) => (
               <div
                 key={feature._key}
-                className="bg-dark-card border border-border-dark rounded-md p-6"
+                className="bg-dark-card border border-border-dark rounded-md px-6 py-12"
               >
                 {feature.icon && (
-                  <div className="mb-4 text-cream/80">
-                    <Icon icon={feature.icon} width={28} height={28} />
+                  <div className="mb-6 text-lavender/80">
+                    <Icon icon={feature.icon} width={42} height={42} />
                   </div>
                 )}
                 {feature.title && (
-                  <h3 className="font-serif text-[24px] leading-[120%] text-cream mb-2">
+                  <h3 className="font-serif text-[24px] md:text-4xl leading-[120%] text-lavender mb-4">
                     {feature.title}
                   </h3>
                 )}
                 {feature.description && (
-                  <p className="font-sans text-[16px] font-light text-text-muted-dark leading-[150%]">
+                  <p className="font-sans text-[16px] md:text-lg mb-8  text-lavender leading-[150%]">
                     {feature.description}
                   </p>
                 )}
@@ -85,9 +88,7 @@ export default function FeatureCards({block}: FeatureCardsProps) {
               {cta.buttonText}
             </Button>
           )}
-          {trustLine && (
-            <p className="font-sans text-[14px] text-text-muted-dark">{trustLine}</p>
-          )}
+          {trustLine && <p className="font-sans text-[14px] text-text-muted-dark">{trustLine}</p>}
         </div>
       </div>
     </section>

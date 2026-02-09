@@ -18,24 +18,19 @@ export default function StatsBar({block}: StatsBarProps) {
   const {stats, showLogo} = block
 
   return (
-    <section className="relative bg-lavender overflow-hidden">
-      <DecorativeCurve color="white" position="top-left" className="w-[500px] h-[300px]" />
-      <DecorativeCurve color="white" position="bottom-right" className="w-[400px] h-[250px]" />
-
-      <div className="container relative z-10 py-[60px] lg:py-[80px]">
+    <section className="relative mb-24 border-y border-dark md:mb-32 bg-lavender overflow-hidden">
+      <div className="md:max-w-[80vw] px-8 md:px-20 mx-auto relative z-10 pb-[60px] lg:pb-[80px] pt-[80px] lg:pt-[100px]">
         {stats && stats.length > 0 && (
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
             {stats.map((stat) => (
               <div
                 key={stat._key}
-                className="bg-white rounded-md p-6 text-center shadow-card border border-border-light"
+                className="bg-white rounded-md p-12 md:p-8 flex flex-col justify-center text-center shadow-card border border-dark"
               >
-                <div className="font-sans text-[36px] lg:text-[48px] font-medium leading-[100%] tracking-[-0.01em] text-dark mb-2">
+                <div className="font-serif text-5xl  lg:text-6xl font-thin leading-[100%] tracking-[-0.01em] text-dark mb-2">
                   {stat.value}
                 </div>
-                <div className="font-sans text-[14px] lg:text-[16px] text-text-muted">
-                  {stat.label}
-                </div>
+                <div className="font-sans text-[14px] ">{stat.label}</div>
               </div>
             ))}
           </div>

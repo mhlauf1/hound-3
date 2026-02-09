@@ -59,10 +59,7 @@ export default async function RootLayout({children}: {children: React.ReactNode}
   const {data: settings} = await sanityFetch({query: settingsQuery})
 
   return (
-    <html
-      lang="en"
-      className={`${ebGaramond.variable} ${GeistSans.variable} bg-tan text-dark`}
-    >
+    <html lang="en" className={`${ebGaramond.variable} ${GeistSans.variable} bg-tan text-dark`}>
       <body>
         <Toaster />
         {isDraftMode && (
@@ -72,16 +69,15 @@ export default async function RootLayout({children}: {children: React.ReactNode}
           </>
         )}
         <SanityLive onError={handleError} />
-        <Header
-          navItems={settings?.navItems as any}
-          ctaButton={settings?.ctaButton as any}
-        />
+        <Header navItems={settings?.navItems as any} ctaButton={settings?.ctaButton as any} />
         <main className="pt-[72px]">{children}</main>
         <Footer
           tagline={settings?.footerTagline ?? undefined}
           columns={settings?.footerColumns as any}
           contactInfo={settings?.contactInfo as any}
           footerText={settings?.footerText ?? undefined}
+          footerTextLink={settings?.footerTextLink as any}
+          bottomLinks={settings?.footerBottomLinks as any}
         />
         <SpeedInsights />
       </body>

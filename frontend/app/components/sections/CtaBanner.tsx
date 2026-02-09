@@ -5,6 +5,7 @@ import DecorativeCurve from '@/app/components/ui/DecorativeCurve'
 type CtaBannerProps = {
   block: {
     heading?: string
+    icon?: {asset?: {_ref: string}}
     backgroundImage?: {asset?: {_ref: string}; crop?: any}
     cta?: {buttonText?: string; link?: any}
     showRating?: boolean
@@ -16,11 +17,11 @@ type CtaBannerProps = {
 }
 
 export default function CtaBanner({block}: CtaBannerProps) {
-  const {heading, backgroundImage, cta, showRating, ratingText} = block
+  const {heading, icon, backgroundImage, cta, showRating, ratingText} = block
 
   return (
     <section className="bg-tan px-4 lg:px-8">
-      <div className="relative rounded-lg overflow-hidden max-w-6xl mx-auto">
+      <div className="relative rounded-lg min-h-[70vh] md:min-h-[80vh] flex px-[10%] items-center overflow-hidden">
         {/* Background image */}
         {backgroundImage?.asset?._ref && (
           <div className="absolute inset-0">
@@ -32,38 +33,29 @@ export default function CtaBanner({block}: CtaBannerProps) {
               mode="cover"
               className="w-full h-full object-cover"
             />
-            <div className="absolute inset-0 bg-dark/50" />
+            <div className="absolute inset-0 bg-dark/20" />
           </div>
         )}
 
         {/* Fallback dark bg if no image */}
-        {!backgroundImage?.asset?._ref && (
-          <div className="absolute inset-0 bg-dark" />
-        )}
-
-        {/* Decorative curves */}
-        <DecorativeCurve color="white" position="top-left" className="w-[300px] h-[200px]" />
-        <DecorativeCurve color="white" position="bottom-right" className="w-[300px] h-[200px]" />
-
+        {!backgroundImage?.asset?._ref && <div className="absolute inset-0 bg-dark" />}
         <div className="relative z-10 py-16 lg:py-24 text-center">
-          {/* Dog icon */}
-          <div className="flex justify-center mb-4">
-            <svg width="32" height="28" viewBox="0 0 32 28" fill="none">
-              <path
-                d="M16 6C16 6 13 1 10 3C7 5 8 10 10 12C12 14 14 15 16 15C18 15 20 14 22 12C24 10 25 5 22 3C19 1 16 6 16 6Z"
-                stroke="white"
-                strokeWidth="1.5"
-                fill="none"
+          {icon?.asset?._ref && (
+            <div className="mb-8">
+              <Image
+                id={icon.asset._ref}
+                alt=""
+                width={120}
+                className="w-[100px] lg:w-[120px] h-auto mx-auto"
               />
-            </svg>
-          </div>
+            </div>
+          )}
 
           {heading && (
-            <h2 className="font-serif text-[32px] md:text-[44px] lg:text-[56px] leading-[95%] tracking-[-0.005em] text-white mb-8 max-w-lg mx-auto">
+            <h2 className="font-serif font-thin text-[32px] md:text-[44px] lg:text-[56px] leading-[95%] tracking-[-0.005em] text-white mb-10 max-w-lg mx-auto">
               {heading}
             </h2>
           )}
-
           {cta?.buttonText && (
             <Button variant="primary" link={cta.link} className="mb-4">
               {cta.buttonText}
