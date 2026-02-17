@@ -19,8 +19,8 @@
   --color-cream: #FEFFEA;
 
   /* Font families */
-  --font-serif: var(--font-geist-sans, 'Geist', system-ui, sans-serif);
-  --font-sans: var(--font-geist-sans, 'Geist', system-ui, sans-serif);
+  --font-serif: var(--font-poppins, 'Poppins', system-ui, sans-serif);
+  --font-sans: var(--font-poppins, 'Poppins', system-ui, sans-serif);
 
   /* Font sizes — hero/heading scale (serif) */
   --font-size-hero: 84px;
@@ -59,8 +59,8 @@
 @layer base {
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-serif);
-    font-weight: 400;
-    letter-spacing: -0.01em;
+    font-weight: 500;
+    letter-spacing: -0.025em;
   }
 
   body {

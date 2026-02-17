@@ -45,8 +45,8 @@ export default function Hero({block}: HeroProps) {
         className="absolute right-1/8 bottom-1/4 w-15 lg:w-[80px] pointer-events-none hidden lg:block"
       />
 
-      <div className="container relative z-10 pt-28 pb-8 lg:pt-[14vh] lg:pb-12">
-        <div className="flex flex-col items-center text-center max-w-3xl mx-auto">
+      <div className="container relative z-10 pt-20 pb-8 lg:pt-[12vh] lg:pb-12">
+        <div className="flex flex-col items-center text-center max-w-4xl mx-auto">
           {eyebrow && (
             <FadeIn>
               <Badge className="mb-3 md:mb-6">{eyebrow}</Badge>
@@ -55,7 +55,7 @@ export default function Hero({block}: HeroProps) {
 
           {heading && (
             <FadeIn delay={0.1}>
-              <h1 className="font-sans font-light text-[48px] md:text-[56px] lg:text-[84px] leading-[110%] tracking-tighter mb-6">
+              <h1 className="text-[48px] md:text-[56px] lg:text-[84px] leading-[110%] mb-6">
                 {heading}
               </h1>
             </FadeIn>

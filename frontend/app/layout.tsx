@@ -2,7 +2,14 @@ import './globals.css'
 
 import {SpeedInsights} from '@vercel/speed-insights/next'
 import type {Metadata} from 'next'
-import {GeistSans} from 'geist/font/sans'
+import {Poppins} from 'next/font/google'
+
+const poppins = Poppins({
+  variable: '--font-poppins',
+  subsets: ['latin'],
+  display: 'swap',
+  weight: ['300', '400', '500', '600', '700'],
+})
 import {draftMode} from 'next/headers'
 import {toPlainText} from 'next-sanity'
 import {VisualEditing} from 'next-sanity/visual-editing'
@@ -51,7 +58,7 @@ export default async function RootLayout({children}: {children: React.ReactNode}
   const {data: settings} = await sanityFetch({query: settingsQuery})
 
   return (
-    <html lang="en" className={`${GeistSans.variable} bg-tan text-dark`}>
+    <html lang="en" className={`${poppins.variable} bg-tan text-dark`}>
       <body>
         <Toaster />
         {isDraftMode && (

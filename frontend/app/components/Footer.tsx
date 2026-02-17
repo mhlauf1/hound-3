@@ -40,18 +40,18 @@ export default function Footer({
       {/* Lavender accent line */}
       <div className="h-1.5 bg-lavender" />
 
-      <div className="px-6 md:px-20 py-16 lg:py-20">
+      <div className="px-6 md:px-20 py-12 lg:py-20">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8">
           {/* Brand column */}
           <div>
             <div className="mb-4">
-              <span className="font-serif text-2xl tracking-tight">Hound Around</span>
+              <span className="font-serif text-2xl font-semibold tracking-tight">Hound Around</span>
               <div className="font-sans text-[11px] font-medium uppercase tracking-[0.2em]">
                 Resort
               </div>
             </div>
             {tagline && (
-              <p className="font-sans text-[15px] max-w-[34ch] text-text-muted leading-relaxed">
+              <p className="font-sans text-[15px] md:max-w-[34ch] text-text-muted leading-relaxed">
                 {tagline}
               </p>
             )}
