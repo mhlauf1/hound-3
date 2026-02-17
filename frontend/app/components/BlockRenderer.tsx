@@ -62,7 +62,7 @@ export default function BlockRenderer({block, index, pageId, pageType}: BlockPro
   }
   return React.createElement(
     () => (
-      <div className="w-full bg-lavender/20 text-center text-text-muted p-20 rounded-md">
+      <div className="w-full bg-sand/20 text-center text-text-muted p-20 rounded-md">
         A &ldquo;{block._type}&rdquo; block hasn&apos;t been created
       </div>
     ),

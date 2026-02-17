@@ -63,9 +63,9 @@ npm run sanity:typegen    # Extract schema + generate types
 
 ## Design System (from SPEC.md)
 
-**Colors:** tan (#FEFFEA) background, lavender (#F0D7FF) accent sections, dark (#201A25) dark sections, accent-orange (#E87830) decorative curves.
+**Colors:** cream (#FAF7F2) background, sand (#E8DED1) accent sections, forest (#2D4A3E) dark sections, terracotta (#C4704B) buttons/accents. Additional: terracotta-dark (#b3613e), terracotta-light (#E8C4B4), sage (#A8B5A0), charcoal (#3D3D3D), gold (#D4A853), rose (#D4A5A5).
 
-**Typography:** EB Garamond (serif, headings), Geist (sans, body/UI). Scale ranges from 84px hero down to 14px caption.
+**Typography:** Poppins (all text). Scale ranges from 84px hero down to 14px caption.
 
 **Border radius:** sm (8px), md (12px), lg (24px), xl (40px), section (48px).
 

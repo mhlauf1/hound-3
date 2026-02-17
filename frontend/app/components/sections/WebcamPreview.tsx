@@ -24,7 +24,7 @@ export default function WebcamPreview({block}: WebcamPreviewProps) {
   const [password, setPassword] = useState('')
 
   return (
-    <section className="bg-tan">
+    <section className="bg-cream">
       <div className="px-8 md:px-24 py-[80px] lg:py-[120px]">
         <FadeIn>
           <div className="text-center mb-10 lg:mb-14">
@@ -41,14 +41,14 @@ export default function WebcamPreview({block}: WebcamPreviewProps) {
           <div className="grid grid-cols-1 lg:grid-cols-[2fr_3fr] gap-6 lg:gap-4 items-center">
             {/* Password form */}
             {passwordProtected && (
-              <div className="border border-dark flex w-full items-center rounded-lg p-8 h-full">
+              <div className="border border-forest flex w-full items-center rounded-lg p-8 h-full">
                 <div className="space-y-4 w-full px-12">
                   <input
                     type="password"
                     placeholder="Enter Your Password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    className="w-full px-4 py-3 bg-lavender/40 text-center border border-border-light rounded-sm font-sans text-[16px] placeholder:text-text-muted focus:outline-none focus:ring-2 focus:ring-lavender"
+                    className="w-full px-4 py-3 bg-sand/40 text-center border border-border-light rounded-sm font-sans text-[16px] placeholder:text-text-muted focus:outline-none focus:ring-2 focus:ring-sand"
                   />
                   <Button variant="outline" className="w-full">
                     Submit
@@ -70,7 +70,7 @@ export default function WebcamPreview({block}: WebcamPreviewProps) {
                 {/* Play button overlay */}
                 <div className="absolute inset-0 flex items-center justify-center">
                   <div className="w-16 h-16 bg-white/80 rounded-full flex items-center justify-center">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="#201A25">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="#2D4A3E">
                       <path d="M8 5v14l11-7z" />
                     </svg>
                   </div>

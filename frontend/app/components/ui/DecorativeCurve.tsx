@@ -1,13 +1,13 @@
 type DecorativeCurveProps = {
-  color?: 'white' | 'orange' | 'cream'
+  color?: 'white' | 'terracotta' | 'cream'
   position?: 'top-right' | 'top-left' | 'bottom-right' | 'bottom-left' | 'center'
   className?: string
 }
 
 const colorMap = {
   white: '#FFFFFF',
-  orange: '#E87830',
-  cream: '#FEFFEA',
+  terracotta: '#C4704B',
+  cream: '#FAF7F2',
 }
 
 export default function DecorativeCurve({

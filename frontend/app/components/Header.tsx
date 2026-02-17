@@ -49,7 +49,7 @@ export default function Header({navItems, ctaButton}: HeaderProps) {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 transition-colors duration-300">
       <div className="px-2 md:px-20">
-        <div className="flex border  bg-tan/95 backdrop-blur-sm border-dark/20 rounded-md mt-4 pl-4 md:pl-12 pr-2 md:pr-6 items-center justify-between py-3">
+        <div className="flex border  bg-cream/95 backdrop-blur-sm border-forest/20 rounded-md mt-4 pl-4 md:pl-12 pr-2 md:pr-6 items-center justify-between py-3">
           {/* Logo */}
           <Link href="/" className="flex flex-col items-center">
             <span className="font-serif text-xl leading-tight font-semibold tracking-tight">
@@ -68,7 +68,7 @@ export default function Header({navItems, ctaButton}: HeaderProps) {
                   <button
                     onClick={() => setDropdownOpen(dropdownOpen === item._key ? null : item._key)}
                     onBlur={() => setTimeout(() => setDropdownOpen(null), 200)}
-                    className="flex items-center gap-1 font-sans text-[16px] text-dark hover:text-dark/70 transition-colors"
+                    className="flex items-center gap-1 font-sans text-[16px] text-forest hover:text-forest/70 transition-colors"
                   >
                     {item.label}
                     <svg width="12" height="12" viewBox="0 0 12 12" fill="none" className="mt-0.5">
@@ -83,7 +83,7 @@ export default function Header({navItems, ctaButton}: HeaderProps) {
                 ) : (
                   <Link
                     href={resolveNavLink(item.link) || '#'}
-                    className="font-sans text-[16px] text-dark hover:text-dark/70 transition-colors"
+                    className="font-sans text-[16px] text-forest hover:text-forest/70 transition-colors"
                   >
                     {item.label}
                   </Link>
@@ -96,7 +96,7 @@ export default function Header({navItems, ctaButton}: HeaderProps) {
                       <Link
                         key={child._key}
                         href={resolveNavLink(child.link) || '#'}
-                        className="block px-4 py-2 text-[15px] font-sans text-dark hover:bg-lavender/30 transition-colors"
+                        className="block px-4 py-2 text-[15px] font-sans text-forest hover:bg-sand/30 transition-colors"
                       >
                         {child.label}
                       </Link>
@@ -123,13 +123,13 @@ export default function Header({navItems, ctaButton}: HeaderProps) {
             aria-label="Toggle menu"
           >
             <span
-              className={`block w-6 h-[2px] bg-dark transition-transform ${mobileOpen ? 'rotate-45 translate-y-[5px]' : ''}`}
+              className={`block w-6 h-[2px] bg-forest transition-transform ${mobileOpen ? 'rotate-45 translate-y-[5px]' : ''}`}
             />
             <span
-              className={`block w-6 h-[2px] bg-dark transition-opacity ${mobileOpen ? 'opacity-0' : ''}`}
+              className={`block w-6 h-[2px] bg-forest transition-opacity ${mobileOpen ? 'opacity-0' : ''}`}
             />
             <span
-              className={`block w-6 h-[2px] bg-dark transition-transform ${mobileOpen ? '-rotate-45 -translate-y-[5px]' : ''}`}
+              className={`block w-6 h-[2px] bg-forest transition-transform ${mobileOpen ? '-rotate-45 -translate-y-[5px]' : ''}`}
             />
           </button>
         </div>
@@ -145,7 +145,7 @@ export default function Header({navItems, ctaButton}: HeaderProps) {
               animate={{opacity: 1}}
               exit={{opacity: 0}}
               transition={{duration: 0.3}}
-              className="fixed inset-0 bg-dark/40 z-40 md:hidden"
+              className="fixed inset-0 bg-forest/40 z-40 md:hidden"
               onClick={() => setMobileOpen(false)}
             />
 
@@ -155,7 +155,7 @@ export default function Header({navItems, ctaButton}: HeaderProps) {
               animate={{x: 0}}
               exit={{x: '100%'}}
               transition={{type: 'spring', damping: 30, stiffness: 300}}
-              className="fixed top-0 right-0 bottom-0 w-[85%] max-w-[360px] bg-tan z-50 md:hidden flex flex-col shadow-xl"
+              className="fixed top-0 right-0 bottom-0 w-[85%] max-w-[360px] bg-cream z-50 md:hidden flex flex-col shadow-xl"
             >
               {/* Close button */}
               <div className="flex justify-end p-5">
@@ -189,7 +189,7 @@ export default function Header({navItems, ctaButton}: HeaderProps) {
                   >
                     <Link
                       href={resolveNavLink(item.link) || '#'}
-                      className="block font-serif text-[28px] tracking-tight text-dark py-3 border-b border-border-light"
+                      className="block font-serif text-[28px] tracking-tight text-forest py-3 border-b border-border-light"
                       onClick={() => setMobileOpen(false)}
                     >
                       {item.label}

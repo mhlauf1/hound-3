@@ -1,15 +1,19 @@
 type SectionWrapperProps = {
-  background?: 'tan' | 'lavender' | 'dark'
+  background?: 'cream' | 'sand' | 'forest' | 'tan' | 'lavender' | 'dark'
   curvedTop?: boolean
   className?: string
   children: React.ReactNode
   id?: string
 }
 
-const bgColors = {
-  tan: 'bg-tan',
-  lavender: 'bg-lavender',
-  dark: 'bg-dark text-cream',
+const bgColors: Record<string, string> = {
+  cream: 'bg-cream',
+  sand: 'bg-sand',
+  forest: 'bg-forest text-cream',
+  // Backward-compat aliases for existing Sanity data
+  tan: 'bg-cream',
+  lavender: 'bg-sand',
+  dark: 'bg-forest text-cream',
 }
 
 export default function SectionWrapper({

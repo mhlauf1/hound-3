@@ -13,7 +13,7 @@ type SplitContentProps = {
     badge?: {asset?: {_ref: string}}
     image?: {asset?: {_ref: string}; crop?: any}
     imagePosition?: 'left' | 'right'
-    backgroundColor?: 'tan' | 'lavender' | 'dark'
+    backgroundColor?: 'cream' | 'sand' | 'forest' | 'tan' | 'lavender' | 'dark'
   }
   index: number
   pageId: string
@@ -21,15 +21,19 @@ type SplitContentProps = {
 }
 
 const bgColors: Record<string, string> = {
-  tan: 'bg-tan text-dark',
-  lavender: 'bg-lavender text-dark',
-  dark: 'bg-dark text-cream',
+  cream: 'bg-cream text-forest',
+  sand: 'bg-sand text-forest',
+  forest: 'bg-forest text-cream',
+  // Backward-compat aliases for existing Sanity data
+  tan: 'bg-cream text-forest',
+  lavender: 'bg-sand text-forest',
+  dark: 'bg-forest text-cream',
 }
 
 export default function SplitContent({block}: SplitContentProps) {
   const {heading, body, link, badge, image, imagePosition, backgroundColor} = block
   const isImageLeft = stegaClean(imagePosition) === 'left'
-  const bg = bgColors[stegaClean(backgroundColor) || 'lavender'] || bgColors.lavender
+  const bg = bgColors[stegaClean(backgroundColor) || 'sand'] || bgColors.sand
 
   return (
     <section className={`${bg}`}>

@@ -58,13 +58,13 @@ export const splitContent = defineType({
       type: 'string',
       options: {
         list: [
-          {title: 'Tan', value: 'tan'},
-          {title: 'Lavender', value: 'lavender'},
-          {title: 'Dark', value: 'dark'},
+          {title: 'Cream', value: 'cream'},
+          {title: 'Sand', value: 'sand'},
+          {title: 'Forest', value: 'forest'},
         ],
         layout: 'radio',
       },
-      initialValue: 'lavender',
+      initialValue: 'sand',
     }),
   ],
   preview: {

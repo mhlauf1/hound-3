@@ -21,7 +21,7 @@ export default function ImageRow({block}: ImageRowProps) {
   if (!images || images.length === 0) return null
 
   return (
-    <section className="bg-tan overflow-hidden">
+    <section className="bg-cream overflow-hidden">
       <div className="flex gap-3 px-4 lg:px-8 overflow-x-auto snap-x snap-mandatory scrollbar-hide pb-2">
         {images.map((img, i) =>
           img.asset?._ref ? (
