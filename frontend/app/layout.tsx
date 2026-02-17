@@ -2,7 +2,6 @@ import './globals.css'
 
 import {SpeedInsights} from '@vercel/speed-insights/next'
 import type {Metadata} from 'next'
-import {EB_Garamond} from 'next/font/google'
 import {GeistSans} from 'geist/font/sans'
 import {draftMode} from 'next/headers'
 import {toPlainText} from 'next-sanity'
@@ -47,19 +46,12 @@ export async function generateMetadata(): Promise<Metadata> {
   }
 }
 
-const ebGaramond = EB_Garamond({
-  variable: '--font-serif',
-  subsets: ['latin'],
-  display: 'swap',
-  weight: ['400', '500', '600', '700', '800'],
-})
-
 export default async function RootLayout({children}: {children: React.ReactNode}) {
   const {isEnabled: isDraftMode} = await draftMode()
   const {data: settings} = await sanityFetch({query: settingsQuery})
 
   return (
-    <html lang="en" className={`${ebGaramond.variable} ${GeistSans.variable} bg-tan text-dark`}>
+    <html lang="en" className={`${GeistSans.variable} bg-tan text-dark`}>
       <body>
         <Toaster />
         {isDraftMode && (

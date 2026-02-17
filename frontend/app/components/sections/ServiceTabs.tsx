@@ -4,6 +4,7 @@ import {useState, useEffect} from 'react'
 import Badge from '@/app/components/ui/Badge'
 import Button from '@/app/components/ui/Button'
 import Image from '@/app/components/SanityImage'
+import {FadeIn} from '@/app/components/ui/FadeIn'
 
 type ServiceTab = {
   _id: string
@@ -45,22 +46,25 @@ export default function ServiceTabs({block}: ServiceTabsProps) {
   return (
     <section className="bg-tan">
       <div className="px-6 md:px-24 flex flex-col items-center py-[80px] lg:py-[120px]">
-        <div className="text-center mb-10">
-          {eyebrow && <Badge className="mb-4">{eyebrow}</Badge>}
-          {heading && (
-            <h2 className="font-serif text-[36px] md:max-w-[20ch] md:text-[48px] lg:text-[56px] leading-[95%] tracking-[-0.005em]">
-              {heading}
-            </h2>
-          )}
-        </div>
+        <FadeIn>
+          <div className="text-center mb-10">
+            {eyebrow && <Badge className="mb-4">{eyebrow}</Badge>}
+            {heading && (
+              <h2 className="font-serif font-light text-[36px] md:max-w-[18ch] md:text-[48px] lg:text-[56px] leading-[95%] tracking-tighter">
+                {heading}
+              </h2>
+            )}
+          </div>
+        </FadeIn>
 
         {/* Tab bar */}
+        <FadeIn delay={0.15} className="w-full">
         <div className="flex border-b w-full border-border-light mb-10 mt-4 lg:mb-14 overflow-x-auto">
           {tabs.map((tab, i) => (
             <button
               key={tab._id}
               onClick={() => setActiveTab(i)}
-              className={`relative flex-1 min-w-[120px] p-2 md:p-4 font-serif text-start text-[16px] md:text-2xl lg:text-3xl transition-colors ${
+              className={`relative flex-1 min-w-[120px] p-2 md:p-4 font-serif text-start text-[16px] md:text-2xl tracking-tight lg:text-3xl transition-colors ${
                 i === activeTab ? 'text-dark' : 'text-text-muted hover:text-dark'
               }`}
             >
@@ -74,6 +78,7 @@ export default function ServiceTabs({block}: ServiceTabsProps) {
             </button>
           ))}
         </div>
+        </FadeIn>
 
         {/* Tab content */}
         {activeService && (
@@ -83,7 +88,7 @@ export default function ServiceTabs({block}: ServiceTabsProps) {
           >
             <div className="pb-4 pt-16 px-8 md:pl-24">
               {activeService.title && (
-                <h3 className="font-serif text-[28px] md:text-[36px] lg:text-[48px] leading-[95%] mb-4">
+                <h3 className="font-serif text-[28px] md:text-[36px] lg:text-[48px]  font-light leading-[95%] mb-4">
                   {activeService.title}
                 </h3>
               )}

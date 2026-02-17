@@ -1,6 +1,7 @@
 import Badge from '@/app/components/ui/Badge'
 import Button from '@/app/components/ui/Button'
 import Image from '@/app/components/SanityImage'
+import {FadeIn} from '@/app/components/ui/FadeIn'
 // Hero background variant — swap import to try different styles:
 // GrainGlow | DotGrid | MeshGradient | TopoLines
 // import {TopoLines as HeroBackground} from './hero-backgrounds'
@@ -46,46 +47,62 @@ export default function Hero({block}: HeroProps) {
 
       <div className="container relative z-10 pt-28 pb-8 lg:pt-[14vh] lg:pb-12">
         <div className="flex flex-col items-center text-center max-w-3xl mx-auto">
-          {eyebrow && <Badge className="mb-3 md:mb-6">{eyebrow}</Badge>}
+          {eyebrow && (
+            <FadeIn>
+              <Badge className="mb-3 md:mb-6">{eyebrow}</Badge>
+            </FadeIn>
+          )}
 
           {heading && (
-            <h1 className="font-serif text-[48px] md:text-[56px] lg:text-[84px] leading-[110%] tracking-[-0.01em] mb-6">
-              {heading}
-            </h1>
+            <FadeIn delay={0.1}>
+              <h1 className="font-sans font-light text-[48px] md:text-[56px] lg:text-[84px] leading-[110%] tracking-tighter mb-6">
+                {heading}
+              </h1>
+            </FadeIn>
           )}
 
           {subtext && (
-            <p className="font-sans  md:text-base lg:text-lg font-light text-text-muted leading-[150%] max-w-md mb-8">
-              {subtext}
-            </p>
+            <FadeIn delay={0.2}>
+              <p className="font-sans  md:text-base lg:text-lg font-light text-text-muted leading-[150%] max-w-2xl mb-8">
+                {subtext}
+              </p>
+            </FadeIn>
           )}
 
-          <div className="flex flex-row items-center gap-2 md:gap-3 mb-4">
-            {primaryCta?.buttonText && (
-              <Button variant="primary" link={primaryCta.link}>
-                {primaryCta.buttonText}
-              </Button>
-            )}
-            {secondaryCta?.buttonText && (
-              <Button variant="outline" link={secondaryCta.link}>
-                {secondaryCta.buttonText}
-              </Button>
-            )}
-          </div>
+          <FadeIn delay={0.3}>
+            <div className="flex flex-row items-center gap-2 md:gap-3 mb-4">
+              {primaryCta?.buttonText && (
+                <Button variant="primary" link={primaryCta.link}>
+                  {primaryCta.buttonText}
+                </Button>
+              )}
+              {secondaryCta?.buttonText && (
+                <Button variant="outline" link={secondaryCta.link}>
+                  {secondaryCta.buttonText}
+                </Button>
+              )}
+            </div>
+          </FadeIn>
 
-          {trustLine && <p className="font-sans text-[14px] text-text-muted">{trustLine}</p>}
+          {trustLine && (
+            <FadeIn delay={0.35}>
+              <p className="font-sans text-[14px] text-text-muted">{trustLine}</p>
+            </FadeIn>
+          )}
         </div>
 
         {heroImage?.asset?._ref && (
-          <div className="mt-10 lg:mt-16 max-w-4xl mx-auto">
-            <Image
-              id={heroImage.asset._ref}
-              alt="Hero image"
-              width={960}
-              crop={heroImage.crop}
-              className="rounded-xl w-full object-cover"
-            />
-          </div>
+          <FadeIn delay={0.4}>
+            <div className="mt-10 lg:mt-16 max-w-4xl mx-auto">
+              <Image
+                id={heroImage.asset._ref}
+                alt="Hero image"
+                width={960}
+                crop={heroImage.crop}
+                className="rounded-xl w-full object-cover"
+              />
+            </div>
+          </FadeIn>
         )}
       </div>
     </section>

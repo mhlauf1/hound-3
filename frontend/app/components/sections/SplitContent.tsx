@@ -3,6 +3,7 @@ import type {PortableTextBlock} from 'next-sanity'
 import Image from '@/app/components/SanityImage'
 import ResolvedLink from '@/app/components/ResolvedLink'
 import {stegaClean} from '@sanity/client/stega'
+import {FadeIn} from '@/app/components/ui/FadeIn'
 
 type SplitContentProps = {
   block: {
@@ -32,48 +33,58 @@ export default function SplitContent({block}: SplitContentProps) {
 
   return (
     <section className={`${bg}`}>
-      <div className="px-6 md:px-24 lg:py-20">
+      <div className="px-6 md:px-24 py-16 lg:py-20">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
           {/* Text side */}
           <div className={isImageLeft ? 'lg:order-2' : 'lg:order-1'}>
             {heading && (
-              <h2 className="font-serif text-[36px] md:text-[48px] lg:text-[88px] leading-[100%] max-w-[10ch] tracking-[-0.005em] mb-6">
-                {heading}
-              </h2>
+              <FadeIn>
+                <h2 className="font-serif text-[48px] lg:text-[88px] leading-[100%] max-w-[8ch] tracking-tighter font-light mb-6">
+                  {heading}
+                </h2>
+              </FadeIn>
             )}
 
             {body && (
-              <div className="font-sans text-[16px] lg:text-[18px] font-light leading-[150%] opacity-80 mb-6 prose prose-p:mb-3">
-                <PortableText value={body} />
-              </div>
+              <FadeIn delay={0.1}>
+                <div className="font-sans text-[16px] lg:text-[18px] font-light leading-[150%] opacity-80 mb-6 prose prose-p:mb-3">
+                  <PortableText value={body} />
+                </div>
+              </FadeIn>
             )}
 
             {link?.label && link?.link && (
-              <div className="mb-6">
-                <ResolvedLink
-                  link={link.link}
-                  className="font-sans text-[16px] font-medium underline underline-offset-4 hover:opacity-70 transition-opacity"
-                >
-                  {link.label}
-                </ResolvedLink>
-              </div>
+              <FadeIn delay={0.2}>
+                <div className="mb-6">
+                  <ResolvedLink
+                    link={link.link}
+                    className="font-sans text-[16px] font-medium underline underline-offset-4 hover:opacity-70 transition-opacity"
+                  >
+                    {link.label}
+                  </ResolvedLink>
+                </div>
+              </FadeIn>
             )}
 
             {badge?.asset?._ref && (
-              <Image id={badge.asset._ref} alt="Badge" width={80} className="h-36 w-auto" />
+              <FadeIn delay={0.2}>
+                <Image id={badge.asset._ref} alt="Badge" width={80} className="h-36 w-auto" />
+              </FadeIn>
             )}
           </div>
 
           {/* Image side */}
           <div className={isImageLeft ? 'lg:order-1' : 'lg:order-2'}>
             {image?.asset?._ref && (
-              <Image
-                id={image.asset._ref}
-                alt={heading || 'Section image'}
-                width={600}
-                crop={image.crop}
-                className="rounded-lg aspect-[4/3] w-full object-cover"
-              />
+              <FadeIn delay={0.1}>
+                <Image
+                  id={image.asset._ref}
+                  alt={heading || 'Section image'}
+                  width={600}
+                  crop={image.crop}
+                  className="rounded-lg aspect-[4/3] w-full object-cover"
+                />
+              </FadeIn>
             )}
           </div>
         </div>

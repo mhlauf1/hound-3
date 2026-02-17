@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import {useState, useEffect} from 'react'
+import {motion, AnimatePresence} from 'framer-motion'
 import Button from '@/app/components/ui/Button'
 
 type NavChild = {
@@ -32,6 +33,18 @@ export default function Header({navItems, ctaButton}: HeaderProps) {
     window.addEventListener('scroll', handleScroll, {passive: true})
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
+
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (mobileOpen) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = ''
+    }
+    return () => {
+      document.body.style.overflow = ''
+    }
+  }, [mobileOpen])
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 transition-colors duration-300">
@@ -120,41 +133,89 @@ export default function Header({navItems, ctaButton}: HeaderProps) {
         </div>
       </div>
 
-      {/* Mobile menu */}
-      {mobileOpen && (
-        <div className="md:hidden bg-tan border-t border-border-light">
-          <div className="container py-6 flex flex-col gap-4">
-            {navItems?.map((item) => (
-              <div key={item._key}>
-                <Link
-                  href={resolveNavLink(item.link) || '#'}
-                  className="block font-sans text-[18px] text-dark py-2"
+      {/* Mobile menu slide-in */}
+      <AnimatePresence>
+        {mobileOpen && (
+          <>
+            {/* Backdrop */}
+            <motion.div
+              initial={{opacity: 0}}
+              animate={{opacity: 1}}
+              exit={{opacity: 0}}
+              transition={{duration: 0.3}}
+              className="fixed inset-0 bg-dark/40 z-40 md:hidden"
+              onClick={() => setMobileOpen(false)}
+            />
+
+            {/* Panel */}
+            <motion.div
+              initial={{x: '100%'}}
+              animate={{x: 0}}
+              exit={{x: '100%'}}
+              transition={{type: 'spring', damping: 30, stiffness: 300}}
+              className="fixed top-0 right-0 bottom-0 w-[85%] max-w-[360px] bg-tan z-50 md:hidden flex flex-col shadow-xl"
+            >
+              {/* Close button */}
+              <div className="flex justify-end p-5">
+                <button
+                  onClick={() => setMobileOpen(false)}
+                  className="p-2"
+                  aria-label="Close menu"
+                >
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+                    <path d="M18 6L6 18M6 6l12 12" />
+                  </svg>
+                </button>
+              </div>
+
+              {/* Nav links */}
+              <nav className="flex-1 px-8 overflow-y-auto">
+                {navItems?.map((item, i) => (
+                  <motion.div
+                    key={item._key}
+                    initial={{opacity: 0, x: 20}}
+                    animate={{opacity: 1, x: 0}}
+                    transition={{delay: 0.1 + i * 0.05, duration: 0.3}}
+                  >
+                    <Link
+                      href={resolveNavLink(item.link) || '#'}
+                      className="block font-serif text-[28px] tracking-tight text-dark py-3 border-b border-border-light"
+                      onClick={() => setMobileOpen(false)}
+                    >
+                      {item.label}
+                    </Link>
+                    {item.children?.map((child) => (
+                      <Link
+                        key={child._key}
+                        href={resolveNavLink(child.link) || '#'}
+                        className="block font-sans text-[16px] text-text-muted pl-4 py-2"
+                        onClick={() => setMobileOpen(false)}
+                      >
+                        {child.label}
+                      </Link>
+                    ))}
+                  </motion.div>
+                ))}
+              </nav>
+
+              {/* CTA at bottom */}
+              {ctaButton?.buttonText && (
+                <motion.div
+                  initial={{opacity: 0, y: 10}}
+                  animate={{opacity: 1, y: 0}}
+                  transition={{delay: 0.3, duration: 0.3}}
+                  className="p-8 pt-4"
                   onClick={() => setMobileOpen(false)}
                 >
-                  {item.label}
-                </Link>
-                {item.children?.map((child) => (
-                  <Link
-                    key={child._key}
-                    href={resolveNavLink(child.link) || '#'}
-                    className="block font-sans text-[16px] text-text-muted pl-4 py-1.5"
-                    onClick={() => setMobileOpen(false)}
-                  >
-                    {child.label}
-                  </Link>
-                ))}
-              </div>
-            ))}
-            {ctaButton?.buttonText && (
-              <div className="pt-2">
-                <Button variant="primary" link={ctaButton.link} className="w-full">
-                  {ctaButton.buttonText}
-                </Button>
-              </div>
-            )}
-          </div>
-        </div>
-      )}
+                  <Button variant="primary" link={ctaButton.link} className="w-full">
+                    {ctaButton.buttonText}
+                  </Button>
+                </motion.div>
+              )}
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
     </header>
   )
 }

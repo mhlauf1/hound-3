@@ -50,6 +50,13 @@ export type SplitContent = {
 
 export type CtaBanner = {
   _type: 'ctaBanner'
+  icon?: {
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    _type: 'image'
+  }
   heading: string
   backgroundImage?: {
     asset?: SanityImageAssetReference
@@ -72,6 +79,13 @@ export type TestimonialReference = {
 
 export type Testimonials = {
   _type: 'testimonials'
+  icon?: {
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    _type: 'image'
+  }
   heading: string
   reviews?: Array<
     {
@@ -128,6 +142,20 @@ export type ServiceTabs = {
 export type FeatureCards = {
   _type: 'featureCards'
   heading: string
+  stickerLeft?: {
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    _type: 'image'
+  }
+  stickerRight?: {
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    _type: 'image'
+  }
   features?: Array<{
     icon?: string
     title: string
@@ -387,6 +415,15 @@ export type Settings = {
     email?: string
   }
   footerText?: string
+  footerTextLink?: {
+    label?: string
+    href?: string
+  }
+  footerBottomLinks?: Array<{
+    label?: string
+    link?: Link
+    _key: string
+  }>
   ogImage?: {
     asset?: SanityImageAssetReference
     media?: unknown

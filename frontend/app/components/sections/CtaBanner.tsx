@@ -1,6 +1,7 @@
 import Button from '@/app/components/ui/Button'
 import Image from '@/app/components/SanityImage'
 import DecorativeCurve from '@/app/components/ui/DecorativeCurve'
+import {FadeIn} from '@/app/components/ui/FadeIn'
 
 type CtaBannerProps = {
   block: {
@@ -41,38 +42,46 @@ export default function CtaBanner({block}: CtaBannerProps) {
         {!backgroundImage?.asset?._ref && <div className="absolute inset-0 bg-dark" />}
         <div className="relative z-10 py-16 lg:py-24 text-center">
           {icon?.asset?._ref && (
-            <div className="mb-8">
-              <Image
-                id={icon.asset._ref}
-                alt=""
-                width={120}
-                className="w-[100px] lg:w-[120px] h-auto mx-auto"
-              />
-            </div>
+            <FadeIn>
+              <div className="mb-8">
+                <Image
+                  id={icon.asset._ref}
+                  alt=""
+                  width={120}
+                  className="w-[100px] lg:w-[120px] h-auto mx-auto"
+                />
+              </div>
+            </FadeIn>
           )}
 
           {heading && (
-            <h2 className="font-serif font-thin text-[32px] md:text-[44px] lg:text-[56px] leading-[95%] tracking-[-0.005em] text-white mb-10 max-w-lg mx-auto">
-              {heading}
-            </h2>
+            <FadeIn delay={0.1}>
+              <h2 className="font-serif font-thin text-[32px] md:text-[44px] lg:text-[56px] leading-[95%] tracking-tighter text-white mb-10 max-w-lg mx-auto">
+                {heading}
+              </h2>
+            </FadeIn>
           )}
-          {cta?.buttonText && (
-            <Button variant="primary" link={cta.link} className="mb-4">
-              {cta.buttonText}
-            </Button>
-          )}
+          <FadeIn delay={0.2}>
+            {cta?.buttonText && (
+              <Button variant="primary" link={cta.link} className="mb-4">
+                {cta.buttonText}
+              </Button>
+            )}
+          </FadeIn>
 
           {showRating && ratingText && (
-            <div className="flex items-center justify-center gap-1.5 mt-4">
-              <div className="flex gap-0.5">
-                {[1, 2, 3, 4, 5].map((star) => (
-                  <svg key={star} width="14" height="14" viewBox="0 0 14 14" fill="white">
-                    <path d="M7 1l1.9 3.8 4.1.7-3 2.9.7 4.2L7 10.5 3.3 12.6l.7-4.2-3-2.9 4.1-.7L7 1z" />
-                  </svg>
-                ))}
+            <FadeIn delay={0.3}>
+              <div className="flex items-center justify-center gap-1.5 mt-4">
+                <div className="flex gap-0.5">
+                  {[1, 2, 3, 4, 5].map((star) => (
+                    <svg key={star} width="14" height="14" viewBox="0 0 14 14" fill="white">
+                      <path d="M7 1l1.9 3.8 4.1.7-3 2.9.7 4.2L7 10.5 3.3 12.6l.7-4.2-3-2.9 4.1-.7L7 1z" />
+                    </svg>
+                  ))}
+                </div>
+                <span className="font-sans text-[13px] text-white/80">{ratingText}</span>
               </div>
-              <span className="font-sans text-[13px] text-white/80">{ratingText}</span>
-            </div>
+            </FadeIn>
           )}
         </div>
       </div>

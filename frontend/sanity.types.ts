@@ -50,6 +50,13 @@ export type SplitContent = {
 
 export type CtaBanner = {
   _type: 'ctaBanner'
+  icon?: {
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    _type: 'image'
+  }
   heading: string
   backgroundImage?: {
     asset?: SanityImageAssetReference
@@ -72,6 +79,13 @@ export type TestimonialReference = {
 
 export type Testimonials = {
   _type: 'testimonials'
+  icon?: {
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    _type: 'image'
+  }
   heading: string
   reviews?: Array<
     {
@@ -128,6 +142,20 @@ export type ServiceTabs = {
 export type FeatureCards = {
   _type: 'featureCards'
   heading: string
+  stickerLeft?: {
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    _type: 'image'
+  }
+  stickerRight?: {
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    _type: 'image'
+  }
   features?: Array<{
     icon?: string
     title: string
@@ -387,6 +415,15 @@ export type Settings = {
     email?: string
   }
   footerText?: string
+  footerTextLink?: {
+    label?: string
+    href?: string
+  }
+  footerBottomLinks?: Array<{
+    label?: string
+    link?: Link
+    _key: string
+  }>
   ogImage?: {
     asset?: SanityImageAssetReference
     media?: unknown
@@ -732,7 +769,7 @@ export declare const internalGroqTypeReferenceTo: unique symbol
 
 // Source: sanity/lib/queries.ts
 // Variable: settingsQuery
-// Query: *[_type == "settings"][0]{  ...,  navItems[]{    ...,      link {      ...,        _type == "link" => {    "page": page->slug.current  }      },    children[]{      ...,        link {      ...,        _type == "link" => {    "page": page->slug.current  }      }    }  },  ctaButton {    ...,      link {      ...,        _type == "link" => {    "page": page->slug.current  }      }  },  footerColumns[]{    ...,    links[]{      ...,        link {      ...,        _type == "link" => {    "page": page->slug.current  }      }    }  },  contactInfo,  footerTagline,  footerText,  logo}
+// Query: *[_type == "settings"][0]{  ...,  navItems[]{    ...,      link {      ...,        _type == "link" => {    "page": page->slug.current  }      },    children[]{      ...,        link {      ...,        _type == "link" => {    "page": page->slug.current  }      }    }  },  ctaButton {    ...,      link {      ...,        _type == "link" => {    "page": page->slug.current  }      }  },  footerColumns[]{    ...,    links[]{      ...,        link {      ...,        _type == "link" => {    "page": page->slug.current  }      }    }  },  contactInfo,  footerTagline,  footerText,  footerTextLink,  footerBottomLinks[]{    ...,      link {      ...,        _type == "link" => {    "page": page->slug.current  }      }  },  logo}
 export type SettingsQueryResult = {
   _id: string
   _type: 'settings'
@@ -823,6 +860,21 @@ export type SettingsQueryResult = {
     email?: string
   } | null
   footerText: string | null
+  footerTextLink: {
+    label?: string
+    href?: string
+  } | null
+  footerBottomLinks: Array<{
+    label?: string
+    link: {
+      _type: 'link'
+      linkType?: 'href' | 'page'
+      href?: string
+      page: string | null
+      openInNewTab?: boolean
+    } | null
+    _key: string
+  }> | null
   ogImage?: {
     asset?: SanityImageAssetReference
     media?: unknown
@@ -875,6 +927,13 @@ export type GetPageQueryResult = {
     | {
         _key: string
         _type: 'ctaBanner'
+        icon?: {
+          asset?: SanityImageAssetReference
+          media?: unknown
+          hotspot?: SanityImageHotspot
+          crop?: SanityImageCrop
+          _type: 'image'
+        }
         heading: string
         backgroundImage?: {
           asset?: SanityImageAssetReference
@@ -901,6 +960,20 @@ export type GetPageQueryResult = {
         _key: string
         _type: 'featureCards'
         heading: string
+        stickerLeft?: {
+          asset?: SanityImageAssetReference
+          media?: unknown
+          hotspot?: SanityImageHotspot
+          crop?: SanityImageCrop
+          _type: 'image'
+        }
+        stickerRight?: {
+          asset?: SanityImageAssetReference
+          media?: unknown
+          hotspot?: SanityImageHotspot
+          crop?: SanityImageCrop
+          _type: 'image'
+        }
         features?: Array<{
           icon?: string
           title: string
@@ -1091,6 +1164,13 @@ export type GetPageQueryResult = {
     | {
         _key: string
         _type: 'testimonials'
+        icon?: {
+          asset?: SanityImageAssetReference
+          media?: unknown
+          hotspot?: SanityImageHotspot
+          crop?: SanityImageCrop
+          _type: 'image'
+        }
         heading: string
         reviews: Array<{
           _id: string
@@ -1161,6 +1241,13 @@ export type HomepageQueryResult = {
     | {
         _key: string
         _type: 'ctaBanner'
+        icon?: {
+          asset?: SanityImageAssetReference
+          media?: unknown
+          hotspot?: SanityImageHotspot
+          crop?: SanityImageCrop
+          _type: 'image'
+        }
         heading: string
         backgroundImage?: {
           asset?: SanityImageAssetReference
@@ -1187,6 +1274,20 @@ export type HomepageQueryResult = {
         _key: string
         _type: 'featureCards'
         heading: string
+        stickerLeft?: {
+          asset?: SanityImageAssetReference
+          media?: unknown
+          hotspot?: SanityImageHotspot
+          crop?: SanityImageCrop
+          _type: 'image'
+        }
+        stickerRight?: {
+          asset?: SanityImageAssetReference
+          media?: unknown
+          hotspot?: SanityImageHotspot
+          crop?: SanityImageCrop
+          _type: 'image'
+        }
         features?: Array<{
           icon?: string
           title: string
@@ -1377,6 +1478,13 @@ export type HomepageQueryResult = {
     | {
         _key: string
         _type: 'testimonials'
+        icon?: {
+          asset?: SanityImageAssetReference
+          media?: unknown
+          hotspot?: SanityImageHotspot
+          crop?: SanityImageCrop
+          _type: 'image'
+        }
         heading: string
         reviews: Array<{
           _id: string
@@ -1426,7 +1534,7 @@ export type PagesSlugsResult = Array<{
 import '@sanity/client'
 declare module '@sanity/client' {
   interface SanityQueries {
-    '*[_type == "settings"][0]{\n  ...,\n  navItems[]{\n    ...,\n    \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current\n  }\n\n      }\n,\n    children[]{\n      ...,\n      \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current\n  }\n\n      }\n\n    }\n  },\n  ctaButton {\n    ...,\n    \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current\n  }\n\n      }\n\n  },\n  footerColumns[]{\n    ...,\n    links[]{\n      ...,\n      \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current\n  }\n\n      }\n\n    }\n  },\n  contactInfo,\n  footerTagline,\n  footerText,\n  logo\n}': SettingsQueryResult
+    '*[_type == "settings"][0]{\n  ...,\n  navItems[]{\n    ...,\n    \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current\n  }\n\n      }\n,\n    children[]{\n      ...,\n      \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current\n  }\n\n      }\n\n    }\n  },\n  ctaButton {\n    ...,\n    \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current\n  }\n\n      }\n\n  },\n  footerColumns[]{\n    ...,\n    links[]{\n      ...,\n      \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current\n  }\n\n      }\n\n    }\n  },\n  contactInfo,\n  footerTagline,\n  footerText,\n  footerTextLink,\n  footerBottomLinks[]{\n    ...,\n    \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current\n  }\n\n      }\n\n  },\n  logo\n}': SettingsQueryResult
     '\n  *[_type == \'page\' && slug.current == $slug][0]{\n    _id,\n    _type,\n    name,\n    slug,\n    heading,\n    subheading,\n    \n  "pageBuilder": pageBuilder[]{\n    ...,\n    _type == "callToAction" => {\n      ...,\n      button \n  {\n    ...,\n    \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current\n  }\n\n      }\n\n  }\n\n    },\n    _type == "infoSection" => {\n      content[]{\n        ...,\n        markDefs[]{\n          ...,\n          \n  _type == "link" => {\n    "page": page->slug.current\n  }\n\n        }\n      }\n    },\n    _type == "hero" => {\n      ...,\n      primaryCta \n  {\n    ...,\n    \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current\n  }\n\n      }\n\n  }\n,\n      secondaryCta \n  {\n    ...,\n    \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current\n  }\n\n      }\n\n  }\n\n    },\n    _type == "featureCards" => {\n      ...,\n      cta \n  {\n    ...,\n    \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current\n  }\n\n      }\n\n  }\n\n    },\n    _type == "serviceTabs" => {\n      ...,\n      tabs[]->{\n        _id,\n        title,\n        slug,\n        shortDescription,\n        tabImage,\n        tabCta \n  {\n    ...,\n    \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current\n  }\n\n      }\n\n  }\n\n      }\n    },\n    _type == "testimonials" => {\n      ...,\n      reviews[]->{\n        _id,\n        quote,\n        authorName,\n        authorLabel,\n        rating\n      }\n    },\n    _type == "ctaBanner" => {\n      ...,\n      cta \n  {\n    ...,\n    \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current\n  }\n\n      }\n\n  }\n\n    },\n    _type == "splitContent" => {\n      ...,\n      link {\n        ...,\n        link {\n          ...,\n          \n  _type == "link" => {\n    "page": page->slug.current\n  }\n\n        }\n      }\n    },\n  }\n,\n  }\n': GetPageQueryResult
     '\n  *[_type == \'page\' && slug.current == \'homepage\'][0]{\n    _id,\n    _type,\n    name,\n    slug,\n    heading,\n    subheading,\n    \n  "pageBuilder": pageBuilder[]{\n    ...,\n    _type == "callToAction" => {\n      ...,\n      button \n  {\n    ...,\n    \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current\n  }\n\n      }\n\n  }\n\n    },\n    _type == "infoSection" => {\n      content[]{\n        ...,\n        markDefs[]{\n          ...,\n          \n  _type == "link" => {\n    "page": page->slug.current\n  }\n\n        }\n      }\n    },\n    _type == "hero" => {\n      ...,\n      primaryCta \n  {\n    ...,\n    \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current\n  }\n\n      }\n\n  }\n,\n      secondaryCta \n  {\n    ...,\n    \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current\n  }\n\n      }\n\n  }\n\n    },\n    _type == "featureCards" => {\n      ...,\n      cta \n  {\n    ...,\n    \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current\n  }\n\n      }\n\n  }\n\n    },\n    _type == "serviceTabs" => {\n      ...,\n      tabs[]->{\n        _id,\n        title,\n        slug,\n        shortDescription,\n        tabImage,\n        tabCta \n  {\n    ...,\n    \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current\n  }\n\n      }\n\n  }\n\n      }\n    },\n    _type == "testimonials" => {\n      ...,\n      reviews[]->{\n        _id,\n        quote,\n        authorName,\n        authorLabel,\n        rating\n      }\n    },\n    _type == "ctaBanner" => {\n      ...,\n      cta \n  {\n    ...,\n    \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current\n  }\n\n      }\n\n  }\n\n    },\n    _type == "splitContent" => {\n      ...,\n      link {\n        ...,\n        link {\n          ...,\n          \n  _type == "link" => {\n    "page": page->slug.current\n  }\n\n        }\n      }\n    },\n  }\n,\n  }\n': HomepageQueryResult
     '\n  *[_type == "page" && defined(slug.current)] | order(_type asc) {\n    "slug": slug.current,\n    _type,\n    _updatedAt,\n  }\n': SitemapDataResult
