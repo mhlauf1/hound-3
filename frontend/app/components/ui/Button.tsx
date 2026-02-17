@@ -13,8 +13,8 @@ type ButtonProps = {
 }
 
 const variants = {
-  primary: 'bg-lavender text-dark border-[1.5px] border-dark hover:brightness-95 transition-all',
-  outline: 'bg-transparent text-dark border-[1.5px] border-dark hover:bg-dark/5 transition-all',
+  primary: 'bg-terracotta text-white border-[1.5px] border-terracotta hover:bg-terracotta-dark transition-all',
+  outline: 'bg-transparent text-forest border-[1.5px] border-forest hover:bg-forest/5 transition-all',
 }
 
 export default function Button({

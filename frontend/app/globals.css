@@ -6,17 +6,22 @@
 
 @theme {
   /* Colors */
-  --color-tan: #FEFFEA;
-  --color-lavender: #F0D7FF;
-  --color-dark: #201A25;
-  --color-dark-card: #2A2430;
-  --color-accent-orange: #E87830;
+  --color-cream: #FAF7F2;
+  --color-sand: #E8DED1;
+  --color-forest: #2D4A3E;
+  --color-forest-card: #375549;
+  --color-terracotta: #C4704B;
+  --color-terracotta-dark: #b3613e;
+  --color-terracotta-light: #E8C4B4;
+  --color-sage: #A8B5A0;
+  --color-charcoal: #3D3D3D;
+  --color-gold: #D4A853;
+  --color-rose: #D4A5A5;
   --color-white: #FFFFFF;
-  --color-border-light: rgba(32, 26, 37, 0.15);
-  --color-border-dark: rgba(254, 255, 234, 0.20);
-  --color-text-muted: rgba(32, 26, 37, 0.70);
-  --color-text-muted-dark: rgba(254, 255, 234, 0.70);
-  --color-cream: #FEFFEA;
+  --color-border-light: rgba(45, 74, 62, 0.15);
+  --color-border-dark: rgba(250, 247, 242, 0.20);
+  --color-text-muted: rgba(45, 74, 62, 0.70);
+  --color-text-muted-dark: rgba(250, 247, 242, 0.70);
 
   /* Font families */
   --font-serif: var(--font-poppins, 'Poppins', system-ui, sans-serif);
@@ -50,8 +55,8 @@
   --radius-section: 48px;
 
   /* Shadows */
-  --shadow-card: 0 1px 3px rgba(32, 26, 37, 0.08);
-  --shadow-card-hover: 0 4px 12px rgba(32, 26, 37, 0.12);
+  --shadow-card: 0 1px 3px rgba(45, 74, 62, 0.08);
+  --shadow-card-hover: 0 4px 12px rgba(45, 74, 62, 0.12);
 
   --default-transition-duration: 250ms;
 }

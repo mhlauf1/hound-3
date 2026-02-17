@@ -21,7 +21,7 @@ export default function CtaBanner({block}: CtaBannerProps) {
   const {heading, icon, backgroundImage, cta, showRating, ratingText} = block
 
   return (
-    <section className="bg-tan px-4 lg:px-8">
+    <section className="bg-cream px-4 lg:px-8">
       <div className="relative rounded-lg min-h-[70vh] md:min-h-[80vh] flex px-[10%] items-center overflow-hidden">
         {/* Background image */}
         {backgroundImage?.asset?._ref && (
@@ -34,12 +34,12 @@ export default function CtaBanner({block}: CtaBannerProps) {
               mode="cover"
               className="w-full h-full object-cover"
             />
-            <div className="absolute inset-0 bg-dark/20" />
+            <div className="absolute inset-0 bg-forest/20" />
           </div>
         )}
 
         {/* Fallback dark bg if no image */}
-        {!backgroundImage?.asset?._ref && <div className="absolute inset-0 bg-dark" />}
+        {!backgroundImage?.asset?._ref && <div className="absolute inset-0 bg-forest" />}
         <div className="relative z-10 py-16 lg:py-24 text-center">
           {icon?.asset?._ref && (
             <FadeIn>

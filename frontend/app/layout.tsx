@@ -58,7 +58,7 @@ export default async function RootLayout({children}: {children: React.ReactNode}
   const {data: settings} = await sanityFetch({query: settingsQuery})
 
   return (
-    <html lang="en" className={`${poppins.variable} bg-tan text-dark`}>
+    <html lang="en" className={`${poppins.variable} bg-cream text-forest`}>
       <body>
         <Toaster />
         {isDraftMode && (

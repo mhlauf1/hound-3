@@ -22,7 +22,7 @@ export default function CTA({block}: CtaProps) {
 
   return (
     <section className={isDark ? 'relative dark dark:bg-black' : 'relative dark:bg-black'}>
-      <div className="absolute inset-0 bg-dark/5 dark:bg-white/5" />
+      <div className="absolute inset-0 bg-forest/5 dark:bg-white/5" />
       <div className="container relative">
         <div className="grid lg:grid-cols-2 gap-12 py-12">
           <div

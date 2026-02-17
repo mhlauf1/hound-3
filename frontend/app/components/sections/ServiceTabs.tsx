@@ -44,7 +44,7 @@ export default function ServiceTabs({block}: ServiceTabsProps) {
   const activeService = tabs[activeTab]
 
   return (
-    <section className="bg-tan">
+    <section className="bg-cream">
       <div className="px-6 md:px-24 flex flex-col items-center py-[80px] lg:py-[120px]">
         <FadeIn>
           <div className="text-center mb-10">
@@ -65,14 +65,14 @@ export default function ServiceTabs({block}: ServiceTabsProps) {
                 key={tab._id}
                 onClick={() => setActiveTab(i)}
                 className={`relative flex-1 min-w-[120px] p-2 md:p-4 font-serif text-start text-[16px] md:text-2xl tracking-tight font-medium lg:text-3xl transition-colors ${
-                  i === activeTab ? 'text-dark' : 'text-text-muted hover:text-dark'
+                  i === activeTab ? 'text-forest' : 'text-text-muted hover:text-forest'
                 }`}
               >
                 {tab.title}
                 {i === activeTab && (
                   <span
                     key={activeTab}
-                    className="absolute bottom-0 left-0 h-[2px] bg-dark animate-progress"
+                    className="absolute bottom-0 left-0 h-[2px] bg-forest animate-progress"
                   />
                 )}
               </button>
@@ -84,7 +84,7 @@ export default function ServiceTabs({block}: ServiceTabsProps) {
         {activeService && (
           <div
             key={activeTab}
-            className="grid grid-cols-1 bg-dark/10 rounded-lg  lg:grid-cols-2 gap-8 lg:gap-12 items-center animate-fade-in"
+            className="grid grid-cols-1 bg-forest/10 rounded-lg  lg:grid-cols-2 gap-8 lg:gap-12 items-center animate-fade-in"
           >
             <div className="pb-4 pt-16 px-8 md:pl-24">
               {activeService.title && (

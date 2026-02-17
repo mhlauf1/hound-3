@@ -36,9 +36,9 @@ export default function Footer({
   bottomLinks,
 }: FooterProps) {
   return (
-    <footer className="bg-tan relative">
-      {/* Lavender accent line */}
-      <div className="h-1.5 bg-lavender" />
+    <footer className="bg-cream relative">
+      {/* Sand accent line */}
+      <div className="h-1.5 bg-sand" />
 
       <div className="px-6 md:px-20 py-12 lg:py-20">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8">
@@ -66,7 +66,7 @@ export default function Footer({
                   <li key={item._key}>
                     <Link
                       href={resolveFooterLink(item.link) || '#'}
-                      className="font-sans text-[15px] text-text-muted hover:text-dark transition-colors"
+                      className="font-sans text-[15px] text-text-muted hover:text-forest transition-colors"
                     >
                       {item.label}
                     </Link>
@@ -88,7 +88,7 @@ export default function Footer({
                 {contactInfo.email && (
                   <a
                     href={`mailto:${contactInfo.email}`}
-                    className="block hover:text-dark transition-colors"
+                    className="block hover:text-forest transition-colors"
                   >
                     {contactInfo.email}
                   </a>
@@ -115,7 +115,7 @@ export default function Footer({
                 <Link
                   key={item._key}
                   href={resolveFooterLink(item.link) || '#'}
-                  className="font-sans text-[14px] text-text-muted hover:text-dark transition-colors"
+                  className="font-sans text-[14px] text-text-muted hover:text-forest transition-colors"
                 >
                   {item.label}
                 </Link>
@@ -146,7 +146,7 @@ function renderFooterTextWithLink(text: string, linkLabel: string, href: string)
         href={href}
         target="_blank"
         rel="noopener noreferrer"
-        className="underline hover:text-dark transition-colors"
+        className="underline hover:text-forest transition-colors"
       >
         {linkLabel}
       </a>

@@ -26,7 +26,7 @@ export default function Hero({block}: HeroProps) {
   const {eyebrow, heading, subtext, primaryCta, secondaryCta, trustLine, heroImage} = block
 
   return (
-    <section className="relative bg-tan overflow-hidden">
+    <section className="relative bg-cream overflow-hidden">
       {/* <HeroBackground /> */}
 
       {/* Left dog illustration */}
