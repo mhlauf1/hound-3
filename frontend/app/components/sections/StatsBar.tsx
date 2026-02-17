@@ -26,7 +26,7 @@ export default function StatsBar({block}: StatsBarProps) {
             {stats.map((stat, i) => (
               <FadeIn key={stat._key} delay={0.1 * i}>
                 <div className="bg-white rounded-md p-12 md:p-8 flex flex-col justify-center text-center shadow-card border border-dark h-full">
-                  <div className="font-serif text-5xl  lg:text-6xl font-thin leading-[100%] tracking-[-0.01em] text-dark mb-2">
+                  <div className="text-5xl lg:text-6xl leading-[100%] tracking-tighter font-medium text-dark mb-2">
                     {stat.value}
                   </div>
                   <div className="font-sans text-[14px] ">{stat.label}</div>
@@ -39,7 +39,9 @@ export default function StatsBar({block}: StatsBarProps) {
         {showLogo && (
           <FadeIn>
             <div className="text-center">
-              <span className="font-serif text-2xl tracking-tight text-dark">Hound Around</span>
+              <span className="font-serif text-2xl tracking-tight font-semibold text-dark">
+                Hound Around
+              </span>
               <div className="font-sans text-[10px] font-medium uppercase tracking-[0.2em] text-dark/70">
                 Resort
               </div>

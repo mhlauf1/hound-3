@@ -43,7 +43,7 @@ export default function Testimonials({block}: TestimonialsProps) {
 
         {heading && (
           <FadeIn delay={0.1}>
-            <h2 className="font-serif text-[36px] md:text-[48px] lg:text-[56px] leading-[95%] tracking-tighter font-light text-cream text-center mb-12 lg:mb-16">
+            <h2 className="text-[36px] md:text-[48px] lg:text-[56px] leading-[95%] text-cream text-center mb-12 lg:mb-16">
               {heading}
             </h2>
           </FadeIn>

@@ -30,7 +30,7 @@ export default function WebcamPreview({block}: WebcamPreviewProps) {
           <div className="text-center mb-10 lg:mb-14">
             {eyebrow && <Badge className="mb-4">{eyebrow}</Badge>}
             {heading && (
-              <h2 className="font-serif text-[36px] md:text-[48px] lg:text-[56px] leading-[95%] tracking-tighter font-light">
+              <h2 className="text-[36px] md:text-[48px] lg:text-[56px] leading-[95%]">
                 {heading}
               </h2>
             )}

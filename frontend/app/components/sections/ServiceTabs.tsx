@@ -50,7 +50,7 @@ export default function ServiceTabs({block}: ServiceTabsProps) {
           <div className="text-center mb-10">
             {eyebrow && <Badge className="mb-4">{eyebrow}</Badge>}
             {heading && (
-              <h2 className="font-serif font-light text-[36px] md:max-w-[18ch] md:text-[48px] lg:text-[56px] leading-[95%] tracking-tighter">
+              <h2 className="text-[36px] md:max-w-[20ch] md:text-[48px] lg:text-[56px] leading-[105%]">
                 {heading}
               </h2>
             )}
@@ -59,25 +59,25 @@ export default function ServiceTabs({block}: ServiceTabsProps) {
 
         {/* Tab bar */}
         <FadeIn delay={0.15} className="w-full">
-        <div className="flex border-b w-full border-border-light mb-10 mt-4 lg:mb-14 overflow-x-auto">
-          {tabs.map((tab, i) => (
-            <button
-              key={tab._id}
-              onClick={() => setActiveTab(i)}
-              className={`relative flex-1 min-w-[120px] p-2 md:p-4 font-serif text-start text-[16px] md:text-2xl tracking-tight lg:text-3xl transition-colors ${
-                i === activeTab ? 'text-dark' : 'text-text-muted hover:text-dark'
-              }`}
-            >
-              {tab.title}
-              {i === activeTab && (
-                <span
-                  key={activeTab}
-                  className="absolute bottom-0 left-0 h-[2px] bg-dark animate-progress"
-                />
-              )}
-            </button>
-          ))}
-        </div>
+          <div className="flex border-b w-full border-border-light mb-10 mt-4 lg:mb-14 overflow-x-auto">
+            {tabs.map((tab, i) => (
+              <button
+                key={tab._id}
+                onClick={() => setActiveTab(i)}
+                className={`relative flex-1 min-w-[120px] p-2 md:p-4 font-serif text-start text-[16px] md:text-2xl tracking-tight font-medium lg:text-3xl transition-colors ${
+                  i === activeTab ? 'text-dark' : 'text-text-muted hover:text-dark'
+                }`}
+              >
+                {tab.title}
+                {i === activeTab && (
+                  <span
+                    key={activeTab}
+                    className="absolute bottom-0 left-0 h-[2px] bg-dark animate-progress"
+                  />
+                )}
+              </button>
+            ))}
+          </div>
         </FadeIn>
 
         {/* Tab content */}
@@ -88,7 +88,7 @@ export default function ServiceTabs({block}: ServiceTabsProps) {
           >
             <div className="pb-4 pt-16 px-8 md:pl-24">
               {activeService.title && (
-                <h3 className="font-serif text-[28px] md:text-[36px] lg:text-[48px]  font-light leading-[95%] mb-4">
+                <h3 className="text-[28px] md:text-[36px] font-medium lg:text-[48px] leading-[95%] mb-4">
                   {activeService.title}
                 </h3>
               )}

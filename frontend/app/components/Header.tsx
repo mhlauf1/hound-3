@@ -51,8 +51,10 @@ export default function Header({navItems, ctaButton}: HeaderProps) {
       <div className="px-2 md:px-20">
         <div className="flex border  bg-tan/95 backdrop-blur-sm border-dark/20 rounded-md mt-4 pl-4 md:pl-12 pr-2 md:pr-6 items-center justify-between py-3">
           {/* Logo */}
-          <Link href="/" className="flex flex-col items-center  gap-1">
-            <span className="font-serif text-xl leading-tight tracking-tight">Hound Around</span>
+          <Link href="/" className="flex flex-col items-center">
+            <span className="font-serif text-xl leading-tight font-semibold tracking-tight">
+              Hound Around
+            </span>
             <span className="font-sans text-[8px] font-semibold uppercase tracking-[0.2em] leading-tight">
               Resort
             </span>
@@ -162,7 +164,15 @@ export default function Header({navItems, ctaButton}: HeaderProps) {
                   className="p-2"
                   aria-label="Close menu"
                 >
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+                  <svg
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                  >
                     <path d="M18 6L6 18M6 6l12 12" />
                   </svg>
                 </button>
