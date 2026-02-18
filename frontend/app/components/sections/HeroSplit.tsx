@@ -35,9 +35,9 @@ export default function HeroSplit({block}: HeroSplitProps) {
   return (
     <section className={bg}>
       <div className="px-6 md:px-24 py-16 lg:py-24">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
+        <div className="flex flex-col md:flex-row justify-between gap-8 lg:gap-16 items-center">
           {/* Text side */}
-          <div className={isImageLeft ? 'lg:order-2' : 'lg:order-1'}>
+          <div className={`${isImageLeft ? 'lg:order-2' : 'lg:order-1'} flex-1`}>
             {eyebrow && (
               <FadeIn>
                 <p className="font-sans text-[14px] font-medium uppercase tracking-[0.08em] text-terracotta mb-3">
@@ -78,7 +78,7 @@ export default function HeroSplit({block}: HeroSplitProps) {
           </div>
 
           {/* Image side */}
-          <div className={isImageLeft ? 'lg:order-1' : 'lg:order-2'}>
+          <div className={`${isImageLeft ? 'lg:order-1' : 'lg:order-2'} flex justify-end flex-1`}>
             {image?.asset?._ref && (
               <FadeIn delay={0.1}>
                 <Image
@@ -87,7 +87,7 @@ export default function HeroSplit({block}: HeroSplitProps) {
                   width={700}
                   crop={image.crop}
                   hotspot={image.hotspot}
-                  className="rounded-lg aspect-[4/5] w-full object-cover"
+                  className="rounded-lg md:w-[600px] aspect-square w-full object-cover"
                 />
               </FadeIn>
             )}

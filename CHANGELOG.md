@@ -6,6 +6,60 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ---
 
+## [0.4.0] — 2026-02-17
+
+### Added
+
+#### Pricing Page — Full Build from CSV Data
+
+The client emailed 3 images containing all of their real pricing information for daycare, boarding, grooming, add-ons, and policies. The images were uploaded to Claude, which extracted and structured the data into 5 CSV files. Those CSVs were dropped into `price-data/` and Claude Code handled the rest — schema design, component builds, data import — in a single session.
+
+**Workflow:**
+1. Client sent 3 photos of their printed pricing sheets via email
+2. Uploaded images to Claude, which parsed the pricing data into structured CSV files
+3. Added the CSVs to `price-data/` in the repo
+4. Claude Code analyzed each CSV's data shape and designed matching Sanity schemas
+5. Built 3 new page builder block schemas, 3 React components, wired everything up
+6. Imported all CSV data directly into Sanity via MCP tools as page builder blocks on the `/pricing` page
+7. Published the document — pricing page live with all real data
+
+#### New Sanity Schemas (3 new page builder blocks)
+- **`pricingMatrix`** (`studio/src/schemaTypes/objects/pricingMatrix.ts`) — For grooming's size x hair-type price grids. Supports multiple tables, each with column headers, labeled rows, and cells containing a value and optional note. Includes footnotes array and cream/sand background options.
+- **`pricingList`** (`studio/src/schemaTypes/objects/pricingList.ts`) — For simple service-to-price lists (a la carte grooming, boarding add-ons). Each item has service name, price, and optional note. Supports 1 or 2-column layout with cream/sand backgrounds.
+- **`policyNotes`** (`studio/src/schemaTypes/objects/policyNotes.ts`) — For grouped policy/disclaimer callout cards. Categories each contain a list of policy strings. Supports cream/sand/forest backgrounds.
+
+#### New React Components (3 new)
+- **`PricingMatrix.tsx`** — HTML `<table>` with forest-green header row, alternating row stripes, terracotta prices, cell notes as small italic text. Empty cells render as muted dashes. Mobile: `overflow-x-auto` with sticky first column for row labels. FadeIn animation per table.
+- **`PricingList.tsx`** — Dotted-leader rows (service name ... price) with flex layout. Notes appear as small muted text below service name. Optional 2-column grid via `lg:grid-cols-2`. Staggered FadeIn on items.
+- **`PolicyNotes.tsx`** — Responsive grid of rounded cards (1-3 columns based on category count). Each policy has an info-circle SVG icon in terracotta. Supports cream/sand/forest backgrounds with adaptive text colors for dark mode.
+
+#### Pricing Data Files
+- `price-data/daycare-boarding.csv` — Daycare (5 tiers) and boarding (3 tiers) with 1-dog and additional-dog pricing
+- `price-data/grooming.csv` — 3 grooming service types across hair type and size, 24 price points
+- `price-data/grooming-alacarte.csv` — 17 a la carte grooming services with prices and notes
+- `price-data/boarding-addons.csv` — 4 boarding add-on services with per-day pricing
+- `price-data/policies.csv` — 8 policies across 3 categories (Boarding, Daycare, Grooming)
+- `price-data/prices-with-tax.csv` — Internal reference data (not displayed on website)
+
+#### CMS Content — Pricing Page
+Injected 5 page builder blocks onto the existing `/pricing` page via Sanity MCP:
+1. **Daycare & Boarding Rates** (pricingTable) — 2 categories: Daycare with 5 tiers (Full Day, Half Day, 5/10/20 Day Packages) and Boarding with 3 tiers (1-9 Nights, 10+ Nights, No Show Fee). All include additional dog pricing.
+2. **Grooming Services** (pricingMatrix) — 3 tables: Quick Bath (4 sizes x 2 hair types), Full Service Bath (5 sizes x 2 hair types), Full Service Groom (5 sizes, all hair types). Includes 2 footnotes about Quick Bath restrictions and cancellation policy.
+3. **A La Carte Services** (pricingList) — 17 grooming add-on items in 2-column layout with notes on variable-price services.
+4. **Boarding Add-Ons** (pricingList) — 4 items in 1-column layout on sand background.
+5. **Policies & Notes** (policyNotes) — 3 category cards (Boarding: 3 policies, Daycare: 2 policies, Grooming: 3 policies) on sand background.
+
+### Changed
+- `studio/src/schemaTypes/index.ts` — registered 3 new schema types (pricingMatrix, pricingList, policyNotes)
+- `studio/src/schemaTypes/documents/page.ts` — added 3 new types to pageBuilder `of` array
+- `studio/src/schemaTypes/documents/service.ts` — added 3 new types + heroMinimal to pageBuilder `of` array
+- `frontend/app/components/BlockRenderer.tsx` — imported and mapped 3 new components (PricingMatrix, PricingList, PolicyNotes)
+- `frontend/sanity/lib/queries.ts` — added 3 GROQ expansion clauses (pricingMatrix, pricingList, policyNotes) to `pageBuilderExpansion`
+- `frontend/sanity.types.ts` — regenerated with new schema types
+- `studio/sanity.types.ts` — regenerated with new schema types
+
+---
+
 ## [0.3.0] — 2026-02-17
 
 ### Added

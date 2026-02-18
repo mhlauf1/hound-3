@@ -19,6 +19,7 @@ import {galleryGrid} from './objects/galleryGrid'
 import {contactForm} from './objects/contactForm'
 import {heroSplit} from './objects/heroSplit'
 import {heroBanner} from './objects/heroBanner'
+import {heroMinimal} from './objects/heroMinimal'
 import {serviceCards} from './objects/serviceCards'
 import {featureList} from './objects/featureList'
 import {processSteps} from './objects/processSteps'
@@ -28,6 +29,9 @@ import {videoSection} from './objects/videoSection'
 import {fullWidthMedia} from './objects/fullWidthMedia'
 import {ctaStrip} from './objects/ctaStrip'
 import {logoBar} from './objects/logoBar'
+import {pricingMatrix} from './objects/pricingMatrix'
+import {pricingList} from './objects/pricingList'
+import {policyNotes} from './objects/policyNotes'
 import {settings} from './singletons/settings'
 import {link} from './objects/link'
 import {blockContent} from './objects/blockContent'
@@ -65,6 +69,7 @@ export const schemaTypes = [
   contactForm,
   heroSplit,
   heroBanner,
+  heroMinimal,
   serviceCards,
   featureList,
   processSteps,
@@ -74,4 +79,7 @@ export const schemaTypes = [
   fullWidthMedia,
   ctaStrip,
   logoBar,
+  pricingMatrix,
+  pricingList,
+  policyNotes,
 ]

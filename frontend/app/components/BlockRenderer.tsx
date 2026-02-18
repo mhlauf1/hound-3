@@ -18,6 +18,7 @@ import GalleryGrid from '@/app/components/sections/GalleryGrid'
 import ContactForm from '@/app/components/sections/ContactForm'
 import HeroSplit from '@/app/components/sections/HeroSplit'
 import HeroBanner from '@/app/components/sections/HeroBanner'
+import HeroMinimal from '@/app/components/sections/HeroMinimal'
 import ServiceCards from '@/app/components/sections/ServiceCards'
 import FeatureList from '@/app/components/sections/FeatureList'
 import ProcessSteps from '@/app/components/sections/ProcessSteps'
@@ -27,6 +28,9 @@ import VideoSection from '@/app/components/sections/VideoSection'
 import FullWidthMedia from '@/app/components/sections/FullWidthMedia'
 import CtaStrip from '@/app/components/sections/CtaStrip'
 import LogoBar from '@/app/components/sections/LogoBar'
+import PricingMatrix from '@/app/components/sections/PricingMatrix'
+import PricingList from '@/app/components/sections/PricingList'
+import PolicyNotes from '@/app/components/sections/PolicyNotes'
 import {dataAttr} from '@/sanity/lib/utils'
 import {PageBuilderSection} from '@/sanity/lib/types'
 
@@ -60,6 +64,7 @@ const Blocks = {
   contactForm: ContactForm,
   heroSplit: HeroSplit,
   heroBanner: HeroBanner,
+  heroMinimal: HeroMinimal,
   serviceCards: ServiceCards,
   featureList: FeatureList,
   processSteps: ProcessSteps,
@@ -69,6 +74,9 @@ const Blocks = {
   fullWidthMedia: FullWidthMedia,
   ctaStrip: CtaStrip,
   logoBar: LogoBar,
+  pricingMatrix: PricingMatrix,
+  pricingList: PricingList,
+  policyNotes: PolicyNotes,
 } as BlocksType
 
 export default function BlockRenderer({block, index, pageId, pageType}: BlockProps) {
