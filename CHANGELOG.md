@@ -6,6 +6,63 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ---
 
+## [0.3.0] — 2026-02-17
+
+### Added
+
+#### New Page Builder Blocks (11 new sections)
+- **heroSplit** — 2-column hero with text+CTAs on one side, image on the other; reversible image position (left/right), 3 background color options (cream/sand/forest)
+- **heroBanner** — Full-width background image hero with gradient overlay; configurable overlay opacity (light/medium/heavy) and min-height (standard/tall/fullscreen)
+- **serviceCards** — Grid of image-topped cards with descriptions and arrow-link CTAs; configurable 2/3/4 columns, hover shadow transitions
+- **featureList** — Alternating image+text rows with auto-numbering (01, 02, etc.); blockContent body with PortableText, optional per-feature CTAs
+- **processSteps** — Numbered horizontal steps with connecting lines on desktop, vertical stack on mobile; supports Iconify icons in step circles, 2-6 steps
+- **contentColumns** — Flexible 2 or 3-column layout with optional images, blockContent body, and CTAs per column
+- **iconGrid** — Compact icon+title+description grid using Iconify; 2/3/4 columns with light and dark (forest) bg variants
+- **videoSection** — YouTube/Vimeo embed with thumbnail + play button overlay; full-width and split (text+video) layouts; auto-parses video URLs into embed format
+- **fullWidthMedia** — Full-bleed background image with overlay text and CTA; gradient direction follows text alignment (left/center/right)
+- **ctaStrip** — Compact single-row CTA bar with heading, subtext, and button; 4 bg options including terracotta with adaptive button styling
+- **logoBar** — Partner/certification logo display in grid or marquee mode; logos display as grayscale with color on hover, optional link per logo
+
+#### Sanity Schema Files (11 new)
+- `studio/src/schemaTypes/objects/heroSplit.ts`
+- `studio/src/schemaTypes/objects/heroBanner.ts`
+- `studio/src/schemaTypes/objects/serviceCards.ts`
+- `studio/src/schemaTypes/objects/featureList.ts`
+- `studio/src/schemaTypes/objects/processSteps.ts`
+- `studio/src/schemaTypes/objects/contentColumns.ts`
+- `studio/src/schemaTypes/objects/iconGrid.ts`
+- `studio/src/schemaTypes/objects/videoSection.ts`
+- `studio/src/schemaTypes/objects/fullWidthMedia.ts`
+- `studio/src/schemaTypes/objects/ctaStrip.ts`
+- `studio/src/schemaTypes/objects/logoBar.ts`
+
+#### React Components (11 new)
+- `frontend/app/components/sections/HeroSplit.tsx`
+- `frontend/app/components/sections/HeroBanner.tsx`
+- `frontend/app/components/sections/ServiceCards.tsx`
+- `frontend/app/components/sections/FeatureList.tsx`
+- `frontend/app/components/sections/ProcessSteps.tsx` — client component (Iconify)
+- `frontend/app/components/sections/ContentColumns.tsx`
+- `frontend/app/components/sections/IconGrid.tsx` — client component (Iconify)
+- `frontend/app/components/sections/VideoSection.tsx` — client component (useState for play toggle)
+- `frontend/app/components/sections/FullWidthMedia.tsx`
+- `frontend/app/components/sections/CtaStrip.tsx`
+- `frontend/app/components/sections/LogoBar.tsx` — client component (marquee animation)
+
+#### CSS
+- `@keyframes marquee` animation (translateX 0 → -50% over 30s) for logoBar marquee mode
+- `animate-marquee` Tailwind utility
+
+### Changed
+- `studio/src/schemaTypes/index.ts` — registered 11 new schema types
+- `studio/src/schemaTypes/documents/page.ts` — added 11 new types to pageBuilder `of` array
+- `studio/src/schemaTypes/documents/service.ts` — added 11 new types to pageBuilder `of` array
+- `frontend/app/components/BlockRenderer.tsx` — imported and mapped 11 new components
+- `frontend/sanity/lib/queries.ts` — added 8 GROQ expansion clauses to `pageBuilderExpansion` (heroSplit, heroBanner, serviceCards, featureList, processSteps, contentColumns, fullWidthMedia, ctaStrip) using existing `buttonFields` and `linkReference` fragments
+- `frontend/app/globals.css` — added marquee keyframes and utility
+
+---
+
 ## [0.1.0] — 2026-02-05
 
 ### Added

@@ -112,6 +112,95 @@ const pageBuilderExpansion = /* groq */ `
         }
       }
     },
+    _type == "faqAccordion" => {
+      ...,
+      faqs[]{
+        ...,
+        answer[]{
+          ...,
+          markDefs[]{
+            ...,
+            ${linkReference}
+          }
+        }
+      }
+    },
+    _type == "pricingTable" => {
+      ...,
+      categories[]{
+        ...,
+        tiers[]{
+          ...,
+          cta ${buttonFields}
+        }
+      }
+    },
+    _type == "contactForm" => {
+      ...,
+      description[]{
+        ...,
+        markDefs[]{
+          ...,
+          ${linkReference}
+        }
+      }
+    },
+    _type == "heroSplit" => {
+      ...,
+      primaryCta ${buttonFields},
+      secondaryCta ${buttonFields}
+    },
+    _type == "heroBanner" => {
+      ...,
+      primaryCta ${buttonFields}
+    },
+    _type == "serviceCards" => {
+      ...,
+      cards[]{
+        ...,
+        cta ${buttonFields}
+      }
+    },
+    _type == "featureList" => {
+      ...,
+      features[]{
+        ...,
+        body[]{
+          ...,
+          markDefs[]{
+            ...,
+            ${linkReference}
+          }
+        },
+        cta ${buttonFields}
+      }
+    },
+    _type == "processSteps" => {
+      ...,
+      cta ${buttonFields}
+    },
+    _type == "contentColumns" => {
+      ...,
+      columns[]{
+        ...,
+        body[]{
+          ...,
+          markDefs[]{
+            ...,
+            ${linkReference}
+          }
+        },
+        cta ${buttonFields}
+      }
+    },
+    _type == "fullWidthMedia" => {
+      ...,
+      cta ${buttonFields}
+    },
+    _type == "ctaStrip" => {
+      ...,
+      cta ${buttonFields}
+    },
   }
 `
 
@@ -149,5 +238,22 @@ export const sitemapData = defineQuery(`
 
 export const pagesSlugs = defineQuery(`
   *[_type == "page" && defined(slug.current)]
+  {"slug": slug.current}
+`)
+
+export const getServiceQuery = defineQuery(`
+  *[_type == 'service' && slug.current == $slug][0]{
+    _id,
+    _type,
+    title,
+    slug,
+    heading,
+    shortDescription,
+    ${pageBuilderExpansion},
+  }
+`)
+
+export const serviceSlugs = defineQuery(`
+  *[_type == "service" && defined(slug.current)]
   {"slug": slug.current}
 `)
