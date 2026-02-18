@@ -2,7 +2,7 @@ import type {Metadata} from 'next'
 
 import PageBuilderPage from '@/app/components/PageBuilder'
 import {sanityFetch} from '@/sanity/lib/live'
-import {getPageQuery, pagesSlugs} from '@/sanity/lib/queries'
+import {getServiceQuery, serviceSlugs} from '@/sanity/lib/queries'
 
 type Props = {
   params: Promise<{slug: string}>
@@ -10,7 +10,7 @@ type Props = {
 
 export async function generateStaticParams() {
   const {data} = await sanityFetch({
-    query: pagesSlugs,
+    query: serviceSlugs,
     perspective: 'published',
     stega: false,
   })
@@ -19,30 +19,30 @@ export async function generateStaticParams() {
 
 export async function generateMetadata(props: Props): Promise<Metadata> {
   const params = await props.params
-  const {data: page} = await sanityFetch({
-    query: getPageQuery,
+  const {data: service} = await sanityFetch({
+    query: getServiceQuery,
     params,
     stega: false,
   })
 
   return {
-    title: page?.name,
-    description: page?.heading,
+    title: service?.title,
+    description: service?.heading || service?.shortDescription,
   } satisfies Metadata
 }
 
-export default async function Page(props: Props) {
+export default async function ServicePage(props: Props) {
   const params = await props.params
-  const [{data: page}] = await Promise.all([sanityFetch({query: getPageQuery, params})])
+  const [{data: service}] = await Promise.all([sanityFetch({query: getServiceQuery, params})])
 
-  if (!page?._id) {
+  if (!service?._id) {
     return (
       <div className="container py-20 text-center">
-        <h1 className="font-serif text-[36px] mb-4">Page not found</h1>
-        <p className="font-sans text-text-muted">This page doesn&apos;t exist yet.</p>
+        <h1 className="font-serif text-[36px] mb-4">Service not found</h1>
+        <p className="font-sans text-text-muted">This service doesn&apos;t exist yet.</p>
       </div>
     )
   }
 
-  return <PageBuilderPage page={page} />
+  return <PageBuilderPage page={service} />
 }

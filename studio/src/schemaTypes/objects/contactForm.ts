@@ -1,0 +1,135 @@
+import {defineField, defineType, defineArrayMember} from 'sanity'
+import {EnvelopeIcon} from '@sanity/icons'
+
+export const contactForm = defineType({
+  name: 'contactForm',
+  title: 'Contact Form',
+  type: 'object',
+  icon: EnvelopeIcon,
+  fields: [
+    defineField({
+      name: 'eyebrow',
+      title: 'Eyebrow',
+      type: 'string',
+    }),
+    defineField({
+      name: 'heading',
+      title: 'Heading',
+      type: 'string',
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: 'description',
+      title: 'Description',
+      type: 'blockContent',
+    }),
+    defineField({
+      name: 'formFields',
+      title: 'Form Fields',
+      type: 'array',
+      of: [
+        defineArrayMember({
+          type: 'object',
+          name: 'formField',
+          title: 'Form Field',
+          fields: [
+            defineField({
+              name: 'fieldName',
+              title: 'Field Name',
+              type: 'string',
+              description: 'Internal field identifier (e.g. "email", "message")',
+              validation: (Rule) => Rule.required(),
+            }),
+            defineField({
+              name: 'label',
+              title: 'Label',
+              type: 'string',
+              validation: (Rule) => Rule.required(),
+            }),
+            defineField({
+              name: 'type',
+              title: 'Field Type',
+              type: 'string',
+              options: {
+                list: [
+                  {title: 'Text', value: 'text'},
+                  {title: 'Email', value: 'email'},
+                  {title: 'Phone', value: 'tel'},
+                  {title: 'Textarea', value: 'textarea'},
+                  {title: 'Select', value: 'select'},
+                ],
+              },
+              initialValue: 'text',
+            }),
+            defineField({
+              name: 'required',
+              title: 'Required',
+              type: 'boolean',
+              initialValue: false,
+            }),
+            defineField({
+              name: 'options',
+              title: 'Options',
+              type: 'array',
+              of: [{type: 'string'}],
+              description: 'Only used for "Select" field type',
+              hidden: ({parent}) => parent?.type !== 'select',
+            }),
+          ],
+          preview: {
+            select: {title: 'label', subtitle: 'type'},
+          },
+        }),
+      ],
+    }),
+    defineField({
+      name: 'submitButtonText',
+      title: 'Submit Button Text',
+      type: 'string',
+      initialValue: 'Send Message',
+    }),
+    defineField({
+      name: 'successMessage',
+      title: 'Success Message',
+      type: 'string',
+      initialValue: 'Thank you! We\'ll be in touch soon.',
+    }),
+    defineField({
+      name: 'showMap',
+      title: 'Show Map',
+      type: 'boolean',
+      initialValue: false,
+    }),
+    defineField({
+      name: 'mapEmbedUrl',
+      title: 'Map Embed URL',
+      type: 'url',
+      hidden: ({parent}) => !parent?.showMap,
+    }),
+    defineField({
+      name: 'address',
+      title: 'Address',
+      type: 'text',
+      rows: 3,
+    }),
+    defineField({
+      name: 'phone',
+      title: 'Phone',
+      type: 'string',
+    }),
+    defineField({
+      name: 'email',
+      title: 'Email',
+      type: 'string',
+    }),
+  ],
+  preview: {
+    select: {title: 'heading'},
+    prepare({title}) {
+      return {
+        title: title || 'Untitled Contact Form',
+        subtitle: 'Contact Form',
+      }
+    },
+  },
+})

@@ -22,7 +22,7 @@ export default function CtaBanner({block}: CtaBannerProps) {
 
   return (
     <section className="bg-cream px-4 lg:px-8">
-      <div className="relative rounded-lg min-h-[70vh] md:min-h-[80vh] flex px-[10%] items-center overflow-hidden">
+      <div className="relative rounded-lg min-h-[60vh] md:min-h-[80vh] flex px-[6%] md:px-[10%] items-center overflow-hidden">
         {/* Background image */}
         {backgroundImage?.asset?._ref && (
           <div className="absolute inset-0">
@@ -40,7 +40,7 @@ export default function CtaBanner({block}: CtaBannerProps) {
 
         {/* Fallback dark bg if no image */}
         {!backgroundImage?.asset?._ref && <div className="absolute inset-0 bg-forest" />}
-        <div className="relative z-10 py-16 lg:py-24 text-center">
+        <div className="relative flex flex-col items-start md:items-center z-10 py-16 lg:py-24 text-start md:text-center">
           {icon?.asset?._ref && (
             <FadeIn>
               <div className="mb-8">

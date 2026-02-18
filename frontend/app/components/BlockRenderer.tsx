@@ -11,6 +11,22 @@ import WebcamPreview from '@/app/components/sections/WebcamPreview'
 import Testimonials from '@/app/components/sections/Testimonials'
 import CtaBanner from '@/app/components/sections/CtaBanner'
 import SplitContent from '@/app/components/sections/SplitContent'
+import FaqAccordion from '@/app/components/sections/FaqAccordion'
+import PricingTable from '@/app/components/sections/PricingTable'
+import TeamGrid from '@/app/components/sections/TeamGrid'
+import GalleryGrid from '@/app/components/sections/GalleryGrid'
+import ContactForm from '@/app/components/sections/ContactForm'
+import HeroSplit from '@/app/components/sections/HeroSplit'
+import HeroBanner from '@/app/components/sections/HeroBanner'
+import ServiceCards from '@/app/components/sections/ServiceCards'
+import FeatureList from '@/app/components/sections/FeatureList'
+import ProcessSteps from '@/app/components/sections/ProcessSteps'
+import ContentColumns from '@/app/components/sections/ContentColumns'
+import IconGrid from '@/app/components/sections/IconGrid'
+import VideoSection from '@/app/components/sections/VideoSection'
+import FullWidthMedia from '@/app/components/sections/FullWidthMedia'
+import CtaStrip from '@/app/components/sections/CtaStrip'
+import LogoBar from '@/app/components/sections/LogoBar'
 import {dataAttr} from '@/sanity/lib/utils'
 import {PageBuilderSection} from '@/sanity/lib/types'
 
@@ -37,6 +53,22 @@ const Blocks = {
   testimonials: Testimonials,
   ctaBanner: CtaBanner,
   splitContent: SplitContent,
+  faqAccordion: FaqAccordion,
+  pricingTable: PricingTable,
+  teamGrid: TeamGrid,
+  galleryGrid: GalleryGrid,
+  contactForm: ContactForm,
+  heroSplit: HeroSplit,
+  heroBanner: HeroBanner,
+  serviceCards: ServiceCards,
+  featureList: FeatureList,
+  processSteps: ProcessSteps,
+  contentColumns: ContentColumns,
+  iconGrid: IconGrid,
+  videoSection: VideoSection,
+  fullWidthMedia: FullWidthMedia,
+  ctaStrip: CtaStrip,
+  logoBar: LogoBar,
 } as BlocksType
 
 export default function BlockRenderer({block, index, pageId, pageType}: BlockProps) {

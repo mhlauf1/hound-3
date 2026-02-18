@@ -1,0 +1,99 @@
+import Button from '@/app/components/ui/Button'
+import Image from '@/app/components/SanityImage'
+import {FadeIn} from '@/app/components/ui/FadeIn'
+import {stegaClean} from '@sanity/client/stega'
+
+type HeroSplitProps = {
+  block: {
+    eyebrow?: string
+    heading?: string
+    body?: string
+    primaryCta?: {buttonText?: string; link?: any}
+    secondaryCta?: {buttonText?: string; link?: any}
+    image?: {asset?: {_ref: string}; crop?: any; hotspot?: any}
+    imagePosition?: 'left' | 'right'
+    backgroundColor?: 'cream' | 'sand' | 'forest'
+  }
+  index: number
+  pageId: string
+  pageType: string
+}
+
+const bgColors: Record<string, string> = {
+  cream: 'bg-cream text-forest',
+  sand: 'bg-sand text-forest',
+  forest: 'bg-forest text-cream',
+}
+
+export default function HeroSplit({block}: HeroSplitProps) {
+  const {eyebrow, heading, body, primaryCta, secondaryCta, image, imagePosition, backgroundColor} =
+    block
+  const isImageLeft = stegaClean(imagePosition) === 'left'
+  const bg = bgColors[stegaClean(backgroundColor) || 'cream'] || bgColors.cream
+  const isDark = stegaClean(backgroundColor) === 'forest'
+
+  return (
+    <section className={bg}>
+      <div className="px-6 md:px-24 py-16 lg:py-24">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
+          {/* Text side */}
+          <div className={isImageLeft ? 'lg:order-2' : 'lg:order-1'}>
+            {eyebrow && (
+              <FadeIn>
+                <p className="font-sans text-[14px] font-medium uppercase tracking-[0.08em] text-terracotta mb-3">
+                  {eyebrow}
+                </p>
+              </FadeIn>
+            )}
+            {heading && (
+              <FadeIn delay={0.05}>
+                <h1 className="text-[48px] md:text-[56px] lg:text-[84px] leading-[110%] mb-6">
+                  {heading}
+                </h1>
+              </FadeIn>
+            )}
+            {body && (
+              <FadeIn delay={0.1}>
+                <p
+                  className={`font-sans text-[16px] lg:text-[18px] font-light leading-[150%] mb-8 ${isDark ? 'text-text-muted-dark' : 'text-text-muted'}`}
+                >
+                  {body}
+                </p>
+              </FadeIn>
+            )}
+            <FadeIn delay={0.15}>
+              <div className="flex flex-row items-center gap-2 md:gap-3">
+                {primaryCta?.buttonText && (
+                  <Button variant="primary" link={primaryCta.link}>
+                    {primaryCta.buttonText}
+                  </Button>
+                )}
+                {secondaryCta?.buttonText && (
+                  <Button variant="outline" link={secondaryCta.link}>
+                    {secondaryCta.buttonText}
+                  </Button>
+                )}
+              </div>
+            </FadeIn>
+          </div>
+
+          {/* Image side */}
+          <div className={isImageLeft ? 'lg:order-1' : 'lg:order-2'}>
+            {image?.asset?._ref && (
+              <FadeIn delay={0.1}>
+                <Image
+                  id={image.asset._ref}
+                  alt={heading || 'Hero image'}
+                  width={700}
+                  crop={image.crop}
+                  hotspot={image.hotspot}
+                  className="rounded-lg aspect-[4/5] w-full object-cover"
+                />
+              </FadeIn>
+            )}
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}

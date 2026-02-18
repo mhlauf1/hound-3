@@ -12,6 +12,22 @@ import {webcamPreview} from './objects/webcamPreview'
 import {testimonials} from './objects/testimonials'
 import {ctaBanner} from './objects/ctaBanner'
 import {splitContent} from './objects/splitContent'
+import {faqAccordion} from './objects/faqAccordion'
+import {pricingTable} from './objects/pricingTable'
+import {teamGrid} from './objects/teamGrid'
+import {galleryGrid} from './objects/galleryGrid'
+import {contactForm} from './objects/contactForm'
+import {heroSplit} from './objects/heroSplit'
+import {heroBanner} from './objects/heroBanner'
+import {serviceCards} from './objects/serviceCards'
+import {featureList} from './objects/featureList'
+import {processSteps} from './objects/processSteps'
+import {contentColumns} from './objects/contentColumns'
+import {iconGrid} from './objects/iconGrid'
+import {videoSection} from './objects/videoSection'
+import {fullWidthMedia} from './objects/fullWidthMedia'
+import {ctaStrip} from './objects/ctaStrip'
+import {logoBar} from './objects/logoBar'
 import {settings} from './singletons/settings'
 import {link} from './objects/link'
 import {blockContent} from './objects/blockContent'
@@ -42,4 +58,20 @@ export const schemaTypes = [
   testimonials,
   ctaBanner,
   splitContent,
+  faqAccordion,
+  pricingTable,
+  teamGrid,
+  galleryGrid,
+  contactForm,
+  heroSplit,
+  heroBanner,
+  serviceCards,
+  featureList,
+  processSteps,
+  contentColumns,
+  iconGrid,
+  videoSection,
+  fullWidthMedia,
+  ctaStrip,
+  logoBar,
 ]

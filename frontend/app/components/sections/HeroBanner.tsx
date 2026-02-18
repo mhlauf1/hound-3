@@ -1,0 +1,93 @@
+import Button from '@/app/components/ui/Button'
+import Image from '@/app/components/SanityImage'
+import {FadeIn} from '@/app/components/ui/FadeIn'
+import {stegaClean} from '@sanity/client/stega'
+
+type HeroBannerProps = {
+  block: {
+    eyebrow?: string
+    heading?: string
+    subtext?: string
+    primaryCta?: {buttonText?: string; link?: any}
+    backgroundImage?: {asset?: {_ref: string}; crop?: any; hotspot?: any}
+    overlayOpacity?: 'light' | 'medium' | 'heavy'
+    minHeight?: 'standard' | 'tall' | 'fullscreen'
+  }
+  index: number
+  pageId: string
+  pageType: string
+}
+
+const overlayClasses: Record<string, string> = {
+  light: 'from-black/30 to-black/10',
+  medium: 'from-black/50 to-black/20',
+  heavy: 'from-black/70 to-black/40',
+}
+
+const heightClasses: Record<string, string> = {
+  standard: 'min-h-[60vh]',
+  tall: 'min-h-[80vh]',
+  fullscreen: 'min-h-screen',
+}
+
+export default function HeroBanner({block}: HeroBannerProps) {
+  const {eyebrow, heading, subtext, primaryCta, backgroundImage, overlayOpacity, minHeight} = block
+  const overlay =
+    overlayClasses[stegaClean(overlayOpacity) || 'medium'] || overlayClasses.medium
+  const height = heightClasses[stegaClean(minHeight) || 'standard'] || heightClasses.standard
+
+  return (
+    <section className={`relative ${height} flex items-center justify-center overflow-hidden`}>
+      {/* Background image */}
+      {backgroundImage?.asset?._ref && (
+        <div className="absolute inset-0">
+          <Image
+            id={backgroundImage.asset._ref}
+            alt=""
+            width={1400}
+            crop={backgroundImage.crop}
+            hotspot={backgroundImage.hotspot}
+            mode="cover"
+            className="w-full h-full object-cover"
+          />
+          <div className={`absolute inset-0 bg-gradient-to-t ${overlay}`} />
+        </div>
+      )}
+
+      {/* Fallback dark bg */}
+      {!backgroundImage?.asset?._ref && <div className="absolute inset-0 bg-forest" />}
+
+      {/* Content */}
+      <div className="relative z-10 text-center px-6 py-16 lg:py-24 max-w-3xl mx-auto">
+        {eyebrow && (
+          <FadeIn>
+            <p className="font-sans text-[14px] font-medium uppercase tracking-[0.08em] text-terracotta-light mb-3">
+              {eyebrow}
+            </p>
+          </FadeIn>
+        )}
+        {heading && (
+          <FadeIn delay={0.1}>
+            <h1 className="text-[48px] md:text-[56px] lg:text-[84px] leading-[110%] text-white mb-6">
+              {heading}
+            </h1>
+          </FadeIn>
+        )}
+        {subtext && (
+          <FadeIn delay={0.2}>
+            <p className="font-sans text-[16px] lg:text-[18px] font-light leading-[150%] text-white/80 mb-8 max-w-2xl mx-auto">
+              {subtext}
+            </p>
+          </FadeIn>
+        )}
+        {primaryCta?.buttonText && (
+          <FadeIn delay={0.3}>
+            <Button variant="primary" link={primaryCta.link}>
+              {primaryCta.buttonText}
+            </Button>
+          </FadeIn>
+        )}
+      </div>
+    </section>
+  )
+}
