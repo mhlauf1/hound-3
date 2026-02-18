@@ -1,8 +1,18 @@
 import {NextResponse} from 'next/server'
-import {Resend} from 'resend'
+import nodemailer from 'nodemailer'
 
-const resend = new Resend(process.env.RESEND_API_KEY)
+const transporter = nodemailer.createTransport({
+  host: process.env.SMTP_HOST,
+  port: Number(process.env.SMTP_PORT) || 587,
+  secure: Number(process.env.SMTP_PORT) === 465,
+  auth: {
+    user: process.env.SMTP_USER,
+    pass: process.env.SMTP_PASS,
+  },
+})
+
 const toEmail = process.env.CONTACT_FORM_TO_EMAIL || ''
+const fromEmail = process.env.SMTP_FROM || process.env.SMTP_USER || ''
 
 export async function POST(request: Request) {
   try {
@@ -12,26 +22,28 @@ export async function POST(request: Request) {
       return NextResponse.json({error: 'Invalid request body'}, {status: 400})
     }
 
-    // Build email content from form fields
     const lines = Object.entries(body)
       .filter(([, value]) => typeof value === 'string' && value.trim())
-      .map(([key, value]) => `<p><strong>${escapeHtml(key)}:</strong> ${escapeHtml(value as string)}</p>`)
+      .map(
+        ([key, value]) =>
+          `<p><strong>${escapeHtml(key)}:</strong> ${escapeHtml(value as string)}</p>`,
+      )
       .join('\n')
 
     if (!lines) {
       return NextResponse.json({error: 'No form data provided'}, {status: 400})
     }
 
-    if (!toEmail) {
-      console.error('CONTACT_FORM_TO_EMAIL is not set')
+    if (!toEmail || !fromEmail) {
+      console.error('Email environment variables are not configured')
       return NextResponse.json({error: 'Contact form is not configured'}, {status: 500})
     }
 
     const senderName = (body.name as string) || 'Website Visitor'
     const senderEmail = (body.email as string) || undefined
 
-    await resend.emails.send({
-      from: 'Hound Around Website <onboarding@resend.dev>',
+    await transporter.sendMail({
+      from: `"Hound Around Website" <${fromEmail}>`,
       to: toEmail,
       replyTo: senderEmail,
       subject: `New Contact Form Submission from ${senderName}`,

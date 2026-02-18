@@ -53,6 +53,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - `@keyframes marquee` animation (translateX 0 → -50% over 30s) for logoBar marquee mode
 - `animate-marquee` Tailwind utility
 
+#### Email
+- Replaced Resend with Nodemailer for contact form email routing via SMTP
+- Env vars: `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASS`, `SMTP_FROM`, `CONTACT_FORM_TO_EMAIL`
+
 ### Changed
 - `studio/src/schemaTypes/index.ts` — registered 11 new schema types
 - `studio/src/schemaTypes/documents/page.ts` — added 11 new types to pageBuilder `of` array
