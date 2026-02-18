@@ -57,6 +57,7 @@ export const page = defineType({
         {type: 'contactForm'},
         {type: 'heroSplit'},
         {type: 'heroBanner'},
+        {type: 'heroMinimal'},
         {type: 'serviceCards'},
         {type: 'featureList'},
         {type: 'processSteps'},
@@ -66,6 +67,9 @@ export const page = defineType({
         {type: 'fullWidthMedia'},
         {type: 'ctaStrip'},
         {type: 'logoBar'},
+        {type: 'pricingMatrix'},
+        {type: 'pricingList'},
+        {type: 'policyNotes'},
       ],
       options: {
         insertMenu: {

@@ -75,6 +75,10 @@ export const service = defineType({
         {type: 'fullWidthMedia'},
         {type: 'ctaStrip'},
         {type: 'logoBar'},
+        {type: 'heroMinimal'},
+        {type: 'pricingMatrix'},
+        {type: 'pricingList'},
+        {type: 'policyNotes'},
       ],
       options: {
         insertMenu: {

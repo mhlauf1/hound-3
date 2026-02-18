@@ -25,6 +25,101 @@ export type SanityImageAssetReference = {
   [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
 }
 
+export type TeamMemberImage = {
+  asset?: SanityImageAssetReference
+  media?: unknown // Unable to locate the referenced type "teamMember.image.media" in schema
+  hotspot?: SanityImageHotspot
+  crop?: SanityImageCrop
+  _type: 'image'
+}
+
+export type ContactForm = {
+  _type: 'contactForm'
+  eyebrow?: string
+  heading: string
+  description?: BlockContent
+  formFields?: Array<{
+    fieldName: string
+    label: string
+    type?: 'text' | 'email' | 'tel' | 'textarea' | 'select'
+    required?: boolean
+    options?: Array<string>
+    _type: 'formField'
+    _key: string
+  }>
+  submitButtonText?: string
+  successMessage?: string
+  showMap?: boolean
+  mapEmbedUrl?: string
+  address?: string
+  phone?: string
+  email?: string
+}
+
+export type GalleryGrid = {
+  _type: 'galleryGrid'
+  eyebrow?: string
+  heading?: string
+  images?: Array<{
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    alt?: string
+    _type: 'image'
+    _key: string
+  }>
+  columns?: 2 | 3 | 4
+}
+
+export type TeamGrid = {
+  _type: 'teamGrid'
+  eyebrow?: string
+  heading?: string
+  members?: Array<{
+    name: string
+    role?: string
+    bio?: string
+    image?: TeamMemberImage
+    _type: 'teamMember'
+    _key: string
+  }>
+}
+
+export type PricingTable = {
+  _type: 'pricingTable'
+  eyebrow?: string
+  heading?: string
+  description?: string
+  categories?: Array<{
+    categoryName: string
+    tiers?: Array<{
+      name: string
+      price?: string
+      description?: string
+      features?: Array<string>
+      highlighted?: boolean
+      cta?: Button
+      _type: 'pricingTier'
+      _key: string
+    }>
+    _type: 'pricingCategory'
+    _key: string
+  }>
+}
+
+export type FaqAccordion = {
+  _type: 'faqAccordion'
+  eyebrow?: string
+  heading: string
+  faqs?: Array<{
+    question: string
+    answer?: BlockContent
+    _type: 'faq'
+    _key: string
+  }>
+}
+
 export type SplitContent = {
   _type: 'splitContent'
   heading: string
@@ -45,7 +140,7 @@ export type SplitContent = {
     _type: 'image'
   }
   imagePosition?: 'left' | 'right'
-  backgroundColor?: 'tan' | 'lavender' | 'dark'
+  backgroundColor?: 'cream' | 'sand' | 'forest'
 }
 
 export type CtaBanner = {
@@ -329,6 +424,57 @@ export type Service = {
     _type: 'image'
   }
   tabCta?: Button
+  heading?: string
+  pageBuilder?: Array<
+    | ({
+        _key: string
+      } & CallToAction)
+    | ({
+        _key: string
+      } & InfoSection)
+    | ({
+        _key: string
+      } & Hero)
+    | ({
+        _key: string
+      } & ImageRow)
+    | ({
+        _key: string
+      } & FeatureCards)
+    | ({
+        _key: string
+      } & ServiceTabs)
+    | ({
+        _key: string
+      } & StatsBar)
+    | ({
+        _key: string
+      } & WebcamPreview)
+    | ({
+        _key: string
+      } & Testimonials)
+    | ({
+        _key: string
+      } & CtaBanner)
+    | ({
+        _key: string
+      } & SplitContent)
+    | ({
+        _key: string
+      } & FaqAccordion)
+    | ({
+        _key: string
+      } & PricingTable)
+    | ({
+        _key: string
+      } & TeamGrid)
+    | ({
+        _key: string
+      } & GalleryGrid)
+    | ({
+        _key: string
+      } & ContactForm)
+  >
 }
 
 export type SanityImageCrop = {
@@ -479,6 +625,21 @@ export type Page = {
     | ({
         _key: string
       } & SplitContent)
+    | ({
+        _key: string
+      } & FaqAccordion)
+    | ({
+        _key: string
+      } & PricingTable)
+    | ({
+        _key: string
+      } & TeamGrid)
+    | ({
+        _key: string
+      } & GalleryGrid)
+    | ({
+        _key: string
+      } & ContactForm)
   >
 }
 
@@ -718,6 +879,12 @@ export type Geopoint = {
 export type AllSanitySchemaTypes =
   | SplitContentLink
   | SanityImageAssetReference
+  | TeamMemberImage
+  | ContactForm
+  | GalleryGrid
+  | TeamGrid
+  | PricingTable
+  | FaqAccordion
   | SplitContent
   | CtaBanner
   | TestimonialReference

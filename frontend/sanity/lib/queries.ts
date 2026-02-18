@@ -154,6 +154,9 @@ const pageBuilderExpansion = /* groq */ `
       ...,
       primaryCta ${buttonFields}
     },
+    _type == "heroMinimal" => {
+      ...
+    },
     _type == "serviceCards" => {
       ...,
       cards[]{
@@ -200,6 +203,15 @@ const pageBuilderExpansion = /* groq */ `
     _type == "ctaStrip" => {
       ...,
       cta ${buttonFields}
+    },
+    _type == "pricingMatrix" => {
+      ...
+    },
+    _type == "pricingList" => {
+      ...
+    },
+    _type == "policyNotes" => {
+      ...
     },
   }
 `
