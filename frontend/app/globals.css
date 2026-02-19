@@ -130,3 +130,14 @@
     transform: translateX(-50%);
   }
 }
+
+/* Pricing calculator focus styles on dark backgrounds */
+@layer base {
+  .bg-forest button:focus-visible,
+  .bg-forest label:focus-visible,
+  .bg-forest [role="radio"]:focus-visible {
+    outline: 2px solid var(--color-terracotta);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+}
