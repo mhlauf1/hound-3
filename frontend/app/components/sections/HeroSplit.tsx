@@ -34,8 +34,8 @@ export default function HeroSplit({block}: HeroSplitProps) {
   const isDark = stegaClean(backgroundColor) === 'forest'
 
   return (
-    <section className={bg}>
-      <div className="px-6 md:px-24 py-16 lg:py-24">
+    <section className={` pt-18 ${bg}`}>
+      <div className="px-6  md:px-24 py-16 lg:py-24">
         <div className="flex flex-col md:flex-row justify-between gap-8 lg:gap-16 items-center">
           {/* Text side */}
           <div className={`${isImageLeft ? 'lg:order-2' : 'lg:order-1'} flex-1`}>

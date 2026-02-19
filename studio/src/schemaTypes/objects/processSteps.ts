@@ -39,6 +39,12 @@ export const processSteps = defineType({
               validation: (Rule) => Rule.required(),
             }),
             defineField({
+              name: 'badge',
+              title: 'Badge Text',
+              type: 'string',
+              description: 'Optional label shown below the title (e.g. "6:30 AM - 12:00 PM", "All Day")',
+            }),
+            defineField({
               name: 'description',
               title: 'Description',
               type: 'text',

@@ -29,7 +29,7 @@ export default function CtaStrip({block}: CtaStripProps) {
 
   return (
     <section className={bg}>
-      <div className="px-6 md:px-24 py-8 lg:py-12">
+      <div className="px-6 md:px-24 py-16 lg:py-24">
         <FadeIn>
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
             <div>
@@ -47,7 +47,11 @@ export default function CtaStrip({block}: CtaStripProps) {
               )}
             </div>
             {cta?.buttonText && (
-              <Button variant={isDark ? 'outline' : 'primary'} link={cta.link} className={isDark ? '!border-white !text-white hover:!bg-white/10' : ''}>
+              <Button
+                variant={isDark ? 'outline' : 'primary'}
+                link={cta.link}
+                className={isDark ? '!border-white !text-white hover:!bg-white/10' : ''}
+              >
                 {cta.buttonText}
               </Button>
             )}

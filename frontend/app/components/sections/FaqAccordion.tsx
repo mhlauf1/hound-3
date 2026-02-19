@@ -31,29 +31,39 @@ function AccordionItem({
   onToggle: () => void
 }) {
   return (
-    <div className="border-b border-sand">
+    <div
+      className={`rounded-xl border transition-colors duration-200 ${isOpen ? 'bg-white border-sand shadow-sm' : 'bg-white/60 border-border-light hover:border-sand'}`}
+    >
       <button
         onClick={onToggle}
-        className="flex w-full items-center justify-between py-5 text-left"
+        className="flex w-full items-center justify-between px-6 py-5 text-left"
       >
-        <span className="font-sans text-[18px] md:text-[20px] font-medium text-forest pr-4">
+        <span className="font-sans text-[17px] md:text-[19px] font-medium text-forest pr-4">
           {faq.question}
         </span>
-        <svg
-          className={`h-5 w-5 shrink-0 text-forest transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}
-          fill="none"
-          viewBox="0 0 24 24"
-          strokeWidth={2}
-          stroke="currentColor"
+        <span
+          className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 transition-colors duration-200 ${isOpen ? 'bg-terracotta text-white' : 'bg-sand/60 text-forest'}`}
         >
-          <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
-        </svg>
+          <svg
+            className="h-4 w-4"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={2.5}
+            stroke="currentColor"
+          >
+            {isOpen ? (
+              <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14" />
+            ) : (
+              <path strokeLinecap="round" strokeLinejoin="round" d="M12 5v14m-7-7h14" />
+            )}
+          </svg>
+        </span>
       </button>
       <div
-        className={`overflow-hidden transition-all duration-300 ${isOpen ? 'max-h-96 pb-5' : 'max-h-0'}`}
+        className={`overflow-hidden transition-all duration-300 ${isOpen ? 'max-h-96 pb-6' : 'max-h-0'}`}
       >
         {faq.answer && (
-          <div className="font-sans text-[16px] leading-[150%] text-charcoal/80 prose prose-p:mb-3">
+          <div className="px-6 font-sans text-[15px] md:text-[16px] font-light leading-[170%] text-charcoal/75 prose prose-p:mb-3">
             <PortableText value={faq.answer} />
           </div>
         )}
@@ -70,7 +80,7 @@ export default function FaqAccordion({block}: FaqAccordionProps) {
     <section className="bg-cream">
       <div className="px-6 md:px-24 py-16 lg:py-24">
         <FadeIn>
-          <div className="max-w-3xl mx-auto">
+          <div className="max-w-3xl md:mb-4 flex items-start md:items-center flex-col mx-auto">
             {eyebrow && <Badge className="mb-3">{eyebrow}</Badge>}
             {heading && (
               <h2 className="text-[36px] md:text-[48px] lg:text-[56px] leading-[105%] text-forest mb-10">
@@ -81,7 +91,7 @@ export default function FaqAccordion({block}: FaqAccordionProps) {
         </FadeIn>
 
         {faqs && faqs.length > 0 && (
-          <div className="max-w-3xl mx-auto">
+          <div className="max-w-3xl mx-auto flex flex-col gap-3">
             {faqs.map((faq, i) => (
               <FadeIn key={faq._key} delay={0.05 * i}>
                 <AccordionItem

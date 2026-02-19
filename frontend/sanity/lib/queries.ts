@@ -224,6 +224,19 @@ const pageBuilderExpansion = /* groq */ `
         ${linkReference}
       }
     },
+    _type == "whatsIncluded" => {
+      ...
+    },
+    _type == "requirementsList" => {
+      ...,
+      link {
+        ...,
+        link {
+          ...,
+          ${linkReference}
+        }
+      }
+    },
   }
 `
 

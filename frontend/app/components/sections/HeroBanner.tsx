@@ -37,7 +37,9 @@ export default function HeroBanner({block}: HeroBannerProps) {
   const height = heightClasses[stegaClean(minHeight) || 'standard'] || heightClasses.standard
 
   return (
-    <section className={`relative ${height} flex items-center justify-center overflow-hidden`}>
+    <section
+      className={`relative  pt-18 ${height} flex items-center justify-center overflow-hidden`}
+    >
       {/* Background image */}
       {backgroundImage?.asset?._ref && (
         <div className="absolute inset-0">

@@ -6,6 +6,42 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ---
 
+## [0.6.0] — 2026-02-19
+
+### Added
+
+#### New Page Builder Blocks (2 new sections)
+- **WhatsIncluded** — displays a list of included items/features for a service
+- **RequirementsList** — lists requirements with optional CTA link
+
+#### ProcessSteps Enhancements
+- **Badge field** — optional text shown below step titles (e.g. "6:30 AM - 12:00 PM", "All Day")
+- **Connecting line** — continuous horizontal line behind step circles on desktop (replaces per-gap segments)
+
+### Changed
+
+#### Navigation
+- **Services dropdown** — "Services" is now a non-clickable dropdown trigger on both desktop and mobile; only the 3 service subpages (Daycare, Grooming, Boarding) are clickable links. Desktop uses `<button>`, mobile uses `<span>` instead of `<Link>`.
+
+#### Layout & Spacing
+- **Hero sections** — added `pt-18` top padding directly to Hero, HeroBanner, HeroMinimal, and HeroSplit instead of relying on a global `pt-[72px]` wrapper
+- **`layout.tsx`** — removed `pt-[72px]` from `<main>` (hero sections now handle their own top spacing)
+- **HeroMinimal** — increased desktop min-height to `md:min-h-[65vh]`
+- **CtaStrip** — increased vertical padding from `py-8 lg:py-12` to `py-16 lg:py-24`
+- **PricingCalculator** — tightened internal padding/spacing, added `mb-12 md:mb-20` bottom margin
+- **Pricing calculators** — tightened grid gap from `lg:gap-12` to `lg:gap-10` across all 3 calculator variants
+- **Footer** — removed `mt-12` top margin
+
+#### UI Refinements
+- **FaqAccordion** — redesigned from bordered rows to card-style items with rounded corners, white backgrounds, plus/minus toggle icons with terracotta accent on open state, adjusted typography sizing and weight
+
+### Removed
+- **Self Wash service** — deleted document and all references from Sanity
+- **Services overview page** — deleted from Sanity (services are now accessed directly via nav dropdown)
+- **Self-Wash footer link** — removed from the footer Services column
+
+---
+
 ## [0.5.0] — 2026-02-18
 
 ### Added
