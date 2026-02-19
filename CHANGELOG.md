@@ -6,6 +6,46 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ---
 
+## [0.5.0] — 2026-02-18
+
+### Added
+
+#### Interactive Pricing Calculators
+New `pricingCalculator` page builder block with three service-specific calculator variants. Pricing data is hardcoded from the real CSV data. Each calculator renders on a forest green background with inputs on the left and an animated output card on the right.
+
+- **Daycare Calculator** — Full/half day toggle, 5/10/20-day package selection with per-package savings display, configurable day count for single-day bookings
+- **Boarding Calculator** — Nightly rate with automatic extended-stay discount at 10+ nights (badge indicator), add-on checkboxes for medication ($3/day), puppy pads ($3/day), dry food ($4/day), chicken & rice ($6/day), included amenities list
+- **Grooming Calculator** — Service type (Quick Bath / Full Bath / Full Groom), dog size filtered by availability per service, hair type toggle (hidden for Full Groom), add-ons (nail trim, teeth brushing, de-shed, ear cleaning, face trim) with size-aware pricing, estimated service duration, N/A handling for unavailable combos
+
+#### New Files (9)
+- `studio/src/schemaTypes/objects/pricingCalculator.ts` — Sanity schema with calculatorType, eyebrow, heading, subheading, CTA link, and tax note
+- `frontend/app/hooks/useAnimatedNumber.ts` — requestAnimationFrame count-up hook with ease-out cubic easing (~400ms)
+- `frontend/app/data/pricingData.ts` — All rates from CSVs with pure calculation functions returning totals, line items, savings, and metadata
+- `frontend/app/components/pricing/CalculatorInputs.tsx` — Shared primitives: NumberStepper, RadioGroup, CheckboxGroup, ContactNotice
+- `frontend/app/components/pricing/PriceOutputCard.tsx` — Cream output card with animated price, itemized breakdown, savings callout, includes list, time estimate, and CTA
+- `frontend/app/components/pricing/DaycareCalculator.tsx`
+- `frontend/app/components/pricing/BoardingCalculator.tsx`
+- `frontend/app/components/pricing/GroomingCalculator.tsx`
+- `frontend/app/components/sections/PricingCalculator.tsx` — Main section wrapper with two-column layout
+
+#### Edge Cases
+- 4+ dogs shows "Contact us at 651-788-9797" with phone link
+- Quick Bath + XL + Long Hair = N/A with disabled CTA and explanation
+- Quick Bath has no XS size — auto-filtered and valid size auto-selected on service switch
+- Large totals formatted with commas
+- `aria-live="polite"` on animated price for screen reader announcements
+
+### Changed
+- `studio/src/schemaTypes/index.ts` — registered `pricingCalculator`
+- `studio/src/schemaTypes/documents/page.ts` — added `pricingCalculator` to pageBuilder
+- `studio/src/schemaTypes/documents/service.ts` — added `pricingCalculator` to pageBuilder
+- `frontend/app/components/BlockRenderer.tsx` — imported and mapped PricingCalculator component
+- `frontend/sanity/lib/queries.ts` — added GROQ expansion for `ctaLink` field
+- `frontend/app/globals.css` — added focus-visible styles for dark background inputs
+- `frontend/app/components/Footer.tsx` — added top margin spacing
+
+---
+
 ## [0.4.0] — 2026-02-17
 
 ### Added

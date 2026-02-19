@@ -80,6 +80,7 @@ export const service = defineType({
         {type: 'pricingList'},
         {type: 'policyNotes'},
         {type: 'featureGrid'},
+        {type: 'pricingCalculator'},
       ],
       options: {
         insertMenu: {

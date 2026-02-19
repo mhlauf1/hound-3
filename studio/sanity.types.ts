@@ -73,6 +73,17 @@ export type ItemsObjectImage = {
   _type: 'image'
 }
 
+export type PricingCalculator = {
+  _type: 'pricingCalculator'
+  calculatorType: 'daycare' | 'boarding' | 'grooming'
+  eyebrow?: string
+  heading: string
+  subheading?: string
+  ctaText?: string
+  ctaLink?: Link
+  taxNote?: string
+}
+
 export type FeatureGrid = {
   _type: 'featureGrid'
   heading: string
@@ -807,6 +818,9 @@ export type Service = {
     | ({
         _key: string
       } & FeatureGrid)
+    | ({
+        _key: string
+      } & PricingCalculator)
   >
 }
 
@@ -1021,6 +1035,9 @@ export type Page = {
     | ({
         _key: string
       } & FeatureGrid)
+    | ({
+        _key: string
+      } & PricingCalculator)
   >
 }
 
@@ -1266,6 +1283,7 @@ export type AllSanitySchemaTypes =
   | ColumnsObjectImage
   | LogosObjectImage
   | ItemsObjectImage
+  | PricingCalculator
   | FeatureGrid
   | PolicyNotes
   | PricingList

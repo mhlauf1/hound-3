@@ -217,6 +217,13 @@ const pageBuilderExpansion = /* groq */ `
       ...,
       cta ${buttonFields}
     },
+    _type == "pricingCalculator" => {
+      ...,
+      ctaLink {
+        ...,
+        ${linkReference}
+      }
+    },
   }
 `
 

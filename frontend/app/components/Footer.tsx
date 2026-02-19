@@ -36,7 +36,7 @@ export default function Footer({
   bottomLinks,
 }: FooterProps) {
   return (
-    <footer className="bg-cream relative">
+    <footer className="bg-cream mt-12 relative">
       {/* Sand accent line */}
       <div className="h-1.5 bg-sand" />
 
