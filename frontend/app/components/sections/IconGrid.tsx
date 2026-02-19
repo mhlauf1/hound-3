@@ -3,6 +3,7 @@
 import {Icon} from '@iconify/react'
 import {FadeIn} from '@/app/components/ui/FadeIn'
 import {stegaClean} from '@sanity/client/stega'
+import Badge from '../ui/Badge'
 
 type IconGridProps = {
   block: {
@@ -47,11 +48,7 @@ export default function IconGrid({block}: IconGridProps) {
       <div className="px-6 md:px-24 py-16 lg:py-24">
         <FadeIn>
           <div className="mb-10 lg:mb-14">
-            {eyebrow && (
-              <p className="font-sans text-[14px] font-medium uppercase tracking-[0.08em] text-terracotta mb-3">
-                {eyebrow}
-              </p>
-            )}
+            {eyebrow && <Badge className="mb-3">{eyebrow}</Badge>}
             {heading && (
               <h2 className="text-[36px] md:text-[48px] lg:text-[56px] leading-[105%] mb-4">
                 {heading}
@@ -81,7 +78,9 @@ export default function IconGrid({block}: IconGridProps) {
                   {item.icon && (
                     <div
                       className={`w-12 h-12 rounded-md flex items-center justify-center mb-4 ${
-                        isDark ? 'bg-terracotta/20 text-terracotta' : 'bg-terracotta/10 text-terracotta'
+                        isDark
+                          ? 'bg-terracotta/20 text-terracotta'
+                          : 'bg-terracotta/10 text-terracotta'
                       }`}
                     >
                       <Icon icon={item.icon} width={28} height={28} />

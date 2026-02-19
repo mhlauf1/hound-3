@@ -2,6 +2,7 @@ import Button from '@/app/components/ui/Button'
 import Image from '@/app/components/SanityImage'
 import {FadeIn} from '@/app/components/ui/FadeIn'
 import {stegaClean} from '@sanity/client/stega'
+import Badge from '../ui/Badge'
 
 type HeroSplitProps = {
   block: {
@@ -40,9 +41,7 @@ export default function HeroSplit({block}: HeroSplitProps) {
           <div className={`${isImageLeft ? 'lg:order-2' : 'lg:order-1'} flex-1`}>
             {eyebrow && (
               <FadeIn>
-                <p className="font-sans text-[14px] font-medium uppercase tracking-[0.08em] text-terracotta mb-3">
-                  {eyebrow}
-                </p>
+                <Badge className="mb-3">{eyebrow}</Badge>
               </FadeIn>
             )}
             {heading && (

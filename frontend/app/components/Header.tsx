@@ -63,11 +63,23 @@ export default function Header({navItems, ctaButton}: HeaderProps) {
           {/* Desktop Nav */}
           <nav className="hidden md:flex items-center gap-8">
             {navItems?.map((item) => (
-              <div key={item._key} className="relative">
+              <div
+                key={item._key}
+                className="relative"
+                onMouseEnter={() =>
+                  item.children && item.children.length > 0
+                    ? setDropdownOpen(item._key)
+                    : undefined
+                }
+                onMouseLeave={() =>
+                  item.children && item.children.length > 0
+                    ? setDropdownOpen(null)
+                    : undefined
+                }
+              >
                 {item.children && item.children.length > 0 ? (
-                  <button
-                    onClick={() => setDropdownOpen(dropdownOpen === item._key ? null : item._key)}
-                    onBlur={() => setTimeout(() => setDropdownOpen(null), 200)}
+                  <Link
+                    href={resolveNavLink(item.link) || '#'}
                     className="flex items-center gap-1 font-sans text-[16px] text-forest hover:text-forest/70 transition-colors"
                   >
                     {item.label}
@@ -79,7 +91,7 @@ export default function Header({navItems, ctaButton}: HeaderProps) {
                         strokeLinecap="round"
                       />
                     </svg>
-                  </button>
+                  </Link>
                 ) : (
                   <Link
                     href={resolveNavLink(item.link) || '#'}
@@ -91,16 +103,18 @@ export default function Header({navItems, ctaButton}: HeaderProps) {
 
                 {/* Dropdown */}
                 {item.children && item.children.length > 0 && dropdownOpen === item._key && (
-                  <div className="absolute top-full left-0 mt-2 bg-white rounded-md shadow-card-hover py-2 min-w-[160px] border border-border-light">
-                    {item.children.map((child) => (
-                      <Link
-                        key={child._key}
-                        href={resolveNavLink(child.link) || '#'}
-                        className="block px-4 py-2 text-[15px] font-sans text-forest hover:bg-sand/30 transition-colors"
-                      >
-                        {child.label}
-                      </Link>
-                    ))}
+                  <div className="absolute top-full left-0 pt-2">
+                    <div className="bg-white rounded-md shadow-card-hover py-2 min-w-[160px] border border-border-light">
+                      {item.children.map((child) => (
+                        <Link
+                          key={child._key}
+                          href={resolveNavLink(child.link) || '#'}
+                          className="block px-4 py-2 text-[15px] font-sans text-forest hover:bg-sand/30 transition-colors"
+                        >
+                          {child.label}
+                        </Link>
+                      ))}
+                    </div>
                   </div>
                 )}
               </div>

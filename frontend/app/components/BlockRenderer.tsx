@@ -31,6 +31,7 @@ import LogoBar from '@/app/components/sections/LogoBar'
 import PricingMatrix from '@/app/components/sections/PricingMatrix'
 import PricingList from '@/app/components/sections/PricingList'
 import PolicyNotes from '@/app/components/sections/PolicyNotes'
+import FeatureGrid from '@/app/components/sections/FeatureGrid'
 import {dataAttr} from '@/sanity/lib/utils'
 import {PageBuilderSection} from '@/sanity/lib/types'
 
@@ -77,6 +78,7 @@ const Blocks = {
   pricingMatrix: PricingMatrix,
   pricingList: PricingList,
   policyNotes: PolicyNotes,
+  featureGrid: FeatureGrid,
 } as BlocksType
 
 export default function BlockRenderer({block, index, pageId, pageType}: BlockProps) {

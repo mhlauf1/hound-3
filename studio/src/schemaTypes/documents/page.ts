@@ -70,6 +70,7 @@ export const page = defineType({
         {type: 'pricingMatrix'},
         {type: 'pricingList'},
         {type: 'policyNotes'},
+        {type: 'featureGrid'},
       ],
       options: {
         insertMenu: {

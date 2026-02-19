@@ -213,6 +213,10 @@ const pageBuilderExpansion = /* groq */ `
     _type == "policyNotes" => {
       ...
     },
+    _type == "featureGrid" => {
+      ...,
+      cta ${buttonFields}
+    },
   }
 `
 
@@ -268,4 +272,10 @@ export const getServiceQuery = defineQuery(`
 export const serviceSlugs = defineQuery(`
   *[_type == "service" && defined(slug.current)]
   {"slug": slug.current}
+`)
+
+export const servicesNavQuery = defineQuery(`
+  *[_type == "service" && defined(slug.current)] | order(title asc) {
+    _id, title, "slug": slug.current
+  }
 `)

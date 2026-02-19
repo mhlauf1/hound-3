@@ -6,6 +6,7 @@ import type {PortableTextBlock} from 'next-sanity'
 import Button from '@/app/components/ui/Button'
 import {FadeIn} from '@/app/components/ui/FadeIn'
 import {stegaClean} from '@sanity/client/stega'
+import Badge from '../ui/Badge'
 
 type FormField = {
   _key: string
@@ -91,9 +92,9 @@ export default function ContactForm({block}: ContactFormProps) {
         <FadeIn>
           <div className="mb-10 lg:mb-14">
             {eyebrow && (
-              <p className="font-sans text-[14px] font-medium uppercase tracking-[0.08em] text-terracotta mb-3">
-                {eyebrow}
-              </p>
+              <FadeIn>
+                <Badge className="mb-3">{eyebrow}</Badge>
+              </FadeIn>
             )}
             {heading && (
               <h2 className="text-[36px] md:text-[48px] lg:text-[56px] leading-[105%] text-forest mb-4">
@@ -108,7 +109,9 @@ export default function ContactForm({block}: ContactFormProps) {
           </div>
         </FadeIn>
 
-        <div className={`grid grid-cols-1 ${hasContactInfo ? 'lg:grid-cols-2' : ''} gap-10 lg:gap-16`}>
+        <div
+          className={`grid grid-cols-1 ${hasContactInfo ? 'lg:grid-cols-2' : ''} gap-10 lg:gap-16`}
+        >
           {/* Form */}
           <FadeIn>
             {status === 'success' ? (

@@ -19,7 +19,7 @@ import DraftModeToast from '@/app/components/DraftModeToast'
 import Footer from '@/app/components/Footer'
 import Header from '@/app/components/Header'
 import {sanityFetch, SanityLive} from '@/sanity/lib/live'
-import {settingsQuery} from '@/sanity/lib/queries'
+import {settingsQuery, servicesNavQuery} from '@/sanity/lib/queries'
 import {resolveOpenGraphImage} from '@/sanity/lib/utils'
 import {handleError} from '@/app/client-utils'
 
@@ -55,7 +55,25 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function RootLayout({children}: {children: React.ReactNode}) {
   const {isEnabled: isDraftMode} = await draftMode()
-  const {data: settings} = await sanityFetch({query: settingsQuery})
+  const [{data: settings}, {data: services}] = await Promise.all([
+    sanityFetch({query: settingsQuery}),
+    sanityFetch({query: servicesNavQuery}),
+  ])
+
+  // Inject services as dropdown children into the "Services" nav item
+  const navItems = settings?.navItems?.map((item: any) => {
+    if (item.label === 'Services' && services && services.length > 0) {
+      return {
+        ...item,
+        children: services.map((service: any) => ({
+          _key: service._id,
+          label: service.title,
+          link: {linkType: 'href', href: `/services/${service.slug}`},
+        })),
+      }
+    }
+    return item
+  })
 
   return (
     <html lang="en" className={`${poppins.variable} bg-cream text-forest`}>
@@ -68,7 +86,7 @@ export default async function RootLayout({children}: {children: React.ReactNode}
           </>
         )}
         <SanityLive onError={handleError} />
-        <Header navItems={settings?.navItems as any} ctaButton={settings?.ctaButton as any} />
+        <Header navItems={navItems as any} ctaButton={settings?.ctaButton as any} />
         <main className="pt-[72px]">{children}</main>
         <Footer
           tagline={settings?.footerTagline ?? undefined}

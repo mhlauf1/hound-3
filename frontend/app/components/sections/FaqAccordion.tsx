@@ -4,6 +4,7 @@ import {useState} from 'react'
 import {PortableText} from '@portabletext/react'
 import type {PortableTextBlock} from 'next-sanity'
 import {FadeIn} from '@/app/components/ui/FadeIn'
+import Badge from '../ui/Badge'
 
 type FaqAccordionProps = {
   block: {
@@ -70,11 +71,7 @@ export default function FaqAccordion({block}: FaqAccordionProps) {
       <div className="px-6 md:px-24 py-16 lg:py-24">
         <FadeIn>
           <div className="max-w-3xl mx-auto">
-            {eyebrow && (
-              <p className="font-sans text-[14px] font-medium uppercase tracking-[0.08em] text-terracotta mb-3">
-                {eyebrow}
-              </p>
-            )}
+            {eyebrow && <Badge className="mb-3">{eyebrow}</Badge>}
             {heading && (
               <h2 className="text-[36px] md:text-[48px] lg:text-[56px] leading-[105%] text-forest mb-10">
                 {heading}
