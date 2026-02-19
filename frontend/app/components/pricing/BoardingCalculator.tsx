@@ -25,7 +25,7 @@ export default function BoardingCalculator({ctaText, ctaLink, taxNote}: Boarding
 
   if (dogs > 3) {
     return (
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10 items-start">
         <div className="space-y-6">
           <NumberStepper label="Number of Dogs" value={dogs} min={1} max={10} onChange={setDogs} />
           <ContactNotice />
@@ -44,7 +44,7 @@ export default function BoardingCalculator({ctaText, ctaLink, taxNote}: Boarding
   }
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10 items-start">
       {/* Inputs */}
       <div className="space-y-6">
         <NumberStepper label="Number of Dogs" value={dogs} min={1} max={10} onChange={setDogs} />

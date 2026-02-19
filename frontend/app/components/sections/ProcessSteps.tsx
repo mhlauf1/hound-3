@@ -14,6 +14,7 @@ type ProcessStepsProps = {
     steps?: Array<{
       _key: string
       title?: string
+      badge?: string
       description?: string
       icon?: string
     }>
@@ -58,40 +59,46 @@ export default function ProcessSteps({block}: ProcessStepsProps) {
         </FadeIn>
 
         {steps && steps.length > 0 && (
-          <div className="flex flex-col lg:flex-row items-start lg:items-start justify-center gap-4 lg:gap-0 mb-10 lg:mb-14">
-            {steps.map((step, i) => (
-              <div key={step._key} className="flex flex-col lg:flex-row items-center flex-1">
-                <FadeIn delay={0.1 * i}>
-                  <div className="flex flex-col items-center text-center max-w-[200px]">
-                    {/* Circle with number or icon */}
-                    <div className="w-12 h-12 rounded-full bg-terracotta text-white flex items-center justify-center mb-4 shrink-0">
-                      {step.icon ? (
-                        <Icon icon={step.icon} width={24} height={24} />
-                      ) : (
-                        <span className="font-sans text-[16px] font-medium">{i + 1}</span>
+          <div className="relative mb-10 lg:mb-14 max-w-5xl mx-auto">
+            {/* Continuous connecting line behind circles */}
+            <div className="hidden lg:block absolute top-6 left-0 right-0 h-[2px] bg-terracotta/30" />
+
+            <div className="relative flex flex-col lg:flex-row items-start lg:items-start justify-center gap-4 lg:gap-0">
+              {steps.map((step, i) => (
+                <div key={step._key} className="flex flex-col items-center flex-1">
+                  <FadeIn delay={0.1 * i}>
+                    <div className="flex flex-col items-center text-center max-w-[200px]">
+                      {/* Circle with number or icon */}
+                      <div className="relative z-10 w-12 h-12 rounded-full bg-terracotta text-white flex items-center justify-center mb-4 shrink-0">
+                        {step.icon ? (
+                          <Icon icon={step.icon} width={24} height={24} />
+                        ) : (
+                          <span className="font-sans text-[16px] font-medium">{i + 1}</span>
+                        )}
+                      </div>
+                      {step.title && (
+                        <h3 className="text-[18px] md:text-[20px] leading-[120%] mb-1">
+                          {step.title}
+                        </h3>
+                      )}
+                      {step.badge && (
+                        <span className="font-sans text-[13px] font-medium text-terracotta mb-2">
+                          {step.badge}
+                        </span>
+                      )}
+                      {!step.badge && step.title && <div className="mb-1" />}
+                      {step.description && (
+                        <p
+                          className={`font-sans text-[14px] font-light leading-[150%] ${isDark ? 'text-text-muted-dark' : 'text-text-muted'}`}
+                        >
+                          {step.description}
+                        </p>
                       )}
                     </div>
-                    {step.title && (
-                      <h3 className="text-[18px] md:text-[20px] leading-[120%] mb-2">
-                        {step.title}
-                      </h3>
-                    )}
-                    {step.description && (
-                      <p
-                        className={`font-sans text-[14px] font-light leading-[150%] ${isDark ? 'text-text-muted-dark' : 'text-text-muted'}`}
-                      >
-                        {step.description}
-                      </p>
-                    )}
-                  </div>
-                </FadeIn>
-
-                {/* Connecting line (not after last step) */}
-                {i < steps.length - 1 && (
-                  <div className="hidden lg:block flex-1 h-[2px] bg-terracotta/30 mx-4 mt-6 self-start" />
-                )}
-              </div>
-            ))}
+                  </FadeIn>
+                </div>
+              ))}
+            </div>
           </div>
         )}
 

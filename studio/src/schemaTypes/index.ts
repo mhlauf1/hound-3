@@ -34,6 +34,8 @@ import {pricingList} from './objects/pricingList'
 import {policyNotes} from './objects/policyNotes'
 import {featureGrid} from './objects/featureGrid'
 import {pricingCalculator} from './objects/pricingCalculator'
+import {whatsIncluded} from './objects/whatsIncluded'
+import {requirementsList} from './objects/requirementsList'
 import {settings} from './singletons/settings'
 import {link} from './objects/link'
 import {blockContent} from './objects/blockContent'
@@ -86,4 +88,6 @@ export const schemaTypes = [
   policyNotes,
   featureGrid,
   pricingCalculator,
+  whatsIncluded,
+  requirementsList,
 ]

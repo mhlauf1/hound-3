@@ -78,9 +78,9 @@ export default function Header({navItems, ctaButton}: HeaderProps) {
                 }
               >
                 {item.children && item.children.length > 0 ? (
-                  <Link
-                    href={resolveNavLink(item.link) || '#'}
-                    className="flex items-center gap-1 font-sans text-[16px] text-forest hover:text-forest/70 transition-colors"
+                  <button
+                    type="button"
+                    className="flex items-center gap-1 font-sans text-[16px] text-forest hover:text-forest/70 transition-colors cursor-default"
                   >
                     {item.label}
                     <svg width="12" height="12" viewBox="0 0 12 12" fill="none" className="mt-0.5">
@@ -91,7 +91,7 @@ export default function Header({navItems, ctaButton}: HeaderProps) {
                         strokeLinecap="round"
                       />
                     </svg>
-                  </Link>
+                  </button>
                 ) : (
                   <Link
                     href={resolveNavLink(item.link) || '#'}
@@ -201,13 +201,19 @@ export default function Header({navItems, ctaButton}: HeaderProps) {
                     animate={{opacity: 1, x: 0}}
                     transition={{delay: 0.1 + i * 0.05, duration: 0.3}}
                   >
-                    <Link
-                      href={resolveNavLink(item.link) || '#'}
-                      className="block font-serif text-[28px] tracking-tight text-forest py-3 border-b border-border-light"
-                      onClick={() => setMobileOpen(false)}
-                    >
-                      {item.label}
-                    </Link>
+                    {item.children && item.children.length > 0 ? (
+                      <span className="block font-serif text-[28px] tracking-tight text-forest py-3 border-b border-border-light">
+                        {item.label}
+                      </span>
+                    ) : (
+                      <Link
+                        href={resolveNavLink(item.link) || '#'}
+                        className="block font-serif text-[28px] tracking-tight text-forest py-3 border-b border-border-light"
+                        onClick={() => setMobileOpen(false)}
+                      >
+                        {item.label}
+                      </Link>
+                    )}
                     {item.children?.map((child) => (
                       <Link
                         key={child._key}

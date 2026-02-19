@@ -72,6 +72,8 @@ export const page = defineType({
         {type: 'policyNotes'},
         {type: 'featureGrid'},
         {type: 'pricingCalculator'},
+        {type: 'whatsIncluded'},
+        {type: 'requirementsList'},
       ],
       options: {
         insertMenu: {

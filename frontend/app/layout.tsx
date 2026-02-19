@@ -87,7 +87,7 @@ export default async function RootLayout({children}: {children: React.ReactNode}
         )}
         <SanityLive onError={handleError} />
         <Header navItems={navItems as any} ctaButton={settings?.ctaButton as any} />
-        <main className="pt-[72px]">{children}</main>
+        <main>{children}</main>
         <Footer
           tagline={settings?.footerTagline ?? undefined}
           columns={settings?.footerColumns as any}

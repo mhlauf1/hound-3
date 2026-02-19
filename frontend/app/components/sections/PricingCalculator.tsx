@@ -34,11 +34,11 @@ export default function PricingCalculator({block}: PricingCalculatorProps) {
   const Calculator = calculatorType ? calculators[calculatorType] : null
 
   return (
-    <section className="bg-forest text-cream rounded-[48px] mx-3 md:mx-6">
-      <div className="px-6 md:px-16 lg:px-24 py-16 lg:py-24">
+    <section className="bg-forest mb-12 md:mb-20 text-cream rounded-[48px] mx-3 md:mx-6">
+      <div className="px-6 md:px-16 lg:px-24 py-14 lg:py-20">
         {/* Header */}
         <FadeIn>
-          <div className="max-w-2xl mb-10 lg:mb-14">
+          <div className="max-w-2xl mb-8 lg:mb-10">
             {eyebrow && (
               <Badge className="mb-3 !bg-forest-card !text-cream/80 !border-border-dark">
                 {eyebrow}
