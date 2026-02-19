@@ -2,6 +2,7 @@
 
 import {FadeIn} from '@/app/components/ui/FadeIn'
 import {stegaClean} from '@sanity/client/stega'
+import Badge from '../ui/Badge'
 
 type PricingMatrixProps = {
   block: {
@@ -45,11 +46,7 @@ export default function PricingMatrix({block}: PricingMatrixProps) {
       <div className="px-6 md:px-24 py-16 lg:py-24">
         <FadeIn>
           <div className="text-center max-w-2xl mx-auto mb-12 lg:mb-16">
-            {eyebrow && (
-              <p className="font-sans text-[14px] font-medium uppercase tracking-[0.08em] text-terracotta mb-3">
-                {eyebrow}
-              </p>
-            )}
+            {eyebrow && <Badge className="mb-3">{eyebrow}</Badge>}
             {heading && (
               <h2 className="text-[36px] md:text-[48px] lg:text-[56px] leading-[105%] text-forest mb-4">
                 {heading}
@@ -97,10 +94,7 @@ export default function PricingMatrix({block}: PricingMatrixProps) {
                     </thead>
                     <tbody>
                       {table.rows?.map((row, ri) => (
-                        <tr
-                          key={row._key}
-                          className={ri % 2 === 0 ? 'bg-sand/30' : 'bg-cream'}
-                        >
+                        <tr key={row._key} className={ri % 2 === 0 ? 'bg-sand/30' : 'bg-cream'}>
                           <td className="font-sans text-[14px] md:text-[16px] font-medium text-forest px-4 py-3 sticky left-0 z-10 bg-inherit">
                             {row.rowLabel}
                           </td>

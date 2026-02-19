@@ -32,6 +32,7 @@ import {logoBar} from './objects/logoBar'
 import {pricingMatrix} from './objects/pricingMatrix'
 import {pricingList} from './objects/pricingList'
 import {policyNotes} from './objects/policyNotes'
+import {featureGrid} from './objects/featureGrid'
 import {settings} from './singletons/settings'
 import {link} from './objects/link'
 import {blockContent} from './objects/blockContent'
@@ -82,4 +83,5 @@ export const schemaTypes = [
   pricingMatrix,
   pricingList,
   policyNotes,
+  featureGrid,
 ]

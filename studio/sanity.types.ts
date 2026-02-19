@@ -33,6 +33,291 @@ export type TeamMemberImage = {
   _type: 'image'
 }
 
+export type ObjectImage = {
+  asset?: SanityImageAssetReference
+  media?: unknown // Unable to locate the referenced type "object.image.media" in schema
+  hotspot?: SanityImageHotspot
+  crop?: SanityImageCrop
+  _type: 'image'
+}
+
+export type FeaturesObjectImage = {
+  asset?: SanityImageAssetReference
+  media?: unknown // Unable to locate the referenced type "features.object.image.media" in schema
+  hotspot?: SanityImageHotspot
+  crop?: SanityImageCrop
+  _type: 'image'
+}
+
+export type ColumnsObjectImage = {
+  asset?: SanityImageAssetReference
+  media?: unknown // Unable to locate the referenced type "columns.object.image.media" in schema
+  hotspot?: SanityImageHotspot
+  crop?: SanityImageCrop
+  _type: 'image'
+}
+
+export type LogosObjectImage = {
+  asset?: SanityImageAssetReference
+  media?: unknown // Unable to locate the referenced type "logos.object.image.media" in schema
+  hotspot?: SanityImageHotspot
+  crop?: SanityImageCrop
+  _type: 'image'
+}
+
+export type ItemsObjectImage = {
+  asset?: SanityImageAssetReference
+  media?: unknown // Unable to locate the referenced type "items.object.image.media" in schema
+  hotspot?: SanityImageHotspot
+  crop?: SanityImageCrop
+  _type: 'image'
+}
+
+export type FeatureGrid = {
+  _type: 'featureGrid'
+  heading: string
+  cta?: Button
+  items?: Array<{
+    image?: ItemsObjectImage
+    icon?: string
+    title: string
+    description?: string
+    _key: string
+  }>
+  columns?: 3 | 4
+  backgroundColor?: 'cream' | 'sand' | 'forest' | 'black'
+}
+
+export type PolicyNotes = {
+  _type: 'policyNotes'
+  eyebrow?: string
+  heading?: string
+  categories?: Array<{
+    categoryName: string
+    policies?: Array<string>
+    _type: 'policyCategory'
+    _key: string
+  }>
+  backgroundColor?: 'cream' | 'sand' | 'forest'
+}
+
+export type PricingList = {
+  _type: 'pricingList'
+  eyebrow?: string
+  heading?: string
+  description?: string
+  items?: Array<{
+    service: string
+    price?: string
+    note?: string
+    _type: 'pricingListItem'
+    _key: string
+  }>
+  columns?: 1 | 2
+  backgroundColor?: 'cream' | 'sand'
+}
+
+export type PricingMatrix = {
+  _type: 'pricingMatrix'
+  eyebrow?: string
+  heading?: string
+  description?: string
+  tables?: Array<{
+    tableName: string
+    tableDescription?: string
+    columnHeaders?: Array<string>
+    rows?: Array<{
+      rowLabel: string
+      cells?: Array<{
+        value?: string
+        note?: string
+        _type: 'matrixCell'
+        _key: string
+      }>
+      _type: 'matrixRow'
+      _key: string
+    }>
+    _type: 'matrixTable'
+    _key: string
+  }>
+  footnotes?: Array<string>
+  backgroundColor?: 'cream' | 'sand'
+}
+
+export type LogoBar = {
+  _type: 'logoBar'
+  heading?: string
+  logos?: Array<{
+    image: LogosObjectImage
+    alt: string
+    url?: string
+    _key: string
+  }>
+  displayMode?: 'grid' | 'marquee'
+  backgroundColor?: 'cream' | 'sand' | 'white'
+}
+
+export type CtaStrip = {
+  _type: 'ctaStrip'
+  heading: string
+  subtext?: string
+  cta: Button
+  backgroundColor?: 'cream' | 'sand' | 'forest' | 'terracotta'
+}
+
+export type FullWidthMedia = {
+  _type: 'fullWidthMedia'
+  heading?: string
+  subtext?: string
+  cta?: Button
+  image: {
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    _type: 'image'
+  }
+  textAlignment?: 'left' | 'center' | 'right'
+  overlayOpacity?: 'light' | 'medium' | 'heavy'
+}
+
+export type VideoSection = {
+  _type: 'videoSection'
+  eyebrow?: string
+  heading?: string
+  description?: string
+  videoUrl: string
+  thumbnail?: {
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    _type: 'image'
+  }
+  layout?: 'full' | 'split'
+  backgroundColor?: 'cream' | 'sand' | 'forest'
+}
+
+export type IconGrid = {
+  _type: 'iconGrid'
+  eyebrow?: string
+  heading: string
+  description?: string
+  items?: Array<{
+    icon?: string
+    title: string
+    description?: string
+    _key: string
+  }>
+  columns?: 2 | 3 | 4
+  backgroundColor?: 'cream' | 'sand' | 'forest'
+}
+
+export type ContentColumns = {
+  _type: 'contentColumns'
+  eyebrow?: string
+  heading?: string
+  columns?: Array<{
+    image?: ColumnsObjectImage
+    heading?: string
+    body?: BlockContent
+    cta?: Button
+    _key: string
+  }>
+  layout?: 2 | 3
+  backgroundColor?: 'cream' | 'sand'
+}
+
+export type ProcessSteps = {
+  _type: 'processSteps'
+  eyebrow?: string
+  heading: string
+  description?: string
+  steps?: Array<{
+    title: string
+    description?: string
+    icon?: string
+    _key: string
+  }>
+  cta?: Button
+  backgroundColor?: 'cream' | 'sand' | 'forest'
+}
+
+export type FeatureList = {
+  _type: 'featureList'
+  eyebrow?: string
+  heading: string
+  features?: Array<{
+    title: string
+    body?: BlockContent
+    image?: FeaturesObjectImage
+    cta?: Button
+    _key: string
+  }>
+  showNumbers?: boolean
+  backgroundColor?: 'cream' | 'sand'
+}
+
+export type ServiceCards = {
+  _type: 'serviceCards'
+  eyebrow?: string
+  heading: string
+  description?: string
+  cards?: Array<{
+    image?: ObjectImage
+    title: string
+    description?: string
+    cta?: Button
+    _key: string
+  }>
+  columns?: 2 | 3 | 4
+  backgroundColor?: 'cream' | 'sand'
+}
+
+export type HeroMinimal = {
+  _type: 'heroMinimal'
+  eyebrow?: string
+  heading: string
+  headingAccent?: string
+  subtext?: string
+  backgroundColor?: 'cream' | 'sand' | 'forest'
+}
+
+export type HeroBanner = {
+  _type: 'heroBanner'
+  eyebrow?: string
+  heading: string
+  subtext?: string
+  primaryCta?: Button
+  backgroundImage: {
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    _type: 'image'
+  }
+  overlayOpacity?: 'light' | 'medium' | 'heavy'
+  minHeight?: 'standard' | 'tall' | 'fullscreen'
+}
+
+export type HeroSplit = {
+  _type: 'heroSplit'
+  eyebrow?: string
+  heading: string
+  body?: string
+  primaryCta?: Button
+  secondaryCta?: Button
+  image: {
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    _type: 'image'
+  }
+  imagePosition?: 'left' | 'right'
+  backgroundColor?: 'cream' | 'sand' | 'forest'
+}
+
 export type ContactForm = {
   _type: 'contactForm'
   eyebrow?: string
@@ -474,6 +759,54 @@ export type Service = {
     | ({
         _key: string
       } & ContactForm)
+    | ({
+        _key: string
+      } & HeroSplit)
+    | ({
+        _key: string
+      } & HeroBanner)
+    | ({
+        _key: string
+      } & ServiceCards)
+    | ({
+        _key: string
+      } & FeatureList)
+    | ({
+        _key: string
+      } & ProcessSteps)
+    | ({
+        _key: string
+      } & ContentColumns)
+    | ({
+        _key: string
+      } & IconGrid)
+    | ({
+        _key: string
+      } & VideoSection)
+    | ({
+        _key: string
+      } & FullWidthMedia)
+    | ({
+        _key: string
+      } & CtaStrip)
+    | ({
+        _key: string
+      } & LogoBar)
+    | ({
+        _key: string
+      } & HeroMinimal)
+    | ({
+        _key: string
+      } & PricingMatrix)
+    | ({
+        _key: string
+      } & PricingList)
+    | ({
+        _key: string
+      } & PolicyNotes)
+    | ({
+        _key: string
+      } & FeatureGrid)
   >
 }
 
@@ -640,6 +973,54 @@ export type Page = {
     | ({
         _key: string
       } & ContactForm)
+    | ({
+        _key: string
+      } & HeroSplit)
+    | ({
+        _key: string
+      } & HeroBanner)
+    | ({
+        _key: string
+      } & HeroMinimal)
+    | ({
+        _key: string
+      } & ServiceCards)
+    | ({
+        _key: string
+      } & FeatureList)
+    | ({
+        _key: string
+      } & ProcessSteps)
+    | ({
+        _key: string
+      } & ContentColumns)
+    | ({
+        _key: string
+      } & IconGrid)
+    | ({
+        _key: string
+      } & VideoSection)
+    | ({
+        _key: string
+      } & FullWidthMedia)
+    | ({
+        _key: string
+      } & CtaStrip)
+    | ({
+        _key: string
+      } & LogoBar)
+    | ({
+        _key: string
+      } & PricingMatrix)
+    | ({
+        _key: string
+      } & PricingList)
+    | ({
+        _key: string
+      } & PolicyNotes)
+    | ({
+        _key: string
+      } & FeatureGrid)
   >
 }
 
@@ -880,6 +1261,27 @@ export type AllSanitySchemaTypes =
   | SplitContentLink
   | SanityImageAssetReference
   | TeamMemberImage
+  | ObjectImage
+  | FeaturesObjectImage
+  | ColumnsObjectImage
+  | LogosObjectImage
+  | ItemsObjectImage
+  | FeatureGrid
+  | PolicyNotes
+  | PricingList
+  | PricingMatrix
+  | LogoBar
+  | CtaStrip
+  | FullWidthMedia
+  | VideoSection
+  | IconGrid
+  | ContentColumns
+  | ProcessSteps
+  | FeatureList
+  | ServiceCards
+  | HeroMinimal
+  | HeroBanner
+  | HeroSplit
   | ContactForm
   | GalleryGrid
   | TeamGrid

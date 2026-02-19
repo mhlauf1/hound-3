@@ -2,6 +2,7 @@ import Button from '@/app/components/ui/Button'
 import Image from '@/app/components/SanityImage'
 import {FadeIn} from '@/app/components/ui/FadeIn'
 import {stegaClean} from '@sanity/client/stega'
+import Badge from '../ui/Badge'
 
 type HeroBannerProps = {
   block: {
@@ -32,8 +33,7 @@ const heightClasses: Record<string, string> = {
 
 export default function HeroBanner({block}: HeroBannerProps) {
   const {eyebrow, heading, subtext, primaryCta, backgroundImage, overlayOpacity, minHeight} = block
-  const overlay =
-    overlayClasses[stegaClean(overlayOpacity) || 'medium'] || overlayClasses.medium
+  const overlay = overlayClasses[stegaClean(overlayOpacity) || 'medium'] || overlayClasses.medium
   const height = heightClasses[stegaClean(minHeight) || 'standard'] || heightClasses.standard
 
   return (
@@ -61,9 +61,7 @@ export default function HeroBanner({block}: HeroBannerProps) {
       <div className="relative z-10 text-center px-6 py-16 lg:py-24 max-w-3xl mx-auto">
         {eyebrow && (
           <FadeIn>
-            <p className="font-sans text-[14px] font-medium uppercase tracking-[0.08em] text-terracotta-light mb-3">
-              {eyebrow}
-            </p>
+            <Badge className="mb-3">{eyebrow}</Badge>
           </FadeIn>
         )}
         {heading && (

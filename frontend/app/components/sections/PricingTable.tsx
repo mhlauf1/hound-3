@@ -1,5 +1,6 @@
 import Button from '@/app/components/ui/Button'
 import {FadeIn} from '@/app/components/ui/FadeIn'
+import Badge from '../ui/Badge'
 
 type PricingTableProps = {
   block: {
@@ -33,11 +34,7 @@ export default function PricingTable({block}: PricingTableProps) {
       <div className="px-6 md:px-24 py-16 lg:py-24">
         <FadeIn>
           <div className="text-center max-w-2xl mx-auto mb-12 lg:mb-16">
-            {eyebrow && (
-              <p className="font-sans text-[14px] font-medium uppercase tracking-[0.08em] text-terracotta mb-3">
-                {eyebrow}
-              </p>
-            )}
+            {eyebrow && <Badge className="mb-3">{eyebrow}</Badge>}
             {heading && (
               <h2 className="text-[36px] md:text-[48px] lg:text-[56px] leading-[105%] text-forest mb-4">
                 {heading}

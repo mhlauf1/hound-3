@@ -1,5 +1,6 @@
 import {FadeIn} from '@/app/components/ui/FadeIn'
 import {stegaClean} from '@sanity/client/stega'
+import Badge from '../ui/Badge'
 
 type HeroMinimalProps = {
   block: {
@@ -27,15 +28,11 @@ export default function HeroMinimal({block}: HeroMinimalProps) {
 
   return (
     <section className={`${bg} min-h-[55vh] flex items-end justify-center`}>
-      <div className="px-6 md:px-24 pb-12 lg:pb-16 pt-24 text-center w-full">
+      <div className="px-6 md:px-24 pb-32 lg:pb-24 pt-24 text-center w-full">
         <div className="max-w-7xl mx-auto">
           {eyebrow && (
             <FadeIn>
-              <p
-                className={`font-sans text-[14px] font-medium uppercase tracking-[0.08em] mb-4 ${isDark ? 'text-terracotta-light' : 'text-terracotta'}`}
-              >
-                {eyebrow}
-              </p>
+              <Badge className="mb-3">{eyebrow}</Badge>
             </FadeIn>
           )}
           {heading && (

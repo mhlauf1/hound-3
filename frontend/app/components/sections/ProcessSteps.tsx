@@ -4,6 +4,7 @@ import {Icon} from '@iconify/react'
 import Button from '@/app/components/ui/Button'
 import {FadeIn} from '@/app/components/ui/FadeIn'
 import {stegaClean} from '@sanity/client/stega'
+import Badge from '../ui/Badge'
 
 type ProcessStepsProps = {
   block: {
@@ -40,11 +41,7 @@ export default function ProcessSteps({block}: ProcessStepsProps) {
       <div className="px-6 md:px-24 py-16 lg:py-24">
         <FadeIn>
           <div className="text-center mb-10 lg:mb-14 max-w-2xl mx-auto">
-            {eyebrow && (
-              <p className="font-sans text-[14px] font-medium uppercase tracking-[0.08em] text-terracotta mb-3">
-                {eyebrow}
-              </p>
-            )}
+            {eyebrow && <Badge className="mb-3">{eyebrow}</Badge>}
             {heading && (
               <h2 className="text-[36px] md:text-[48px] lg:text-[56px] leading-[105%] mb-4">
                 {heading}

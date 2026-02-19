@@ -5,6 +5,8 @@ import PortableText from '@/app/components/PortableText'
 import Image from '@/app/components/SanityImage'
 import {stegaClean} from '@sanity/client/stega'
 import {ExtractPageBuilderType} from '@/sanity/lib/types'
+import {FadeIn} from './ui/FadeIn'
+import Badge from './ui/Badge'
 
 type CtaProps = {
   block: ExtractPageBuilderType<'callToAction'>
@@ -29,9 +31,9 @@ export default function CTA({block}: CtaProps) {
             className={`${isImageFirst && image ? 'row-start-2 lg:row-start-1 lg:col-start-2' : ''} flex flex-col gap-2 `}
           >
             {eyebrow && (
-              <span className="text-sm uppercase dark:text-white font-mono tracking-tight opacity-70">
-                {eyebrow}
-              </span>
+              <FadeIn>
+                <Badge className="mb-3">{eyebrow}</Badge>
+              </FadeIn>
             )}
             {heading && (
               <h2 className="text-2xl md:text-3xl lg:text-4xl dark:text-white">{heading}</h2>
