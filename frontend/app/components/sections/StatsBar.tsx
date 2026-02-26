@@ -19,8 +19,8 @@ export default function StatsBar({block}: StatsBarProps) {
   const {stats, showLogo} = block
 
   return (
-    <section className="relative mb-24 border-y border-forest md:mb-32 bg-sand overflow-hidden">
-      <div className="md:max-w-[80vw] px-8 md:px-20 mx-auto relative z-10 pb-[60px] lg:pb-[80px] pt-[80px] lg:pt-[100px]">
+    <section className="relative  border-y border-forest  bg-sand overflow-hidden">
+      <div className="md:max-w-[80vw] px-8 md:px-20 mx-auto relative z-10 py-25 md:py-30">
         {stats && stats.length > 0 && (
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
             {stats.map((stat, i) => (

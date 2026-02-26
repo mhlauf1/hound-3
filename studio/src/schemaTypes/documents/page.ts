@@ -74,6 +74,7 @@ export const page = defineType({
         {type: 'pricingCalculator'},
         {type: 'whatsIncluded'},
         {type: 'requirementsList'},
+        {type: 'webcamGrid'},
       ],
       options: {
         insertMenu: {

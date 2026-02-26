@@ -237,6 +237,12 @@ const pageBuilderExpansion = /* groq */ `
         }
       }
     },
+    _type == "webcamGrid" => {
+      ...,
+      "webcams": *[_type == "webcam" && enabled == true] | order(group asc, sortOrder asc) {
+        _id, name, cameraId, group, sortOrder
+      }
+    },
   }
 `
 

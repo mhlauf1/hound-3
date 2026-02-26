@@ -18,6 +18,11 @@ export type SplitContentLink = {
   link?: Link
 }
 
+export type RequirementsListLink = {
+  label?: string
+  link?: Link
+}
+
 export type SanityImageAssetReference = {
   _ref: string
   _type: 'reference'
@@ -71,6 +76,44 @@ export type ItemsObjectImage = {
   hotspot?: SanityImageHotspot
   crop?: SanityImageCrop
   _type: 'image'
+}
+
+export type RequirementsList = {
+  _type: 'requirementsList'
+  eyebrow?: string
+  heading: string
+  description?: string
+  items?: Array<{
+    text?: string
+    _key: string
+  }>
+  link?: RequirementsListLink
+  image?: {
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    _type: 'image'
+  }
+  imagePosition?: 'left' | 'right'
+  backgroundColor?: 'cream' | 'sand'
+}
+
+export type WhatsIncluded = {
+  _type: 'whatsIncluded'
+  eyebrow?: string
+  heading?: string
+  description?: string
+  items?: Array<{
+    icon?: string
+    title: string
+    description?: string
+    _key: string
+  }>
+  layout?: 'card' | 'inline'
+  columns?: 2 | 3 | 4
+  backgroundColor?: 'cream' | 'sand' | 'forest'
+  iconColor?: 'terracotta' | 'forest' | 'muted'
 }
 
 export type PricingCalculator = {
@@ -246,6 +289,7 @@ export type ProcessSteps = {
   description?: string
   steps?: Array<{
     title: string
+    badge?: string
     description?: string
     icon?: string
     _key: string
@@ -821,6 +865,12 @@ export type Service = {
     | ({
         _key: string
       } & PricingCalculator)
+    | ({
+        _key: string
+      } & WhatsIncluded)
+    | ({
+        _key: string
+      } & RequirementsList)
   >
 }
 
@@ -1038,6 +1088,12 @@ export type Page = {
     | ({
         _key: string
       } & PricingCalculator)
+    | ({
+        _key: string
+      } & WhatsIncluded)
+    | ({
+        _key: string
+      } & RequirementsList)
   >
 }
 
@@ -1276,6 +1332,7 @@ export type Geopoint = {
 
 export type AllSanitySchemaTypes =
   | SplitContentLink
+  | RequirementsListLink
   | SanityImageAssetReference
   | TeamMemberImage
   | ObjectImage
@@ -1283,6 +1340,8 @@ export type AllSanitySchemaTypes =
   | ColumnsObjectImage
   | LogosObjectImage
   | ItemsObjectImage
+  | RequirementsList
+  | WhatsIncluded
   | PricingCalculator
   | FeatureGrid
   | PolicyNotes

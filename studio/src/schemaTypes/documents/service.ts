@@ -83,6 +83,7 @@ export const service = defineType({
         {type: 'pricingCalculator'},
         {type: 'whatsIncluded'},
         {type: 'requirementsList'},
+        {type: 'webcamGrid'},
       ],
       options: {
         insertMenu: {
