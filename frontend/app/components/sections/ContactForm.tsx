@@ -109,7 +109,7 @@ export default function ContactForm({block}: ContactFormProps) {
                   className="h-12 w-12 text-forest mx-auto mb-4"
                   fill="none"
                   viewBox="0 0 24 24"
-                  strokeWidth={1.4}
+                  strokeWidth={1.5}
                   stroke="currentColor"
                 >
                   <path
