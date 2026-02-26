@@ -20,20 +20,21 @@ type SplitContentProps = {
   pageType: string
 }
 
-const bgColors: Record<string, string> = {
-  cream: 'bg-cream text-forest',
-  sand: 'bg-sand text-forest',
-  forest: 'bg-forest text-cream',
+const bgColors: Record<string, {classes: string; isDark: boolean}> = {
+  cream: {classes: 'bg-cream text-forest', isDark: false},
+  sand: {classes: 'bg-sand text-forest', isDark: false},
+  forest: {classes: 'bg-forest text-cream', isDark: true},
   // Backward-compat aliases for existing Sanity data
-  tan: 'bg-cream text-forest',
-  lavender: 'bg-sand text-forest',
-  dark: 'bg-forest text-cream',
+  tan: {classes: 'bg-cream text-forest', isDark: false},
+  lavender: {classes: 'bg-sand text-forest', isDark: false},
+  dark: {classes: 'bg-forest text-cream', isDark: true},
 }
 
 export default function SplitContent({block}: SplitContentProps) {
   const {heading, body, link, badge, image, imagePosition, backgroundColor} = block
   const isImageLeft = stegaClean(imagePosition) === 'left'
-  const bg = bgColors[stegaClean(backgroundColor) || 'sand'] || bgColors.sand
+  const {classes: bg, isDark} =
+    bgColors[stegaClean(backgroundColor) || 'sand'] || bgColors.sand
 
   return (
     <section className={`${bg}`}>
@@ -43,7 +44,7 @@ export default function SplitContent({block}: SplitContentProps) {
           <div className={isImageLeft ? 'lg:order-2' : 'lg:order-1'}>
             {heading && (
               <FadeIn>
-                <h2 className="text-[48px] lg:text-[88px] leading-[100%] max-w-[8ch] mb-6">
+                <h2 className="text-[48px] lg:text-[80px] leading-[100%] max-w-[18ch] mb-6">
                   {heading}
                 </h2>
               </FadeIn>
@@ -51,7 +52,7 @@ export default function SplitContent({block}: SplitContentProps) {
 
             {body && (
               <FadeIn delay={0.1}>
-                <div className="font-sans text-[16px] lg:text-[18px] font-light leading-[150%] opacity-80 mb-6 prose prose-p:mb-3">
+                <div className={`font-sans text-[16px] lg:text-[18px] font-light leading-[150%] opacity-80 mb-6 prose prose-p:mb-3 ${isDark ? 'prose-invert' : ''}`}>
                   <PortableText value={body} />
                 </div>
               </FadeIn>

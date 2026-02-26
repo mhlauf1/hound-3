@@ -35,6 +35,7 @@ import FeatureGrid from '@/app/components/sections/FeatureGrid'
 import PricingCalculator from '@/app/components/sections/PricingCalculator'
 import WhatsIncluded from '@/app/components/sections/WhatsIncluded'
 import RequirementsList from '@/app/components/sections/RequirementsList'
+import WebcamGrid from '@/app/components/sections/WebcamGrid'
 import {dataAttr} from '@/sanity/lib/utils'
 import {PageBuilderSection} from '@/sanity/lib/types'
 
@@ -85,6 +86,7 @@ const Blocks = {
   pricingCalculator: PricingCalculator,
   whatsIncluded: WhatsIncluded,
   requirementsList: RequirementsList,
+  webcamGrid: WebcamGrid,
 } as BlocksType
 
 export default function BlockRenderer({block, index, pageId, pageType}: BlockProps) {

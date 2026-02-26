@@ -1,6 +1,7 @@
 import {page} from './documents/page'
 import {service} from './documents/service'
 import {testimonial} from './documents/testimonial'
+import {webcam} from './documents/webcam'
 import {callToAction} from './objects/callToAction'
 import {infoSection} from './objects/infoSection'
 import {hero} from './objects/hero'
@@ -36,6 +37,7 @@ import {featureGrid} from './objects/featureGrid'
 import {pricingCalculator} from './objects/pricingCalculator'
 import {whatsIncluded} from './objects/whatsIncluded'
 import {requirementsList} from './objects/requirementsList'
+import {webcamGrid} from './objects/webcamGrid'
 import {settings} from './singletons/settings'
 import {link} from './objects/link'
 import {blockContent} from './objects/blockContent'
@@ -49,6 +51,7 @@ export const schemaTypes = [
   page,
   service,
   testimonial,
+  webcam,
   // Objects
   button,
   blockContent,
@@ -90,4 +93,5 @@ export const schemaTypes = [
   pricingCalculator,
   whatsIncluded,
   requirementsList,
+  webcamGrid,
 ]

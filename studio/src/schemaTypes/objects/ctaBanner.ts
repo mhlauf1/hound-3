@@ -26,6 +26,14 @@ export const ctaBanner = defineType({
       options: {hotspot: true},
     }),
     defineField({
+      name: 'sideImage',
+      title: 'Side Image',
+      type: 'image',
+      options: {hotspot: true},
+      description:
+        'Optional: adds a square photo on the right in a 2-column layout. Leave empty to use the full-width background image mode.',
+    }),
+    defineField({
       name: 'cta',
       title: 'CTA Button',
       type: 'button',
