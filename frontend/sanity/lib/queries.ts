@@ -2,7 +2,8 @@ import {defineQuery} from 'next-sanity'
 
 const linkReference = /* groq */ `
   _type == "link" => {
-    "page": page->slug.current
+    "page": page->slug.current,
+    "pageType": page->_type
   }
 `
 

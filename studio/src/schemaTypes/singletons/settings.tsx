@@ -105,7 +105,14 @@ export const settings = defineType({
           type: 'object',
           fields: [
             defineField({name: 'label', title: 'Label', type: 'string', validation: (Rule) => Rule.required()}),
-            defineField({name: 'link', title: 'Link', type: 'link'}),
+            defineField({
+              name: 'link',
+              title: 'Link',
+              type: 'link',
+              description: 'Leave empty if this item has dropdown children',
+              hidden: ({parent}) =>
+                Array.isArray(parent?.children) && parent.children.length > 0,
+            }),
             defineField({
               name: 'children',
               title: 'Dropdown Items',

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {Suspense} from 'react'
 
 import Cta from '@/app/components/Cta'
 import Info from '@/app/components/InfoSection'
@@ -15,7 +15,7 @@ import FaqAccordion from '@/app/components/sections/FaqAccordion'
 import PricingTable from '@/app/components/sections/PricingTable'
 import TeamGrid from '@/app/components/sections/TeamGrid'
 import GalleryGrid from '@/app/components/sections/GalleryGrid'
-import ContactForm from '@/app/components/sections/ContactForm'
+import ContactFormComponent from '@/app/components/sections/ContactForm'
 import HeroSplit from '@/app/components/sections/HeroSplit'
 import HeroBanner from '@/app/components/sections/HeroBanner'
 import HeroMinimal from '@/app/components/sections/HeroMinimal'
@@ -44,6 +44,14 @@ type BlockProps = {
   block: PageBuilderSection
   pageId: string
   pageType: string
+}
+
+function ContactForm(props: BlockProps) {
+  return (
+    <Suspense>
+      <ContactFormComponent {...(props as React.ComponentProps<typeof ContactFormComponent>)} />
+    </Suspense>
+  )
 }
 
 type BlocksType = {

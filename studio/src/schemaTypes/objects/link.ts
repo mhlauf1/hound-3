@@ -12,7 +12,6 @@ export const link = defineType({
       name: 'linkType',
       title: 'Link Type',
       type: 'string',
-      initialValue: 'href',
       options: {
         list: [
           {title: 'URL', value: 'href'},
@@ -39,7 +38,7 @@ export const link = defineType({
       name: 'page',
       title: 'Page',
       type: 'reference',
-      to: [{type: 'page'}],
+      to: [{type: 'page'}, {type: 'service'}],
       hidden: ({parent}) => parent?.linkType !== 'page',
       validation: (Rule) =>
         Rule.custom((value, context) => {
@@ -49,6 +48,13 @@ export const link = defineType({
           }
           return true
         }),
+    }),
+    defineField({
+      name: 'queryString',
+      title: 'Query String',
+      type: 'string',
+      description: 'Optional query params (e.g. ?service=daycare)',
+      hidden: ({parent}) => parent?.linkType !== 'page',
     }),
     defineField({
       name: 'openInNewTab',
