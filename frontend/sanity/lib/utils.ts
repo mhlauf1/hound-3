@@ -41,7 +41,13 @@ export function linkResolver(link: Link | DereferencedLink | undefined) {
       return link.href || null
     case 'page':
       if (link?.page && typeof link.page === 'string') {
-        return `/${link.page}`
+        const pageType = (link as DereferencedLink).pageType
+        let path = pageType === 'service' ? `/services/${link.page}` : `/${link.page}`
+        const qs = (link as DereferencedLink).queryString
+        if (qs) {
+          path += qs.startsWith('?') ? qs : `?${qs}`
+        }
+        return path
       }
       return null
     default:

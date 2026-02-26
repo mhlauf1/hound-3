@@ -12,5 +12,7 @@ export type DereferencedLink = {
   linkType?: string
   href?: string
   page?: string | null
+  pageType?: string | null
+  queryString?: string
   openInNewTab?: boolean
 }

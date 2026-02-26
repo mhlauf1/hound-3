@@ -1,36 +1,17 @@
 'use client'
 
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
+import {useSearchParams} from 'next/navigation'
 import {PortableText} from '@portabletext/react'
-import type {PortableTextBlock} from 'next-sanity'
+
 import Button from '@/app/components/ui/Button'
 import {FadeIn} from '@/app/components/ui/FadeIn'
 import {stegaClean} from '@sanity/client/stega'
 import Badge from '../ui/Badge'
-
-type FormField = {
-  _key: string
-  fieldName?: string
-  label?: string
-  type?: 'text' | 'email' | 'tel' | 'textarea' | 'select'
-  required?: boolean
-  options?: string[]
-}
+import type {ExtractPageBuilderType} from '@/sanity/lib/types'
 
 type ContactFormProps = {
-  block: {
-    eyebrow?: string
-    heading?: string
-    description?: PortableTextBlock[]
-    formFields?: FormField[]
-    submitButtonText?: string
-    successMessage?: string
-    showMap?: boolean
-    mapEmbedUrl?: string
-    address?: string
-    phone?: string
-    email?: string
-  }
+  block: ExtractPageBuilderType<'contactForm'>
   index: number
   pageId: string
   pageType: string
@@ -51,9 +32,17 @@ export default function ContactForm({block}: ContactFormProps) {
     email,
   } = block
 
+  const searchParams = useSearchParams()
   const [formData, setFormData] = useState<Record<string, string>>({})
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle')
   const [errorMessage, setErrorMessage] = useState('')
+
+  useEffect(() => {
+    const serviceParam = searchParams.get('service')
+    if (serviceParam && formFields?.some((f) => stegaClean(f.fieldName) === 'service')) {
+      setFormData((prev) => ({...prev, service: serviceParam}))
+    }
+  }, [searchParams, formFields])
 
   const handleChange = (fieldName: string, value: string) => {
     setFormData((prev) => ({...prev, [fieldName]: value}))
@@ -87,7 +76,7 @@ export default function ContactForm({block}: ContactFormProps) {
   const hasContactInfo = address || phone || email || (stegaClean(showMap) && mapEmbedUrl)
 
   return (
-    <section className="bg-cream">
+    <section className="bg-cream pt-8">
       <div className="px-6 md:px-24 py-16 lg:py-24">
         <FadeIn>
           <div className="mb-10 lg:mb-14">

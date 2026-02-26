@@ -78,6 +78,13 @@ export type ItemsObjectImage = {
   _type: 'image'
 }
 
+export type WebcamGrid = {
+  _type: 'webcamGrid'
+  heading?: string
+  subtext?: string
+  showGroupHeaders?: boolean
+}
+
 export type RequirementsList = {
   _type: 'requirementsList'
   eyebrow?: string
@@ -500,6 +507,13 @@ export type CtaBanner = {
     crop?: SanityImageCrop
     _type: 'image'
   }
+  sideImage?: {
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    _type: 'image'
+  }
   cta?: Button
   showRating?: boolean
   ratingText?: string
@@ -650,7 +664,8 @@ export type Link = {
   _type: 'link'
   linkType?: 'href' | 'page'
   href?: string
-  page?: PageReference
+  page?: PageReference | ServiceReference
+  queryString?: string
   openInNewTab?: boolean
 }
 
@@ -733,6 +748,19 @@ export type Button = {
   _type: 'button'
   buttonText?: string
   link?: Link
+}
+
+export type Webcam = {
+  _id: string
+  _type: 'webcam'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  name: string
+  cameraId: string
+  group: 'indoor' | 'outdoor'
+  sortOrder?: number
+  enabled?: boolean
 }
 
 export type Testimonial = {
@@ -871,6 +899,9 @@ export type Service = {
     | ({
         _key: string
       } & RequirementsList)
+    | ({
+        _key: string
+      } & WebcamGrid)
   >
 }
 
@@ -1094,6 +1125,9 @@ export type Page = {
     | ({
         _key: string
       } & RequirementsList)
+    | ({
+        _key: string
+      } & WebcamGrid)
   >
 }
 
@@ -1340,6 +1374,7 @@ export type AllSanitySchemaTypes =
   | ColumnsObjectImage
   | LogosObjectImage
   | ItemsObjectImage
+  | WebcamGrid
   | RequirementsList
   | WhatsIncluded
   | PricingCalculator
@@ -1382,6 +1417,7 @@ export type AllSanitySchemaTypes =
   | BlockContentTextOnly
   | BlockContent
   | Button
+  | Webcam
   | Testimonial
   | Service
   | SanityImageCrop

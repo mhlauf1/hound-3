@@ -253,7 +253,10 @@ export default function Header({navItems, ctaButton}: HeaderProps) {
 function resolveNavLink(link: any): string | null {
   if (!link) return null
   if (link.linkType === 'href' && link.href) return link.href
-  if (link.linkType === 'page' && link.page) return `/${link.page}`
+  if (link.linkType === 'page' && link.page) {
+    if (link.pageType === 'service') return `/services/${link.page}`
+    return `/${link.page}`
+  }
   if (link.href) return link.href
   return null
 }

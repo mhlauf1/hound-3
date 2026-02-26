@@ -33,12 +33,11 @@ const bgColors: Record<string, {classes: string; isDark: boolean}> = {
 export default function SplitContent({block}: SplitContentProps) {
   const {heading, body, link, badge, image, imagePosition, backgroundColor} = block
   const isImageLeft = stegaClean(imagePosition) === 'left'
-  const {classes: bg, isDark} =
-    bgColors[stegaClean(backgroundColor) || 'sand'] || bgColors.sand
+  const {classes: bg, isDark} = bgColors[stegaClean(backgroundColor) || 'sand'] || bgColors.sand
 
   return (
     <section className={`${bg}`}>
-      <div className="px-6 md:px-24 py-16 lg:py-20">
+      <div className="px-6 md:px-24 py-16 lg:py-28">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
           {/* Text side */}
           <div className={isImageLeft ? 'lg:order-2' : 'lg:order-1'}>
@@ -52,7 +51,9 @@ export default function SplitContent({block}: SplitContentProps) {
 
             {body && (
               <FadeIn delay={0.1}>
-                <div className={`font-sans text-[16px] lg:text-[18px] font-light leading-[150%] opacity-80 mb-6 prose prose-p:mb-3 ${isDark ? 'prose-invert' : ''}`}>
+                <div
+                  className={`font-sans text-[16px] lg:text-[18px] font-light leading-[150%] opacity-80 mb-6 prose prose-p:mb-3 ${isDark ? 'prose-invert' : ''}`}
+                >
                   <PortableText value={body} />
                 </div>
               </FadeIn>
