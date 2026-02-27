@@ -61,20 +61,16 @@ export default function Header({navItems, ctaButton}: HeaderProps) {
           </Link>
 
           {/* Desktop Nav */}
-          <nav className="hidden md:flex items-center gap-8">
+          <nav className="hidden lg:flex items-center gap-8">
             {navItems?.map((item) => (
               <div
                 key={item._key}
                 className="relative"
                 onMouseEnter={() =>
-                  item.children && item.children.length > 0
-                    ? setDropdownOpen(item._key)
-                    : undefined
+                  item.children && item.children.length > 0 ? setDropdownOpen(item._key) : undefined
                 }
                 onMouseLeave={() =>
-                  item.children && item.children.length > 0
-                    ? setDropdownOpen(null)
-                    : undefined
+                  item.children && item.children.length > 0 ? setDropdownOpen(null) : undefined
                 }
               >
                 {item.children && item.children.length > 0 ? (
@@ -122,7 +118,7 @@ export default function Header({navItems, ctaButton}: HeaderProps) {
           </nav>
 
           {/* Desktop CTA */}
-          <div className="hidden md:block">
+          <div className="hidden lg:block">
             {ctaButton?.buttonText && (
               <Button variant="primary" link={ctaButton.link}>
                 {ctaButton.buttonText}
@@ -133,7 +129,7 @@ export default function Header({navItems, ctaButton}: HeaderProps) {
           {/* Mobile hamburger */}
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
-            className="md:hidden flex flex-col gap-1.5 p-2"
+            className="lg:hidden flex flex-col gap-1.5 p-2"
             aria-label="Toggle menu"
           >
             <span

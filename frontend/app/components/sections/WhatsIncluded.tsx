@@ -76,7 +76,7 @@ export default function WhatsIncluded({block}: WhatsIncludedProps) {
     <section className={`${colors.section} mb-12 md:mb-20 ]`}>
       <div className="px-6 md:px-16 lg:px-24 py-16 lg:py-24">
         <FadeIn>
-          <div className="text-center mb-10 lg:mb-14 max-w-3xl mx-auto">
+          <div className="text-center mb-10 lg:mb-18 max-w-3xl mx-auto">
             {eyebrow && (
               <p
                 className={`font-sans text-[12px] md:text-[13px] font-semibold uppercase tracking-[0.1em] ${colors.eyebrow} mb-3`}
@@ -93,7 +93,7 @@ export default function WhatsIncluded({block}: WhatsIncludedProps) {
             )}
             {description && (
               <p
-                className={`font-sans text-[16px] lg:text-[18px] font-light leading-[150%] ${colors.muted} mt-4`}
+                className={`font-sans text-[16px] lg:text-[18px] font-light leading-[150%] ${colors.muted} mt-4 md:mt-6`}
               >
                 {description}
               </p>

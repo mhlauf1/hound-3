@@ -63,7 +63,7 @@ export default function Hero({block}: HeroProps) {
 
           {subtext && (
             <FadeIn delay={0.2}>
-              <p className="font-sans  md:text-base lg:text-lg font-light text-text-muted leading-[150%] max-w-2xl mb-8">
+              <p className="font-sans  md:text-base lg:text-lg font-light text-text-muted leading-[150%] max-w-xl mb-8">
                 {subtext}
               </p>
             </FadeIn>
