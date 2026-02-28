@@ -59,10 +59,8 @@ export default function WebcamGrid({block}: WebcamGridProps) {
               </FadeIn>
             )}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {indoor.map((cam, i) => (
-                <FadeIn key={cam._id} delay={i * 0.1}>
-                  <WebcamEmbed cameraId={cam.cameraId} name={cam.name} />
-                </FadeIn>
+              {indoor.map((cam) => (
+                <WebcamEmbed key={cam._id} cameraId={cam.cameraId} name={cam.name} />
               ))}
             </div>
           </div>
@@ -79,10 +77,8 @@ export default function WebcamGrid({block}: WebcamGridProps) {
               </FadeIn>
             )}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {outdoor.map((cam, i) => (
-                <FadeIn key={cam._id} delay={i * 0.1}>
-                  <WebcamEmbed cameraId={cam.cameraId} name={cam.name} />
-                </FadeIn>
+              {outdoor.map((cam) => (
+                <WebcamEmbed key={cam._id} cameraId={cam.cameraId} name={cam.name} />
               ))}
             </div>
           </div>
