@@ -1,5 +1,5 @@
 import {defineField, defineType, defineArrayMember} from 'sanity'
-import {EnvelopeIcon} from '@sanity/icons'
+import {EnvelopeIcon, ImageIcon} from '@sanity/icons'
 
 export const contactForm = defineType({
   name: 'contactForm',
@@ -105,6 +105,13 @@ export const contactForm = defineType({
       title: 'Map Embed URL',
       type: 'url',
       hidden: ({parent}) => !parent?.showMap,
+    }),
+    defineField({
+      name: 'image',
+      title: 'Sidebar Image',
+      type: 'image',
+      description: 'Photo displayed above the contact info on the right side',
+      options: {hotspot: true},
     }),
     defineField({
       name: 'address',

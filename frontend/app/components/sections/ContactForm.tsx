@@ -4,6 +4,7 @@ import {useState, useEffect} from 'react'
 import {useSearchParams} from 'next/navigation'
 import {PortableText} from '@portabletext/react'
 
+import Image from '@/app/components/SanityImage'
 import Button from '@/app/components/ui/Button'
 import {FadeIn} from '@/app/components/ui/FadeIn'
 import {stegaClean} from '@sanity/client/stega'
@@ -27,6 +28,7 @@ export default function ContactForm({block}: ContactFormProps) {
     successMessage,
     showMap,
     mapEmbedUrl,
+    image,
     address,
     phone,
     email,
@@ -73,7 +75,8 @@ export default function ContactForm({block}: ContactFormProps) {
     }
   }
 
-  const hasContactInfo = address || phone || email || (stegaClean(showMap) && mapEmbedUrl)
+  const hasContactInfo =
+    image?.asset?._ref || address || phone || email || (stegaClean(showMap) && mapEmbedUrl)
 
   return (
     <section className="bg-cream pt-8">
@@ -190,6 +193,19 @@ export default function ContactForm({block}: ContactFormProps) {
           {hasContactInfo && (
             <FadeIn delay={0.1}>
               <div className="space-y-6">
+                {image?.asset?._ref && (
+                  <div className="rounded-lg overflow-hidden">
+                    <Image
+                      id={image.asset._ref}
+                      alt={heading || 'Contact'}
+                      width={700}
+                      crop={image.crop}
+                      hotspot={image.hotspot}
+                      className="w-full max-h-[500px] object-cover  rounded-lg"
+                    />
+                  </div>
+                )}
+
                 {stegaClean(showMap) && mapEmbedUrl && (
                   <div className="rounded-lg overflow-hidden aspect-video">
                     <iframe

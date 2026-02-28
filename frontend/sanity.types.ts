@@ -452,6 +452,13 @@ export type ContactForm = {
   successMessage?: string
   showMap?: boolean
   mapEmbedUrl?: string
+  image?: {
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    _type: 'image'
+  }
   address?: string
   phone?: string
   email?: string
@@ -1743,6 +1750,13 @@ export type GetPageQueryResult = {
         successMessage?: string
         showMap?: boolean
         mapEmbedUrl?: string
+        image?: {
+          asset?: SanityImageAssetReference
+          media?: unknown
+          hotspot?: SanityImageHotspot
+          crop?: SanityImageCrop
+          _type: 'image'
+        }
         address?: string
         phone?: string
         email?: string
@@ -2810,6 +2824,13 @@ export type HomepageQueryResult = {
         successMessage?: string
         showMap?: boolean
         mapEmbedUrl?: string
+        image?: {
+          asset?: SanityImageAssetReference
+          media?: unknown
+          hotspot?: SanityImageHotspot
+          crop?: SanityImageCrop
+          _type: 'image'
+        }
         address?: string
         phone?: string
         email?: string
@@ -3893,6 +3914,13 @@ export type GetServiceQueryResult = {
         successMessage?: string
         showMap?: boolean
         mapEmbedUrl?: string
+        image?: {
+          asset?: SanityImageAssetReference
+          media?: unknown
+          hotspot?: SanityImageHotspot
+          crop?: SanityImageCrop
+          _type: 'image'
+        }
         address?: string
         phone?: string
         email?: string
