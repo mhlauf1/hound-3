@@ -244,19 +244,35 @@ export default function Testimonials({block}: TestimonialsProps) {
             <div className="flex justify-center mt-10">
               <div className="inline-flex items-center gap-2 bg-forest-card border border-border-dark rounded-full px-5 py-2.5">
                 <div className="flex gap-0.5">
-                  {[1, 2, 3, 4, 5].map((star) => (
-                    <svg
-                      key={star}
-                      width="16"
-                      height="16"
-                      viewBox="0 0 16 16"
-                      fill={star <= Math.floor(Number(googleRating)) ? '#FAF7F2' : 'none'}
-                      stroke="#FAF7F2"
-                      strokeWidth="1"
-                    >
-                      <path d="M8 1l2.2 4.4L15 6.2l-3.5 3.4.8 4.8L8 12.1 3.7 14.4l.8-4.8L1 6.2l4.8-.8L8 1z" />
-                    </svg>
-                  ))}
+                  {[1, 2, 3, 4, 5].map((star) => {
+                    const rating = Number(googleRating)
+                    const isFull = star <= Math.floor(rating)
+                    const isHalf = !isFull && star === Math.ceil(rating) && rating % 1 !== 0
+                    return (
+                      <svg
+                        key={star}
+                        width="16"
+                        height="16"
+                        viewBox="0 0 16 16"
+                        stroke="#FAF7F2"
+                        strokeWidth="1"
+                      >
+                        {isHalf ? (
+                          <>
+                            <defs>
+                              <clipPath id="half-star">
+                                <rect x="0" y="0" width="8" height="16" />
+                              </clipPath>
+                            </defs>
+                            <path d="M8 1l2.2 4.4L15 6.2l-3.5 3.4.8 4.8L8 12.1 3.7 14.4l.8-4.8L1 6.2l4.8-.8L8 1z" fill="none" />
+                            <path d="M8 1l2.2 4.4L15 6.2l-3.5 3.4.8 4.8L8 12.1 3.7 14.4l.8-4.8L1 6.2l4.8-.8L8 1z" fill="#FAF7F2" clipPath="url(#half-star)" />
+                          </>
+                        ) : (
+                          <path d="M8 1l2.2 4.4L15 6.2l-3.5 3.4.8 4.8L8 12.1 3.7 14.4l.8-4.8L1 6.2l4.8-.8L8 1z" fill={isFull ? '#FAF7F2' : 'none'} />
+                        )}
+                      </svg>
+                    )
+                  })}
                 </div>
                 <span className="font-sans text-[14px] text-cream">
                   {googleRating} On Google Reviews

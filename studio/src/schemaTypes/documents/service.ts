@@ -84,6 +84,8 @@ export const service = defineType({
         {type: 'whatsIncluded'},
         {type: 'requirementsList'},
         {type: 'webcamGrid'},
+        {type: 'galleryCarousel'},
+        {type: 'galleryShowcase'},
       ],
       options: {
         insertMenu: {

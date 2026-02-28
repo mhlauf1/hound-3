@@ -1,21 +1,22 @@
 import {defineField, defineType, defineArrayMember} from 'sanity'
 import {ImagesIcon} from '@sanity/icons'
 
-export const galleryGrid = defineType({
-  name: 'galleryGrid',
-  title: 'Gallery Grid',
+export const galleryPage = defineType({
+  name: 'galleryPage',
+  title: 'Gallery Page',
   type: 'object',
   icon: ImagesIcon,
   fields: [
     defineField({
-      name: 'eyebrow',
-      title: 'Eyebrow',
-      type: 'string',
-    }),
-    defineField({
       name: 'heading',
       title: 'Heading',
       type: 'string',
+    }),
+    defineField({
+      name: 'subtext',
+      title: 'Subtext',
+      type: 'text',
+      rows: 2,
     }),
     defineField({
       name: 'images',
@@ -31,29 +32,27 @@ export const galleryGrid = defineType({
               title: 'Alt Text',
               type: 'string',
             }),
+            defineField({
+              name: 'caption',
+              title: 'Caption',
+              type: 'string',
+            }),
           ],
         }),
       ],
     }),
     defineField({
-      name: 'columns',
-      title: 'Columns',
-      type: 'number',
+      name: 'layout',
+      title: 'Layout',
+      type: 'string',
       options: {
         list: [
-          {title: '2 Columns', value: 2},
-          {title: '3 Columns', value: 3},
-          {title: '4 Columns', value: 4},
+          {title: 'Grid', value: 'grid'},
+          {title: 'Single Column', value: 'single'},
         ],
+        layout: 'radio',
       },
-      initialValue: 3,
-    }),
-    defineField({
-      name: 'enableLightbox',
-      title: 'Enable Lightbox',
-      type: 'boolean',
-      initialValue: true,
-      description: 'Allow clicking images to view them full-screen',
+      initialValue: 'grid',
     }),
     defineField({
       name: 'backgroundColor',
@@ -63,7 +62,6 @@ export const galleryGrid = defineType({
         list: [
           {title: 'Cream', value: 'cream'},
           {title: 'Sand', value: 'sand'},
-          {title: 'Forest', value: 'forest'},
         ],
         layout: 'radio',
       },
@@ -74,8 +72,8 @@ export const galleryGrid = defineType({
     select: {title: 'heading'},
     prepare({title}) {
       return {
-        title: title || 'Untitled Gallery Grid',
-        subtitle: 'Gallery Grid',
+        title: title || 'Gallery Page',
+        subtitle: 'Gallery Page',
       }
     },
   },

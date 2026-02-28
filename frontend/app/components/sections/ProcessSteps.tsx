@@ -59,15 +59,14 @@ export default function ProcessSteps({block}: ProcessStepsProps) {
         </FadeIn>
 
         {steps && steps.length > 0 && (
-          <div className="relative mb-10 lg:mb-14 max-w-5xl mx-auto">
+          <div className="relative mb-10 lg:mb-14 max-w-7xl mx-auto">
             {/* Continuous connecting line behind circles */}
             <div className="hidden lg:block absolute top-6 left-0 right-0 h-[2px] bg-terracotta/30" />
-
             <div className="relative flex flex-col lg:flex-row items-start lg:items-start justify-center gap-4 lg:gap-0">
               {steps.map((step, i) => (
                 <div key={step._key} className="flex flex-col items-center flex-1">
                   <FadeIn delay={0.1 * i}>
-                    <div className="flex flex-col items-center text-center max-w-[200px]">
+                    <div className="flex flex-col items-center text-center max-w-[90%]">
                       {/* Circle with number or icon */}
                       <div className="relative z-10 w-12 h-12 rounded-full bg-terracotta text-white flex items-center justify-center mb-4 shrink-0">
                         {step.icon ? (

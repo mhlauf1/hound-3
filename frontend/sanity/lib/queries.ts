@@ -238,6 +238,18 @@ const pageBuilderExpansion = /* groq */ `
         }
       }
     },
+    _type == "galleryGrid" => {
+      ...
+    },
+    _type == "galleryCarousel" => {
+      ...
+    },
+    _type == "galleryShowcase" => {
+      ...
+    },
+    _type == "galleryPage" => {
+      ...
+    },
     _type == "webcamGrid" => {
       ...,
       "webcams": *[_type == "webcam" && enabled == true] | order(group asc, sortOrder asc) {

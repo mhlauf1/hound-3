@@ -13,8 +13,10 @@ type ButtonProps = {
 }
 
 const variants = {
-  primary: 'bg-terracotta text-white border-[1.5px] border-terracotta hover:bg-terracotta-dark transition-all',
-  outline: 'bg-transparent text-forest border-[1.5px] border-forest hover:bg-forest/5 transition-all',
+  primary:
+    'bg-terracotta text-white border-[1.5px] border-terracotta hover:bg-terracotta-dark transition-all',
+  outline:
+    'bg-transparent text-forest border-[1.5px] border-forest hover:bg-forest/5 transition-all',
 }
 
 export default function Button({
@@ -26,7 +28,7 @@ export default function Button({
   onClick,
   type = 'button',
 }: ButtonProps) {
-  const baseStyles = `inline-flex items-center justify-center font-sans font-medium text-[14px] md:text-[16px] tracking-[0.02em] px-7 py-3.5 rounded-md ${variants[variant]} ${className}`
+  const baseStyles = `inline-flex items-center justify-center whitespace-nowrap font-sans font-medium text-[14px] md:text-[16px] tracking-[0.02em] w-full md:w-auto px-7 py-3.5 rounded-md ${variants[variant]} ${className}`
 
   const resolvedHref = link ? linkResolver(link) : href
 

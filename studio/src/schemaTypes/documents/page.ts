@@ -75,6 +75,9 @@ export const page = defineType({
         {type: 'whatsIncluded'},
         {type: 'requirementsList'},
         {type: 'webcamGrid'},
+        {type: 'galleryCarousel'},
+        {type: 'galleryShowcase'},
+        {type: 'galleryPage'},
       ],
       options: {
         insertMenu: {

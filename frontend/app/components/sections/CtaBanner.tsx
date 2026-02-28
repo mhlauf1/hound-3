@@ -60,7 +60,7 @@ export default function CtaBanner({block}: CtaBannerProps) {
 
           <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 items-center">
             {/* Text side */}
-            <div className="px-[8%] lg:px-[10%] py-16 lg:py-24">
+            <div className="px-[8%]  lg:px-[10%] py-16 lg:py-24">
               {icon?.asset?._ref && (
                 <FadeIn>
                   <div className="mb-8">
@@ -82,9 +82,9 @@ export default function CtaBanner({block}: CtaBannerProps) {
                 </FadeIn>
               )}
 
-              <FadeIn delay={0.2}>
+              <FadeIn className="w-full md:w-auto" delay={0.2}>
                 {cta?.buttonText && (
-                  <Button variant="primary" link={cta.link} className="mb-4">
+                  <Button variant="primary" link={cta.link} className="w-full md:w-auto mb-4">
                     {cta.buttonText}
                   </Button>
                 )}
@@ -135,7 +135,7 @@ export default function CtaBanner({block}: CtaBannerProps) {
 
         {/* Fallback dark bg if no image */}
         {!backgroundImage?.asset?._ref && <div className="absolute inset-0 bg-forest" />}
-        <div className="relative flex flex-col items-start md:items-center z-10 py-16 lg:py-24 text-start md:text-center">
+        <div className="relative flex flex-col tems-center z-10 py-16 lg:py-24 text-start md:text-center">
           {icon?.asset?._ref && (
             <FadeIn>
               <div className="mb-8">
@@ -151,12 +151,12 @@ export default function CtaBanner({block}: CtaBannerProps) {
 
           {heading && (
             <FadeIn delay={0.1}>
-              <h2 className="text-[32px] md:text-[44px] lg:text-[56px] leading-[95%] text-white mb-10 max-w-xl mx-auto">
+              <h2 className="text-[32px] text-center  md:text-[44px] lg:text-[56px] leading-[105%] text-white mb-10 max-w-xl mx-auto">
                 {heading}
               </h2>
             </FadeIn>
           )}
-          <FadeIn delay={0.2}>
+          <FadeIn className="w-full md:w-auto" delay={0.2}>
             {cta?.buttonText && (
               <Button variant="primary" link={cta.link} className="mb-4">
                 {cta.buttonText}
