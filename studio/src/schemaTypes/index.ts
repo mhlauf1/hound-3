@@ -38,6 +38,9 @@ import {pricingCalculator} from './objects/pricingCalculator'
 import {whatsIncluded} from './objects/whatsIncluded'
 import {requirementsList} from './objects/requirementsList'
 import {webcamGrid} from './objects/webcamGrid'
+import {galleryCarousel} from './objects/galleryCarousel'
+import {galleryShowcase} from './objects/galleryShowcase'
+import {galleryPage} from './objects/galleryPage'
 import {settings} from './singletons/settings'
 import {link} from './objects/link'
 import {blockContent} from './objects/blockContent'
@@ -94,4 +97,7 @@ export const schemaTypes = [
   whatsIncluded,
   requirementsList,
   webcamGrid,
+  galleryCarousel,
+  galleryShowcase,
+  galleryPage,
 ]

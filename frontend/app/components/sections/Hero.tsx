@@ -69,8 +69,8 @@ export default function Hero({block}: HeroProps) {
             </FadeIn>
           )}
 
-          <FadeIn delay={0.3}>
-            <div className="flex flex-row items-center gap-2 md:gap-3 mb-4">
+          <FadeIn className="w-full md:w-auto" delay={0.3}>
+            <div className="flex flex-col w-full md:flex-row items-center gap-2 md:gap-3 mb-4">
               {primaryCta?.buttonText && (
                 <Button variant="primary" link={primaryCta.link}>
                   {primaryCta.buttonText}

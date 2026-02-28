@@ -1,11 +1,11 @@
 import {defineField, defineType, defineArrayMember} from 'sanity'
-import {ImagesIcon} from '@sanity/icons'
+import {ImageIcon} from '@sanity/icons'
 
-export const galleryGrid = defineType({
-  name: 'galleryGrid',
-  title: 'Gallery Grid',
+export const galleryCarousel = defineType({
+  name: 'galleryCarousel',
+  title: 'Gallery Carousel',
   type: 'object',
-  icon: ImagesIcon,
+  icon: ImageIcon,
   fields: [
     defineField({
       name: 'eyebrow',
@@ -31,29 +31,20 @@ export const galleryGrid = defineType({
               title: 'Alt Text',
               type: 'string',
             }),
+            defineField({
+              name: 'caption',
+              title: 'Caption',
+              type: 'string',
+            }),
           ],
         }),
       ],
-    }),
-    defineField({
-      name: 'columns',
-      title: 'Columns',
-      type: 'number',
-      options: {
-        list: [
-          {title: '2 Columns', value: 2},
-          {title: '3 Columns', value: 3},
-          {title: '4 Columns', value: 4},
-        ],
-      },
-      initialValue: 3,
     }),
     defineField({
       name: 'enableLightbox',
       title: 'Enable Lightbox',
       type: 'boolean',
       initialValue: true,
-      description: 'Allow clicking images to view them full-screen',
     }),
     defineField({
       name: 'backgroundColor',
@@ -74,8 +65,8 @@ export const galleryGrid = defineType({
     select: {title: 'heading'},
     prepare({title}) {
       return {
-        title: title || 'Untitled Gallery Grid',
-        subtitle: 'Gallery Grid',
+        title: title || 'Untitled Gallery Carousel',
+        subtitle: 'Gallery Carousel',
       }
     },
   },

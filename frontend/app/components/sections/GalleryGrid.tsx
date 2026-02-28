@@ -1,20 +1,29 @@
+'use client'
+
 import Image from '@/app/components/SanityImage'
 import {FadeIn} from '@/app/components/ui/FadeIn'
+import Lightbox from '@/app/components/ui/Lightbox'
+import {useLightbox} from '@/app/hooks/useLightbox'
+import {sanityImageUrlWithDimensions} from '@/sanity/lib/image'
 import {stegaClean} from '@sanity/client/stega'
 import Badge from '../ui/Badge'
+
+type GalleryImage = {
+  _key: string
+  alt?: string
+  asset?: {_ref: string}
+  crop?: any
+  hotspot?: any
+}
 
 type GalleryGridProps = {
   block: {
     eyebrow?: string
     heading?: string
-    images?: Array<{
-      _key: string
-      alt?: string
-      asset?: {_ref: string}
-      crop?: any
-      hotspot?: any
-    }>
+    images?: GalleryImage[]
     columns?: number
+    enableLightbox?: boolean
+    backgroundColor?: string
   }
   index: number
   pageId: string
@@ -27,32 +36,66 @@ const columnClasses: Record<number, string> = {
   4: 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-4',
 }
 
+const bgClasses: Record<string, string> = {
+  cream: 'bg-cream',
+  sand: 'bg-sand',
+  forest: 'bg-forest',
+}
+
 export default function GalleryGrid({block}: GalleryGridProps) {
-  const {eyebrow, heading, images, columns} = block
+  const {eyebrow, heading, images, columns, enableLightbox, backgroundColor} = block
+  const {isOpen, currentIndex, openLightbox, closeLightbox} = useLightbox()
+
   const cols = stegaClean(columns) || 3
   const gridClass = columnClasses[cols] || columnClasses[3]
+  const bgColor = stegaClean(backgroundColor) || 'cream'
+  const isDark = bgColor === 'forest'
+  const lightboxEnabled = enableLightbox !== false
+
+  const validImages = (images || []).filter((img) => img.asset?._ref)
+
+  const lightboxSlides = validImages.map((img) =>
+    sanityImageUrlWithDimensions(img.asset!._ref, 1600),
+  )
 
   return (
-    <section className="bg-cream">
+    <section className={bgClasses[bgColor] || 'bg-cream'}>
       <div className="px-6 md:px-24 py-16 lg:py-24">
         <FadeIn>
           <div className="mb-10 lg:mb-14">
             {eyebrow && <Badge className="mb-3">{eyebrow}</Badge>}
             {heading && (
-              <h2 className="text-[36px] md:text-[48px] lg:text-[56px] leading-[105%] text-forest">
+              <h2
+                className={`text-[48px] lg:text-[80px] leading-[100%] ${isDark ? 'text-cream' : 'text-forest'}`}
+              >
                 {heading}
               </h2>
             )}
           </div>
         </FadeIn>
 
-        {images && images.length > 0 && (
-          <div className={`grid ${gridClass} gap-4`}>
-            {images.map((image, i) => (
+        {validImages.length > 0 && (
+          <div className={`grid ${gridClass} mb-8 md:mb-12 gap-4`}>
+            {validImages.map((image, i) => (
               <FadeIn key={image._key} delay={0.05 * i}>
-                {image.asset?._ref && (
+                {lightboxEnabled ? (
+                  <button
+                    type="button"
+                    onClick={() => openLightbox(i)}
+                    className="w-full cursor-zoom-in group"
+                  >
+                    <Image
+                      id={image.asset!._ref}
+                      alt={image.alt || ''}
+                      width={600}
+                      crop={image.crop}
+                      hotspot={image.hotspot}
+                      className="rounded-lg max-h-[500px] w-full object-cover transition-opacity group-hover:opacity-90"
+                    />
+                  </button>
+                ) : (
                   <Image
-                    id={image.asset._ref}
+                    id={image.asset!._ref}
                     alt={image.alt || ''}
                     width={600}
                     crop={image.crop}
@@ -65,6 +108,15 @@ export default function GalleryGrid({block}: GalleryGridProps) {
           </div>
         )}
       </div>
+
+      {lightboxEnabled && (
+        <Lightbox
+          images={lightboxSlides}
+          open={isOpen}
+          index={currentIndex}
+          onClose={closeLightbox}
+        />
+      )}
     </section>
   )
 }
