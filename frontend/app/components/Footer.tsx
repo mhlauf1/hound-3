@@ -102,15 +102,24 @@ export default function Footer({
       {/* Bottom bar */}
       <div className="border-t border-border-light">
         <div className="px-6 md:px-20 py-5 flex flex-col sm:flex-row items-center justify-between gap-3">
-          <p className="font-sans text-[14px] text-text-muted">
-            {footerText
-              ? footerTextLink?.label && footerTextLink?.href
-                ? renderFooterTextWithLink(footerText, footerTextLink.label, footerTextLink.href)
-                : footerText
-              : `\u00A9 ${new Date().getFullYear()} Hound Around Resort. All rights reserved.`}
-          </p>
+          <div className="flex flex-col  items-start">
+            <p className="font-sans text-[14px] text-text-muted">
+              {footerText
+                ? footerTextLink?.label && footerTextLink?.href
+                  ? renderFooterTextWithLink(footerText, footerTextLink.label, footerTextLink.href)
+                  : footerText
+                : `\u00A9 ${new Date().getFullYear()} Hound Around Resort. All rights reserved.`}
+            </p>
+            <p className="font-sans text-[14px] text-text-muted">
+              Designed and developed by{' '}
+              <Link href="https://www.lauf.co/" target="_blank" className="font-bold">
+                Lauf.
+              </Link>{' '}
+            </p>
+          </div>
+
           {bottomLinks && bottomLinks.length > 0 && (
-            <div className="flex items-center gap-6">
+            <div className="flex w-full md:w-auto mt-2 md:mt-0 items-start md:items-center gap-6">
               {bottomLinks.map((item) => (
                 <Link
                   key={item._key}
