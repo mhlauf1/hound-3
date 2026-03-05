@@ -108,7 +108,7 @@ export default function Hero({block, index}: HeroProps) {
                   </div>
                   {reviewText && <p className="font-sans text-sm text-text-muted">{reviewText}</p>}
                 </div>
-                {trustLine && <p className="font-sans text-xs text-text-muted/70">{trustLine}</p>}
+                {trustLine && <p className="font-sans text-xs text-text-muted">{trustLine}</p>}
               </div>
             </FadeIn>
           )}

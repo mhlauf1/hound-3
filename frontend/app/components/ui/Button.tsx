@@ -14,7 +14,7 @@ type ButtonProps = {
 
 const variants = {
   primary:
-    'bg-terracotta text-white border-[1.5px] border-terracotta hover:bg-terracotta-dark transition-all',
+    'bg-terracotta-dark text-white border-[1.5px] border-terracotta-dark hover:brightness-90 transition-all',
   outline:
     'bg-transparent text-forest border-[1.5px] border-forest hover:bg-forest/5 transition-all',
 }

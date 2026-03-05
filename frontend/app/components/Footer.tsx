@@ -127,7 +127,7 @@ export default function Footer({
           {/* Dynamic columns */}
           {columns?.map((col) => (
             <div key={col._key}>
-              <h4 className="font-sans text-[16px] font-medium mb-4">{col.title}</h4>
+              <p className="font-sans text-[16px] font-medium mb-4">{col.title}</p>
               <ul className="space-y-3">
                 {col.links?.map((item) => (
                   <li key={item._key}>
@@ -146,7 +146,7 @@ export default function Footer({
           {/* Contact column */}
           {contactInfo && (
             <div>
-              <h4 className="font-sans text-[16px] font-medium mb-4">Contact</h4>
+              <p className="font-sans text-[16px] font-medium mb-4">Contact</p>
               <div className="space-y-3 font-sans text-[15px] text-text-muted">
                 {contactInfo.address && (
                   <p className="whitespace-pre-line">{contactInfo.address}</p>

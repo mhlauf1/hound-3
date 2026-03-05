@@ -41,17 +41,17 @@ export default function HeroMinimal({block}: HeroMinimalProps) {
                   <div className="flex animate-ticker whitespace-nowrap w-max">
                     {[0, 1].map((copy) => (
                       <div key={copy} className="flex items-center shrink-0">
-                        <span className="font-sans text-[12px] font-medium text-terracotta px-3">
+                        <span className="font-sans text-[12px] font-medium text-terracotta-dark px-3">
                           {eyebrow}
                         </span>
-                        <span className="text-terracotta/30">|</span>
+                        <span className="text-terracotta-dark/30">|</span>
                         <div className="flex items-center gap-1 px-3">
                           <div className="flex items-center gap-0.5">
                             {[...Array(5)].map((_, i) => (
                               <Icon key={i} icon="mdi:star" className="w-3 h-3 text-gold" />
                             ))}
                           </div>
-                          <span className="font-sans text-[12px] font-medium text-terracotta">
+                          <span className="font-sans text-[12px] font-medium text-terracotta-dark">
                             {rating} Stars
                           </span>
                         </div>
