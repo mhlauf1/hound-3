@@ -103,7 +103,7 @@ export default function ValuePillars({block}: ValuePillarsProps) {
                 >
                   {pillar.metric && (
                     <p
-                      className={`font-heading text-[40px] md:text-[48px] lg:text-[56px]  tracking-tight leading-[100%] ${colors.metric} mb-3`}
+                      className={`font-heading text-[40px] md:text-[48px] lg:text-[56px]  tracking-tight font-semibold leading-[100%] ${colors.metric} mb-3`}
                     >
                       {pillar.metric}
                     </p>
