@@ -170,7 +170,7 @@ export default function GalleryCarousel({block}: GalleryCarouselProps) {
                     <div
                       key={image._key}
                       data-card
-                      className="flex-shrink-0 w-[250px] sm:w-[360px] lg:w-[500px] snap-start"
+                      className="flex-shrink-0 w-[250px] sm:w-[360px] lg:w-[501px] snap-start"
                     >
                       {lightboxEnabled ? (
                         <button
