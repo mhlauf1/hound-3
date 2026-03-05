@@ -63,6 +63,21 @@ export const heroBanner = defineType({
       },
       initialValue: 'standard',
     }),
+    defineField({
+      name: 'backgroundColor',
+      title: 'Background Color',
+      type: 'string',
+      description: 'Used when no background image is set',
+      options: {
+        list: [
+          {title: 'Cream', value: 'cream'},
+          {title: 'Sand', value: 'sand'},
+          {title: 'Forest', value: 'forest'},
+        ],
+        layout: 'radio',
+      },
+      initialValue: 'cream',
+    }),
   ],
   preview: {
     select: {title: 'heading'},

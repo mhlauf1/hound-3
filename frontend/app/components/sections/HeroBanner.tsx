@@ -13,6 +13,7 @@ type HeroBannerProps = {
     backgroundImage?: {asset?: {_ref: string}; crop?: any; hotspot?: any}
     overlayOpacity?: 'light' | 'medium' | 'heavy'
     minHeight?: 'standard' | 'tall' | 'fullscreen'
+    backgroundColor?: 'cream' | 'sand' | 'forest'
   }
   index: number
   pageId: string
@@ -25,6 +26,12 @@ const overlayClasses: Record<string, string> = {
   heavy: 'from-black/70 to-black/40',
 }
 
+const bgColors: Record<string, { bg: string; text: string; subtext: string }> = {
+  cream: { bg: 'bg-cream', text: 'text-forest', subtext: 'text-text-muted' },
+  sand: { bg: 'bg-sand', text: 'text-forest', subtext: 'text-text-muted' },
+  forest: { bg: 'bg-forest', text: 'text-cream', subtext: 'text-cream/80' },
+}
+
 const heightClasses: Record<string, string> = {
   standard: 'min-h-[60vh]',
   tall: 'min-h-[80vh]',
@@ -32,32 +39,32 @@ const heightClasses: Record<string, string> = {
 }
 
 export default function HeroBanner({block}: HeroBannerProps) {
-  const {eyebrow, heading, subtext, primaryCta, backgroundImage, overlayOpacity, minHeight} = block
+  const {eyebrow, heading, subtext, primaryCta, backgroundImage, overlayOpacity, minHeight, backgroundColor} = block
   const overlay = overlayClasses[stegaClean(overlayOpacity) || 'medium'] || overlayClasses.medium
   const height = heightClasses[stegaClean(minHeight) || 'standard'] || heightClasses.standard
+  const hasImage = !!backgroundImage?.asset?._ref
+  const colorKey = stegaClean(backgroundColor) || 'cream'
+  const colors = bgColors[colorKey] || bgColors.cream
 
   return (
     <section
-      className={`relative  pt-18 ${height} flex items-center justify-center overflow-hidden`}
+      className={`relative  pt-18 ${height} flex items-center justify-center overflow-hidden ${!hasImage ? colors.bg : ''}`}
     >
       {/* Background image */}
-      {backgroundImage?.asset?._ref && (
+      {hasImage && (
         <div className="absolute inset-0">
           <Image
-            id={backgroundImage.asset._ref}
+            id={backgroundImage.asset!._ref}
             alt=""
             width={1400}
-            crop={backgroundImage.crop}
-            hotspot={backgroundImage.hotspot}
+            crop={backgroundImage!.crop}
+            hotspot={backgroundImage!.hotspot}
             mode="cover"
             className="w-full h-full object-cover"
           />
           <div className={`absolute inset-0 bg-gradient-to-t ${overlay}`} />
         </div>
       )}
-
-      {/* Fallback dark bg */}
-      {!backgroundImage?.asset?._ref && <div className="absolute inset-0 bg-forest" />}
 
       {/* Content */}
       <div className="relative z-10 text-center px-6 py-16 lg:py-24 max-w-4xl mx-auto">
@@ -68,14 +75,14 @@ export default function HeroBanner({block}: HeroBannerProps) {
         )}
         {heading && (
           <FadeIn delay={0.1}>
-            <h1 className="text-[48px] tracking-tight font-semibold md:text-[56px] lg:text-[80px] leading-[104%] text-white mb-6">
+            <h1 className={`text-[48px] tracking-tight font-semibold md:text-[56px] lg:text-[80px] leading-[104%] mb-6 ${hasImage ? 'text-white' : colors.text}`}>
               {heading}
             </h1>
           </FadeIn>
         )}
         {subtext && (
           <FadeIn delay={0.2}>
-            <p className="font-sans text-[16px] lg:text-[18px]  leading-[150%] text-white/80 mb-8 max-w-2xl mx-auto">
+            <p className={`font-sans text-[16px] lg:text-[18px]  leading-[150%] mb-8 max-w-2xl mx-auto ${hasImage ? 'text-white/80' : colors.subtext}`}>
               {subtext}
             </p>
           </FadeIn>
