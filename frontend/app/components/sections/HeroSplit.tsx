@@ -27,7 +27,7 @@ const bgColors: Record<string, string> = {
   forest: 'bg-forest text-cream',
 }
 
-export default function HeroSplit({block}: HeroSplitProps) {
+export default function HeroSplit({block, index}: HeroSplitProps) {
   const {
     eyebrow,
     heading,
@@ -93,10 +93,11 @@ export default function HeroSplit({block}: HeroSplitProps) {
                 <Image
                   id={image.asset._ref}
                   alt={heading || 'Hero image'}
-                  width={700}
+                  width={600}
                   crop={image.crop}
                   hotspot={image.hotspot}
                   className="rounded-lg md:w-[600px] aspect-square w-full object-cover"
+                  {...(index === 0 && {loading: 'eager' as const, fetchPriority: 'high' as const})}
                 />
                 {stickerImage?.asset?._ref && (
                   <div className="absolute top-4 left-4  lg:top-6 lg:left-6 bg-white rounded-full p-3 pointer-events-none z-10">

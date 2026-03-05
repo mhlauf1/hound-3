@@ -41,7 +41,7 @@ const alignmentConfig: Record<string, {container: string; gradient: string; text
   },
 }
 
-export default function FullWidthMedia({block}: FullWidthMediaProps) {
+export default function FullWidthMedia({block, index}: FullWidthMediaProps) {
   const {heading, subtext, cta, image, textAlignment, overlayOpacity} = block
   const alignment = alignmentConfig[stegaClean(textAlignment) || 'left'] || alignmentConfig.left
   const overlay = overlayClasses[stegaClean(overlayOpacity) || 'medium'] || overlayClasses.medium
@@ -59,6 +59,7 @@ export default function FullWidthMedia({block}: FullWidthMediaProps) {
             hotspot={image.hotspot}
             mode="cover"
             className="w-full h-full object-cover"
+            {...(index === 0 && {loading: 'eager' as const, fetchPriority: 'high' as const})}
           />
           <div className={`absolute inset-0 ${alignment.gradient} ${overlay}`} />
         </div>

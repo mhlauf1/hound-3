@@ -20,7 +20,7 @@ type HeroProps = {
   pageType: string
 }
 
-export default function Hero({block}: HeroProps) {
+export default function Hero({block, index}: HeroProps) {
   const {
     eyebrow,
     heading,
@@ -123,6 +123,7 @@ export default function Hero({block}: HeroProps) {
                 width={960}
                 crop={heroImage.crop}
                 className="rounded-xl w-full object-cover"
+                {...(index === 0 && {loading: 'eager' as const, fetchPriority: 'high' as const})}
               />
             </div>
           </FadeIn>

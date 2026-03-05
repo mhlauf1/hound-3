@@ -69,7 +69,7 @@ export default function ServiceCards({block}: ServiceCardsProps) {
                     <Image
                       id={card.image.asset._ref}
                       alt={card.title || ''}
-                      width={500}
+                      width={400}
                       crop={card.image.crop}
                       hotspot={card.image.hotspot}
                       className="aspect-[4/3] w-full object-cover"

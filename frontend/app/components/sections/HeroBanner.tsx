@@ -38,7 +38,7 @@ const heightClasses: Record<string, string> = {
   fullscreen: 'min-h-screen',
 }
 
-export default function HeroBanner({block}: HeroBannerProps) {
+export default function HeroBanner({block, index}: HeroBannerProps) {
   const {eyebrow, heading, subtext, primaryCta, backgroundImage, overlayOpacity, minHeight, backgroundColor} = block
   const overlay = overlayClasses[stegaClean(overlayOpacity) || 'medium'] || overlayClasses.medium
   const height = heightClasses[stegaClean(minHeight) || 'standard'] || heightClasses.standard
@@ -61,6 +61,7 @@ export default function HeroBanner({block}: HeroBannerProps) {
             hotspot={backgroundImage!.hotspot}
             mode="cover"
             className="w-full h-full object-cover"
+            {...(index === 0 && {loading: 'eager' as const, fetchPriority: 'high' as const})}
           />
           <div className={`absolute inset-0 bg-gradient-to-t ${overlay}`} />
         </div>

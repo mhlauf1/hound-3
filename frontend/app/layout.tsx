@@ -8,7 +8,7 @@ const poppins = Poppins({
   variable: '--font-poppins',
   subsets: ['latin'],
   display: 'swap',
-  weight: ['300', '400', '500', '600', '700'],
+  weight: ['400', '500', '600', '700'],
 })
 
 const bricolage = Bricolage_Grotesque({
@@ -84,6 +84,9 @@ export default async function RootLayout({children}: {children: React.ReactNode}
 
   return (
     <html lang="en" className={`${poppins.variable} ${bricolage.variable} bg-cream text-forest`}>
+      <head>
+        <link rel="preconnect" href="https://cdn.sanity.io" />
+      </head>
       <body>
         <Toaster />
         {isDraftMode && (

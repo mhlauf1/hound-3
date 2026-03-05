@@ -1,5 +1,5 @@
 'use client'
-import {motion} from 'framer-motion'
+import {useEffect, useRef} from 'react'
 
 interface FadeInProps {
   children: React.ReactNode
@@ -9,12 +9,12 @@ interface FadeInProps {
   className?: string
 }
 
-const directionOffset = {
-  up: {y: 24},
-  down: {y: -24},
-  left: {x: 24},
-  right: {x: -24},
-  none: {},
+const directionTransform = {
+  up: 'translateY(24px)',
+  down: 'translateY(-24px)',
+  left: 'translateX(24px)',
+  right: 'translateX(-24px)',
+  none: 'none',
 }
 
 export function FadeIn({
@@ -24,15 +24,39 @@ export function FadeIn({
   duration = 0.5,
   className,
 }: FadeInProps) {
+  const ref = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const el = ref.current
+    if (!el) return
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          el.style.transitionDelay = `${delay}s`
+          el.style.opacity = '1'
+          el.style.transform = 'translate(0, 0)'
+          observer.unobserve(el)
+        }
+      },
+      {rootMargin: '-50px'},
+    )
+
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [delay])
+
   return (
-    <motion.div
-      initial={{opacity: 0, ...directionOffset[direction]}}
-      whileInView={{opacity: 1, x: 0, y: 0}}
-      viewport={{once: true, margin: '-50px'}}
-      transition={{duration, delay, ease: [0.25, 0.1, 0.25, 1]}}
+    <div
+      ref={ref}
       className={className}
+      style={{
+        opacity: 0,
+        transform: directionTransform[direction],
+        transition: `opacity ${duration}s cubic-bezier(0.25, 0.1, 0.25, 1), transform ${duration}s cubic-bezier(0.25, 0.1, 0.25, 1)`,
+      }}
     >
       {children}
-    </motion.div>
+    </div>
   )
 }
