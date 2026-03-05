@@ -51,7 +51,7 @@ export default function PriceOutputCard({
           Estimated Cost
         </span>
         {badge && (
-          <span className="text-[12px] font-sans  bg-sage/20 text-forest px-2.5 py-1 rounded-full">
+          <span className="text-[12px] font-sans  bg-sage/20  text-forest px-2.5 py-1 rounded-full">
             {badge}
           </span>
         )}
@@ -64,7 +64,7 @@ export default function PriceOutputCard({
         </div>
       ) : (
         <p
-          className="text-[48px] md:text-[56px] font-light tracking-tight text-forest leading-tight mb-4"
+          className="text-[48px] md:text-[56px] font-semibold tracking-tight text-forest leading-tight mb-4"
           aria-live="polite"
           aria-atomic="true"
         >
