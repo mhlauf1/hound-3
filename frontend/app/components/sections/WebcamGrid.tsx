@@ -32,7 +32,7 @@ export default function WebcamGrid({block}: WebcamGridProps) {
 
   return (
     <section className="bg-cream">
-      <div className="max-w-[1600px] mx-auto px-6 lg:px-10 py-[80px] lg:py-[120px]">
+      <div className="max-w-[1580px] mx-auto px-6 lg:px-10 py-[80px] lg:py-[120px]">
         {/* Section header */}
         <FadeIn>
           <div className="text-center mb-10 lg:mb-14">
