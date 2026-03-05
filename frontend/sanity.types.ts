@@ -90,6 +90,13 @@ export type ValuePillars = {
     _key: string
   }>
   columns?: 2 | 3 | 4
+  accentImage?: {
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    _type: 'image'
+  }
   backgroundColor?: 'cream' | 'sand' | 'forest'
 }
 
@@ -196,7 +203,8 @@ export type WhatsIncluded = {
 
 export type PricingCalculator = {
   _type: 'pricingCalculator'
-  calculatorType: 'daycare' | 'boarding' | 'grooming'
+  displayMode?: 'single' | 'tabbed'
+  calculatorType?: 'daycare' | 'boarding' | 'grooming'
   eyebrow?: string
   heading: string
   subheading?: string
@@ -342,6 +350,13 @@ export type IconGrid = {
     _key: string
   }>
   columns?: 2 | 3 | 4
+  accentImage?: {
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    _type: 'image'
+  }
   backgroundColor?: 'cream' | 'sand' | 'forest'
 }
 
@@ -449,6 +464,13 @@ export type HeroSplit = {
     crop?: SanityImageCrop
     _type: 'image'
   }
+  stickerImage?: {
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    _type: 'image'
+  }
   imagePosition?: 'left' | 'right'
   backgroundColor?: 'cream' | 'sand' | 'forest'
 }
@@ -505,6 +527,13 @@ export type GalleryGrid = {
   }>
   columns?: 2 | 3 | 4
   enableLightbox?: boolean
+  accentImage?: {
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    _type: 'image'
+  }
   backgroundColor?: 'cream' | 'sand' | 'forest'
 }
 
@@ -576,6 +605,13 @@ export type SplitContent = {
     crop?: SanityImageCrop
     _type: 'image'
   }
+  stickerImage?: {
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    _type: 'image'
+  }
   imagePosition?: 'left' | 'right'
   backgroundColor?: 'cream' | 'sand' | 'forest'
 }
@@ -583,6 +619,13 @@ export type SplitContent = {
 export type CtaBanner = {
   _type: 'ctaBanner'
   icon?: {
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    _type: 'image'
+  }
+  stickerImage?: {
     asset?: SanityImageAssetReference
     media?: unknown
     hotspot?: SanityImageHotspot
@@ -1901,6 +1944,13 @@ export type GetPageQueryResult = {
           crop?: SanityImageCrop
           _type: 'image'
         }
+        stickerImage?: {
+          asset?: SanityImageAssetReference
+          media?: unknown
+          hotspot?: SanityImageHotspot
+          crop?: SanityImageCrop
+          _type: 'image'
+        }
         heading: string
         backgroundImage?: {
           asset?: SanityImageAssetReference
@@ -2186,6 +2236,13 @@ export type GetPageQueryResult = {
         }>
         columns?: 2 | 3 | 4
         enableLightbox?: boolean
+        accentImage?: {
+          asset?: SanityImageAssetReference
+          media?: unknown
+          hotspot?: SanityImageHotspot
+          crop?: SanityImageCrop
+          _type: 'image'
+        }
         backgroundColor?: 'cream' | 'forest' | 'sand'
       }
     | {
@@ -2345,6 +2402,13 @@ export type GetPageQueryResult = {
           crop?: SanityImageCrop
           _type: 'image'
         }
+        stickerImage?: {
+          asset?: SanityImageAssetReference
+          media?: unknown
+          hotspot?: SanityImageHotspot
+          crop?: SanityImageCrop
+          _type: 'image'
+        }
         imagePosition?: 'left' | 'right'
         backgroundColor?: 'cream' | 'forest' | 'sand'
       }
@@ -2361,6 +2425,13 @@ export type GetPageQueryResult = {
           _key: string
         }>
         columns?: 2 | 3 | 4
+        accentImage?: {
+          asset?: SanityImageAssetReference
+          media?: unknown
+          hotspot?: SanityImageHotspot
+          crop?: SanityImageCrop
+          _type: 'image'
+        }
         backgroundColor?: 'cream' | 'forest' | 'sand'
       }
     | {
@@ -2444,7 +2515,8 @@ export type GetPageQueryResult = {
     | {
         _key: string
         _type: 'pricingCalculator'
-        calculatorType: 'boarding' | 'daycare' | 'grooming'
+        displayMode?: 'single' | 'tabbed'
+        calculatorType?: 'boarding' | 'daycare' | 'grooming'
         eyebrow?: string
         heading: string
         subheading?: string
@@ -2697,6 +2769,13 @@ export type GetPageQueryResult = {
           crop?: SanityImageCrop
           _type: 'image'
         }
+        stickerImage?: {
+          asset?: SanityImageAssetReference
+          media?: unknown
+          hotspot?: SanityImageHotspot
+          crop?: SanityImageCrop
+          _type: 'image'
+        }
         imagePosition?: 'left' | 'right'
         backgroundColor?: 'cream' | 'forest' | 'sand'
       }
@@ -2759,6 +2838,13 @@ export type GetPageQueryResult = {
           _key: string
         }>
         columns?: 2 | 3 | 4
+        accentImage?: {
+          asset?: SanityImageAssetReference
+          media?: unknown
+          hotspot?: SanityImageHotspot
+          crop?: SanityImageCrop
+          _type: 'image'
+        }
         backgroundColor?: 'cream' | 'forest' | 'sand'
       }
     | {
@@ -3005,6 +3091,13 @@ export type HomepageQueryResult = {
           crop?: SanityImageCrop
           _type: 'image'
         }
+        stickerImage?: {
+          asset?: SanityImageAssetReference
+          media?: unknown
+          hotspot?: SanityImageHotspot
+          crop?: SanityImageCrop
+          _type: 'image'
+        }
         heading: string
         backgroundImage?: {
           asset?: SanityImageAssetReference
@@ -3290,6 +3383,13 @@ export type HomepageQueryResult = {
         }>
         columns?: 2 | 3 | 4
         enableLightbox?: boolean
+        accentImage?: {
+          asset?: SanityImageAssetReference
+          media?: unknown
+          hotspot?: SanityImageHotspot
+          crop?: SanityImageCrop
+          _type: 'image'
+        }
         backgroundColor?: 'cream' | 'forest' | 'sand'
       }
     | {
@@ -3449,6 +3549,13 @@ export type HomepageQueryResult = {
           crop?: SanityImageCrop
           _type: 'image'
         }
+        stickerImage?: {
+          asset?: SanityImageAssetReference
+          media?: unknown
+          hotspot?: SanityImageHotspot
+          crop?: SanityImageCrop
+          _type: 'image'
+        }
         imagePosition?: 'left' | 'right'
         backgroundColor?: 'cream' | 'forest' | 'sand'
       }
@@ -3465,6 +3572,13 @@ export type HomepageQueryResult = {
           _key: string
         }>
         columns?: 2 | 3 | 4
+        accentImage?: {
+          asset?: SanityImageAssetReference
+          media?: unknown
+          hotspot?: SanityImageHotspot
+          crop?: SanityImageCrop
+          _type: 'image'
+        }
         backgroundColor?: 'cream' | 'forest' | 'sand'
       }
     | {
@@ -3548,7 +3662,8 @@ export type HomepageQueryResult = {
     | {
         _key: string
         _type: 'pricingCalculator'
-        calculatorType: 'boarding' | 'daycare' | 'grooming'
+        displayMode?: 'single' | 'tabbed'
+        calculatorType?: 'boarding' | 'daycare' | 'grooming'
         eyebrow?: string
         heading: string
         subheading?: string
@@ -3801,6 +3916,13 @@ export type HomepageQueryResult = {
           crop?: SanityImageCrop
           _type: 'image'
         }
+        stickerImage?: {
+          asset?: SanityImageAssetReference
+          media?: unknown
+          hotspot?: SanityImageHotspot
+          crop?: SanityImageCrop
+          _type: 'image'
+        }
         imagePosition?: 'left' | 'right'
         backgroundColor?: 'cream' | 'forest' | 'sand'
       }
@@ -3863,6 +3985,13 @@ export type HomepageQueryResult = {
           _key: string
         }>
         columns?: 2 | 3 | 4
+        accentImage?: {
+          asset?: SanityImageAssetReference
+          media?: unknown
+          hotspot?: SanityImageHotspot
+          crop?: SanityImageCrop
+          _type: 'image'
+        }
         backgroundColor?: 'cream' | 'forest' | 'sand'
       }
     | {
@@ -4125,6 +4254,13 @@ export type GetServiceQueryResult = {
           crop?: SanityImageCrop
           _type: 'image'
         }
+        stickerImage?: {
+          asset?: SanityImageAssetReference
+          media?: unknown
+          hotspot?: SanityImageHotspot
+          crop?: SanityImageCrop
+          _type: 'image'
+        }
         heading: string
         backgroundImage?: {
           asset?: SanityImageAssetReference
@@ -4410,6 +4546,13 @@ export type GetServiceQueryResult = {
         }>
         columns?: 2 | 3 | 4
         enableLightbox?: boolean
+        accentImage?: {
+          asset?: SanityImageAssetReference
+          media?: unknown
+          hotspot?: SanityImageHotspot
+          crop?: SanityImageCrop
+          _type: 'image'
+        }
         backgroundColor?: 'cream' | 'forest' | 'sand'
       }
     | {
@@ -4551,6 +4694,13 @@ export type GetServiceQueryResult = {
           crop?: SanityImageCrop
           _type: 'image'
         }
+        stickerImage?: {
+          asset?: SanityImageAssetReference
+          media?: unknown
+          hotspot?: SanityImageHotspot
+          crop?: SanityImageCrop
+          _type: 'image'
+        }
         imagePosition?: 'left' | 'right'
         backgroundColor?: 'cream' | 'forest' | 'sand'
       }
@@ -4567,6 +4717,13 @@ export type GetServiceQueryResult = {
           _key: string
         }>
         columns?: 2 | 3 | 4
+        accentImage?: {
+          asset?: SanityImageAssetReference
+          media?: unknown
+          hotspot?: SanityImageHotspot
+          crop?: SanityImageCrop
+          _type: 'image'
+        }
         backgroundColor?: 'cream' | 'forest' | 'sand'
       }
     | {
@@ -4650,7 +4807,8 @@ export type GetServiceQueryResult = {
     | {
         _key: string
         _type: 'pricingCalculator'
-        calculatorType: 'boarding' | 'daycare' | 'grooming'
+        displayMode?: 'single' | 'tabbed'
+        calculatorType?: 'boarding' | 'daycare' | 'grooming'
         eyebrow?: string
         heading: string
         subheading?: string
@@ -4903,6 +5061,13 @@ export type GetServiceQueryResult = {
           crop?: SanityImageCrop
           _type: 'image'
         }
+        stickerImage?: {
+          asset?: SanityImageAssetReference
+          media?: unknown
+          hotspot?: SanityImageHotspot
+          crop?: SanityImageCrop
+          _type: 'image'
+        }
         imagePosition?: 'left' | 'right'
         backgroundColor?: 'cream' | 'forest' | 'sand'
       }
@@ -4965,6 +5130,13 @@ export type GetServiceQueryResult = {
           _key: string
         }>
         columns?: 2 | 3 | 4
+        accentImage?: {
+          asset?: SanityImageAssetReference
+          media?: unknown
+          hotspot?: SanityImageHotspot
+          crop?: SanityImageCrop
+          _type: 'image'
+        }
         backgroundColor?: 'cream' | 'forest' | 'sand'
       }
     | {

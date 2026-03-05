@@ -8,6 +8,19 @@ export const pricingCalculator = defineType({
   icon: ActivityIcon,
   fields: [
     defineField({
+      name: 'displayMode',
+      title: 'Display Mode',
+      type: 'string',
+      options: {
+        list: [
+          {title: 'Single Calculator', value: 'single'},
+          {title: 'Tabbed (All Services)', value: 'tabbed'},
+        ],
+        layout: 'radio',
+      },
+      initialValue: 'single',
+    }),
+    defineField({
       name: 'calculatorType',
       title: 'Calculator Type',
       type: 'string',
@@ -19,7 +32,13 @@ export const pricingCalculator = defineType({
         ],
         layout: 'radio',
       },
-      validation: (Rule) => Rule.required(),
+      hidden: ({parent}) => parent?.displayMode === 'tabbed',
+      validation: (Rule) =>
+        Rule.custom((value, context) => {
+          const parent = context.parent as {displayMode?: string}
+          if (parent?.displayMode === 'tabbed') return true
+          return value ? true : 'Calculator type is required for single mode'
+        }),
     }),
     defineField({
       name: 'eyebrow',
@@ -60,12 +79,14 @@ export const pricingCalculator = defineType({
   preview: {
     select: {
       title: 'heading',
-      subtitle: 'calculatorType',
+      calculatorType: 'calculatorType',
+      displayMode: 'displayMode',
     },
-    prepare({title, subtitle}) {
+    prepare({title, calculatorType, displayMode}) {
+      const mode = displayMode === 'tabbed' ? 'Tabbed (All Services)' : calculatorType ? `${calculatorType.charAt(0).toUpperCase()}${calculatorType.slice(1)} Calculator` : 'No type selected'
       return {
         title: title || 'Pricing Calculator',
-        subtitle: subtitle ? `${subtitle.charAt(0).toUpperCase()}${subtitle.slice(1)} Calculator` : 'No type selected',
+        subtitle: mode,
       }
     },
   },

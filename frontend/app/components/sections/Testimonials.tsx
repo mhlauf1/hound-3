@@ -246,7 +246,9 @@ export default function Testimonials({block}: TestimonialsProps) {
                   {[1, 2, 3, 4, 5].map((star) => {
                     const rating = Number(googleRating)
                     const isFull = star <= Math.floor(rating)
-                    const isHalf = !isFull && star === Math.ceil(rating) && rating % 1 !== 0
+                    const isPartial = !isFull && star === Math.ceil(rating) && rating % 1 !== 0
+                    const fraction = rating % 1
+                    const clipWidth = fraction * 16
                     return (
                       <svg
                         key={star}
@@ -256,11 +258,11 @@ export default function Testimonials({block}: TestimonialsProps) {
                         stroke="#FAF7F2"
                         strokeWidth="1"
                       >
-                        {isHalf ? (
+                        {isPartial ? (
                           <>
                             <defs>
-                              <clipPath id="half-star">
-                                <rect x="0" y="0" width="8" height="16" />
+                              <clipPath id={`partial-star-${star}`}>
+                                <rect x="0" y="0" width={clipWidth} height="16" />
                               </clipPath>
                             </defs>
                             <path
@@ -270,7 +272,7 @@ export default function Testimonials({block}: TestimonialsProps) {
                             <path
                               d="M8 1l2.2 4.4L15 6.2l-3.5 3.4.8 4.8L8 12.1 3.7 14.4l.8-4.8L1 6.2l4.8-.8L8 1z"
                               fill="#FAF7F2"
-                              clipPath="url(#half-star)"
+                              clipPath={`url(#partial-star-${star})`}
                             />
                           </>
                         ) : (
@@ -284,7 +286,7 @@ export default function Testimonials({block}: TestimonialsProps) {
                   })}
                 </div>
                 <span className="font-sans text-[14px] text-cream">
-                  {googleRating} On Google Reviews
+                  {googleRating} On Facebook Reviews
                 </span>
               </div>
             </div>

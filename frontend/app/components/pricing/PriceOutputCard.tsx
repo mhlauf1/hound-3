@@ -18,6 +18,7 @@ type PriceOutputCardProps = {
   includes?: string[]
   timeEstimate?: string
   badge?: string | null
+  emptyMessage?: string
 }
 
 function formatPrice(amount: number): string {
@@ -40,11 +41,12 @@ export default function PriceOutputCard({
   includes,
   timeEstimate,
   badge,
+  emptyMessage,
 }: PriceOutputCardProps) {
   const animatedTotal = useAnimatedNumber(total)
 
   return (
-    <div className="bg-cream rounded-2xl p-6 md:p-8 lg:sticky lg:top-8">
+    <div className="bg-cream rounded-2xl p-6 md:p-8 lg:sticky lg:top-32">
       {/* Header */}
       <div className="flex items-center justify-between mb-1">
         <span className="font-sans text-[13px]  uppercase tracking-wider text-terracotta">
@@ -62,6 +64,17 @@ export default function PriceOutputCard({
         <div className="my-4">
           <p className="font-sans text-[16px] text-charcoal/70">{disabledMessage}</p>
         </div>
+      ) : emptyMessage && total === 0 ? (
+        <>
+          <p
+            className="text-[48px] md:text-[56px] font-semibold tracking-tight text-forest/30 leading-tight mb-2"
+            aria-live="polite"
+            aria-atomic="true"
+          >
+            $0
+          </p>
+          <p className="font-sans text-[14px] text-charcoal/50 mb-4">{emptyMessage}</p>
+        </>
       ) : (
         <p
           className="text-[48px] md:text-[56px] font-semibold tracking-tight text-forest leading-tight mb-4"
