@@ -84,7 +84,7 @@ export default function HeroMinimal({block}: HeroMinimalProps) {
           {subtext && (
             <FadeIn delay={0.15}>
               <p
-                className={`font-sans text-[16px] lg:text-[18px]  leading-[150%] mt-6 max-w-2xl mx-auto ${isDark ? 'text-text-muted-dark' : 'text-text-muted'}`}
+                className={`font-sans text-[16px] lg:text-[18px]  leading-[150%] mt-6 max-w-3xl mx-auto ${isDark ? 'text-text-muted-dark' : 'text-text-muted'}`}
               >
                 {subtext}
               </p>

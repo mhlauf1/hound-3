@@ -112,7 +112,7 @@ export default function GalleryCarousel({block}: GalleryCarouselProps) {
 
   return (
     <section className={bgClasses[bgColor] || 'bg-cream'}>
-      <div className="py-16 lg:py-24">
+      <div className="py-20 mb-4 md:mb-0 lg:py-24">
         {(eyebrow || heading) && (
           <FadeIn>
             <div className="px-6 md:px-24 mb-10 lg:mb-14">
@@ -130,7 +130,7 @@ export default function GalleryCarousel({block}: GalleryCarouselProps) {
 
         {validImages.length > 0 && (
           <FadeIn delay={0.2}>
-            <div className="px-6 sm:px-10 lg:px-16">
+            <div className=" sm:px-10 lg:px-16">
               <div className="relative">
                 {/* Prev button */}
                 <button
@@ -162,8 +162,10 @@ export default function GalleryCarousel({block}: GalleryCarouselProps) {
                 {/* Scrollable cards */}
                 <div
                   ref={scrollRef}
-                  className="flex gap-5 lg:gap-6 overflow-x-auto snap-x snap-mandatory pb-2 scrollbar-hide scroll-smooth px-1"
+                  className="flex gap-5 lg:gap-6 overflow-x-auto snap-x snap-mandatory pb-2 scrollbar-hide scroll-smooth"
                 >
+                  {/* Spacer for initial left inset on mobile — images scroll past it for full bleed */}
+                  <div className="flex-shrink-0 w-4 sm:hidden" aria-hidden="true" />
                   {validImages.map((image, i) => (
                     <div
                       key={image._key}
@@ -204,6 +206,7 @@ export default function GalleryCarousel({block}: GalleryCarouselProps) {
                       )}
                     </div>
                   ))}
+                  <div className="flex-shrink-0 w-4 sm:hidden" aria-hidden="true" />
                 </div>
 
                 {/* Next button */}
