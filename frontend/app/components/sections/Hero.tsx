@@ -115,7 +115,7 @@ export default function Hero({block, index}: HeroProps) {
         </div>
 
         {heroImage?.asset?._ref && (
-          <FadeIn delay={0.5}>
+          index === 0 ? (
             <div className="mt-10 lg:mt-16 max-w-4xl mx-auto">
               <Image
                 id={heroImage.asset._ref}
@@ -123,10 +123,23 @@ export default function Hero({block, index}: HeroProps) {
                 width={960}
                 crop={heroImage.crop}
                 className="rounded-xl w-full object-cover"
-                {...(index === 0 && {loading: 'eager' as const, fetchPriority: 'high' as const})}
+                loading="eager"
+                fetchPriority="high"
               />
             </div>
-          </FadeIn>
+          ) : (
+            <FadeIn delay={0.5}>
+              <div className="mt-10 lg:mt-16 max-w-4xl mx-auto">
+                <Image
+                  id={heroImage.asset._ref}
+                  alt="Hero image"
+                  width={960}
+                  crop={heroImage.crop}
+                  className="rounded-xl w-full object-cover"
+                />
+              </div>
+            </FadeIn>
+          )
         )}
       </div>
     </section>

@@ -86,6 +86,7 @@ export default async function RootLayout({children}: {children: React.ReactNode}
     <html lang="en" className={`${poppins.variable} ${bricolage.variable} bg-cream text-forest`}>
       <head>
         <link rel="preconnect" href="https://cdn.sanity.io" />
+        <link rel="preconnect" href="https://api.iconify.design" />
       </head>
       <body>
         <Toaster />

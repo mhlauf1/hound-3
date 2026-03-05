@@ -34,7 +34,8 @@ function RatingBar({ratingText}: {ratingText: string}) {
   )
 }
 
-export default function CtaBanner({block}: CtaBannerProps) {
+export default function CtaBanner({block, index}: CtaBannerProps) {
+  const isEarly = index <= 1
   const {heading, icon, stickerImage, backgroundImage, sideImage, cta, showRating, ratingText} =
     block
   const hasSideImage = !!sideImage?.asset?._ref
@@ -53,6 +54,7 @@ export default function CtaBanner({block}: CtaBannerProps) {
                 crop={backgroundImage.crop}
                 mode="cover"
                 className="w-full h-full object-cover"
+                {...(isEarly && {loading: 'eager' as const, fetchPriority: 'high' as const})}
               />
               <div className="absolute inset-0 bg-forest/20" />
             </div>
@@ -143,6 +145,7 @@ export default function CtaBanner({block}: CtaBannerProps) {
               crop={backgroundImage.crop}
               mode="cover"
               className="w-full h-full object-cover"
+              {...(isEarly && {loading: 'eager' as const, fetchPriority: 'high' as const})}
             />
             <div className="absolute inset-0 bg-forest/20" />
           </div>
