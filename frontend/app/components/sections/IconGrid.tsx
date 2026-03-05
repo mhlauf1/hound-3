@@ -3,7 +3,57 @@
 import {Icon} from '@iconify/react'
 import {FadeIn} from '@/app/components/ui/FadeIn'
 import {stegaClean} from '@sanity/client/stega'
+import Image from '@/app/components/SanityImage'
 import Badge from '../ui/Badge'
+import type {ReactNode} from 'react'
+
+function linkifyLine(line: string): ReactNode {
+  const trimmed = line.trim()
+  if (!trimmed) return null
+
+  // Email: entire line is an email address
+  if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmed)) {
+    return <a href={`mailto:${trimmed}`}>{trimmed}</a>
+  }
+
+  // Phone: line is primarily digits/dashes/parens/spaces/dots, 7+ digits
+  const digitsOnly = trimmed.replace(/\D/g, '')
+  if (/^[\d\s\-().+]+$/.test(trimmed) && digitsOnly.length >= 7) {
+    return <a href={`tel:+1${digitsOnly.slice(-10)}`}>{trimmed}</a>
+  }
+
+  // Address: contains a US state abbreviation + zip code pattern
+  if (/\b[A-Z]{2}\s+\d{5}/.test(trimmed)) {
+    const query = encodeURIComponent(trimmed)
+    return (
+      <a href={`https://www.google.com/maps/search/${query}`} target="_blank" rel="noopener noreferrer">
+        {trimmed}
+      </a>
+    )
+  }
+
+  return trimmed
+}
+
+function RichDescription({description, isDark}: {description: string; isDark: boolean}) {
+  const cleaned = stegaClean(description)
+  const lines = cleaned.split('\n').filter((l) => l.trim())
+
+  const linkClass = 'underline decoration-current/30 hover:text-terracotta hover:decoration-terracotta transition-colors'
+
+  return (
+    <div className={`font-sans text-[15px] font-light leading-[150%] space-y-1 ${isDark ? 'text-text-muted-dark' : 'text-text-muted'}`}>
+      {lines.map((line, i) => {
+        const node = linkifyLine(line)
+        return (
+          <div key={i}>
+            {typeof node === 'string' ? node : <span className={linkClass}>{node}</span>}
+          </div>
+        )
+      })}
+    </div>
+  )
+}
 
 type IconGridProps = {
   block: {
@@ -17,6 +67,7 @@ type IconGridProps = {
       description?: string
     }>
     columns?: number
+    accentImage?: {asset?: {_ref: string}}
     backgroundColor?: 'cream' | 'sand' | 'forest'
   }
   index: number
@@ -37,7 +88,7 @@ const bgColors: Record<string, string> = {
 }
 
 export default function IconGrid({block}: IconGridProps) {
-  const {eyebrow, heading, description, items, columns, backgroundColor} = block
+  const {eyebrow, heading, description, items, columns, accentImage, backgroundColor} = block
   const cols = stegaClean(columns) || 3
   const gridClass = columnClasses[cols] || columnClasses[3]
   const bg = bgColors[stegaClean(backgroundColor) || 'cream'] || bgColors.cream
@@ -94,16 +145,25 @@ export default function IconGrid({block}: IconGridProps) {
                     </h3>
                   )}
                   {item.description && (
-                    <p
-                      className={`font-sans text-[14px] font-light leading-[150%] ${isDark ? 'text-text-muted-dark' : 'text-text-muted'}`}
-                    >
-                      {item.description}
-                    </p>
+                    <RichDescription description={item.description} isDark={isDark} />
                   )}
                 </div>
               </FadeIn>
             ))}
           </div>
+        )}
+
+        {accentImage?.asset?._ref && (
+          <FadeIn>
+            <div className="flex justify-center mt-8 lg:mt-12">
+              <Image
+                id={accentImage.asset._ref}
+                alt=""
+                width={200}
+                className="w-[50px] lg:w-[60px] aspect-square object-contain"
+              />
+            </div>
+          </FadeIn>
         )}
       </div>
     </section>

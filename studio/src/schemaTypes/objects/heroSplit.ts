@@ -42,6 +42,12 @@ export const heroSplit = defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
+      name: 'stickerImage',
+      title: 'Sticker Image',
+      type: 'image',
+      description: 'Optional fun illustration/sticker that overlaps the hero image edge',
+    }),
+    defineField({
       name: 'imagePosition',
       title: 'Image Position',
       type: 'string',

@@ -40,6 +40,12 @@ export const splitContent = defineType({
       options: {hotspot: true},
     }),
     defineField({
+      name: 'stickerImage',
+      title: 'Sticker Image',
+      type: 'image',
+      description: 'Optional fun illustration/sticker that overlaps the image edge',
+    }),
+    defineField({
       name: 'imagePosition',
       title: 'Image Position',
       type: 'string',

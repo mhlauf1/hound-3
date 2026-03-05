@@ -14,6 +14,12 @@ export const ctaBanner = defineType({
       description: 'Optional icon/illustration displayed above the heading',
     }),
     defineField({
+      name: 'stickerImage',
+      title: 'Sticker Image',
+      type: 'image',
+      description: 'Optional small image displayed in a white circle above the heading',
+    }),
+    defineField({
       name: 'heading',
       title: 'Heading',
       type: 'string',

@@ -72,6 +72,12 @@ export const valuePillars = defineType({
       initialValue: 4,
     }),
     defineField({
+      name: 'accentImage',
+      title: 'Accent Image',
+      type: 'image',
+      description: 'Optional small image (e.g. paw icon) displayed centered below the pillars',
+    }),
+    defineField({
       name: 'backgroundColor',
       title: 'Background Color',
       type: 'string',

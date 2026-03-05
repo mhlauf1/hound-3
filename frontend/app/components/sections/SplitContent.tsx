@@ -12,6 +12,7 @@ type SplitContentProps = {
     link?: {label?: string; link?: any}
     badge?: {asset?: {_ref: string}}
     image?: {asset?: {_ref: string}; crop?: any}
+    stickerImage?: {asset?: {_ref: string}}
     imagePosition?: 'left' | 'right'
     backgroundColor?: 'cream' | 'sand' | 'forest' | 'tan' | 'lavender' | 'dark'
   }
@@ -31,7 +32,7 @@ const bgColors: Record<string, {classes: string; isDark: boolean}> = {
 }
 
 export default function SplitContent({block}: SplitContentProps) {
-  const {heading, body, link, badge, image, imagePosition, backgroundColor} = block
+  const {heading, body, link, badge, image, stickerImage, imagePosition, backgroundColor} = block
   const isImageLeft = stegaClean(imagePosition) === 'left'
   const {classes: bg, isDark} = bgColors[stegaClean(backgroundColor) || 'sand'] || bgColors.sand
 
@@ -77,7 +78,7 @@ export default function SplitContent({block}: SplitContentProps) {
           {/* Image side */}
           <div className={isImageLeft ? 'lg:order-1' : 'lg:order-2'}>
             {image?.asset?._ref && (
-              <FadeIn delay={0.1}>
+              <FadeIn delay={0.1} className="relative">
                 <Image
                   id={image.asset._ref}
                   alt={heading || 'Section image'}
@@ -85,6 +86,16 @@ export default function SplitContent({block}: SplitContentProps) {
                   crop={image.crop}
                   className="rounded-lg aspect-[4/3] w-full object-cover"
                 />
+                {stickerImage?.asset?._ref && (
+                  <div className="absolute bottom-4 left-4  lg:bottom-6 lg:left-6 bg-white rounded-full p-2.5 pointer-events-none z-10">
+                    <Image
+                      id={stickerImage.asset._ref}
+                      alt=""
+                      width={200}
+                      className="w-[50px] lg:w-[65px] aspect-square object-contain"
+                    />
+                  </div>
+                )}
               </FadeIn>
             )}
           </div>

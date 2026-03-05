@@ -130,7 +130,7 @@ export default function GalleryCarousel({block}: GalleryCarouselProps) {
 
         {validImages.length > 0 && (
           <FadeIn delay={0.2}>
-            <div className="max-w-[1400px] mx-auto px-6 sm:px-10 lg:px-16">
+            <div className="px-6 sm:px-10 lg:px-16">
               <div className="relative">
                 {/* Prev button */}
                 <button
@@ -168,7 +168,7 @@ export default function GalleryCarousel({block}: GalleryCarouselProps) {
                     <div
                       key={image._key}
                       data-card
-                      className="flex-shrink-0 w-[300px] sm:w-[360px] lg:w-[400px] snap-start"
+                      className="flex-shrink-0 w-[250px] sm:w-[360px] lg:w-[500px] snap-start"
                     >
                       {lightboxEnabled ? (
                         <button
@@ -182,7 +182,7 @@ export default function GalleryCarousel({block}: GalleryCarouselProps) {
                             width={500}
                             crop={image.crop}
                             hotspot={image.hotspot}
-                            className="rounded-lg aspect-[4/3] w-full object-cover transition-opacity group-hover:opacity-90"
+                            className="rounded-lg aspect-[3/4] w-full object-cover transition-opacity group-hover:opacity-90"
                           />
                         </button>
                       ) : (

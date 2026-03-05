@@ -7,6 +7,7 @@ type CtaBannerProps = {
   block: {
     heading?: string
     icon?: {asset?: {_ref: string}}
+    stickerImage?: {asset?: {_ref: string}}
     backgroundImage?: {asset?: {_ref: string}; crop?: any}
     sideImage?: {asset?: {_ref: string}; crop?: any}
     cta?: {buttonText?: string; link?: any}
@@ -34,7 +35,8 @@ function RatingBar({ratingText}: {ratingText: string}) {
 }
 
 export default function CtaBanner({block}: CtaBannerProps) {
-  const {heading, icon, backgroundImage, sideImage, cta, showRating, ratingText} = block
+  const {heading, icon, stickerImage, backgroundImage, sideImage, cta, showRating, ratingText} =
+    block
   const hasSideImage = !!sideImage?.asset?._ref
 
   if (hasSideImage) {
@@ -61,6 +63,19 @@ export default function CtaBanner({block}: CtaBannerProps) {
           <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 items-center">
             {/* Text side */}
             <div className="px-[8%]  lg:px-[10%] py-16 lg:py-24">
+              {stickerImage?.asset?._ref && (
+                <FadeIn>
+                  <div className="bg-white rounded-full p-3 w-fit mb-6">
+                    <Image
+                      id={stickerImage.asset._ref}
+                      alt=""
+                      width={200}
+                      className="w-[40px] lg:w-[50px] aspect-square object-contain"
+                    />
+                  </div>
+                </FadeIn>
+              )}
+
               {icon?.asset?._ref && (
                 <FadeIn>
                   <div className="mb-8">
@@ -136,6 +151,19 @@ export default function CtaBanner({block}: CtaBannerProps) {
         {/* Fallback dark bg if no image */}
         {!backgroundImage?.asset?._ref && <div className="absolute inset-0 bg-forest" />}
         <div className="relative flex flex-col tems-center z-10 py-16 lg:py-24 text-start md:text-center">
+          {stickerImage?.asset?._ref && (
+            <FadeIn>
+              <div className="bg-white rounded-full p-3 w-fit mb-6">
+                <Image
+                  id={stickerImage.asset._ref}
+                  alt=""
+                  width={200}
+                  className="w-[40px] lg:w-[50px] aspect-square object-contain"
+                />
+              </div>
+            </FadeIn>
+          )}
+
           {icon?.asset?._ref && (
             <FadeIn>
               <div className="mb-8">

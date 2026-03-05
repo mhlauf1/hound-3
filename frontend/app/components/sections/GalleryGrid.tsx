@@ -24,6 +24,7 @@ type GalleryGridProps = {
     images?: GalleryImage[]
     columns?: number
     enableLightbox?: boolean
+    accentImage?: {asset?: {_ref: string}}
     backgroundColor?: string
   }
   index: number
@@ -44,7 +45,7 @@ const bgClasses: Record<string, string> = {
 }
 
 export default function GalleryGrid({block}: GalleryGridProps) {
-  const {eyebrow, heading, images, columns, enableLightbox, backgroundColor} = block
+  const {eyebrow, heading, images, columns, enableLightbox, accentImage, backgroundColor} = block
   const {isOpen, currentIndex, openLightbox, closeLightbox} = useLightbox()
 
   const cols = stegaClean(columns) || 3
@@ -116,6 +117,19 @@ export default function GalleryGrid({block}: GalleryGridProps) {
               </FadeIn>
             ))}
           </div>
+        )}
+
+        {accentImage?.asset?._ref && (
+          <FadeIn>
+            <div className="flex justify-center mt-8 lg:mt-12">
+              <Image
+                id={accentImage.asset._ref}
+                alt=""
+                width={200}
+                className="w-[50px] lg:w-[60px]"
+              />
+            </div>
+          </FadeIn>
         )}
       </div>
 

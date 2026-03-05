@@ -62,6 +62,12 @@ export const galleryGrid = defineType({
       description: 'Allow clicking images to view them full-screen',
     }),
     defineField({
+      name: 'accentImage',
+      title: 'Accent Image',
+      type: 'image',
+      description: 'Optional small image (e.g. paw icon) displayed centered below the gallery',
+    }),
+    defineField({
       name: 'backgroundColor',
       title: 'Background Color',
       type: 'string',

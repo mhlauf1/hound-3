@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import Image from '@/app/components/SanityImage'
+import TextLogo from '@/app/components/TextLogo'
 
 type FooterLink = {
   _key: string
@@ -61,12 +62,7 @@ export default function Footer({
                     className="w-[140px] h-auto"
                   />
                 ) : (
-                  <>
-                    <span className="font-heading text-2xl tracking-tight">Hound Around</span>
-                    <div className="font-sans text-[11px] font-medium uppercase tracking-[0.2em]">
-                      Resort
-                    </div>
-                  </>
+                  <TextLogo align="left" />
                 )}
               </div>
               {tagline && (

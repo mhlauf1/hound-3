@@ -12,6 +12,7 @@ type HeroSplitProps = {
     primaryCta?: {buttonText?: string; link?: any}
     secondaryCta?: {buttonText?: string; link?: any}
     image?: {asset?: {_ref: string}; crop?: any; hotspot?: any}
+    stickerImage?: {asset?: {_ref: string}}
     imagePosition?: 'left' | 'right'
     backgroundColor?: 'cream' | 'sand' | 'forest'
   }
@@ -27,8 +28,17 @@ const bgColors: Record<string, string> = {
 }
 
 export default function HeroSplit({block}: HeroSplitProps) {
-  const {eyebrow, heading, body, primaryCta, secondaryCta, image, imagePosition, backgroundColor} =
-    block
+  const {
+    eyebrow,
+    heading,
+    body,
+    primaryCta,
+    secondaryCta,
+    image,
+    stickerImage,
+    imagePosition,
+    backgroundColor,
+  } = block
   const isImageLeft = stegaClean(imagePosition) === 'left'
   const bg = bgColors[stegaClean(backgroundColor) || 'cream'] || bgColors.cream
   const isDark = stegaClean(backgroundColor) === 'forest'
@@ -79,7 +89,7 @@ export default function HeroSplit({block}: HeroSplitProps) {
           {/* Image side */}
           <div className={`${isImageLeft ? 'lg:order-1' : 'lg:order-2'} flex justify-end flex-1`}>
             {image?.asset?._ref && (
-              <FadeIn delay={0.1}>
+              <FadeIn delay={0.1} className="relative">
                 <Image
                   id={image.asset._ref}
                   alt={heading || 'Hero image'}
@@ -88,6 +98,16 @@ export default function HeroSplit({block}: HeroSplitProps) {
                   hotspot={image.hotspot}
                   className="rounded-lg md:w-[600px] aspect-square w-full object-cover"
                 />
+                {stickerImage?.asset?._ref && (
+                  <div className="absolute top-4 left-4  lg:top-6 lg:left-6 bg-white rounded-full p-3 pointer-events-none z-10">
+                    <Image
+                      id={stickerImage.asset._ref}
+                      alt=""
+                      width={200}
+                      className="w-[40px] lg:w-[50px] aspect-square object-contain"
+                    />
+                  </div>
+                )}
               </FadeIn>
             )}
           </div>

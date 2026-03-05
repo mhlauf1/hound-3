@@ -120,7 +120,7 @@ export default function Testimonials({block}: TestimonialsProps) {
         {/* Carousel */}
         {reviews && reviews.length > 0 && (
           <FadeIn delay={0.2}>
-            <div className="max-w-[1400px] mx-auto px-6 sm:px-10 lg:px-16">
+            <div className=" px-6 sm:px-10 lg:px-16">
               {/* Cards row with navigation */}
               <div className="relative">
                 {/* Prev button */}

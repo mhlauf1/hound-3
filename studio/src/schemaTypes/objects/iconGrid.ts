@@ -71,6 +71,12 @@ export const iconGrid = defineType({
       initialValue: 3,
     }),
     defineField({
+      name: 'accentImage',
+      title: 'Accent Image',
+      type: 'image',
+      description: 'Optional small image (e.g. paw icon) displayed centered below the grid',
+    }),
+    defineField({
       name: 'backgroundColor',
       title: 'Background Color',
       type: 'string',

@@ -1,5 +1,6 @@
 import DecorativeCurve from '@/app/components/ui/DecorativeCurve'
 import {FadeIn} from '@/app/components/ui/FadeIn'
+import TextLogo from '@/app/components/TextLogo'
 
 type StatsBarProps = {
   block: {
@@ -38,14 +39,7 @@ export default function StatsBar({block}: StatsBarProps) {
 
         {showLogo && (
           <FadeIn>
-            <div className="flex flex-col items-center">
-              <span className="font-heading text-2xl leading-tight  tracking-tight">
-                Hound Around
-              </span>
-              <span className="font-sans text-[10px] font-semibold uppercase tracking-[0.2em] leading-tight">
-                Resort
-              </span>
-            </div>
+            <TextLogo />
           </FadeIn>
         )}
       </div>

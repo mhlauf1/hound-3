@@ -2,6 +2,7 @@
 
 import {FadeIn} from '@/app/components/ui/FadeIn'
 import {stegaClean} from '@sanity/client/stega'
+import Image from '@/app/components/SanityImage'
 import Badge from '../ui/Badge'
 
 type ValuePillarsProps = {
@@ -16,6 +17,7 @@ type ValuePillarsProps = {
       description?: string
     }>
     columns?: number
+    accentImage?: {asset?: {_ref: string}}
     backgroundColor?: 'cream' | 'sand' | 'forest'
   }
   index: number
@@ -60,7 +62,7 @@ const sectionColors: Record<
 }
 
 export default function ValuePillars({block}: ValuePillarsProps) {
-  const {eyebrow, heading, description, pillars, columns, backgroundColor} = block
+  const {eyebrow, heading, description, pillars, columns, accentImage, backgroundColor} = block
   const cols = stegaClean(columns) || 4
   const gridClass = columnClasses[cols] || columnClasses[4]
   const colors = sectionColors[stegaClean(backgroundColor) || 'sand'] || sectionColors.sand
@@ -124,6 +126,19 @@ export default function ValuePillars({block}: ValuePillarsProps) {
               </FadeIn>
             ))}
           </div>
+        )}
+
+        {accentImage?.asset?._ref && (
+          <FadeIn>
+            <div className="flex justify-center mt-8 lg:mt-12">
+              <Image
+                id={accentImage.asset._ref}
+                alt=""
+                width={200}
+                className="w-[50px] lg:w-[60px]"
+              />
+            </div>
+          </FadeIn>
         )}
       </div>
     </section>

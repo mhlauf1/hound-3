@@ -5,6 +5,7 @@ import {useState, useEffect} from 'react'
 import {motion, AnimatePresence} from 'framer-motion'
 import Button from '@/app/components/ui/Button'
 import Image from '@/app/components/SanityImage'
+import TextLogo from '@/app/components/TextLogo'
 
 type NavChild = {
   _key: string
@@ -62,14 +63,7 @@ export default function Header({navItems, ctaButton, logo}: HeaderProps) {
                 className="w-[140px] lg:w-[180px] h-auto"
               />
             ) : (
-              <div className="flex flex-col items-center">
-                <span className="font-heading text-2xl leading-tight  tracking-tight">
-                  Hound Around
-                </span>
-                <span className="font-sans text-[10px] font-semibold uppercase tracking-[0.2em] leading-tight">
-                  Resort
-                </span>
-              </div>
+              <TextLogo />
             )}
           </Link>
 
