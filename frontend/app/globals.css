@@ -27,7 +27,7 @@
   --color-text-muted-dark: rgba(250, 247, 242, 0.7);
 
   /* Font families */
-  --font-serif: var(--font-poppins, 'Poppins', system-ui, sans-serif);
+  --font-heading: 'Bricolage Grotesque', system-ui, sans-serif;
   --font-sans: var(--font-poppins, 'Poppins', system-ui, sans-serif);
 
   /* Font sizes — hero/heading scale (serif) */
@@ -58,8 +58,8 @@
   --radius-section: 48px;
 
   /* Shadows */
-  --shadow-card: 0 1px 3px rgba(45, 74, 62, 0.08);
-  --shadow-card-hover: 0 4px 12px rgba(45, 74, 62, 0.12);
+  --shadow-card: 0 2px 8px rgba(45, 74, 62, 0.06);
+  --shadow-card-hover: 0 8px 24px rgba(45, 74, 62, 0.10);
 
   --default-transition-duration: 250ms;
 }
@@ -71,14 +71,14 @@
   h4,
   h5,
   h6 {
-    font-family: var(--font-serif);
-    font-weight: 500;
-    letter-spacing: -0.025em;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    letter-spacing: -0.01em;
   }
 
   body {
     font-family: var(--font-sans);
-    font-weight: 300;
+    font-weight: 400;
     line-height: 1.5;
   }
 }
@@ -120,6 +120,10 @@
 
 @utility animate-marquee {
   animation: marquee 30s linear infinite;
+}
+
+@utility animate-ticker {
+  animation: marquee 18s linear infinite;
 }
 
 @keyframes marquee {

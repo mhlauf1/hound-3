@@ -60,7 +60,7 @@ export default function HeroBanner({block}: HeroBannerProps) {
       {!backgroundImage?.asset?._ref && <div className="absolute inset-0 bg-forest" />}
 
       {/* Content */}
-      <div className="relative z-10 text-center px-6 py-16 lg:py-24 max-w-3xl mx-auto">
+      <div className="relative z-10 text-center px-6 py-16 lg:py-24 max-w-4xl mx-auto">
         {eyebrow && (
           <FadeIn>
             <Badge className="mb-3">{eyebrow}</Badge>
@@ -68,7 +68,7 @@ export default function HeroBanner({block}: HeroBannerProps) {
         )}
         {heading && (
           <FadeIn delay={0.1}>
-            <h1 className="text-[48px] md:text-[56px] lg:text-[84px] leading-[110%] text-white mb-6">
+            <h1 className="text-[48px] tracking-tight font-semibold md:text-[56px] lg:text-[80px] leading-[104%] text-white mb-6">
               {heading}
             </h1>
           </FadeIn>

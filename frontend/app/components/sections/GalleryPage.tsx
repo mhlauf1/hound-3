@@ -54,7 +54,7 @@ export default function GalleryPage({block}: GalleryPageProps) {
           <FadeIn>
             <div className="mb-10 lg:mb-14 max-w-3xl">
               {heading && (
-                <h2 className="text-[36px] md:text-[48px] lg:text-[56px] leading-[105%] text-forest">
+                <h2 className="text-[36px] md:text-[48px] lg:text-[56px] font-semibold tracking-tight leading-[105%] text-forest">
                   {heading}
                 </h2>
               )}
@@ -72,20 +72,25 @@ export default function GalleryPage({block}: GalleryPageProps) {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {validImages.map((image, i) => (
               <FadeIn key={image._key} delay={0.03 * Math.min(i, 12)}>
-                <button
-                  type="button"
-                  onClick={() => openLightbox(i)}
-                  className="w-full cursor-zoom-in group"
-                >
-                  <Image
-                    id={image.asset!._ref}
-                    alt={image.alt || ''}
-                    width={500}
-                    crop={image.crop}
-                    hotspot={image.hotspot}
-                    className="rounded-lg max-h-[600px] w-full object-cover transition-opacity group-hover:opacity-90"
-                  />
-                </button>
+                <div>
+                  <button
+                    type="button"
+                    onClick={() => openLightbox(i)}
+                    className="w-full cursor-zoom-in group"
+                  >
+                    <Image
+                      id={image.asset!._ref}
+                      alt={image.alt || ''}
+                      width={500}
+                      crop={image.crop}
+                      hotspot={image.hotspot}
+                      className="rounded-lg max-h-[600px] w-full object-cover transition-opacity group-hover:opacity-90"
+                    />
+                  </button>
+                  {image.caption && (
+                    <p className="mt-2 text-[14px] text-forest/60 text-center">{image.caption}</p>
+                  )}
+                </div>
               </FadeIn>
             ))}
           </div>

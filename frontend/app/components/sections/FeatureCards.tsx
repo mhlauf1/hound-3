@@ -6,6 +6,7 @@ import {FadeIn} from '@/app/components/ui/FadeIn'
 type FeatureCardsProps = {
   block: {
     heading?: string
+    subheading?: string
     stickerLeft?: {asset?: {_ref: string}}
     stickerRight?: {asset?: {_ref: string}}
     features?: Array<{
@@ -24,15 +25,15 @@ type FeatureCardsProps = {
 }
 
 export default function FeatureCards({block}: FeatureCardsProps) {
-  const {heading, stickerLeft, stickerRight, features, cta, trustLine} = block
+  const {heading, subheading, stickerLeft, stickerRight, features, cta, trustLine} = block
 
   return (
     <section className="relative bg-forest text-cream rounded-[48px] -mt-12 z-10 overflow-hidden">
       <div className="px-6 md:px-28 relative z-10 py-[80px] lg:py-[148px]">
         <FadeIn>
-          <div className="flex flex-row justify-between items-center mb-12 lg:mb-16">
+          <div className="flex flex-row justify-between items-center mb-8">
             {heading && (
-              <h2 className="text-[36px] md:text-[56px] lg:text-[84px] leading-[105%] text-sand max-w-4xl">
+              <h2 className="text-[36px] md:text-[56px] lg:text-[84px] leading-[105%] font-semibold tracking-tight text-sand max-w-[18ch]">
                 {heading}
               </h2>
             )}
@@ -58,6 +59,14 @@ export default function FeatureCards({block}: FeatureCardsProps) {
           </div>
         </FadeIn>
 
+        {subheading && (
+          <FadeIn delay={0.1}>
+            <p className="font-sans text-[16px] md:text-lg text-sand/70 max-w-2xl leading-relaxed -mt-4 mb-7 lg:mb-12">
+              {subheading}
+            </p>
+          </FadeIn>
+        )}
+
         {features && features.length > 0 && (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-12 lg:mb-16">
             {features.map((feature, i) => (
@@ -69,12 +78,12 @@ export default function FeatureCards({block}: FeatureCardsProps) {
                     </div>
                   )}
                   {feature.title && (
-                    <h3 className="text-[24px] md:text-4xl leading-[120%] text-sand mb-4">
+                    <h3 className="text-[24px] md:text-3xl font-semibold leading-[120%] text-sand mb-3">
                       {feature.title}
                     </h3>
                   )}
                   {feature.description && (
-                    <p className="font-sans text-[16px] md:text-lg mb-2 md:mb-8  text-sand leading-[150%]">
+                    <p className="font-sans text-[16px] md:text-lg mb-2 md:mb-6  text-sand leading-[150%]">
                       {feature.description}
                     </p>
                   )}

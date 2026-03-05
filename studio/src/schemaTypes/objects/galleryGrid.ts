@@ -31,6 +31,12 @@ export const galleryGrid = defineType({
               title: 'Alt Text',
               type: 'string',
             }),
+            defineField({
+              name: 'caption',
+              title: 'Caption',
+              type: 'string',
+              description: 'Optional caption displayed below the image',
+            }),
           ],
         }),
       ],

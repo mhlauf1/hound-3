@@ -31,6 +31,7 @@ export const requirementsList = defineType({
       type: 'array',
       of: [
         {
+          name: 'item',
           type: 'object',
           fields: [defineField({name: 'text', title: 'Text', type: 'string'})],
           preview: {

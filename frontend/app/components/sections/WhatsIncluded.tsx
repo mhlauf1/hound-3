@@ -3,6 +3,7 @@
 import {Icon} from '@iconify/react'
 import {FadeIn} from '@/app/components/ui/FadeIn'
 import {stegaClean} from '@sanity/client/stega'
+import Badge from '../ui/Badge'
 
 type WhatsIncludedProps = {
   block: {
@@ -76,17 +77,15 @@ export default function WhatsIncluded({block}: WhatsIncludedProps) {
     <section className={`${colors.section} mb-12 md:mb-20 ]`}>
       <div className="px-6 md:px-16 lg:px-24 py-16 lg:py-24">
         <FadeIn>
-          <div className="text-center mb-10 lg:mb-18 max-w-3xl mx-auto">
+          <div className="text-center flex flex-col items-center mb-10 lg:mb-18 max-w-2xl mx-auto">
             {eyebrow && (
-              <p
-                className={`font-sans text-[12px] md:text-[13px] font-semibold uppercase tracking-[0.1em] ${colors.eyebrow} mb-3`}
-              >
-                {eyebrow}
-              </p>
+              <FadeIn>
+                <Badge className="mb-3">{eyebrow}</Badge>
+              </FadeIn>
             )}
             {heading && (
               <h2
-                className={`text-[36px] md:text-[48px] lg:text-[56px] leading-[105%] ${colors.heading}`}
+                className={`text-[36px] md:text-[48px] lg:text-[56px] leading-[105%] font-semibold tracking-tight  md:max-w-[20ch] text-center ${colors.heading}`}
               >
                 {heading}
               </h2>

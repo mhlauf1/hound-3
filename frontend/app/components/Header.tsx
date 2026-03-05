@@ -4,6 +4,7 @@ import Link from 'next/link'
 import {useState, useEffect} from 'react'
 import {motion, AnimatePresence} from 'framer-motion'
 import Button from '@/app/components/ui/Button'
+import Image from '@/app/components/SanityImage'
 
 type NavChild = {
   _key: string
@@ -21,9 +22,10 @@ type NavItem = {
 type HeaderProps = {
   navItems?: NavItem[]
   ctaButton?: {buttonText?: string; link?: any}
+  logo?: {asset?: {_ref: string}}
 }
 
-export default function Header({navItems, ctaButton}: HeaderProps) {
+export default function Header({navItems, ctaButton, logo}: HeaderProps) {
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
   const [dropdownOpen, setDropdownOpen] = useState<string | null>(null)
@@ -48,20 +50,31 @@ export default function Header({navItems, ctaButton}: HeaderProps) {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 transition-colors duration-300">
-      <div className="px-2 md:px-20">
+      <div className="px-2 lg:px-20">
         <div className="flex border  bg-cream/95 backdrop-blur-sm border-forest/20 rounded-md mt-4 pl-4 md:pl-12 pr-2 md:pr-6 items-center justify-between py-3">
           {/* Logo */}
-          <Link href="/" className="flex flex-col items-center">
-            <span className="font-serif text-xl leading-tight font-semibold tracking-tight">
-              Hound Around
-            </span>
-            <span className="font-sans text-[8px] font-semibold uppercase tracking-[0.2em] leading-tight">
-              Resort
-            </span>
+          <Link href="/" className="flex items-center">
+            {logo?.asset?._ref ? (
+              <Image
+                id={logo.asset._ref}
+                alt="Hound Around Resort"
+                width={180}
+                className="w-[140px] lg:w-[180px] h-auto"
+              />
+            ) : (
+              <div className="flex flex-col items-center">
+                <span className="font-heading text-2xl leading-tight  tracking-tight">
+                  Hound Around
+                </span>
+                <span className="font-sans text-[10px] font-semibold uppercase tracking-[0.2em] leading-tight">
+                  Resort
+                </span>
+              </div>
+            )}
           </Link>
 
           {/* Desktop Nav */}
-          <nav className="hidden lg:flex items-center gap-8">
+          <nav className="hidden lg:flex items-center gap-7">
             {navItems?.map((item) => (
               <div
                 key={item._key}
@@ -76,7 +89,7 @@ export default function Header({navItems, ctaButton}: HeaderProps) {
                 {item.children && item.children.length > 0 ? (
                   <button
                     type="button"
-                    className="flex items-center gap-1 font-sans text-[16px] text-forest hover:text-forest/70 transition-colors cursor-default"
+                    className="flex items-center gap-1 font-sans text-[14px] text-forest hover:text-forest/70 transition-colors cursor-default"
                   >
                     {item.label}
                     <svg width="12" height="12" viewBox="0 0 12 12" fill="none" className="mt-0.5">
@@ -91,7 +104,7 @@ export default function Header({navItems, ctaButton}: HeaderProps) {
                 ) : (
                   <Link
                     href={resolveNavLink(item.link) || '#'}
-                    className="font-sans text-[16px] text-forest hover:text-forest/70 transition-colors"
+                    className="font-sans text-[14px] text-forest hover:text-forest/70 transition-colors"
                   >
                     {item.label}
                   </Link>
@@ -105,7 +118,7 @@ export default function Header({navItems, ctaButton}: HeaderProps) {
                         <Link
                           key={child._key}
                           href={resolveNavLink(child.link) || '#'}
-                          className="block px-4 py-2 text-[15px] font-sans text-forest hover:bg-sand/30 transition-colors"
+                          className="block px-4 py-2 text-[14px] font-sans text-forest hover:bg-sand/30 transition-colors"
                         >
                           {child.label}
                         </Link>
@@ -198,13 +211,13 @@ export default function Header({navItems, ctaButton}: HeaderProps) {
                     transition={{delay: 0.1 + i * 0.05, duration: 0.3}}
                   >
                     {item.children && item.children.length > 0 ? (
-                      <span className="block font-serif text-[28px] tracking-tight text-forest py-3 border-b border-border-light">
+                      <span className="block font-heading text-[28px] tracking-tight text-forest py-3 border-b border-border-light">
                         {item.label}
                       </span>
                     ) : (
                       <Link
                         href={resolveNavLink(item.link) || '#'}
-                        className="block font-serif text-[28px] tracking-tight text-forest py-3 border-b border-border-light"
+                        className="block font-heading text-[28px] tracking-tight text-forest py-3 border-b border-border-light"
                         onClick={() => setMobileOpen(false)}
                       >
                         {item.label}

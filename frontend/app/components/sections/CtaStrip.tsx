@@ -34,13 +34,13 @@ export default function CtaStrip({block}: CtaStripProps) {
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
             <div>
               {heading && (
-                <h2 className="text-[24px] md:text-[28px] lg:text-[36px] leading-[110%]">
+                <h2 className="text-[24px] md:text-[28px] lg:text-[36px] font-semibold tracking-tight leading-[110%]">
                   {heading}
                 </h2>
               )}
               {subtext && (
                 <p
-                  className={`font-sans text-[14px] lg:text-[16px] font-light mt-1 ${isDark ? 'opacity-80' : 'text-text-muted'}`}
+                  className={`font-sans text-[14px] md:max-w-[84ch] leading-[160%] lg:text-[16px] font-light mt-2 ${isDark ? 'opacity-80' : 'text-text-muted'}`}
                 >
                   {subtext}
                 </p>

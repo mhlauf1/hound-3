@@ -20,6 +20,12 @@ export const service = defineType({
       options: {source: 'title', maxLength: 96},
     }),
     defineField({
+      name: 'sticker',
+      title: 'Sticker Image',
+      type: 'image',
+      description: 'Small dog illustration shown above the title in the service tab',
+    }),
+    defineField({
       name: 'shortDescription',
       title: 'Short Description',
       type: 'text',
@@ -86,6 +92,7 @@ export const service = defineType({
         {type: 'webcamGrid'},
         {type: 'galleryCarousel'},
         {type: 'galleryShowcase'},
+        {type: 'valuePillars'},
       ],
       options: {
         insertMenu: {

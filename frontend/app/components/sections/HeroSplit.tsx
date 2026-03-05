@@ -46,7 +46,7 @@ export default function HeroSplit({block}: HeroSplitProps) {
             )}
             {heading && (
               <FadeIn delay={0.05}>
-                <h1 className="text-[48px] md:text-[56px] md:max-w-[15ch] lg:text-[84px] leading-[110%] mb-6">
+                <h1 className="text-[48px] tracking-tight md:text-[56px] md:max-w-[15ch] font-semibold lg:text-[84px] leading-[104%] mb-6">
                   {heading}
                 </h1>
               </FadeIn>

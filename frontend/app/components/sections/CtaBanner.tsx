@@ -76,7 +76,7 @@ export default function CtaBanner({block}: CtaBannerProps) {
 
               {heading && (
                 <FadeIn delay={0.1}>
-                  <h2 className="text-[32px] md:text-[44px] lg:text-[56px] leading-[95%] text-white mb-10 max-w-xl">
+                  <h2 className="text-[32px] md:text-[44px] lg:text-[56px] font-semibold tracking-tight leading-[95%] text-white mb-10 max-w-xl">
                     {heading}
                   </h2>
                 </FadeIn>
@@ -151,7 +151,7 @@ export default function CtaBanner({block}: CtaBannerProps) {
 
           {heading && (
             <FadeIn delay={0.1}>
-              <h2 className="text-[32px] text-center  md:text-[44px] lg:text-[56px] leading-[105%] text-white mb-10 max-w-xl mx-auto">
+              <h2 className="text-[32px] tracking-tight font-semibold text-center  md:text-[44px] lg:text-[56px] leading-[105%] text-white mb-10 max-w-lg mx-auto">
                 {heading}
               </h2>
             </FadeIn>

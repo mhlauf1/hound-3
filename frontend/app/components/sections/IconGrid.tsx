@@ -50,7 +50,7 @@ export default function IconGrid({block}: IconGridProps) {
           <div className="mb-10 lg:mb-14">
             {eyebrow && <Badge className="mb-3">{eyebrow}</Badge>}
             {heading && (
-              <h2 className="text-[36px] md:text-[48px] lg:text-[56px] leading-[105%] mb-4">
+              <h2 className="text-[36px] font-semibold tracking-tight md:text-[48px] lg:text-[56px] leading-[105%] mb-4">
                 {heading}
               </h2>
             )}

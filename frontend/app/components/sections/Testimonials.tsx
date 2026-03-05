@@ -88,9 +88,8 @@ export default function Testimonials({block}: TestimonialsProps) {
   }
 
   const scrollBy = (direction: 'prev' | 'next') => {
-    const nextPage = direction === 'next'
-      ? Math.min(activePage + 1, totalPages - 1)
-      : Math.max(activePage - 1, 0)
+    const nextPage =
+      direction === 'next' ? Math.min(activePage + 1, totalPages - 1) : Math.max(activePage - 1, 0)
     scrollToPage(nextPage)
   }
 
@@ -112,7 +111,7 @@ export default function Testimonials({block}: TestimonialsProps) {
 
         {heading && (
           <FadeIn delay={0.1}>
-            <h2 className="text-[36px] md:text-[48px] lg:text-[56px] leading-[95%] text-cream text-center mb-12 lg:mb-16">
+            <h2 className="text-[36px] md:text-[48px] lg:text-[56px] leading-[105%] tracking-tight font-semibold text-cream text-center mb-12 lg:mb-16">
               {heading}
             </h2>
           </FadeIn>
@@ -264,11 +263,21 @@ export default function Testimonials({block}: TestimonialsProps) {
                                 <rect x="0" y="0" width="8" height="16" />
                               </clipPath>
                             </defs>
-                            <path d="M8 1l2.2 4.4L15 6.2l-3.5 3.4.8 4.8L8 12.1 3.7 14.4l.8-4.8L1 6.2l4.8-.8L8 1z" fill="none" />
-                            <path d="M8 1l2.2 4.4L15 6.2l-3.5 3.4.8 4.8L8 12.1 3.7 14.4l.8-4.8L1 6.2l4.8-.8L8 1z" fill="#FAF7F2" clipPath="url(#half-star)" />
+                            <path
+                              d="M8 1l2.2 4.4L15 6.2l-3.5 3.4.8 4.8L8 12.1 3.7 14.4l.8-4.8L1 6.2l4.8-.8L8 1z"
+                              fill="none"
+                            />
+                            <path
+                              d="M8 1l2.2 4.4L15 6.2l-3.5 3.4.8 4.8L8 12.1 3.7 14.4l.8-4.8L1 6.2l4.8-.8L8 1z"
+                              fill="#FAF7F2"
+                              clipPath="url(#half-star)"
+                            />
                           </>
                         ) : (
-                          <path d="M8 1l2.2 4.4L15 6.2l-3.5 3.4.8 4.8L8 12.1 3.7 14.4l.8-4.8L1 6.2l4.8-.8L8 1z" fill={isFull ? '#FAF7F2' : 'none'} />
+                          <path
+                            d="M8 1l2.2 4.4L15 6.2l-3.5 3.4.8 4.8L8 12.1 3.7 14.4l.8-4.8L1 6.2l4.8-.8L8 1z"
+                            fill={isFull ? '#FAF7F2' : 'none'}
+                          />
                         )}
                       </svg>
                     )

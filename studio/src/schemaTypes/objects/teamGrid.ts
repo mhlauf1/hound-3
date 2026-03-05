@@ -45,6 +45,12 @@ export const teamGrid = defineType({
               rows: 3,
             }),
             defineField({
+              name: 'certifications',
+              title: 'Certifications',
+              type: 'string',
+              description: 'e.g. "CPDT-KA, Pet First Aid Certified"',
+            }),
+            defineField({
               name: 'image',
               title: 'Photo',
               type: 'image',

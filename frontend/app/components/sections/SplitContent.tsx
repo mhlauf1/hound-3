@@ -1,7 +1,7 @@
 import {PortableText} from '@portabletext/react'
 import type {PortableTextBlock} from 'next-sanity'
 import Image from '@/app/components/SanityImage'
-import ResolvedLink from '@/app/components/ResolvedLink'
+import Button from '@/app/components/ui/Button'
 import {stegaClean} from '@sanity/client/stega'
 import {FadeIn} from '@/app/components/ui/FadeIn'
 
@@ -37,13 +37,13 @@ export default function SplitContent({block}: SplitContentProps) {
 
   return (
     <section className={`${bg}`}>
-      <div className="px-6 md:px-24 py-16 lg:py-28">
+      <div className="px-6 md:px-24 py-20 lg:py-28">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
           {/* Text side */}
           <div className={isImageLeft ? 'lg:order-2' : 'lg:order-1'}>
             {heading && (
               <FadeIn>
-                <h2 className="text-[48px] lg:text-[80px] leading-[100%] max-w-[14ch] mb-6">
+                <h2 className="text-4xl font-semibold md:text-text-5xl lg:text-6xl leading-[105%] tracking-tight max-w-[15ch] mb-6">
                   {heading}
                 </h2>
               </FadeIn>
@@ -62,12 +62,7 @@ export default function SplitContent({block}: SplitContentProps) {
             {link?.label && link?.link && (
               <FadeIn delay={0.2}>
                 <div className="mb-6">
-                  <ResolvedLink
-                    link={link.link}
-                    className="font-sans text-[16px] font-medium underline underline-offset-4 hover:opacity-70 transition-opacity"
-                  >
-                    {link.label}
-                  </ResolvedLink>
+                  <Button link={link.link}>{link.label}</Button>
                 </div>
               </FadeIn>
             )}

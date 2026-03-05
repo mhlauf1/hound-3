@@ -11,6 +11,7 @@ import Badge from '../ui/Badge'
 type GalleryImage = {
   _key: string
   alt?: string
+  caption?: string
   asset?: {_ref: string}
   crop?: any
   hotspot?: any
@@ -62,11 +63,11 @@ export default function GalleryGrid({block}: GalleryGridProps) {
     <section className={bgClasses[bgColor] || 'bg-cream'}>
       <div className="px-6 md:px-24 py-16 lg:py-24">
         <FadeIn>
-          <div className="mb-10 lg:mb-14">
+          <div className="mb-8 lg:mb-10">
             {eyebrow && <Badge className="mb-3">{eyebrow}</Badge>}
             {heading && (
               <h2
-                className={`text-[48px] lg:text-[80px] leading-[100%] ${isDark ? 'text-cream' : 'text-forest'}`}
+                className={`text-4xl md:text-5xl lg:text-6xl leading-[105%] tracking-tight font-semibold ${isDark ? 'text-cream' : 'text-forest'}`}
               >
                 {heading}
               </h2>
@@ -78,31 +79,40 @@ export default function GalleryGrid({block}: GalleryGridProps) {
           <div className={`grid ${gridClass} mb-8 md:mb-12 gap-4`}>
             {validImages.map((image, i) => (
               <FadeIn key={image._key} delay={0.05 * i}>
-                {lightboxEnabled ? (
-                  <button
-                    type="button"
-                    onClick={() => openLightbox(i)}
-                    className="w-full cursor-zoom-in group"
-                  >
+                <div>
+                  {lightboxEnabled ? (
+                    <button
+                      type="button"
+                      onClick={() => openLightbox(i)}
+                      className="w-full cursor-zoom-in group"
+                    >
+                      <Image
+                        id={image.asset!._ref}
+                        alt={image.alt || ''}
+                        width={600}
+                        crop={image.crop}
+                        hotspot={image.hotspot}
+                        className="rounded-lg max-h-[500px] w-full object-cover transition-opacity group-hover:opacity-90"
+                      />
+                    </button>
+                  ) : (
                     <Image
                       id={image.asset!._ref}
                       alt={image.alt || ''}
                       width={600}
                       crop={image.crop}
                       hotspot={image.hotspot}
-                      className="rounded-lg max-h-[500px] w-full object-cover transition-opacity group-hover:opacity-90"
+                      className="rounded-lg aspect-[4/3] w-full object-cover"
                     />
-                  </button>
-                ) : (
-                  <Image
-                    id={image.asset!._ref}
-                    alt={image.alt || ''}
-                    width={600}
-                    crop={image.crop}
-                    hotspot={image.hotspot}
-                    className="rounded-lg aspect-[4/3] w-full object-cover"
-                  />
-                )}
+                  )}
+                  {image.caption && (
+                    <p
+                      className={`mt-2 text-[14px] text-center ${isDark ? 'text-cream/60' : 'text-forest/60'}`}
+                    >
+                      {image.caption}
+                    </p>
+                  )}
+                </div>
               </FadeIn>
             ))}
           </div>

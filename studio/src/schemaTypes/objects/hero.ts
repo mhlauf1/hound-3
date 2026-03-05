@@ -35,6 +35,19 @@ export const hero = defineType({
       type: 'button',
     }),
     defineField({
+      name: 'reviewRating',
+      title: 'Review Star Rating',
+      type: 'number',
+      description: 'Number of filled stars (1–5)',
+      validation: (Rule) => Rule.min(1).max(5),
+    }),
+    defineField({
+      name: 'reviewText',
+      title: 'Review Text',
+      type: 'string',
+      description: 'e.g. "200+ 5 Star Reviews"',
+    }),
+    defineField({
       name: 'trustLine',
       title: 'Trust Line',
       type: 'string',
@@ -42,12 +55,6 @@ export const hero = defineType({
     defineField({
       name: 'heroImage',
       title: 'Hero Image',
-      type: 'image',
-      options: {hotspot: true},
-    }),
-    defineField({
-      name: 'backgroundImage',
-      title: 'Background Image',
       type: 'image',
       options: {hotspot: true},
     }),

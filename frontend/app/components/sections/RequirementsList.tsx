@@ -2,6 +2,7 @@ import Image from '@/app/components/SanityImage'
 import ResolvedLink from '@/app/components/ResolvedLink'
 import {stegaClean} from '@sanity/client/stega'
 import {FadeIn} from '@/app/components/ui/FadeIn'
+import Badge from '../ui/Badge'
 
 type RequirementsListProps = {
   block: {
@@ -37,15 +38,13 @@ export default function RequirementsList({block}: RequirementsListProps) {
           <div className={isImageLeft ? 'lg:order-2' : 'lg:order-1'}>
             {eyebrow && (
               <FadeIn>
-                <p className="text-terracotta text-[13px] font-semibold tracking-[0.15em] uppercase mb-4">
-                  {eyebrow}
-                </p>
+                <Badge className="mb-3">{eyebrow}</Badge>
               </FadeIn>
             )}
 
             {heading && (
               <FadeIn delay={0.05}>
-                <h2 className="text-[32px] lg:text-[42px] leading-[110%] font-medium mb-4">
+                <h2 className="md:text-5xl text-4xl lg:text-text-6xl leading-[110%] font-semibold tracking-tight mb-4">
                   {heading}
                 </h2>
               </FadeIn>
@@ -53,7 +52,7 @@ export default function RequirementsList({block}: RequirementsListProps) {
 
             {description && (
               <FadeIn delay={0.1}>
-                <p className="text-[16px] lg:text-[18px] font-light leading-[160%] opacity-80 mb-8">
+                <p className="text-[16px] lg:text-[18px] md:w-[90%] font-light leading-[160%] opacity-80 mb-8">
                   {description}
                 </p>
               </FadeIn>
@@ -81,9 +80,7 @@ export default function RequirementsList({block}: RequirementsListProps) {
                           />
                         </svg>
                       </span>
-                      <span className="text-[16px] lg:text-[17px] leading-[150%]">
-                        {item.text}
-                      </span>
+                      <span className="text-[16px] lg:text-[17px] leading-[150%]">{item.text}</span>
                     </li>
                   ))}
                 </ul>

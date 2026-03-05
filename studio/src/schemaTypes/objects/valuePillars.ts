@@ -1,11 +1,11 @@
 import {defineField, defineType, defineArrayMember} from 'sanity'
-import {NumberIcon} from '@sanity/icons'
+import {TrendUpwardIcon} from '@sanity/icons'
 
-export const processSteps = defineType({
-  name: 'processSteps',
-  title: 'Process Steps',
+export const valuePillars = defineType({
+  name: 'valuePillars',
+  title: 'Value Pillars',
   type: 'object',
-  icon: NumberIcon,
+  icon: TrendUpwardIcon,
   fields: [
     defineField({
       name: 'eyebrow',
@@ -16,7 +16,6 @@ export const processSteps = defineType({
       name: 'heading',
       title: 'Heading',
       type: 'string',
-      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'description',
@@ -25,14 +24,20 @@ export const processSteps = defineType({
       rows: 3,
     }),
     defineField({
-      name: 'steps',
-      title: 'Steps',
+      name: 'pillars',
+      title: 'Pillars',
       type: 'array',
       of: [
         defineArrayMember({
-          name: 'step',
           type: 'object',
           fields: [
+            defineField({
+              name: 'metric',
+              title: 'Metric',
+              type: 'string',
+              description: 'Large stat or number (e.g. "1:10", "24/7", "7")',
+              validation: (Rule) => Rule.required(),
+            }),
             defineField({
               name: 'title',
               title: 'Title',
@@ -40,35 +45,31 @@ export const processSteps = defineType({
               validation: (Rule) => Rule.required(),
             }),
             defineField({
-              name: 'badge',
-              title: 'Badge Text',
-              type: 'string',
-              description: 'Optional label shown below the title (e.g. "6:30 AM - 12:00 PM", "All Day")',
-            }),
-            defineField({
               name: 'description',
               title: 'Description',
               type: 'text',
               rows: 3,
             }),
-            defineField({
-              name: 'icon',
-              title: 'Icon',
-              type: 'string',
-              description: 'Iconify icon name (e.g. "mdi:calendar-check", "mdi:dog")',
-            }),
           ],
           preview: {
-            select: {title: 'title'},
+            select: {title: 'title', subtitle: 'metric'},
           },
         }),
       ],
-      validation: (Rule) => Rule.min(2).max(6),
     }),
     defineField({
-      name: 'cta',
-      title: 'CTA Button',
-      type: 'button',
+      name: 'columns',
+      title: 'Columns',
+      type: 'number',
+      options: {
+        list: [
+          {title: '2 Columns', value: 2},
+          {title: '3 Columns', value: 3},
+          {title: '4 Columns', value: 4},
+        ],
+        layout: 'radio',
+      },
+      initialValue: 4,
     }),
     defineField({
       name: 'backgroundColor',
@@ -82,13 +83,16 @@ export const processSteps = defineType({
         ],
         layout: 'radio',
       },
-      initialValue: 'cream',
+      initialValue: 'sand',
     }),
   ],
   preview: {
     select: {title: 'heading'},
     prepare({title}) {
-      return {title: title || 'Process Steps', subtitle: 'Process Steps Section'}
+      return {
+        title: title || 'Value Pillars',
+        subtitle: 'Value Pillars',
+      }
     },
   },
 })

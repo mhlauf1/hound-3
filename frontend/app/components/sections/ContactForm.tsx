@@ -32,7 +32,10 @@ export default function ContactForm({block}: ContactFormProps) {
     address,
     phone,
     email,
-  } = block
+    nextSteps,
+  } = block as typeof block & {
+    nextSteps?: Array<{_key?: string; title?: string; description?: string}>
+  }
 
   const searchParams = useSearchParams()
   const [formData, setFormData] = useState<Record<string, string>>({})
@@ -89,7 +92,7 @@ export default function ContactForm({block}: ContactFormProps) {
               </FadeIn>
             )}
             {heading && (
-              <h2 className="text-[36px] md:text-[48px] lg:text-[56px] leading-[105%] text-forest mb-4">
+              <h2 className="text-[36px] md:text-[48px] lg:text-[56px] font-semibold tracking-tight leading-[105%] text-forest mb-4">
                 {heading}
               </h2>
             )}
@@ -189,6 +192,32 @@ export default function ContactForm({block}: ContactFormProps) {
             )}
           </FadeIn>
 
+          {/* Next steps */}
+          {nextSteps && nextSteps.length > 0 && !hasContactInfo && (
+            <FadeIn delay={0.1}>
+              <div className="space-y-4">
+                <h3 className="font-heading text-[24px] font-semibold text-forest mb-2">
+                  What happens next?
+                </h3>
+                {nextSteps.map((step, i) => (
+                  <div key={step._key || i} className="flex gap-4">
+                    <div className="flex-shrink-0 w-8 h-8 rounded-full bg-terracotta/10 text-terracotta font-semibold text-[14px] flex items-center justify-center">
+                      {i + 1}
+                    </div>
+                    <div>
+                      <p className="font-sans text-[16px] font-medium text-forest">{step.title}</p>
+                      {step.description && (
+                        <p className="font-sans text-[14px] text-text-muted mt-0.5">
+                          {step.description}
+                        </p>
+                      )}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </FadeIn>
+          )}
+
           {/* Contact info + map */}
           {hasContactInfo && (
             <FadeIn delay={0.1}>
@@ -259,6 +288,31 @@ export default function ContactForm({block}: ContactFormProps) {
                     </div>
                   )}
                 </div>
+
+                {nextSteps && nextSteps.length > 0 && (
+                  <div className="space-y-4 pt-2">
+                    <h3 className="font-heading text-[20px] font-semibold text-forest">
+                      What happens next?
+                    </h3>
+                    {nextSteps.map((step, i) => (
+                      <div key={step._key || i} className="flex gap-4">
+                        <div className="flex-shrink-0 w-8 h-8 rounded-full bg-terracotta/10 text-terracotta font-semibold text-[14px] flex items-center justify-center">
+                          {i + 1}
+                        </div>
+                        <div>
+                          <p className="font-sans text-[16px] font-medium text-forest">
+                            {step.title}
+                          </p>
+                          {step.description && (
+                            <p className="font-sans text-[14px] text-text-muted mt-0.5">
+                              {step.description}
+                            </p>
+                          )}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
               </div>
             </FadeIn>
           )}

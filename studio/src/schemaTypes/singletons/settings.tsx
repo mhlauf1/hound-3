@@ -102,6 +102,7 @@ export const settings = defineType({
       type: 'array',
       of: [
         defineArrayMember({
+          name: 'navItem',
           type: 'object',
           fields: [
             defineField({name: 'label', title: 'Label', type: 'string', validation: (Rule) => Rule.required()}),
@@ -137,6 +138,12 @@ export const settings = defineType({
       name: 'ctaButton',
       title: 'Header CTA Button',
       type: 'button',
+    }),
+    defineField({
+      name: 'footerSticker',
+      title: 'Footer Sticker',
+      type: 'image',
+      description: 'Small dog illustration shown at the bottom of the brand column in the footer',
     }),
     defineField({
       name: 'footerTagline',
@@ -213,6 +220,22 @@ export const settings = defineType({
           ],
           preview: {select: {title: 'label'}},
         }),
+      ],
+    }),
+    defineField({
+      name: 'yearEstablished',
+      title: 'Year Established',
+      type: 'number',
+      description: 'e.g. 2012 — used for trust signals',
+    }),
+    defineField({
+      name: 'socialLinks',
+      title: 'Social Links',
+      type: 'object',
+      fields: [
+        defineField({name: 'facebook', title: 'Facebook URL', type: 'url'}),
+        defineField({name: 'instagram', title: 'Instagram URL', type: 'url'}),
+        defineField({name: 'google', title: 'Google Business URL', type: 'url'}),
       ],
     }),
     defineField({

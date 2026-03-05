@@ -10,6 +10,7 @@ type ServiceTab = {
   _id: string
   title?: string
   slug?: {current?: string}
+  sticker?: {asset?: {_ref: string}}
   shortDescription?: string
   tabImage?: {asset?: {_ref: string}; crop?: any}
   tabCta?: {buttonText?: string; link?: any}
@@ -50,7 +51,7 @@ export default function ServiceTabs({block}: ServiceTabsProps) {
           <div className="text-center mb-10">
             {eyebrow && <Badge className="mb-4">{eyebrow}</Badge>}
             {heading && (
-              <h2 className="text-[36px] md:max-w-[20ch] md:text-[48px] lg:text-[56px] leading-[105%]">
+              <h2 className="text-[36px] tracking-tight font-semibold md:max-w-[20ch] md:text-[48px] lg:text-[56px] leading-[105%]">
                 {heading}
               </h2>
             )}
@@ -64,7 +65,7 @@ export default function ServiceTabs({block}: ServiceTabsProps) {
               <button
                 key={tab._id}
                 onClick={() => setActiveTab(i)}
-                className={`relative flex-1 min-w-[120px] p-2 md:p-4 font-serif text-start text-[16px] md:text-2xl tracking-tight font-medium lg:text-3xl transition-colors ${
+                className={`relative flex-1 min-w-[120px] p-2 md:p-4 font-heading text-start text-[16px] md:text-2xl tracking-tight font-light lg:text-3xl transition-colors ${
                   i === activeTab ? 'text-forest' : 'text-text-muted hover:text-forest'
                 }`}
               >
@@ -84,16 +85,24 @@ export default function ServiceTabs({block}: ServiceTabsProps) {
         {activeService && (
           <div
             key={activeTab}
-            className="grid grid-cols-1 bg-forest/10 rounded-lg  lg:grid-cols-2 gap-8 lg:gap-12 items-center animate-fade-in"
+            className="grid grid-cols-1 bg-forest/10 rounded-lg relative lg:grid-cols-2 gap-8 lg:gap-12 items-center animate-fade-in"
           >
-            <div className="pb-4 pt-16 px-8 md:pl-24">
+            <div className="pb-4 pt-12 px-8 md:pl-24">
+              {activeService.sticker?.asset?._ref && (
+                <Image
+                  id={activeService.sticker.asset._ref}
+                  alt=""
+                  width={80}
+                  className="w-[42px] md:w-[54px] mb-8  h-auto"
+                />
+              )}
               {activeService.title && (
-                <h3 className="text-[28px] md:text-[36px] font-medium lg:text-[48px] leading-[95%] mb-4">
+                <h3 className="text-[28px] md:text-[36px] font-semibold lg:text-[48px] leading-[95%] mb-4">
                   {activeService.title}
                 </h3>
               )}
               {activeService.shortDescription && (
-                <p className="font-sans text-[16px] lg:text-[18px] text-text-muted max-w-[46ch] leading-[150%] mb-6">
+                <p className="font-sans text-[16px] lg:text-[18px] text-text-muted max-w-[90%] leading-[150%] mb-6">
                   {activeService.shortDescription}
                 </p>
               )}

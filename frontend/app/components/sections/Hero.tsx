@@ -2,9 +2,6 @@ import Badge from '@/app/components/ui/Badge'
 import Button from '@/app/components/ui/Button'
 import Image from '@/app/components/SanityImage'
 import {FadeIn} from '@/app/components/ui/FadeIn'
-// Hero background variant — swap import to try different styles:
-// GrainGlow | DotGrid | MeshGradient | TopoLines
-// import {TopoLines as HeroBackground} from './hero-backgrounds'
 
 type HeroProps = {
   block: {
@@ -13,9 +10,10 @@ type HeroProps = {
     subtext?: string
     primaryCta?: {buttonText?: string; link?: any}
     secondaryCta?: {buttonText?: string; link?: any}
+    reviewRating?: number
+    reviewText?: string
     trustLine?: string
     heroImage?: {asset?: {_ref: string}; crop?: any; hotspot?: any}
-    backgroundImage?: {asset?: {_ref: string}}
   }
   index: number
   pageId: string
@@ -23,12 +21,20 @@ type HeroProps = {
 }
 
 export default function Hero({block}: HeroProps) {
-  const {eyebrow, heading, subtext, primaryCta, secondaryCta, trustLine, heroImage} = block
+  const {
+    eyebrow,
+    heading,
+    subtext,
+    primaryCta,
+    secondaryCta,
+    reviewRating,
+    reviewText,
+    trustLine,
+    heroImage,
+  } = block
 
   return (
-    <section className="relative pt-18 bg-cream overflow-hidden">
-      {/* <HeroBackground /> */}
-
+    <section className="relative pb-8 md:pb-0 pt-18 bg-cream overflow-x-clip">
       {/* Left dog illustration */}
       <img
         src="/illustrations/hero-left-dog.png"
@@ -45,17 +51,17 @@ export default function Hero({block}: HeroProps) {
         className="absolute right-1/8 bottom-1/4 w-15 lg:w-[80px] pointer-events-none hidden lg:block"
       />
 
-      <div className="container relative z-10 pt-20 pb-8 lg:pt-[12vh] lg:pb-12">
+      <div className="container relative z-10 pt-20 pb-4 lg:pt-[12vh] lg:pb-12">
         <div className="flex flex-col items-center text-center max-w-4xl mx-auto">
           {eyebrow && (
             <FadeIn>
-              <Badge className="mb-3 md:mb-6">{eyebrow}</Badge>
+              <Badge className="mb-5 md:mb-6">{eyebrow}</Badge>
             </FadeIn>
           )}
 
           {heading && (
             <FadeIn delay={0.1}>
-              <h1 className="text-[48px] md:text-[56px] lg:text-[84px] leading-[110%] mb-6">
+              <h1 className="text-[48px] md:text-[56px] lg:text-[84px] leading-[104%] tracking-tight font-semibold mb-6">
                 {heading}
               </h1>
             </FadeIn>
@@ -63,14 +69,14 @@ export default function Hero({block}: HeroProps) {
 
           {subtext && (
             <FadeIn delay={0.2}>
-              <p className="font-sans  md:text-base lg:text-lg font-light text-text-muted leading-[150%] max-w-xl mb-8">
+              <p className="font-sans md:text-base lg:text-lg text-text-muted leading-[150%] max-w-xl mb-8">
                 {subtext}
               </p>
             </FadeIn>
           )}
 
           <FadeIn className="w-full md:w-auto" delay={0.3}>
-            <div className="flex flex-col w-full md:flex-row items-center gap-2 md:gap-3 mb-4">
+            <div className="flex flex-col w-full md:flex-row items-center gap-2 md:gap-3 mb-3 md:mb-4">
               {primaryCta?.buttonText && (
                 <Button variant="primary" link={primaryCta.link}>
                   {primaryCta.buttonText}
@@ -84,15 +90,32 @@ export default function Hero({block}: HeroProps) {
             </div>
           </FadeIn>
 
-          {trustLine && (
+          {reviewRating && (
             <FadeIn delay={0.35}>
-              <p className="font-sans text-[14px] text-text-muted">{trustLine}</p>
+              <div className="flex flex-col mt-3 items-center gap-1">
+                <div className="flex items-center gap-2">
+                  <div className="flex gap-0.5">
+                    {Array.from({length: 5}).map((_, i) => (
+                      <svg
+                        key={i}
+                        className={`w-4 h-4 ${i < reviewRating ? 'text-terracotta' : 'text-terracotta/25'}`}
+                        fill="currentColor"
+                        viewBox="0 0 20 20"
+                      >
+                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                      </svg>
+                    ))}
+                  </div>
+                  {reviewText && <p className="font-sans text-sm text-text-muted">{reviewText}</p>}
+                </div>
+                {trustLine && <p className="font-sans text-xs text-text-muted/70">{trustLine}</p>}
+              </div>
             </FadeIn>
           )}
         </div>
 
         {heroImage?.asset?._ref && (
-          <FadeIn delay={0.4}>
+          <FadeIn delay={0.5}>
             <div className="mt-10 lg:mt-16 max-w-4xl mx-auto">
               <Image
                 id={heroImage.asset._ref}

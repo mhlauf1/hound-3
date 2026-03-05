@@ -106,9 +106,7 @@ export default function GalleryCarousel({block}: GalleryCarouselProps) {
 
   const scrollBy = (direction: 'prev' | 'next') => {
     const nextPage =
-      direction === 'next'
-        ? Math.min(activePage + 1, totalPages - 1)
-        : Math.max(activePage - 1, 0)
+      direction === 'next' ? Math.min(activePage + 1, totalPages - 1) : Math.max(activePage - 1, 0)
     scrollToPage(nextPage)
   }
 
@@ -121,7 +119,7 @@ export default function GalleryCarousel({block}: GalleryCarouselProps) {
               {eyebrow && <Badge className="mb-3">{eyebrow}</Badge>}
               {heading && (
                 <h2
-                  className={`text-[36px] md:text-[48px] lg:text-[56px] leading-[105%] ${isDark ? 'text-cream' : 'text-forest'}`}
+                  className={`text-[36px] md:text-[48px] lg:text-[56px] font-semibold tracking-tight leading-[105%] ${isDark ? 'text-cream' : 'text-forest'}`}
                 >
                   {heading}
                 </h2>
@@ -144,8 +142,20 @@ export default function GalleryCarousel({block}: GalleryCarouselProps) {
                   }`}
                   aria-label="Previous images"
                 >
-                  <svg width="18" height="18" viewBox="0 0 18 18" fill="none" className={isDark ? 'text-cream' : 'text-forest'}>
-                    <path d="M11 4L6 9L11 14" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                  <svg
+                    width="18"
+                    height="18"
+                    viewBox="0 0 18 18"
+                    fill="none"
+                    className={isDark ? 'text-cream' : 'text-forest'}
+                  >
+                    <path
+                      d="M11 4L6 9L11 14"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
                   </svg>
                 </button>
 
@@ -155,7 +165,11 @@ export default function GalleryCarousel({block}: GalleryCarouselProps) {
                   className="flex gap-5 lg:gap-6 overflow-x-auto snap-x snap-mandatory pb-2 scrollbar-hide scroll-smooth px-1"
                 >
                   {validImages.map((image, i) => (
-                    <div key={image._key} data-card className="flex-shrink-0 w-[300px] sm:w-[360px] lg:w-[400px] snap-start">
+                    <div
+                      key={image._key}
+                      data-card
+                      className="flex-shrink-0 w-[300px] sm:w-[360px] lg:w-[400px] snap-start"
+                    >
                       {lightboxEnabled ? (
                         <button
                           type="button"
@@ -181,6 +195,13 @@ export default function GalleryCarousel({block}: GalleryCarouselProps) {
                           className="rounded-lg aspect-[4/3] w-full object-cover"
                         />
                       )}
+                      {image.caption && (
+                        <p
+                          className={`mt-2 text-[13px] text-center ${isDark ? 'text-cream/60' : 'text-forest/60'}`}
+                        >
+                          {image.caption}
+                        </p>
+                      )}
                     </div>
                   ))}
                 </div>
@@ -195,8 +216,20 @@ export default function GalleryCarousel({block}: GalleryCarouselProps) {
                   }`}
                   aria-label="Next images"
                 >
-                  <svg width="18" height="18" viewBox="0 0 18 18" fill="none" className={isDark ? 'text-cream' : 'text-forest'}>
-                    <path d="M7 4L12 9L7 14" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                  <svg
+                    width="18"
+                    height="18"
+                    viewBox="0 0 18 18"
+                    fill="none"
+                    className={isDark ? 'text-cream' : 'text-forest'}
+                  >
+                    <path
+                      d="M7 4L12 9L7 14"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
                   </svg>
                 </button>
               </div>

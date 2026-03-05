@@ -41,10 +41,10 @@ export default function ProcessSteps({block}: ProcessStepsProps) {
     <section className={bg}>
       <div className="px-6 md:px-24 py-16 lg:py-24">
         <FadeIn>
-          <div className="text-center mb-10 lg:mb-14 max-w-2xl mx-auto">
+          <div className="text-center flex flex-col items-center mb-10 lg:mb-14 max-w-2xl mx-auto">
             {eyebrow && <Badge className="mb-3">{eyebrow}</Badge>}
             {heading && (
-              <h2 className="text-[36px] md:text-[48px] lg:text-[56px] leading-[105%] mb-4">
+              <h2 className="text-[36px] md:text-[48px] lg:text-[56px] max-w-[16ch] font-semibold tracking-tight leading-[105%] mb-4">
                 {heading}
               </h2>
             )}
@@ -59,14 +59,14 @@ export default function ProcessSteps({block}: ProcessStepsProps) {
         </FadeIn>
 
         {steps && steps.length > 0 && (
-          <div className="relative mb-10 lg:mb-14 max-w-7xl mx-auto">
+          <div className="relative mb-10 lg:mb-14  mx-auto">
             {/* Continuous connecting line behind circles */}
             <div className="hidden lg:block absolute top-6 left-0 right-0 h-[2px] bg-terracotta/30" />
             <div className="relative flex flex-col lg:flex-row items-start lg:items-start justify-center gap-4 lg:gap-0">
               {steps.map((step, i) => (
                 <div key={step._key} className="flex flex-col items-center flex-1">
                   <FadeIn delay={0.1 * i}>
-                    <div className="flex flex-col items-center text-center max-w-[90%]">
+                    <div className="flex flex-col items-center text-center md:max-w-[90%]">
                       {/* Circle with number or icon */}
                       <div className="relative z-10 w-12 h-12 rounded-full bg-terracotta text-white flex items-center justify-center mb-4 shrink-0">
                         {step.icon ? (
@@ -88,7 +88,7 @@ export default function ProcessSteps({block}: ProcessStepsProps) {
                       {!step.badge && step.title && <div className="mb-1" />}
                       {step.description && (
                         <p
-                          className={`font-sans text-[14px] font-light leading-[150%] ${isDark ? 'text-text-muted-dark' : 'text-text-muted'}`}
+                          className={`font-sans text-[14px] font-light leading-[150%] w-[90%] ${isDark ? 'text-text-muted-dark' : 'text-text-muted'}`}
                         >
                           {step.description}
                         </p>

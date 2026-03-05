@@ -15,6 +15,7 @@ type WebcamGridProps = {
   block: {
     heading?: string
     subtext?: string
+    trustMessage?: string
     showGroupHeaders?: boolean
     webcams?: Webcam[]
   }
@@ -24,7 +25,7 @@ type WebcamGridProps = {
 }
 
 export default function WebcamGrid({block}: WebcamGridProps) {
-  const {heading, subtext, showGroupHeaders = true, webcams = []} = block
+  const {heading, subtext, trustMessage, showGroupHeaders = true, webcams = []} = block
 
   const indoor = webcams.filter((w) => w.group === 'indoor')
   const outdoor = webcams.filter((w) => w.group === 'outdoor')
@@ -36,7 +37,7 @@ export default function WebcamGrid({block}: WebcamGridProps) {
         <FadeIn>
           <div className="text-center mb-10 lg:mb-14">
             {heading && (
-              <h2 className="text-forest text-[36px] md:text-[48px] lg:text-[56px] leading-[95%] mb-4">
+              <h2 className="text-forest text-[36px] md:text-[48px] lg:text-[56px] font-semibold tracking-tight leading-[95%] mb-4">
                 {heading}
               </h2>
             )}
@@ -47,6 +48,17 @@ export default function WebcamGrid({block}: WebcamGridProps) {
             )}
           </div>
         </FadeIn>
+
+        {/* Trust message banner */}
+        {trustMessage && (
+          <FadeIn delay={0.1}>
+            <div className="mb-10 lg:mb-14 mx-auto max-w-3xl text-center bg-forest/5 border border-forest/10 rounded-lg px-6 py-4">
+              <p className="text-[15px] md:text-[16px] text-forest/80 leading-relaxed">
+                {trustMessage}
+              </p>
+            </div>
+          </FadeIn>
+        )}
 
         {/* Indoor cameras */}
         {indoor.length > 0 && (

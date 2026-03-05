@@ -38,7 +38,7 @@ export default async function ServicePage(props: Props) {
   if (!service?._id) {
     return (
       <div className="container py-20 text-center">
-        <h1 className="font-serif text-[36px] mb-4">Service not found</h1>
+        <h1 className="font-heading text-[36px] mb-4">Service not found</h1>
         <p className="font-sans text-text-muted">This service doesn&apos;t exist yet.</p>
       </div>
     )

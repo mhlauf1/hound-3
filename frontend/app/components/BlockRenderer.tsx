@@ -39,6 +39,7 @@ import WebcamGrid from '@/app/components/sections/WebcamGrid'
 import GalleryCarousel from '@/app/components/sections/GalleryCarousel'
 import GalleryShowcase from '@/app/components/sections/GalleryShowcase'
 import GalleryPage from '@/app/components/sections/GalleryPage'
+import ValuePillars from '@/app/components/sections/ValuePillars'
 import {dataAttr} from '@/sanity/lib/utils'
 import {PageBuilderSection} from '@/sanity/lib/types'
 
@@ -101,6 +102,7 @@ const Blocks = {
   galleryCarousel: GalleryCarousel,
   galleryShowcase: GalleryShowcase,
   galleryPage: GalleryPage,
+  valuePillars: ValuePillars,
 } as BlocksType
 
 export default function BlockRenderer({block, index, pageId, pageType}: BlockProps) {

@@ -78,10 +78,80 @@ export type ItemsObjectImage = {
   _type: 'image'
 }
 
+export type ValuePillars = {
+  _type: 'valuePillars'
+  eyebrow?: string
+  heading?: string
+  description?: string
+  pillars?: Array<{
+    metric: string
+    title: string
+    description?: string
+    _key: string
+  }>
+  columns?: 2 | 3 | 4
+  backgroundColor?: 'cream' | 'sand' | 'forest'
+}
+
+export type GalleryPage = {
+  _type: 'galleryPage'
+  heading?: string
+  subtext?: string
+  images?: Array<{
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    alt?: string
+    caption?: string
+    _type: 'image'
+    _key: string
+  }>
+  layout?: 'grid' | 'single'
+  backgroundColor?: 'cream' | 'sand'
+}
+
+export type GalleryShowcase = {
+  _type: 'galleryShowcase'
+  eyebrow?: string
+  heading?: string
+  subheading?: string
+  images?: Array<{
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    alt?: string
+    caption?: string
+    _type: 'image'
+    _key: string
+  }>
+  backgroundColor?: 'cream' | 'sand'
+}
+
+export type GalleryCarousel = {
+  _type: 'galleryCarousel'
+  eyebrow?: string
+  heading?: string
+  images?: Array<{
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    alt?: string
+    caption?: string
+    _type: 'image'
+    _key: string
+  }>
+  enableLightbox?: boolean
+  backgroundColor?: 'cream' | 'sand' | 'forest'
+}
+
 export type WebcamGrid = {
   _type: 'webcamGrid'
   heading?: string
   subtext?: string
+  trustMessage?: string
   showGroupHeaders?: boolean
 }
 
@@ -92,6 +162,7 @@ export type RequirementsList = {
   description?: string
   items?: Array<{
     text?: string
+    _type: 'item'
     _key: string
   }>
   link?: RequirementsListLink
@@ -299,6 +370,7 @@ export type ProcessSteps = {
     badge?: string
     description?: string
     icon?: string
+    _type: 'step'
     _key: string
   }>
   cta?: Button
@@ -339,6 +411,7 @@ export type ServiceCards = {
 export type HeroMinimal = {
   _type: 'heroMinimal'
   eyebrow?: string
+  rating?: string
   heading: string
   headingAccent?: string
   subtext?: string
@@ -351,7 +424,7 @@ export type HeroBanner = {
   heading: string
   subtext?: string
   primaryCta?: Button
-  backgroundImage: {
+  backgroundImage?: {
     asset?: SanityImageAssetReference
     media?: unknown
     hotspot?: SanityImageHotspot
@@ -398,6 +471,19 @@ export type ContactForm = {
   successMessage?: string
   showMap?: boolean
   mapEmbedUrl?: string
+  nextSteps?: Array<{
+    title: string
+    description?: string
+    _type: 'nextStep'
+    _key: string
+  }>
+  image?: {
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    _type: 'image'
+  }
   address?: string
   phone?: string
   email?: string
@@ -413,10 +499,13 @@ export type GalleryGrid = {
     hotspot?: SanityImageHotspot
     crop?: SanityImageCrop
     alt?: string
+    caption?: string
     _type: 'image'
     _key: string
   }>
   columns?: 2 | 3 | 4
+  enableLightbox?: boolean
+  backgroundColor?: 'cream' | 'sand' | 'forest'
 }
 
 export type TeamGrid = {
@@ -427,6 +516,7 @@ export type TeamGrid = {
     name: string
     role?: string
     bio?: string
+    certifications?: string
     image?: TeamMemberImage
     _type: 'teamMember'
     _key: string
@@ -591,6 +681,7 @@ export type ServiceTabs = {
 export type FeatureCards = {
   _type: 'featureCards'
   heading: string
+  subheading?: string
   stickerLeft?: {
     asset?: SanityImageAssetReference
     media?: unknown
@@ -636,15 +727,10 @@ export type Hero = {
   subtext?: string
   primaryCta?: Button
   secondaryCta?: Button
+  reviewRating?: number
+  reviewText?: string
   trustLine?: string
   heroImage?: {
-    asset?: SanityImageAssetReference
-    media?: unknown
-    hotspot?: SanityImageHotspot
-    crop?: SanityImageCrop
-    _type: 'image'
-  }
-  backgroundImage?: {
     asset?: SanityImageAssetReference
     media?: unknown
     hotspot?: SanityImageHotspot
@@ -783,6 +869,13 @@ export type Service = {
   _rev: string
   title: string
   slug?: Slug
+  sticker?: {
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    _type: 'image'
+  }
   shortDescription?: string
   tabImage?: {
     asset?: SanityImageAssetReference
@@ -902,6 +995,15 @@ export type Service = {
     | ({
         _key: string
       } & WebcamGrid)
+    | ({
+        _key: string
+      } & GalleryCarousel)
+    | ({
+        _key: string
+      } & GalleryShowcase)
+    | ({
+        _key: string
+      } & ValuePillars)
   >
 }
 
@@ -970,9 +1072,17 @@ export type Settings = {
       link?: Link
       _key: string
     }>
+    _type: 'navItem'
     _key: string
   }>
   ctaButton?: Button
+  footerSticker?: {
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    _type: 'image'
+  }
   footerTagline?: string
   footerColumns?: Array<{
     title?: string
@@ -998,6 +1108,12 @@ export type Settings = {
     link?: Link
     _key: string
   }>
+  yearEstablished?: number
+  socialLinks?: {
+    facebook?: string
+    instagram?: string
+    google?: string
+  }
   ogImage?: {
     asset?: SanityImageAssetReference
     media?: unknown
@@ -1128,6 +1244,18 @@ export type Page = {
     | ({
         _key: string
       } & WebcamGrid)
+    | ({
+        _key: string
+      } & GalleryCarousel)
+    | ({
+        _key: string
+      } & GalleryShowcase)
+    | ({
+        _key: string
+      } & GalleryPage)
+    | ({
+        _key: string
+      } & ValuePillars)
   >
 }
 
@@ -1374,6 +1502,10 @@ export type AllSanitySchemaTypes =
   | ColumnsObjectImage
   | LogosObjectImage
   | ItemsObjectImage
+  | ValuePillars
+  | GalleryPage
+  | GalleryShowcase
+  | GalleryCarousel
   | WebcamGrid
   | RequirementsList
   | WhatsIncluded

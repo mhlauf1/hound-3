@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from '@/app/components/SanityImage'
 
 type FooterLink = {
   _key: string
@@ -25,6 +26,9 @@ type FooterProps = {
   footerText?: string
   footerTextLink?: {label?: string; href?: string}
   bottomLinks?: FooterBottomLink[]
+  logo?: {asset?: {_ref: string}}
+  socialLinks?: {facebook?: string; instagram?: string; google?: string}
+  footerSticker?: {asset?: {_ref: string}}
 }
 
 export default function Footer({
@@ -34,6 +38,9 @@ export default function Footer({
   footerText,
   footerTextLink,
   bottomLinks,
+  logo,
+  socialLinks,
+  footerSticker,
 }: FooterProps) {
   return (
     <footer className="bg-cream relative">
@@ -43,17 +50,81 @@ export default function Footer({
       <div className="px-6 md:px-20 py-12 lg:py-20">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8">
           {/* Brand column */}
-          <div>
-            <div className="mb-4">
-              <span className="font-serif text-2xl font-semibold tracking-tight">Hound Around</span>
-              <div className="font-sans text-[11px] font-medium uppercase tracking-[0.2em]">
-                Resort
+          <div className="flex flex-col justify-between">
+            <div>
+              <div className="mb-4">
+                {logo?.asset?._ref ? (
+                  <Image
+                    id={logo.asset._ref}
+                    alt="Hound Around Resort"
+                    width={160}
+                    className="w-[140px] h-auto"
+                  />
+                ) : (
+                  <>
+                    <span className="font-heading text-2xl tracking-tight">Hound Around</span>
+                    <div className="font-sans text-[11px] font-medium uppercase tracking-[0.2em]">
+                      Resort
+                    </div>
+                  </>
+                )}
               </div>
+              {tagline && (
+                <p className="font-sans text-[15px] md:max-w-[34ch] text-text-muted leading-relaxed">
+                  {tagline}
+                </p>
+              )}
+              {(socialLinks?.facebook || socialLinks?.instagram || socialLinks?.google) && (
+                <div className="flex gap-4 mt-4">
+                  {socialLinks.facebook && (
+                    <a
+                      href={socialLinks.facebook}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="Facebook"
+                      className="text-forest/50 hover:text-forest transition-colors"
+                    >
+                      <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+                      </svg>
+                    </a>
+                  )}
+                  {socialLinks.instagram && (
+                    <a
+                      href={socialLinks.instagram}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="Instagram"
+                      className="text-forest/50 hover:text-forest transition-colors"
+                    >
+                      <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
+                      </svg>
+                    </a>
+                  )}
+                  {socialLinks.google && (
+                    <a
+                      href={socialLinks.google}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="Google"
+                      className="text-forest/50 hover:text-forest transition-colors"
+                    >
+                      <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12.48 10.92v3.28h7.84c-.24 1.84-.853 3.187-1.787 4.133-1.147 1.147-2.933 2.4-6.053 2.4-4.827 0-8.6-3.893-8.6-8.72s3.773-8.72 8.6-8.72c2.6 0 4.507 1.027 5.907 2.347l2.307-2.307C18.747 1.44 16.133 0 12.48 0 5.867 0 .307 5.387.307 12s5.56 12 12.173 12c3.573 0 6.267-1.173 8.373-3.36 2.16-2.16 2.84-5.213 2.84-7.667 0-.76-.053-1.467-.173-2.053H12.48z" />
+                      </svg>
+                    </a>
+                  )}
+                </div>
+              )}
             </div>
-            {tagline && (
-              <p className="font-sans text-[15px] md:max-w-[34ch] text-text-muted leading-relaxed">
-                {tagline}
-              </p>
+            {footerSticker?.asset?._ref && (
+              <Image
+                id={footerSticker.asset._ref}
+                alt=""
+                width={80}
+                className="w-[56px] md:w-[72px] h-auto mt-6 hidden lg:block"
+              />
             )}
           </div>
 
@@ -140,7 +211,10 @@ export default function Footer({
 function resolveFooterLink(link: any): string | null {
   if (!link) return null
   if (link.linkType === 'href' && link.href) return link.href
-  if (link.linkType === 'page' && link.page) return `/${link.page}`
+  if (link.linkType === 'page' && link.page) {
+    if (link.pageType === 'service') return `/services/${link.page}`
+    return `/${link.page}`
+  }
   if (link.href) return link.href
   return null
 }

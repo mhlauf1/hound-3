@@ -2,13 +2,20 @@ import './globals.css'
 
 import {SpeedInsights} from '@vercel/speed-insights/next'
 import type {Metadata} from 'next'
-import {Poppins} from 'next/font/google'
+import {Bricolage_Grotesque, Poppins} from 'next/font/google'
 
 const poppins = Poppins({
   variable: '--font-poppins',
   subsets: ['latin'],
   display: 'swap',
   weight: ['300', '400', '500', '600', '700'],
+})
+
+const bricolage = Bricolage_Grotesque({
+  variable: '--font-heading',
+  subsets: ['latin'],
+  display: 'swap',
+  weight: ['400', '500', '600', '700'],
 })
 import {draftMode} from 'next/headers'
 import {toPlainText} from 'next-sanity'
@@ -76,7 +83,7 @@ export default async function RootLayout({children}: {children: React.ReactNode}
   })
 
   return (
-    <html lang="en" className={`${poppins.variable} bg-cream text-forest`}>
+    <html lang="en" className={`${poppins.variable} ${bricolage.variable} bg-cream text-forest`}>
       <body>
         <Toaster />
         {isDraftMode && (
@@ -86,7 +93,7 @@ export default async function RootLayout({children}: {children: React.ReactNode}
           </>
         )}
         <SanityLive onError={handleError} />
-        <Header navItems={navItems as any} ctaButton={settings?.ctaButton as any} />
+        <Header navItems={navItems as any} ctaButton={settings?.ctaButton as any} logo={settings?.logo as any} />
         <main>{children}</main>
         <Footer
           tagline={settings?.footerTagline ?? undefined}
@@ -95,6 +102,9 @@ export default async function RootLayout({children}: {children: React.ReactNode}
           footerText={settings?.footerText ?? undefined}
           footerTextLink={settings?.footerTextLink as any}
           bottomLinks={settings?.footerBottomLinks as any}
+          logo={settings?.logo as any}
+          socialLinks={settings?.socialLinks as any}
+          footerSticker={settings?.footerSticker as any}
         />
         <SpeedInsights />
       </body>

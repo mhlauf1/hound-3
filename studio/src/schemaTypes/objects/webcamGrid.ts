@@ -20,6 +20,13 @@ export const webcamGrid = defineType({
       rows: 3,
     }),
     defineField({
+      name: 'trustMessage',
+      title: 'Trust Message',
+      type: 'text',
+      rows: 2,
+      description: 'Optional message displayed between heading and camera grid (e.g. transparency/peace of mind)',
+    }),
+    defineField({
       name: 'showGroupHeaders',
       title: 'Show Group Headers',
       type: 'boolean',

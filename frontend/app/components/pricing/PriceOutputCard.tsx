@@ -47,11 +47,11 @@ export default function PriceOutputCard({
     <div className="bg-cream rounded-2xl p-6 md:p-8 lg:sticky lg:top-8">
       {/* Header */}
       <div className="flex items-center justify-between mb-1">
-        <span className="font-sans text-[13px] font-medium uppercase tracking-wider text-terracotta">
+        <span className="font-sans text-[13px]  uppercase tracking-wider text-terracotta">
           Estimated Cost
         </span>
         {badge && (
-          <span className="text-[12px] font-sans font-medium bg-sage/20 text-forest px-2.5 py-1 rounded-full">
+          <span className="text-[12px] font-sans  bg-sage/20 text-forest px-2.5 py-1 rounded-full">
             {badge}
           </span>
         )}
@@ -64,7 +64,7 @@ export default function PriceOutputCard({
         </div>
       ) : (
         <p
-          className="text-[48px] md:text-[56px] font-medium text-forest leading-tight mb-4"
+          className="text-[48px] md:text-[56px] font-light tracking-tight text-forest leading-tight mb-4"
           aria-live="polite"
           aria-atomic="true"
         >
@@ -78,7 +78,7 @@ export default function PriceOutputCard({
           {lineItems.map((item, i) => (
             <div key={i} className="flex items-start justify-between gap-4">
               <span className="font-sans text-[14px] text-charcoal/70">{item.label}</span>
-              <span className="font-sans text-[14px] font-medium text-forest tabular-nums shrink-0">
+              <span className="font-sans text-[14px]  text-forest tabular-nums shrink-0">
                 ${formatPrice(item.amount)}
               </span>
             </div>
@@ -90,10 +90,16 @@ export default function PriceOutputCard({
       {!disabled && savings !== null && savings !== undefined && savings > 0 && (
         <div className="bg-sage/15 rounded-lg px-4 py-3 mb-4">
           <div className="flex items-center gap-2">
-            <svg className="h-4 w-4 text-forest shrink-0" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+            <svg
+              className="h-4 w-4 text-forest shrink-0"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={2}
+              stroke="currentColor"
+            >
               <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
             </svg>
-            <span className="font-sans text-[14px] font-medium text-forest">
+            <span className="font-sans text-[14px]  text-forest">
               {savingsLabel}: ${formatPrice(savings)}
             </span>
           </div>
@@ -103,13 +109,19 @@ export default function PriceOutputCard({
       {/* Includes */}
       {!disabled && includes && includes.length > 0 && (
         <div className="border-t border-forest/10 pt-4 mb-4">
-          <span className="font-sans text-[12px] font-medium uppercase tracking-wider text-charcoal/50 mb-2 block">
+          <span className="font-sans text-[12px]  uppercase tracking-wider text-charcoal/50 mb-2 block">
             Included
           </span>
           <ul className="space-y-1.5">
             {includes.map((item, i) => (
               <li key={i} className="flex items-center gap-2">
-                <svg className="h-4 w-4 text-sage shrink-0" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+                <svg
+                  className="h-4 w-4 text-sage shrink-0"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={2}
+                  stroke="currentColor"
+                >
                   <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
                 </svg>
                 <span className="font-sans text-[13px] text-charcoal/70">{item}</span>
@@ -122,17 +134,25 @@ export default function PriceOutputCard({
       {/* Time Estimate */}
       {!disabled && timeEstimate && (
         <div className="flex items-center gap-2 mb-4 text-charcoal/60">
-          <svg className="h-4 w-4 shrink-0" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+          <svg
+            className="h-4 w-4 shrink-0"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={2}
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"
+            />
           </svg>
           <span className="font-sans text-[13px]">Estimated time: {timeEstimate}</span>
         </div>
       )}
 
       {/* Tax Note */}
-      {taxNote && (
-        <p className="font-sans text-[12px] italic text-charcoal/50 mb-4">{taxNote}</p>
-      )}
+      {taxNote && <p className="font-sans text-[12px] italic text-charcoal/50 mb-4">{taxNote}</p>}
 
       {/* CTA */}
       <Button

@@ -83,7 +83,7 @@ export default function FaqAccordion({block}: FaqAccordionProps) {
           <div className="max-w-3xl md:mb-4 flex items-start md:items-center flex-col mx-auto">
             {eyebrow && <Badge className="mb-3">{eyebrow}</Badge>}
             {heading && (
-              <h2 className="text-[36px] md:text-[48px] lg:text-[56px] leading-[105%] text-forest mb-10">
+              <h2 className="text-[36px] md:text-[48px] lg:text-[56px] font-semibold tracking-tight leading-[105%] text-forest mb-10">
                 {heading}
               </h2>
             )}

@@ -78,6 +78,21 @@ export type ItemsObjectImage = {
   _type: 'image'
 }
 
+export type ValuePillars = {
+  _type: 'valuePillars'
+  eyebrow?: string
+  heading?: string
+  description?: string
+  pillars?: Array<{
+    metric: string
+    title: string
+    description?: string
+    _key: string
+  }>
+  columns?: 2 | 3 | 4
+  backgroundColor?: 'cream' | 'sand' | 'forest'
+}
+
 export type GalleryPage = {
   _type: 'galleryPage'
   heading?: string
@@ -136,6 +151,7 @@ export type WebcamGrid = {
   _type: 'webcamGrid'
   heading?: string
   subtext?: string
+  trustMessage?: string
   showGroupHeaders?: boolean
 }
 
@@ -146,6 +162,7 @@ export type RequirementsList = {
   description?: string
   items?: Array<{
     text?: string
+    _type: 'item'
     _key: string
   }>
   link?: RequirementsListLink
@@ -353,6 +370,7 @@ export type ProcessSteps = {
     badge?: string
     description?: string
     icon?: string
+    _type: 'step'
     _key: string
   }>
   cta?: Button
@@ -393,6 +411,7 @@ export type ServiceCards = {
 export type HeroMinimal = {
   _type: 'heroMinimal'
   eyebrow?: string
+  rating?: string
   heading: string
   headingAccent?: string
   subtext?: string
@@ -405,7 +424,7 @@ export type HeroBanner = {
   heading: string
   subtext?: string
   primaryCta?: Button
-  backgroundImage: {
+  backgroundImage?: {
     asset?: SanityImageAssetReference
     media?: unknown
     hotspot?: SanityImageHotspot
@@ -452,6 +471,12 @@ export type ContactForm = {
   successMessage?: string
   showMap?: boolean
   mapEmbedUrl?: string
+  nextSteps?: Array<{
+    title: string
+    description?: string
+    _type: 'nextStep'
+    _key: string
+  }>
   image?: {
     asset?: SanityImageAssetReference
     media?: unknown
@@ -474,6 +499,7 @@ export type GalleryGrid = {
     hotspot?: SanityImageHotspot
     crop?: SanityImageCrop
     alt?: string
+    caption?: string
     _type: 'image'
     _key: string
   }>
@@ -490,6 +516,7 @@ export type TeamGrid = {
     name: string
     role?: string
     bio?: string
+    certifications?: string
     image?: TeamMemberImage
     _type: 'teamMember'
     _key: string
@@ -654,6 +681,7 @@ export type ServiceTabs = {
 export type FeatureCards = {
   _type: 'featureCards'
   heading: string
+  subheading?: string
   stickerLeft?: {
     asset?: SanityImageAssetReference
     media?: unknown
@@ -699,15 +727,10 @@ export type Hero = {
   subtext?: string
   primaryCta?: Button
   secondaryCta?: Button
+  reviewRating?: number
+  reviewText?: string
   trustLine?: string
   heroImage?: {
-    asset?: SanityImageAssetReference
-    media?: unknown
-    hotspot?: SanityImageHotspot
-    crop?: SanityImageCrop
-    _type: 'image'
-  }
-  backgroundImage?: {
     asset?: SanityImageAssetReference
     media?: unknown
     hotspot?: SanityImageHotspot
@@ -846,6 +869,13 @@ export type Service = {
   _rev: string
   title: string
   slug?: Slug
+  sticker?: {
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    _type: 'image'
+  }
   shortDescription?: string
   tabImage?: {
     asset?: SanityImageAssetReference
@@ -971,6 +1001,9 @@ export type Service = {
     | ({
         _key: string
       } & GalleryShowcase)
+    | ({
+        _key: string
+      } & ValuePillars)
   >
 }
 
@@ -1039,9 +1072,17 @@ export type Settings = {
       link?: Link
       _key: string
     }>
+    _type: 'navItem'
     _key: string
   }>
   ctaButton?: Button
+  footerSticker?: {
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    _type: 'image'
+  }
   footerTagline?: string
   footerColumns?: Array<{
     title?: string
@@ -1067,6 +1108,12 @@ export type Settings = {
     link?: Link
     _key: string
   }>
+  yearEstablished?: number
+  socialLinks?: {
+    facebook?: string
+    instagram?: string
+    google?: string
+  }
   ogImage?: {
     asset?: SanityImageAssetReference
     media?: unknown
@@ -1206,6 +1253,9 @@ export type Page = {
     | ({
         _key: string
       } & GalleryPage)
+    | ({
+        _key: string
+      } & ValuePillars)
   >
 }
 
@@ -1452,6 +1502,7 @@ export type AllSanitySchemaTypes =
   | ColumnsObjectImage
   | LogosObjectImage
   | ItemsObjectImage
+  | ValuePillars
   | GalleryPage
   | GalleryShowcase
   | GalleryCarousel
@@ -1532,7 +1583,7 @@ export declare const internalGroqTypeReferenceTo: unique symbol
 
 // Source: sanity/lib/queries.ts
 // Variable: settingsQuery
-// Query: *[_type == "settings"][0]{  ...,  navItems[]{    ...,      link {      ...,        _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }      },    children[]{      ...,        link {      ...,        _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }      }    }  },  ctaButton {    ...,      link {      ...,        _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }      }  },  footerColumns[]{    ...,    links[]{      ...,        link {      ...,        _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }      }    }  },  contactInfo,  footerTagline,  footerText,  footerTextLink,  footerBottomLinks[]{    ...,      link {      ...,        _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }      }  },  logo}
+// Query: *[_type == "settings"][0]{  ...,  navItems[]{    ...,      link {      ...,        _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }      },    children[]{      ...,        link {      ...,        _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }      }    }  },  ctaButton {    ...,      link {      ...,        _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }      }  },  footerColumns[]{    ...,    links[]{      ...,        link {      ...,        _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }      }    }  },  contactInfo,  footerTagline,  footerText,  footerTextLink,  footerBottomLinks[]{    ...,      link {      ...,        _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }      }  },  logo,  yearEstablished,  socialLinks}
 export type SettingsQueryResult = {
   _id: string
   _type: 'settings'
@@ -1592,6 +1643,7 @@ export type SettingsQueryResult = {
       } | null
       _key: string
     }> | null
+    _type: 'navItem'
     _key: string
   }> | null
   ctaButton: {
@@ -1607,6 +1659,13 @@ export type SettingsQueryResult = {
       pageType: 'page' | 'service' | null
     } | null
   } | null
+  footerSticker?: {
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    _type: 'image'
+  }
   footerTagline: string | null
   footerColumns: Array<{
     title?: string
@@ -1648,6 +1707,12 @@ export type SettingsQueryResult = {
     } | null
     _key: string
   }> | null
+  yearEstablished: number | null
+  socialLinks: {
+    facebook?: string
+    instagram?: string
+    google?: string
+  } | null
   ogImage?: {
     asset?: SanityImageAssetReference
     media?: unknown
@@ -1661,7 +1726,7 @@ export type SettingsQueryResult = {
 
 // Source: sanity/lib/queries.ts
 // Variable: getPageQuery
-// Query: *[_type == 'page' && slug.current == $slug][0]{    _id,    _type,    name,    slug,    heading,    subheading,      "pageBuilder": pageBuilder[]{    ...,    _type == "callToAction" => {      ...,      button   {    ...,      link {      ...,        _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }      }  }    },    _type == "infoSection" => {      content[]{        ...,        markDefs[]{          ...,            _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }        }      }    },    _type == "hero" => {      ...,      primaryCta   {    ...,      link {      ...,        _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }      }  },      secondaryCta   {    ...,      link {      ...,        _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }      }  }    },    _type == "featureCards" => {      ...,      cta   {    ...,      link {      ...,        _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }      }  }    },    _type == "serviceTabs" => {      ...,      tabs[]->{        _id,        title,        slug,        shortDescription,        tabImage,        tabCta   {    ...,      link {      ...,        _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }      }  }      }    },    _type == "testimonials" => {      ...,      reviews[]->{        _id,        quote,        authorName,        authorLabel,        rating      }    },    _type == "ctaBanner" => {      ...,      cta   {    ...,      link {      ...,        _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }      }  }    },    _type == "splitContent" => {      ...,      link {        ...,        link {          ...,            _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }        }      }    },    _type == "faqAccordion" => {      ...,      faqs[]{        ...,        answer[]{          ...,          markDefs[]{            ...,              _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }          }        }      }    },    _type == "pricingTable" => {      ...,      categories[]{        ...,        tiers[]{          ...,          cta   {    ...,      link {      ...,        _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }      }  }        }      }    },    _type == "contactForm" => {      ...,      description[]{        ...,        markDefs[]{          ...,            _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }        }      }    },    _type == "heroSplit" => {      ...,      primaryCta   {    ...,      link {      ...,        _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }      }  },      secondaryCta   {    ...,      link {      ...,        _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }      }  }    },    _type == "heroBanner" => {      ...,      primaryCta   {    ...,      link {      ...,        _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }      }  }    },    _type == "heroMinimal" => {      ...    },    _type == "serviceCards" => {      ...,      cards[]{        ...,        cta   {    ...,      link {      ...,        _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }      }  }      }    },    _type == "featureList" => {      ...,      features[]{        ...,        body[]{          ...,          markDefs[]{            ...,              _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }          }        },        cta   {    ...,      link {      ...,        _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }      }  }      }    },    _type == "processSteps" => {      ...,      cta   {    ...,      link {      ...,        _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }      }  }    },    _type == "contentColumns" => {      ...,      columns[]{        ...,        body[]{          ...,          markDefs[]{            ...,              _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }          }        },        cta   {    ...,      link {      ...,        _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }      }  }      }    },    _type == "fullWidthMedia" => {      ...,      cta   {    ...,      link {      ...,        _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }      }  }    },    _type == "ctaStrip" => {      ...,      cta   {    ...,      link {      ...,        _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }      }  }    },    _type == "pricingMatrix" => {      ...    },    _type == "pricingList" => {      ...    },    _type == "policyNotes" => {      ...    },    _type == "featureGrid" => {      ...,      cta   {    ...,      link {      ...,        _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }      }  }    },    _type == "pricingCalculator" => {      ...,      ctaLink {        ...,          _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }      }    },    _type == "whatsIncluded" => {      ...    },    _type == "requirementsList" => {      ...,      link {        ...,        link {          ...,            _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }        }      }    },    _type == "galleryGrid" => {      ...    },    _type == "galleryCarousel" => {      ...    },    _type == "galleryShowcase" => {      ...    },    _type == "galleryPage" => {      ...    },    _type == "webcamGrid" => {      ...,      "webcams": *[_type == "webcam" && enabled == true] | order(group asc, sortOrder asc) {        _id, name, cameraId, group, sortOrder      }    },  },  }
+// Query: *[_type == 'page' && slug.current == $slug][0]{    _id,    _type,    name,    slug,    heading,    subheading,      "pageBuilder": pageBuilder[]{    ...,    _type == "callToAction" => {      ...,      button   {    ...,      link {      ...,        _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }      }  }    },    _type == "infoSection" => {      content[]{        ...,        markDefs[]{          ...,            _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }        }      }    },    _type == "hero" => {      ...,      primaryCta   {    ...,      link {      ...,        _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }      }  },      secondaryCta   {    ...,      link {      ...,        _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }      }  }    },    _type == "featureCards" => {      ...,      cta   {    ...,      link {      ...,        _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }      }  }    },    _type == "serviceTabs" => {      ...,      tabs[]->{        _id,        title,        slug,        sticker,        shortDescription,        tabImage,        tabCta   {    ...,      link {      ...,        _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }      }  }      }    },    _type == "testimonials" => {      ...,      reviews[]->{        _id,        quote,        authorName,        authorLabel,        rating      }    },    _type == "ctaBanner" => {      ...,      cta   {    ...,      link {      ...,        _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }      }  }    },    _type == "splitContent" => {      ...,      link {        ...,        link {          ...,            _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }        }      }    },    _type == "faqAccordion" => {      ...,      faqs[]{        ...,        answer[]{          ...,          markDefs[]{            ...,              _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }          }        }      }    },    _type == "pricingTable" => {      ...,      categories[]{        ...,        tiers[]{          ...,          cta   {    ...,      link {      ...,        _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }      }  }        }      }    },    _type == "contactForm" => {      ...,      description[]{        ...,        markDefs[]{          ...,            _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }        }      }    },    _type == "heroSplit" => {      ...,      primaryCta   {    ...,      link {      ...,        _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }      }  },      secondaryCta   {    ...,      link {      ...,        _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }      }  }    },    _type == "heroBanner" => {      ...,      primaryCta   {    ...,      link {      ...,        _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }      }  }    },    _type == "heroMinimal" => {      ...    },    _type == "serviceCards" => {      ...,      cards[]{        ...,        cta   {    ...,      link {      ...,        _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }      }  }      }    },    _type == "featureList" => {      ...,      features[]{        ...,        body[]{          ...,          markDefs[]{            ...,              _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }          }        },        cta   {    ...,      link {      ...,        _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }      }  }      }    },    _type == "processSteps" => {      ...,      cta   {    ...,      link {      ...,        _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }      }  }    },    _type == "contentColumns" => {      ...,      columns[]{        ...,        body[]{          ...,          markDefs[]{            ...,              _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }          }        },        cta   {    ...,      link {      ...,        _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }      }  }      }    },    _type == "fullWidthMedia" => {      ...,      cta   {    ...,      link {      ...,        _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }      }  }    },    _type == "ctaStrip" => {      ...,      cta   {    ...,      link {      ...,        _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }      }  }    },    _type == "pricingMatrix" => {      ...    },    _type == "pricingList" => {      ...    },    _type == "policyNotes" => {      ...    },    _type == "featureGrid" => {      ...,      cta   {    ...,      link {      ...,        _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }      }  }    },    _type == "pricingCalculator" => {      ...,      ctaLink {        ...,          _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }      }    },    _type == "whatsIncluded" => {      ...    },    _type == "requirementsList" => {      ...,      link {        ...,        link {          ...,            _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }        }      }    },    _type == "galleryGrid" => {      ...    },    _type == "galleryCarousel" => {      ...    },    _type == "galleryShowcase" => {      ...    },    _type == "galleryPage" => {      ...    },    _type == "webcamGrid" => {      ...,      "webcams": *[_type == "webcam" && enabled == true] | order(group asc, sortOrder asc) {        _id, name, cameraId, group, sortOrder      }    },  },  }
 export type GetPageQueryResult = {
   _id: string
   _type: 'page'
@@ -1750,6 +1815,12 @@ export type GetPageQueryResult = {
         successMessage?: string
         showMap?: boolean
         mapEmbedUrl?: string
+        nextSteps?: Array<{
+          title: string
+          description?: string
+          _type: 'nextStep'
+          _key: string
+        }>
         image?: {
           asset?: SanityImageAssetReference
           media?: unknown
@@ -1929,6 +2000,7 @@ export type GetPageQueryResult = {
         _key: string
         _type: 'featureCards'
         heading: string
+        subheading?: string
         stickerLeft?: {
           asset?: SanityImageAssetReference
           media?: unknown
@@ -2108,6 +2180,7 @@ export type GetPageQueryResult = {
           hotspot?: SanityImageHotspot
           crop?: SanityImageCrop
           alt?: string
+          caption?: string
           _type: 'image'
           _key: string
         }>
@@ -2183,15 +2256,10 @@ export type GetPageQueryResult = {
             pageType: 'page' | 'service' | null
           } | null
         } | null
+        reviewRating?: number
+        reviewText?: string
         trustLine?: string
         heroImage?: {
-          asset?: SanityImageAssetReference
-          media?: unknown
-          hotspot?: SanityImageHotspot
-          crop?: SanityImageCrop
-          _type: 'image'
-        }
-        backgroundImage?: {
           asset?: SanityImageAssetReference
           media?: unknown
           hotspot?: SanityImageHotspot
@@ -2218,7 +2286,7 @@ export type GetPageQueryResult = {
             pageType: 'page' | 'service' | null
           } | null
         } | null
-        backgroundImage: {
+        backgroundImage?: {
           asset?: SanityImageAssetReference
           media?: unknown
           hotspot?: SanityImageHotspot
@@ -2232,6 +2300,7 @@ export type GetPageQueryResult = {
         _key: string
         _type: 'heroMinimal'
         eyebrow?: string
+        rating?: string
         heading: string
         headingAccent?: string
         subtext?: string
@@ -2479,6 +2548,7 @@ export type GetPageQueryResult = {
           badge?: string
           description?: string
           icon?: string
+          _type: 'step'
           _key: string
         }>
         cta: {
@@ -2504,6 +2574,7 @@ export type GetPageQueryResult = {
         description?: string
         items?: Array<{
           text?: string
+          _type: 'item'
           _key: string
         }>
         link: {
@@ -2565,6 +2636,13 @@ export type GetPageQueryResult = {
           _id: string
           title: string
           slug: Slug | null
+          sticker: {
+            asset?: SanityImageAssetReference
+            media?: unknown
+            hotspot?: SanityImageHotspot
+            crop?: SanityImageCrop
+            _type: 'image'
+          } | null
           shortDescription: string | null
           tabImage: {
             asset?: SanityImageAssetReference
@@ -2641,6 +2719,7 @@ export type GetPageQueryResult = {
           name: string
           role?: string
           bio?: string
+          certifications?: string
           image?: TeamMemberImage
           _type: 'teamMember'
           _key: string
@@ -2669,6 +2748,21 @@ export type GetPageQueryResult = {
       }
     | {
         _key: string
+        _type: 'valuePillars'
+        eyebrow?: string
+        heading?: string
+        description?: string
+        pillars?: Array<{
+          metric: string
+          title: string
+          description?: string
+          _key: string
+        }>
+        columns?: 2 | 3 | 4
+        backgroundColor?: 'cream' | 'forest' | 'sand'
+      }
+    | {
+        _key: string
         _type: 'videoSection'
         eyebrow?: string
         heading?: string
@@ -2689,6 +2783,7 @@ export type GetPageQueryResult = {
         _type: 'webcamGrid'
         heading?: string
         subtext?: string
+        trustMessage?: string
         showGroupHeaders?: boolean
         webcams: Array<{
           _id: string
@@ -2735,7 +2830,7 @@ export type GetPageQueryResult = {
 
 // Source: sanity/lib/queries.ts
 // Variable: homepageQuery
-// Query: *[_type == 'page' && slug.current == 'homepage'][0]{    _id,    _type,    name,    slug,    heading,    subheading,      "pageBuilder": pageBuilder[]{    ...,    _type == "callToAction" => {      ...,      button   {    ...,      link {      ...,        _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }      }  }    },    _type == "infoSection" => {      content[]{        ...,        markDefs[]{          ...,            _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }        }      }    },    _type == "hero" => {      ...,      primaryCta   {    ...,      link {      ...,        _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }      }  },      secondaryCta   {    ...,      link {      ...,        _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }      }  }    },    _type == "featureCards" => {      ...,      cta   {    ...,      link {      ...,        _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }      }  }    },    _type == "serviceTabs" => {      ...,      tabs[]->{        _id,        title,        slug,        shortDescription,        tabImage,        tabCta   {    ...,      link {      ...,        _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }      }  }      }    },    _type == "testimonials" => {      ...,      reviews[]->{        _id,        quote,        authorName,        authorLabel,        rating      }    },    _type == "ctaBanner" => {      ...,      cta   {    ...,      link {      ...,        _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }      }  }    },    _type == "splitContent" => {      ...,      link {        ...,        link {          ...,            _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }        }      }    },    _type == "faqAccordion" => {      ...,      faqs[]{        ...,        answer[]{          ...,          markDefs[]{            ...,              _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }          }        }      }    },    _type == "pricingTable" => {      ...,      categories[]{        ...,        tiers[]{          ...,          cta   {    ...,      link {      ...,        _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }      }  }        }      }    },    _type == "contactForm" => {      ...,      description[]{        ...,        markDefs[]{          ...,            _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }        }      }    },    _type == "heroSplit" => {      ...,      primaryCta   {    ...,      link {      ...,        _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }      }  },      secondaryCta   {    ...,      link {      ...,        _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }      }  }    },    _type == "heroBanner" => {      ...,      primaryCta   {    ...,      link {      ...,        _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }      }  }    },    _type == "heroMinimal" => {      ...    },    _type == "serviceCards" => {      ...,      cards[]{        ...,        cta   {    ...,      link {      ...,        _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }      }  }      }    },    _type == "featureList" => {      ...,      features[]{        ...,        body[]{          ...,          markDefs[]{            ...,              _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }          }        },        cta   {    ...,      link {      ...,        _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }      }  }      }    },    _type == "processSteps" => {      ...,      cta   {    ...,      link {      ...,        _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }      }  }    },    _type == "contentColumns" => {      ...,      columns[]{        ...,        body[]{          ...,          markDefs[]{            ...,              _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }          }        },        cta   {    ...,      link {      ...,        _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }      }  }      }    },    _type == "fullWidthMedia" => {      ...,      cta   {    ...,      link {      ...,        _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }      }  }    },    _type == "ctaStrip" => {      ...,      cta   {    ...,      link {      ...,        _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }      }  }    },    _type == "pricingMatrix" => {      ...    },    _type == "pricingList" => {      ...    },    _type == "policyNotes" => {      ...    },    _type == "featureGrid" => {      ...,      cta   {    ...,      link {      ...,        _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }      }  }    },    _type == "pricingCalculator" => {      ...,      ctaLink {        ...,          _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }      }    },    _type == "whatsIncluded" => {      ...    },    _type == "requirementsList" => {      ...,      link {        ...,        link {          ...,            _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }        }      }    },    _type == "galleryGrid" => {      ...    },    _type == "galleryCarousel" => {      ...    },    _type == "galleryShowcase" => {      ...    },    _type == "galleryPage" => {      ...    },    _type == "webcamGrid" => {      ...,      "webcams": *[_type == "webcam" && enabled == true] | order(group asc, sortOrder asc) {        _id, name, cameraId, group, sortOrder      }    },  },  }
+// Query: *[_type == 'page' && slug.current == 'homepage'][0]{    _id,    _type,    name,    slug,    heading,    subheading,      "pageBuilder": pageBuilder[]{    ...,    _type == "callToAction" => {      ...,      button   {    ...,      link {      ...,        _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }      }  }    },    _type == "infoSection" => {      content[]{        ...,        markDefs[]{          ...,            _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }        }      }    },    _type == "hero" => {      ...,      primaryCta   {    ...,      link {      ...,        _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }      }  },      secondaryCta   {    ...,      link {      ...,        _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }      }  }    },    _type == "featureCards" => {      ...,      cta   {    ...,      link {      ...,        _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }      }  }    },    _type == "serviceTabs" => {      ...,      tabs[]->{        _id,        title,        slug,        sticker,        shortDescription,        tabImage,        tabCta   {    ...,      link {      ...,        _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }      }  }      }    },    _type == "testimonials" => {      ...,      reviews[]->{        _id,        quote,        authorName,        authorLabel,        rating      }    },    _type == "ctaBanner" => {      ...,      cta   {    ...,      link {      ...,        _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }      }  }    },    _type == "splitContent" => {      ...,      link {        ...,        link {          ...,            _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }        }      }    },    _type == "faqAccordion" => {      ...,      faqs[]{        ...,        answer[]{          ...,          markDefs[]{            ...,              _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }          }        }      }    },    _type == "pricingTable" => {      ...,      categories[]{        ...,        tiers[]{          ...,          cta   {    ...,      link {      ...,        _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }      }  }        }      }    },    _type == "contactForm" => {      ...,      description[]{        ...,        markDefs[]{          ...,            _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }        }      }    },    _type == "heroSplit" => {      ...,      primaryCta   {    ...,      link {      ...,        _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }      }  },      secondaryCta   {    ...,      link {      ...,        _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }      }  }    },    _type == "heroBanner" => {      ...,      primaryCta   {    ...,      link {      ...,        _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }      }  }    },    _type == "heroMinimal" => {      ...    },    _type == "serviceCards" => {      ...,      cards[]{        ...,        cta   {    ...,      link {      ...,        _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }      }  }      }    },    _type == "featureList" => {      ...,      features[]{        ...,        body[]{          ...,          markDefs[]{            ...,              _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }          }        },        cta   {    ...,      link {      ...,        _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }      }  }      }    },    _type == "processSteps" => {      ...,      cta   {    ...,      link {      ...,        _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }      }  }    },    _type == "contentColumns" => {      ...,      columns[]{        ...,        body[]{          ...,          markDefs[]{            ...,              _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }          }        },        cta   {    ...,      link {      ...,        _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }      }  }      }    },    _type == "fullWidthMedia" => {      ...,      cta   {    ...,      link {      ...,        _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }      }  }    },    _type == "ctaStrip" => {      ...,      cta   {    ...,      link {      ...,        _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }      }  }    },    _type == "pricingMatrix" => {      ...    },    _type == "pricingList" => {      ...    },    _type == "policyNotes" => {      ...    },    _type == "featureGrid" => {      ...,      cta   {    ...,      link {      ...,        _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }      }  }    },    _type == "pricingCalculator" => {      ...,      ctaLink {        ...,          _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }      }    },    _type == "whatsIncluded" => {      ...    },    _type == "requirementsList" => {      ...,      link {        ...,        link {          ...,            _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }        }      }    },    _type == "galleryGrid" => {      ...    },    _type == "galleryCarousel" => {      ...    },    _type == "galleryShowcase" => {      ...    },    _type == "galleryPage" => {      ...    },    _type == "webcamGrid" => {      ...,      "webcams": *[_type == "webcam" && enabled == true] | order(group asc, sortOrder asc) {        _id, name, cameraId, group, sortOrder      }    },  },  }
 export type HomepageQueryResult = {
   _id: string
   _type: 'page'
@@ -2824,6 +2919,12 @@ export type HomepageQueryResult = {
         successMessage?: string
         showMap?: boolean
         mapEmbedUrl?: string
+        nextSteps?: Array<{
+          title: string
+          description?: string
+          _type: 'nextStep'
+          _key: string
+        }>
         image?: {
           asset?: SanityImageAssetReference
           media?: unknown
@@ -3003,6 +3104,7 @@ export type HomepageQueryResult = {
         _key: string
         _type: 'featureCards'
         heading: string
+        subheading?: string
         stickerLeft?: {
           asset?: SanityImageAssetReference
           media?: unknown
@@ -3182,6 +3284,7 @@ export type HomepageQueryResult = {
           hotspot?: SanityImageHotspot
           crop?: SanityImageCrop
           alt?: string
+          caption?: string
           _type: 'image'
           _key: string
         }>
@@ -3257,15 +3360,10 @@ export type HomepageQueryResult = {
             pageType: 'page' | 'service' | null
           } | null
         } | null
+        reviewRating?: number
+        reviewText?: string
         trustLine?: string
         heroImage?: {
-          asset?: SanityImageAssetReference
-          media?: unknown
-          hotspot?: SanityImageHotspot
-          crop?: SanityImageCrop
-          _type: 'image'
-        }
-        backgroundImage?: {
           asset?: SanityImageAssetReference
           media?: unknown
           hotspot?: SanityImageHotspot
@@ -3292,7 +3390,7 @@ export type HomepageQueryResult = {
             pageType: 'page' | 'service' | null
           } | null
         } | null
-        backgroundImage: {
+        backgroundImage?: {
           asset?: SanityImageAssetReference
           media?: unknown
           hotspot?: SanityImageHotspot
@@ -3306,6 +3404,7 @@ export type HomepageQueryResult = {
         _key: string
         _type: 'heroMinimal'
         eyebrow?: string
+        rating?: string
         heading: string
         headingAccent?: string
         subtext?: string
@@ -3553,6 +3652,7 @@ export type HomepageQueryResult = {
           badge?: string
           description?: string
           icon?: string
+          _type: 'step'
           _key: string
         }>
         cta: {
@@ -3578,6 +3678,7 @@ export type HomepageQueryResult = {
         description?: string
         items?: Array<{
           text?: string
+          _type: 'item'
           _key: string
         }>
         link: {
@@ -3639,6 +3740,13 @@ export type HomepageQueryResult = {
           _id: string
           title: string
           slug: Slug | null
+          sticker: {
+            asset?: SanityImageAssetReference
+            media?: unknown
+            hotspot?: SanityImageHotspot
+            crop?: SanityImageCrop
+            _type: 'image'
+          } | null
           shortDescription: string | null
           tabImage: {
             asset?: SanityImageAssetReference
@@ -3715,6 +3823,7 @@ export type HomepageQueryResult = {
           name: string
           role?: string
           bio?: string
+          certifications?: string
           image?: TeamMemberImage
           _type: 'teamMember'
           _key: string
@@ -3743,6 +3852,21 @@ export type HomepageQueryResult = {
       }
     | {
         _key: string
+        _type: 'valuePillars'
+        eyebrow?: string
+        heading?: string
+        description?: string
+        pillars?: Array<{
+          metric: string
+          title: string
+          description?: string
+          _key: string
+        }>
+        columns?: 2 | 3 | 4
+        backgroundColor?: 'cream' | 'forest' | 'sand'
+      }
+    | {
+        _key: string
         _type: 'videoSection'
         eyebrow?: string
         heading?: string
@@ -3763,6 +3887,7 @@ export type HomepageQueryResult = {
         _type: 'webcamGrid'
         heading?: string
         subtext?: string
+        trustMessage?: string
         showGroupHeaders?: boolean
         webcams: Array<{
           _id: string
@@ -3825,7 +3950,7 @@ export type PagesSlugsResult = Array<{
 
 // Source: sanity/lib/queries.ts
 // Variable: getServiceQuery
-// Query: *[_type == 'service' && slug.current == $slug][0]{    _id,    _type,    title,    slug,    heading,    shortDescription,      "pageBuilder": pageBuilder[]{    ...,    _type == "callToAction" => {      ...,      button   {    ...,      link {      ...,        _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }      }  }    },    _type == "infoSection" => {      content[]{        ...,        markDefs[]{          ...,            _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }        }      }    },    _type == "hero" => {      ...,      primaryCta   {    ...,      link {      ...,        _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }      }  },      secondaryCta   {    ...,      link {      ...,        _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }      }  }    },    _type == "featureCards" => {      ...,      cta   {    ...,      link {      ...,        _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }      }  }    },    _type == "serviceTabs" => {      ...,      tabs[]->{        _id,        title,        slug,        shortDescription,        tabImage,        tabCta   {    ...,      link {      ...,        _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }      }  }      }    },    _type == "testimonials" => {      ...,      reviews[]->{        _id,        quote,        authorName,        authorLabel,        rating      }    },    _type == "ctaBanner" => {      ...,      cta   {    ...,      link {      ...,        _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }      }  }    },    _type == "splitContent" => {      ...,      link {        ...,        link {          ...,            _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }        }      }    },    _type == "faqAccordion" => {      ...,      faqs[]{        ...,        answer[]{          ...,          markDefs[]{            ...,              _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }          }        }      }    },    _type == "pricingTable" => {      ...,      categories[]{        ...,        tiers[]{          ...,          cta   {    ...,      link {      ...,        _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }      }  }        }      }    },    _type == "contactForm" => {      ...,      description[]{        ...,        markDefs[]{          ...,            _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }        }      }    },    _type == "heroSplit" => {      ...,      primaryCta   {    ...,      link {      ...,        _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }      }  },      secondaryCta   {    ...,      link {      ...,        _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }      }  }    },    _type == "heroBanner" => {      ...,      primaryCta   {    ...,      link {      ...,        _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }      }  }    },    _type == "heroMinimal" => {      ...    },    _type == "serviceCards" => {      ...,      cards[]{        ...,        cta   {    ...,      link {      ...,        _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }      }  }      }    },    _type == "featureList" => {      ...,      features[]{        ...,        body[]{          ...,          markDefs[]{            ...,              _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }          }        },        cta   {    ...,      link {      ...,        _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }      }  }      }    },    _type == "processSteps" => {      ...,      cta   {    ...,      link {      ...,        _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }      }  }    },    _type == "contentColumns" => {      ...,      columns[]{        ...,        body[]{          ...,          markDefs[]{            ...,              _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }          }        },        cta   {    ...,      link {      ...,        _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }      }  }      }    },    _type == "fullWidthMedia" => {      ...,      cta   {    ...,      link {      ...,        _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }      }  }    },    _type == "ctaStrip" => {      ...,      cta   {    ...,      link {      ...,        _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }      }  }    },    _type == "pricingMatrix" => {      ...    },    _type == "pricingList" => {      ...    },    _type == "policyNotes" => {      ...    },    _type == "featureGrid" => {      ...,      cta   {    ...,      link {      ...,        _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }      }  }    },    _type == "pricingCalculator" => {      ...,      ctaLink {        ...,          _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }      }    },    _type == "whatsIncluded" => {      ...    },    _type == "requirementsList" => {      ...,      link {        ...,        link {          ...,            _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }        }      }    },    _type == "galleryGrid" => {      ...    },    _type == "galleryCarousel" => {      ...    },    _type == "galleryShowcase" => {      ...    },    _type == "galleryPage" => {      ...    },    _type == "webcamGrid" => {      ...,      "webcams": *[_type == "webcam" && enabled == true] | order(group asc, sortOrder asc) {        _id, name, cameraId, group, sortOrder      }    },  },  }
+// Query: *[_type == 'service' && slug.current == $slug][0]{    _id,    _type,    title,    slug,    heading,    shortDescription,      "pageBuilder": pageBuilder[]{    ...,    _type == "callToAction" => {      ...,      button   {    ...,      link {      ...,        _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }      }  }    },    _type == "infoSection" => {      content[]{        ...,        markDefs[]{          ...,            _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }        }      }    },    _type == "hero" => {      ...,      primaryCta   {    ...,      link {      ...,        _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }      }  },      secondaryCta   {    ...,      link {      ...,        _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }      }  }    },    _type == "featureCards" => {      ...,      cta   {    ...,      link {      ...,        _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }      }  }    },    _type == "serviceTabs" => {      ...,      tabs[]->{        _id,        title,        slug,        sticker,        shortDescription,        tabImage,        tabCta   {    ...,      link {      ...,        _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }      }  }      }    },    _type == "testimonials" => {      ...,      reviews[]->{        _id,        quote,        authorName,        authorLabel,        rating      }    },    _type == "ctaBanner" => {      ...,      cta   {    ...,      link {      ...,        _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }      }  }    },    _type == "splitContent" => {      ...,      link {        ...,        link {          ...,            _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }        }      }    },    _type == "faqAccordion" => {      ...,      faqs[]{        ...,        answer[]{          ...,          markDefs[]{            ...,              _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }          }        }      }    },    _type == "pricingTable" => {      ...,      categories[]{        ...,        tiers[]{          ...,          cta   {    ...,      link {      ...,        _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }      }  }        }      }    },    _type == "contactForm" => {      ...,      description[]{        ...,        markDefs[]{          ...,            _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }        }      }    },    _type == "heroSplit" => {      ...,      primaryCta   {    ...,      link {      ...,        _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }      }  },      secondaryCta   {    ...,      link {      ...,        _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }      }  }    },    _type == "heroBanner" => {      ...,      primaryCta   {    ...,      link {      ...,        _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }      }  }    },    _type == "heroMinimal" => {      ...    },    _type == "serviceCards" => {      ...,      cards[]{        ...,        cta   {    ...,      link {      ...,        _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }      }  }      }    },    _type == "featureList" => {      ...,      features[]{        ...,        body[]{          ...,          markDefs[]{            ...,              _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }          }        },        cta   {    ...,      link {      ...,        _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }      }  }      }    },    _type == "processSteps" => {      ...,      cta   {    ...,      link {      ...,        _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }      }  }    },    _type == "contentColumns" => {      ...,      columns[]{        ...,        body[]{          ...,          markDefs[]{            ...,              _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }          }        },        cta   {    ...,      link {      ...,        _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }      }  }      }    },    _type == "fullWidthMedia" => {      ...,      cta   {    ...,      link {      ...,        _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }      }  }    },    _type == "ctaStrip" => {      ...,      cta   {    ...,      link {      ...,        _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }      }  }    },    _type == "pricingMatrix" => {      ...    },    _type == "pricingList" => {      ...    },    _type == "policyNotes" => {      ...    },    _type == "featureGrid" => {      ...,      cta   {    ...,      link {      ...,        _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }      }  }    },    _type == "pricingCalculator" => {      ...,      ctaLink {        ...,          _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }      }    },    _type == "whatsIncluded" => {      ...    },    _type == "requirementsList" => {      ...,      link {        ...,        link {          ...,            _type == "link" => {    "page": page->slug.current,    "pageType": page->_type  }        }      }    },    _type == "galleryGrid" => {      ...    },    _type == "galleryCarousel" => {      ...    },    _type == "galleryShowcase" => {      ...    },    _type == "galleryPage" => {      ...    },    _type == "webcamGrid" => {      ...,      "webcams": *[_type == "webcam" && enabled == true] | order(group asc, sortOrder asc) {        _id, name, cameraId, group, sortOrder      }    },  },  }
 export type GetServiceQueryResult = {
   _id: string
   _type: 'service'
@@ -3914,6 +4039,12 @@ export type GetServiceQueryResult = {
         successMessage?: string
         showMap?: boolean
         mapEmbedUrl?: string
+        nextSteps?: Array<{
+          title: string
+          description?: string
+          _type: 'nextStep'
+          _key: string
+        }>
         image?: {
           asset?: SanityImageAssetReference
           media?: unknown
@@ -4093,6 +4224,7 @@ export type GetServiceQueryResult = {
         _key: string
         _type: 'featureCards'
         heading: string
+        subheading?: string
         stickerLeft?: {
           asset?: SanityImageAssetReference
           media?: unknown
@@ -4272,6 +4404,7 @@ export type GetServiceQueryResult = {
           hotspot?: SanityImageHotspot
           crop?: SanityImageCrop
           alt?: string
+          caption?: string
           _type: 'image'
           _key: string
         }>
@@ -4329,15 +4462,10 @@ export type GetServiceQueryResult = {
             pageType: 'page' | 'service' | null
           } | null
         } | null
+        reviewRating?: number
+        reviewText?: string
         trustLine?: string
         heroImage?: {
-          asset?: SanityImageAssetReference
-          media?: unknown
-          hotspot?: SanityImageHotspot
-          crop?: SanityImageCrop
-          _type: 'image'
-        }
-        backgroundImage?: {
           asset?: SanityImageAssetReference
           media?: unknown
           hotspot?: SanityImageHotspot
@@ -4364,7 +4492,7 @@ export type GetServiceQueryResult = {
             pageType: 'page' | 'service' | null
           } | null
         } | null
-        backgroundImage: {
+        backgroundImage?: {
           asset?: SanityImageAssetReference
           media?: unknown
           hotspot?: SanityImageHotspot
@@ -4378,6 +4506,7 @@ export type GetServiceQueryResult = {
         _key: string
         _type: 'heroMinimal'
         eyebrow?: string
+        rating?: string
         heading: string
         headingAccent?: string
         subtext?: string
@@ -4625,6 +4754,7 @@ export type GetServiceQueryResult = {
           badge?: string
           description?: string
           icon?: string
+          _type: 'step'
           _key: string
         }>
         cta: {
@@ -4650,6 +4780,7 @@ export type GetServiceQueryResult = {
         description?: string
         items?: Array<{
           text?: string
+          _type: 'item'
           _key: string
         }>
         link: {
@@ -4711,6 +4842,13 @@ export type GetServiceQueryResult = {
           _id: string
           title: string
           slug: Slug | null
+          sticker: {
+            asset?: SanityImageAssetReference
+            media?: unknown
+            hotspot?: SanityImageHotspot
+            crop?: SanityImageCrop
+            _type: 'image'
+          } | null
           shortDescription: string | null
           tabImage: {
             asset?: SanityImageAssetReference
@@ -4787,6 +4925,7 @@ export type GetServiceQueryResult = {
           name: string
           role?: string
           bio?: string
+          certifications?: string
           image?: TeamMemberImage
           _type: 'teamMember'
           _key: string
@@ -4815,6 +4954,21 @@ export type GetServiceQueryResult = {
       }
     | {
         _key: string
+        _type: 'valuePillars'
+        eyebrow?: string
+        heading?: string
+        description?: string
+        pillars?: Array<{
+          metric: string
+          title: string
+          description?: string
+          _key: string
+        }>
+        columns?: 2 | 3 | 4
+        backgroundColor?: 'cream' | 'forest' | 'sand'
+      }
+    | {
+        _key: string
         _type: 'videoSection'
         eyebrow?: string
         heading?: string
@@ -4835,6 +4989,7 @@ export type GetServiceQueryResult = {
         _type: 'webcamGrid'
         heading?: string
         subtext?: string
+        trustMessage?: string
         showGroupHeaders?: boolean
         webcams: Array<{
           _id: string
@@ -4899,12 +5054,12 @@ export type ServicesNavQueryResult = Array<{
 import '@sanity/client'
 declare module '@sanity/client' {
   interface SanityQueries {
-    '*[_type == "settings"][0]{\n  ...,\n  navItems[]{\n    ...,\n    \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n      }\n,\n    children[]{\n      ...,\n      \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n      }\n\n    }\n  },\n  ctaButton {\n    ...,\n    \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n      }\n\n  },\n  footerColumns[]{\n    ...,\n    links[]{\n      ...,\n      \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n      }\n\n    }\n  },\n  contactInfo,\n  footerTagline,\n  footerText,\n  footerTextLink,\n  footerBottomLinks[]{\n    ...,\n    \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n      }\n\n  },\n  logo\n}': SettingsQueryResult
-    '\n  *[_type == \'page\' && slug.current == $slug][0]{\n    _id,\n    _type,\n    name,\n    slug,\n    heading,\n    subheading,\n    \n  "pageBuilder": pageBuilder[]{\n    ...,\n    _type == "callToAction" => {\n      ...,\n      button \n  {\n    ...,\n    \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n      }\n\n  }\n\n    },\n    _type == "infoSection" => {\n      content[]{\n        ...,\n        markDefs[]{\n          ...,\n          \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n        }\n      }\n    },\n    _type == "hero" => {\n      ...,\n      primaryCta \n  {\n    ...,\n    \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n      }\n\n  }\n,\n      secondaryCta \n  {\n    ...,\n    \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n      }\n\n  }\n\n    },\n    _type == "featureCards" => {\n      ...,\n      cta \n  {\n    ...,\n    \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n      }\n\n  }\n\n    },\n    _type == "serviceTabs" => {\n      ...,\n      tabs[]->{\n        _id,\n        title,\n        slug,\n        shortDescription,\n        tabImage,\n        tabCta \n  {\n    ...,\n    \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n      }\n\n  }\n\n      }\n    },\n    _type == "testimonials" => {\n      ...,\n      reviews[]->{\n        _id,\n        quote,\n        authorName,\n        authorLabel,\n        rating\n      }\n    },\n    _type == "ctaBanner" => {\n      ...,\n      cta \n  {\n    ...,\n    \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n      }\n\n  }\n\n    },\n    _type == "splitContent" => {\n      ...,\n      link {\n        ...,\n        link {\n          ...,\n          \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n        }\n      }\n    },\n    _type == "faqAccordion" => {\n      ...,\n      faqs[]{\n        ...,\n        answer[]{\n          ...,\n          markDefs[]{\n            ...,\n            \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n          }\n        }\n      }\n    },\n    _type == "pricingTable" => {\n      ...,\n      categories[]{\n        ...,\n        tiers[]{\n          ...,\n          cta \n  {\n    ...,\n    \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n      }\n\n  }\n\n        }\n      }\n    },\n    _type == "contactForm" => {\n      ...,\n      description[]{\n        ...,\n        markDefs[]{\n          ...,\n          \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n        }\n      }\n    },\n    _type == "heroSplit" => {\n      ...,\n      primaryCta \n  {\n    ...,\n    \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n      }\n\n  }\n,\n      secondaryCta \n  {\n    ...,\n    \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n      }\n\n  }\n\n    },\n    _type == "heroBanner" => {\n      ...,\n      primaryCta \n  {\n    ...,\n    \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n      }\n\n  }\n\n    },\n    _type == "heroMinimal" => {\n      ...\n    },\n    _type == "serviceCards" => {\n      ...,\n      cards[]{\n        ...,\n        cta \n  {\n    ...,\n    \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n      }\n\n  }\n\n      }\n    },\n    _type == "featureList" => {\n      ...,\n      features[]{\n        ...,\n        body[]{\n          ...,\n          markDefs[]{\n            ...,\n            \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n          }\n        },\n        cta \n  {\n    ...,\n    \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n      }\n\n  }\n\n      }\n    },\n    _type == "processSteps" => {\n      ...,\n      cta \n  {\n    ...,\n    \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n      }\n\n  }\n\n    },\n    _type == "contentColumns" => {\n      ...,\n      columns[]{\n        ...,\n        body[]{\n          ...,\n          markDefs[]{\n            ...,\n            \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n          }\n        },\n        cta \n  {\n    ...,\n    \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n      }\n\n  }\n\n      }\n    },\n    _type == "fullWidthMedia" => {\n      ...,\n      cta \n  {\n    ...,\n    \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n      }\n\n  }\n\n    },\n    _type == "ctaStrip" => {\n      ...,\n      cta \n  {\n    ...,\n    \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n      }\n\n  }\n\n    },\n    _type == "pricingMatrix" => {\n      ...\n    },\n    _type == "pricingList" => {\n      ...\n    },\n    _type == "policyNotes" => {\n      ...\n    },\n    _type == "featureGrid" => {\n      ...,\n      cta \n  {\n    ...,\n    \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n      }\n\n  }\n\n    },\n    _type == "pricingCalculator" => {\n      ...,\n      ctaLink {\n        ...,\n        \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n      }\n    },\n    _type == "whatsIncluded" => {\n      ...\n    },\n    _type == "requirementsList" => {\n      ...,\n      link {\n        ...,\n        link {\n          ...,\n          \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n        }\n      }\n    },\n    _type == "galleryGrid" => {\n      ...\n    },\n    _type == "galleryCarousel" => {\n      ...\n    },\n    _type == "galleryShowcase" => {\n      ...\n    },\n    _type == "galleryPage" => {\n      ...\n    },\n    _type == "webcamGrid" => {\n      ...,\n      "webcams": *[_type == "webcam" && enabled == true] | order(group asc, sortOrder asc) {\n        _id, name, cameraId, group, sortOrder\n      }\n    },\n  }\n,\n  }\n': GetPageQueryResult
-    '\n  *[_type == \'page\' && slug.current == \'homepage\'][0]{\n    _id,\n    _type,\n    name,\n    slug,\n    heading,\n    subheading,\n    \n  "pageBuilder": pageBuilder[]{\n    ...,\n    _type == "callToAction" => {\n      ...,\n      button \n  {\n    ...,\n    \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n      }\n\n  }\n\n    },\n    _type == "infoSection" => {\n      content[]{\n        ...,\n        markDefs[]{\n          ...,\n          \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n        }\n      }\n    },\n    _type == "hero" => {\n      ...,\n      primaryCta \n  {\n    ...,\n    \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n      }\n\n  }\n,\n      secondaryCta \n  {\n    ...,\n    \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n      }\n\n  }\n\n    },\n    _type == "featureCards" => {\n      ...,\n      cta \n  {\n    ...,\n    \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n      }\n\n  }\n\n    },\n    _type == "serviceTabs" => {\n      ...,\n      tabs[]->{\n        _id,\n        title,\n        slug,\n        shortDescription,\n        tabImage,\n        tabCta \n  {\n    ...,\n    \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n      }\n\n  }\n\n      }\n    },\n    _type == "testimonials" => {\n      ...,\n      reviews[]->{\n        _id,\n        quote,\n        authorName,\n        authorLabel,\n        rating\n      }\n    },\n    _type == "ctaBanner" => {\n      ...,\n      cta \n  {\n    ...,\n    \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n      }\n\n  }\n\n    },\n    _type == "splitContent" => {\n      ...,\n      link {\n        ...,\n        link {\n          ...,\n          \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n        }\n      }\n    },\n    _type == "faqAccordion" => {\n      ...,\n      faqs[]{\n        ...,\n        answer[]{\n          ...,\n          markDefs[]{\n            ...,\n            \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n          }\n        }\n      }\n    },\n    _type == "pricingTable" => {\n      ...,\n      categories[]{\n        ...,\n        tiers[]{\n          ...,\n          cta \n  {\n    ...,\n    \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n      }\n\n  }\n\n        }\n      }\n    },\n    _type == "contactForm" => {\n      ...,\n      description[]{\n        ...,\n        markDefs[]{\n          ...,\n          \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n        }\n      }\n    },\n    _type == "heroSplit" => {\n      ...,\n      primaryCta \n  {\n    ...,\n    \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n      }\n\n  }\n,\n      secondaryCta \n  {\n    ...,\n    \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n      }\n\n  }\n\n    },\n    _type == "heroBanner" => {\n      ...,\n      primaryCta \n  {\n    ...,\n    \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n      }\n\n  }\n\n    },\n    _type == "heroMinimal" => {\n      ...\n    },\n    _type == "serviceCards" => {\n      ...,\n      cards[]{\n        ...,\n        cta \n  {\n    ...,\n    \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n      }\n\n  }\n\n      }\n    },\n    _type == "featureList" => {\n      ...,\n      features[]{\n        ...,\n        body[]{\n          ...,\n          markDefs[]{\n            ...,\n            \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n          }\n        },\n        cta \n  {\n    ...,\n    \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n      }\n\n  }\n\n      }\n    },\n    _type == "processSteps" => {\n      ...,\n      cta \n  {\n    ...,\n    \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n      }\n\n  }\n\n    },\n    _type == "contentColumns" => {\n      ...,\n      columns[]{\n        ...,\n        body[]{\n          ...,\n          markDefs[]{\n            ...,\n            \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n          }\n        },\n        cta \n  {\n    ...,\n    \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n      }\n\n  }\n\n      }\n    },\n    _type == "fullWidthMedia" => {\n      ...,\n      cta \n  {\n    ...,\n    \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n      }\n\n  }\n\n    },\n    _type == "ctaStrip" => {\n      ...,\n      cta \n  {\n    ...,\n    \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n      }\n\n  }\n\n    },\n    _type == "pricingMatrix" => {\n      ...\n    },\n    _type == "pricingList" => {\n      ...\n    },\n    _type == "policyNotes" => {\n      ...\n    },\n    _type == "featureGrid" => {\n      ...,\n      cta \n  {\n    ...,\n    \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n      }\n\n  }\n\n    },\n    _type == "pricingCalculator" => {\n      ...,\n      ctaLink {\n        ...,\n        \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n      }\n    },\n    _type == "whatsIncluded" => {\n      ...\n    },\n    _type == "requirementsList" => {\n      ...,\n      link {\n        ...,\n        link {\n          ...,\n          \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n        }\n      }\n    },\n    _type == "galleryGrid" => {\n      ...\n    },\n    _type == "galleryCarousel" => {\n      ...\n    },\n    _type == "galleryShowcase" => {\n      ...\n    },\n    _type == "galleryPage" => {\n      ...\n    },\n    _type == "webcamGrid" => {\n      ...,\n      "webcams": *[_type == "webcam" && enabled == true] | order(group asc, sortOrder asc) {\n        _id, name, cameraId, group, sortOrder\n      }\n    },\n  }\n,\n  }\n': HomepageQueryResult
+    '*[_type == "settings"][0]{\n  ...,\n  navItems[]{\n    ...,\n    \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n      }\n,\n    children[]{\n      ...,\n      \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n      }\n\n    }\n  },\n  ctaButton {\n    ...,\n    \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n      }\n\n  },\n  footerColumns[]{\n    ...,\n    links[]{\n      ...,\n      \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n      }\n\n    }\n  },\n  contactInfo,\n  footerTagline,\n  footerText,\n  footerTextLink,\n  footerBottomLinks[]{\n    ...,\n    \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n      }\n\n  },\n  logo,\n  yearEstablished,\n  socialLinks\n}': SettingsQueryResult
+    '\n  *[_type == \'page\' && slug.current == $slug][0]{\n    _id,\n    _type,\n    name,\n    slug,\n    heading,\n    subheading,\n    \n  "pageBuilder": pageBuilder[]{\n    ...,\n    _type == "callToAction" => {\n      ...,\n      button \n  {\n    ...,\n    \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n      }\n\n  }\n\n    },\n    _type == "infoSection" => {\n      content[]{\n        ...,\n        markDefs[]{\n          ...,\n          \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n        }\n      }\n    },\n    _type == "hero" => {\n      ...,\n      primaryCta \n  {\n    ...,\n    \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n      }\n\n  }\n,\n      secondaryCta \n  {\n    ...,\n    \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n      }\n\n  }\n\n    },\n    _type == "featureCards" => {\n      ...,\n      cta \n  {\n    ...,\n    \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n      }\n\n  }\n\n    },\n    _type == "serviceTabs" => {\n      ...,\n      tabs[]->{\n        _id,\n        title,\n        slug,\n        sticker,\n        shortDescription,\n        tabImage,\n        tabCta \n  {\n    ...,\n    \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n      }\n\n  }\n\n      }\n    },\n    _type == "testimonials" => {\n      ...,\n      reviews[]->{\n        _id,\n        quote,\n        authorName,\n        authorLabel,\n        rating\n      }\n    },\n    _type == "ctaBanner" => {\n      ...,\n      cta \n  {\n    ...,\n    \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n      }\n\n  }\n\n    },\n    _type == "splitContent" => {\n      ...,\n      link {\n        ...,\n        link {\n          ...,\n          \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n        }\n      }\n    },\n    _type == "faqAccordion" => {\n      ...,\n      faqs[]{\n        ...,\n        answer[]{\n          ...,\n          markDefs[]{\n            ...,\n            \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n          }\n        }\n      }\n    },\n    _type == "pricingTable" => {\n      ...,\n      categories[]{\n        ...,\n        tiers[]{\n          ...,\n          cta \n  {\n    ...,\n    \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n      }\n\n  }\n\n        }\n      }\n    },\n    _type == "contactForm" => {\n      ...,\n      description[]{\n        ...,\n        markDefs[]{\n          ...,\n          \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n        }\n      }\n    },\n    _type == "heroSplit" => {\n      ...,\n      primaryCta \n  {\n    ...,\n    \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n      }\n\n  }\n,\n      secondaryCta \n  {\n    ...,\n    \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n      }\n\n  }\n\n    },\n    _type == "heroBanner" => {\n      ...,\n      primaryCta \n  {\n    ...,\n    \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n      }\n\n  }\n\n    },\n    _type == "heroMinimal" => {\n      ...\n    },\n    _type == "serviceCards" => {\n      ...,\n      cards[]{\n        ...,\n        cta \n  {\n    ...,\n    \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n      }\n\n  }\n\n      }\n    },\n    _type == "featureList" => {\n      ...,\n      features[]{\n        ...,\n        body[]{\n          ...,\n          markDefs[]{\n            ...,\n            \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n          }\n        },\n        cta \n  {\n    ...,\n    \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n      }\n\n  }\n\n      }\n    },\n    _type == "processSteps" => {\n      ...,\n      cta \n  {\n    ...,\n    \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n      }\n\n  }\n\n    },\n    _type == "contentColumns" => {\n      ...,\n      columns[]{\n        ...,\n        body[]{\n          ...,\n          markDefs[]{\n            ...,\n            \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n          }\n        },\n        cta \n  {\n    ...,\n    \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n      }\n\n  }\n\n      }\n    },\n    _type == "fullWidthMedia" => {\n      ...,\n      cta \n  {\n    ...,\n    \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n      }\n\n  }\n\n    },\n    _type == "ctaStrip" => {\n      ...,\n      cta \n  {\n    ...,\n    \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n      }\n\n  }\n\n    },\n    _type == "pricingMatrix" => {\n      ...\n    },\n    _type == "pricingList" => {\n      ...\n    },\n    _type == "policyNotes" => {\n      ...\n    },\n    _type == "featureGrid" => {\n      ...,\n      cta \n  {\n    ...,\n    \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n      }\n\n  }\n\n    },\n    _type == "pricingCalculator" => {\n      ...,\n      ctaLink {\n        ...,\n        \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n      }\n    },\n    _type == "whatsIncluded" => {\n      ...\n    },\n    _type == "requirementsList" => {\n      ...,\n      link {\n        ...,\n        link {\n          ...,\n          \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n        }\n      }\n    },\n    _type == "galleryGrid" => {\n      ...\n    },\n    _type == "galleryCarousel" => {\n      ...\n    },\n    _type == "galleryShowcase" => {\n      ...\n    },\n    _type == "galleryPage" => {\n      ...\n    },\n    _type == "webcamGrid" => {\n      ...,\n      "webcams": *[_type == "webcam" && enabled == true] | order(group asc, sortOrder asc) {\n        _id, name, cameraId, group, sortOrder\n      }\n    },\n  }\n,\n  }\n': GetPageQueryResult
+    '\n  *[_type == \'page\' && slug.current == \'homepage\'][0]{\n    _id,\n    _type,\n    name,\n    slug,\n    heading,\n    subheading,\n    \n  "pageBuilder": pageBuilder[]{\n    ...,\n    _type == "callToAction" => {\n      ...,\n      button \n  {\n    ...,\n    \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n      }\n\n  }\n\n    },\n    _type == "infoSection" => {\n      content[]{\n        ...,\n        markDefs[]{\n          ...,\n          \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n        }\n      }\n    },\n    _type == "hero" => {\n      ...,\n      primaryCta \n  {\n    ...,\n    \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n      }\n\n  }\n,\n      secondaryCta \n  {\n    ...,\n    \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n      }\n\n  }\n\n    },\n    _type == "featureCards" => {\n      ...,\n      cta \n  {\n    ...,\n    \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n      }\n\n  }\n\n    },\n    _type == "serviceTabs" => {\n      ...,\n      tabs[]->{\n        _id,\n        title,\n        slug,\n        sticker,\n        shortDescription,\n        tabImage,\n        tabCta \n  {\n    ...,\n    \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n      }\n\n  }\n\n      }\n    },\n    _type == "testimonials" => {\n      ...,\n      reviews[]->{\n        _id,\n        quote,\n        authorName,\n        authorLabel,\n        rating\n      }\n    },\n    _type == "ctaBanner" => {\n      ...,\n      cta \n  {\n    ...,\n    \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n      }\n\n  }\n\n    },\n    _type == "splitContent" => {\n      ...,\n      link {\n        ...,\n        link {\n          ...,\n          \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n        }\n      }\n    },\n    _type == "faqAccordion" => {\n      ...,\n      faqs[]{\n        ...,\n        answer[]{\n          ...,\n          markDefs[]{\n            ...,\n            \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n          }\n        }\n      }\n    },\n    _type == "pricingTable" => {\n      ...,\n      categories[]{\n        ...,\n        tiers[]{\n          ...,\n          cta \n  {\n    ...,\n    \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n      }\n\n  }\n\n        }\n      }\n    },\n    _type == "contactForm" => {\n      ...,\n      description[]{\n        ...,\n        markDefs[]{\n          ...,\n          \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n        }\n      }\n    },\n    _type == "heroSplit" => {\n      ...,\n      primaryCta \n  {\n    ...,\n    \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n      }\n\n  }\n,\n      secondaryCta \n  {\n    ...,\n    \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n      }\n\n  }\n\n    },\n    _type == "heroBanner" => {\n      ...,\n      primaryCta \n  {\n    ...,\n    \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n      }\n\n  }\n\n    },\n    _type == "heroMinimal" => {\n      ...\n    },\n    _type == "serviceCards" => {\n      ...,\n      cards[]{\n        ...,\n        cta \n  {\n    ...,\n    \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n      }\n\n  }\n\n      }\n    },\n    _type == "featureList" => {\n      ...,\n      features[]{\n        ...,\n        body[]{\n          ...,\n          markDefs[]{\n            ...,\n            \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n          }\n        },\n        cta \n  {\n    ...,\n    \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n      }\n\n  }\n\n      }\n    },\n    _type == "processSteps" => {\n      ...,\n      cta \n  {\n    ...,\n    \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n      }\n\n  }\n\n    },\n    _type == "contentColumns" => {\n      ...,\n      columns[]{\n        ...,\n        body[]{\n          ...,\n          markDefs[]{\n            ...,\n            \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n          }\n        },\n        cta \n  {\n    ...,\n    \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n      }\n\n  }\n\n      }\n    },\n    _type == "fullWidthMedia" => {\n      ...,\n      cta \n  {\n    ...,\n    \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n      }\n\n  }\n\n    },\n    _type == "ctaStrip" => {\n      ...,\n      cta \n  {\n    ...,\n    \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n      }\n\n  }\n\n    },\n    _type == "pricingMatrix" => {\n      ...\n    },\n    _type == "pricingList" => {\n      ...\n    },\n    _type == "policyNotes" => {\n      ...\n    },\n    _type == "featureGrid" => {\n      ...,\n      cta \n  {\n    ...,\n    \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n      }\n\n  }\n\n    },\n    _type == "pricingCalculator" => {\n      ...,\n      ctaLink {\n        ...,\n        \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n      }\n    },\n    _type == "whatsIncluded" => {\n      ...\n    },\n    _type == "requirementsList" => {\n      ...,\n      link {\n        ...,\n        link {\n          ...,\n          \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n        }\n      }\n    },\n    _type == "galleryGrid" => {\n      ...\n    },\n    _type == "galleryCarousel" => {\n      ...\n    },\n    _type == "galleryShowcase" => {\n      ...\n    },\n    _type == "galleryPage" => {\n      ...\n    },\n    _type == "webcamGrid" => {\n      ...,\n      "webcams": *[_type == "webcam" && enabled == true] | order(group asc, sortOrder asc) {\n        _id, name, cameraId, group, sortOrder\n      }\n    },\n  }\n,\n  }\n': HomepageQueryResult
     '\n  *[_type == "page" && defined(slug.current)] | order(_type asc) {\n    "slug": slug.current,\n    _type,\n    _updatedAt,\n  }\n': SitemapDataResult
     '\n  *[_type == "page" && defined(slug.current)]\n  {"slug": slug.current}\n': PagesSlugsResult
-    '\n  *[_type == \'service\' && slug.current == $slug][0]{\n    _id,\n    _type,\n    title,\n    slug,\n    heading,\n    shortDescription,\n    \n  "pageBuilder": pageBuilder[]{\n    ...,\n    _type == "callToAction" => {\n      ...,\n      button \n  {\n    ...,\n    \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n      }\n\n  }\n\n    },\n    _type == "infoSection" => {\n      content[]{\n        ...,\n        markDefs[]{\n          ...,\n          \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n        }\n      }\n    },\n    _type == "hero" => {\n      ...,\n      primaryCta \n  {\n    ...,\n    \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n      }\n\n  }\n,\n      secondaryCta \n  {\n    ...,\n    \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n      }\n\n  }\n\n    },\n    _type == "featureCards" => {\n      ...,\n      cta \n  {\n    ...,\n    \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n      }\n\n  }\n\n    },\n    _type == "serviceTabs" => {\n      ...,\n      tabs[]->{\n        _id,\n        title,\n        slug,\n        shortDescription,\n        tabImage,\n        tabCta \n  {\n    ...,\n    \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n      }\n\n  }\n\n      }\n    },\n    _type == "testimonials" => {\n      ...,\n      reviews[]->{\n        _id,\n        quote,\n        authorName,\n        authorLabel,\n        rating\n      }\n    },\n    _type == "ctaBanner" => {\n      ...,\n      cta \n  {\n    ...,\n    \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n      }\n\n  }\n\n    },\n    _type == "splitContent" => {\n      ...,\n      link {\n        ...,\n        link {\n          ...,\n          \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n        }\n      }\n    },\n    _type == "faqAccordion" => {\n      ...,\n      faqs[]{\n        ...,\n        answer[]{\n          ...,\n          markDefs[]{\n            ...,\n            \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n          }\n        }\n      }\n    },\n    _type == "pricingTable" => {\n      ...,\n      categories[]{\n        ...,\n        tiers[]{\n          ...,\n          cta \n  {\n    ...,\n    \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n      }\n\n  }\n\n        }\n      }\n    },\n    _type == "contactForm" => {\n      ...,\n      description[]{\n        ...,\n        markDefs[]{\n          ...,\n          \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n        }\n      }\n    },\n    _type == "heroSplit" => {\n      ...,\n      primaryCta \n  {\n    ...,\n    \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n      }\n\n  }\n,\n      secondaryCta \n  {\n    ...,\n    \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n      }\n\n  }\n\n    },\n    _type == "heroBanner" => {\n      ...,\n      primaryCta \n  {\n    ...,\n    \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n      }\n\n  }\n\n    },\n    _type == "heroMinimal" => {\n      ...\n    },\n    _type == "serviceCards" => {\n      ...,\n      cards[]{\n        ...,\n        cta \n  {\n    ...,\n    \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n      }\n\n  }\n\n      }\n    },\n    _type == "featureList" => {\n      ...,\n      features[]{\n        ...,\n        body[]{\n          ...,\n          markDefs[]{\n            ...,\n            \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n          }\n        },\n        cta \n  {\n    ...,\n    \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n      }\n\n  }\n\n      }\n    },\n    _type == "processSteps" => {\n      ...,\n      cta \n  {\n    ...,\n    \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n      }\n\n  }\n\n    },\n    _type == "contentColumns" => {\n      ...,\n      columns[]{\n        ...,\n        body[]{\n          ...,\n          markDefs[]{\n            ...,\n            \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n          }\n        },\n        cta \n  {\n    ...,\n    \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n      }\n\n  }\n\n      }\n    },\n    _type == "fullWidthMedia" => {\n      ...,\n      cta \n  {\n    ...,\n    \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n      }\n\n  }\n\n    },\n    _type == "ctaStrip" => {\n      ...,\n      cta \n  {\n    ...,\n    \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n      }\n\n  }\n\n    },\n    _type == "pricingMatrix" => {\n      ...\n    },\n    _type == "pricingList" => {\n      ...\n    },\n    _type == "policyNotes" => {\n      ...\n    },\n    _type == "featureGrid" => {\n      ...,\n      cta \n  {\n    ...,\n    \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n      }\n\n  }\n\n    },\n    _type == "pricingCalculator" => {\n      ...,\n      ctaLink {\n        ...,\n        \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n      }\n    },\n    _type == "whatsIncluded" => {\n      ...\n    },\n    _type == "requirementsList" => {\n      ...,\n      link {\n        ...,\n        link {\n          ...,\n          \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n        }\n      }\n    },\n    _type == "galleryGrid" => {\n      ...\n    },\n    _type == "galleryCarousel" => {\n      ...\n    },\n    _type == "galleryShowcase" => {\n      ...\n    },\n    _type == "galleryPage" => {\n      ...\n    },\n    _type == "webcamGrid" => {\n      ...,\n      "webcams": *[_type == "webcam" && enabled == true] | order(group asc, sortOrder asc) {\n        _id, name, cameraId, group, sortOrder\n      }\n    },\n  }\n,\n  }\n': GetServiceQueryResult
+    '\n  *[_type == \'service\' && slug.current == $slug][0]{\n    _id,\n    _type,\n    title,\n    slug,\n    heading,\n    shortDescription,\n    \n  "pageBuilder": pageBuilder[]{\n    ...,\n    _type == "callToAction" => {\n      ...,\n      button \n  {\n    ...,\n    \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n      }\n\n  }\n\n    },\n    _type == "infoSection" => {\n      content[]{\n        ...,\n        markDefs[]{\n          ...,\n          \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n        }\n      }\n    },\n    _type == "hero" => {\n      ...,\n      primaryCta \n  {\n    ...,\n    \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n      }\n\n  }\n,\n      secondaryCta \n  {\n    ...,\n    \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n      }\n\n  }\n\n    },\n    _type == "featureCards" => {\n      ...,\n      cta \n  {\n    ...,\n    \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n      }\n\n  }\n\n    },\n    _type == "serviceTabs" => {\n      ...,\n      tabs[]->{\n        _id,\n        title,\n        slug,\n        sticker,\n        shortDescription,\n        tabImage,\n        tabCta \n  {\n    ...,\n    \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n      }\n\n  }\n\n      }\n    },\n    _type == "testimonials" => {\n      ...,\n      reviews[]->{\n        _id,\n        quote,\n        authorName,\n        authorLabel,\n        rating\n      }\n    },\n    _type == "ctaBanner" => {\n      ...,\n      cta \n  {\n    ...,\n    \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n      }\n\n  }\n\n    },\n    _type == "splitContent" => {\n      ...,\n      link {\n        ...,\n        link {\n          ...,\n          \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n        }\n      }\n    },\n    _type == "faqAccordion" => {\n      ...,\n      faqs[]{\n        ...,\n        answer[]{\n          ...,\n          markDefs[]{\n            ...,\n            \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n          }\n        }\n      }\n    },\n    _type == "pricingTable" => {\n      ...,\n      categories[]{\n        ...,\n        tiers[]{\n          ...,\n          cta \n  {\n    ...,\n    \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n      }\n\n  }\n\n        }\n      }\n    },\n    _type == "contactForm" => {\n      ...,\n      description[]{\n        ...,\n        markDefs[]{\n          ...,\n          \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n        }\n      }\n    },\n    _type == "heroSplit" => {\n      ...,\n      primaryCta \n  {\n    ...,\n    \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n      }\n\n  }\n,\n      secondaryCta \n  {\n    ...,\n    \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n      }\n\n  }\n\n    },\n    _type == "heroBanner" => {\n      ...,\n      primaryCta \n  {\n    ...,\n    \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n      }\n\n  }\n\n    },\n    _type == "heroMinimal" => {\n      ...\n    },\n    _type == "serviceCards" => {\n      ...,\n      cards[]{\n        ...,\n        cta \n  {\n    ...,\n    \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n      }\n\n  }\n\n      }\n    },\n    _type == "featureList" => {\n      ...,\n      features[]{\n        ...,\n        body[]{\n          ...,\n          markDefs[]{\n            ...,\n            \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n          }\n        },\n        cta \n  {\n    ...,\n    \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n      }\n\n  }\n\n      }\n    },\n    _type == "processSteps" => {\n      ...,\n      cta \n  {\n    ...,\n    \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n      }\n\n  }\n\n    },\n    _type == "contentColumns" => {\n      ...,\n      columns[]{\n        ...,\n        body[]{\n          ...,\n          markDefs[]{\n            ...,\n            \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n          }\n        },\n        cta \n  {\n    ...,\n    \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n      }\n\n  }\n\n      }\n    },\n    _type == "fullWidthMedia" => {\n      ...,\n      cta \n  {\n    ...,\n    \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n      }\n\n  }\n\n    },\n    _type == "ctaStrip" => {\n      ...,\n      cta \n  {\n    ...,\n    \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n      }\n\n  }\n\n    },\n    _type == "pricingMatrix" => {\n      ...\n    },\n    _type == "pricingList" => {\n      ...\n    },\n    _type == "policyNotes" => {\n      ...\n    },\n    _type == "featureGrid" => {\n      ...,\n      cta \n  {\n    ...,\n    \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n      }\n\n  }\n\n    },\n    _type == "pricingCalculator" => {\n      ...,\n      ctaLink {\n        ...,\n        \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n      }\n    },\n    _type == "whatsIncluded" => {\n      ...\n    },\n    _type == "requirementsList" => {\n      ...,\n      link {\n        ...,\n        link {\n          ...,\n          \n  _type == "link" => {\n    "page": page->slug.current,\n    "pageType": page->_type\n  }\n\n        }\n      }\n    },\n    _type == "galleryGrid" => {\n      ...\n    },\n    _type == "galleryCarousel" => {\n      ...\n    },\n    _type == "galleryShowcase" => {\n      ...\n    },\n    _type == "galleryPage" => {\n      ...\n    },\n    _type == "webcamGrid" => {\n      ...,\n      "webcams": *[_type == "webcam" && enabled == true] | order(group asc, sortOrder asc) {\n        _id, name, cameraId, group, sortOrder\n      }\n    },\n  }\n,\n  }\n': GetServiceQueryResult
     '\n  *[_type == "service" && defined(slug.current)]\n  {"slug": slug.current}\n': ServiceSlugsResult
     '\n  *[_type == "service" && defined(slug.current)] | order(title asc) {\n    _id, title, "slug": slug.current\n  }\n': ServicesNavQueryResult
   }

@@ -11,6 +11,7 @@ type TeamGridProps = {
       name?: string
       role?: string
       bio?: string
+      certifications?: string
       image?: {asset?: {_ref: string}; crop?: any; hotspot?: any}
     }>
   }
@@ -29,7 +30,7 @@ export default function TeamGrid({block}: TeamGridProps) {
           <div className="text-center max-w-2xl mx-auto mb-12 lg:mb-16">
             {eyebrow && <Badge className="mb-3">{eyebrow}</Badge>}
             {heading && (
-              <h2 className="text-[36px] md:text-[48px] lg:text-[56px] leading-[105%] text-forest mb-4">
+              <h2 className="text-[36px] md:text-[48px] lg:text-[56px] font-semibold tracking-tight leading-[105%] text-forest mb-4">
                 {heading}
               </h2>
             )}
@@ -54,13 +55,18 @@ export default function TeamGrid({block}: TeamGridProps) {
                     </div>
                   )}
                   {member.name && (
-                    <h3 className="font-sans text-[20px] md:text-[24px] font-medium text-forest mb-1">
+                    <h3 className="font-sans text-[20px] md:text-[24px] font-semibold text-forest mb-1">
                       {member.name}
                     </h3>
                   )}
                   {member.role && (
-                    <p className="font-sans text-[14px] font-medium uppercase tracking-[0.08em] text-terracotta mb-3">
+                    <p className="font-sans text-[14px] font-medium uppercase tracking-[0.08em] text-terracotta mb-1">
                       {member.role}
+                    </p>
+                  )}
+                  {member.certifications && (
+                    <p className="font-sans text-[13px] text-sage italic mb-3">
+                      {member.certifications}
                     </p>
                   )}
                   {member.bio && (

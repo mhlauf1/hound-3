@@ -28,7 +28,7 @@ export default function Button({
   onClick,
   type = 'button',
 }: ButtonProps) {
-  const baseStyles = `inline-flex items-center justify-center whitespace-nowrap font-sans font-medium text-[14px] md:text-[16px] tracking-[0.02em] w-full md:w-auto px-7 py-3.5 rounded-md ${variants[variant]} ${className}`
+  const baseStyles = `inline-flex items-center justify-center whitespace-nowrap font-sans font-medium text-[14px] md:text-[16px] tracking-[0.02em] w-full md:w-auto px-8 py-4 rounded-lg ${variants[variant]} ${className}`
 
   const resolvedHref = link ? linkResolver(link) : href
 

@@ -78,6 +78,7 @@ export const page = defineType({
         {type: 'galleryCarousel'},
         {type: 'galleryShowcase'},
         {type: 'galleryPage'},
+        {type: 'valuePillars'},
       ],
       options: {
         insertMenu: {

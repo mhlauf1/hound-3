@@ -101,7 +101,7 @@ export default function VideoSection({block}: VideoSectionProps) {
               )}
               {heading && (
                 <FadeIn delay={0.05}>
-                  <h2 className="text-[36px] md:text-[48px] lg:text-[56px] leading-[105%] mb-4">
+                  <h2 className="text-[36px] md:text-[48px] lg:text-[56px] font-semibold tracking-tight leading-[105%] mb-4">
                     {heading}
                   </h2>
                 </FadeIn>
@@ -131,7 +131,7 @@ export default function VideoSection({block}: VideoSectionProps) {
             <div className="text-center mb-10 lg:mb-14 max-w-2xl mx-auto">
               {eyebrow && <Badge className="mb-3">{eyebrow}</Badge>}
               {heading && (
-                <h2 className="text-[36px] md:text-[48px] lg:text-[56px] leading-[105%] mb-4">
+                <h2 className="text-[36px] md:text-[48px] lg:text-[56px] font-semibold tracking-tight leading-[105%] mb-4">
                   {heading}
                 </h2>
               )}

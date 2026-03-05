@@ -38,7 +38,7 @@ export default async function Page(props: Props) {
   if (!page?._id) {
     return (
       <div className="container py-20 text-center">
-        <h1 className="font-serif text-[36px] mb-4">Page not found</h1>
+        <h1 className="font-heading text-[36px] mb-4">Page not found</h1>
         <p className="font-sans text-text-muted">This page doesn&apos;t exist yet.</p>
       </div>
     )

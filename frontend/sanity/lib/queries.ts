@@ -43,7 +43,9 @@ export const settingsQuery = defineQuery(`*[_type == "settings"][0]{
     ...,
     ${linkFields}
   },
-  logo
+  logo,
+  yearEstablished,
+  socialLinks
 }`)
 
 const buttonFields = /* groq */ `
@@ -84,6 +86,7 @@ const pageBuilderExpansion = /* groq */ `
         _id,
         title,
         slug,
+        sticker,
         shortDescription,
         tabImage,
         tabCta ${buttonFields}

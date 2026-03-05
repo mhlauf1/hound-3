@@ -14,6 +14,12 @@ export const featureCards = defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
+      name: 'subheading',
+      title: 'Subheading',
+      type: 'text',
+      rows: 2,
+    }),
+    defineField({
       name: 'stickerLeft',
       title: 'Left Sticker',
       type: 'image',

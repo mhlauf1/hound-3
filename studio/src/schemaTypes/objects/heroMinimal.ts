@@ -13,6 +13,12 @@ export const heroMinimal = defineType({
       type: 'string',
     }),
     defineField({
+      name: 'rating',
+      title: 'Rating',
+      type: 'string',
+      description: 'e.g. "4.8" — when set, the eyebrow badge becomes a scrolling ticker with stars + rating',
+    }),
+    defineField({
       name: 'heading',
       title: 'Heading',
       type: 'string',

@@ -77,7 +77,7 @@ export default function FeatureGrid({block}: FeatureGridProps) {
           <div className="flex flex-col md:flex-row md:justify-between md:items-end gap-4 mb-10 lg:mb-14">
             {heading && (
               <h2
-                className={`text-[36px] md:text-[48px] lg:text-[56px] leading-[105%] ${colors.heading}`}
+                className={`text-[36px] md:text-[48px] lg:text-[56px] font-semibold tracking-tight leading-[105%] ${colors.heading}`}
               >
                 {heading}
               </h2>
@@ -124,7 +124,9 @@ export default function FeatureGrid({block}: FeatureGridProps) {
                     </h3>
                   )}
                   {item.description && (
-                    <p className={`font-sans text-[14px] md:text-[16px] font-light leading-[150%] ${colors.muted}`}>
+                    <p
+                      className={`font-sans text-[14px] md:text-[16px] font-light leading-[150%] ${colors.muted}`}
+                    >
                       {item.description}
                     </p>
                   )}

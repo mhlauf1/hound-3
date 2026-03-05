@@ -34,7 +34,6 @@ export const heroBanner = defineType({
       title: 'Background Image',
       type: 'image',
       options: {hotspot: true},
-      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'overlayOpacity',

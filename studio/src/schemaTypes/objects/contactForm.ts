@@ -107,6 +107,35 @@ export const contactForm = defineType({
       hidden: ({parent}) => !parent?.showMap,
     }),
     defineField({
+      name: 'nextSteps',
+      title: 'Next Steps',
+      type: 'array',
+      description: 'Show numbered steps below the form to set expectations',
+      of: [
+        defineArrayMember({
+          type: 'object',
+          name: 'nextStep',
+          fields: [
+            defineField({
+              name: 'title',
+              title: 'Title',
+              type: 'string',
+              validation: (Rule) => Rule.required(),
+            }),
+            defineField({
+              name: 'description',
+              title: 'Description',
+              type: 'text',
+              rows: 2,
+            }),
+          ],
+          preview: {
+            select: {title: 'title', subtitle: 'description'},
+          },
+        }),
+      ],
+    }),
+    defineField({
       name: 'image',
       title: 'Sidebar Image',
       type: 'image',

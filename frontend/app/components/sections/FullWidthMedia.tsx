@@ -44,8 +44,7 @@ const alignmentConfig: Record<string, {container: string; gradient: string; text
 export default function FullWidthMedia({block}: FullWidthMediaProps) {
   const {heading, subtext, cta, image, textAlignment, overlayOpacity} = block
   const alignment = alignmentConfig[stegaClean(textAlignment) || 'left'] || alignmentConfig.left
-  const overlay =
-    overlayClasses[stegaClean(overlayOpacity) || 'medium'] || overlayClasses.medium
+  const overlay = overlayClasses[stegaClean(overlayOpacity) || 'medium'] || overlayClasses.medium
 
   return (
     <section className="relative min-h-[50vh] lg:min-h-[70vh] flex items-center overflow-hidden">
@@ -75,7 +74,7 @@ export default function FullWidthMedia({block}: FullWidthMediaProps) {
         <div className={alignment.text}>
           {heading && (
             <FadeIn>
-              <h2 className="text-[36px] md:text-[48px] lg:text-[56px] leading-[105%] text-white mb-4">
+              <h2 className="text-[36px] md:text-[48px] lg:text-[56px] font-semibold tracking-tight leading-[105%] text-white mb-4">
                 {heading}
               </h2>
             </FadeIn>
