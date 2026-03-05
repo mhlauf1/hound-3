@@ -40,7 +40,7 @@ export default function CtaStrip({block}: CtaStripProps) {
               )}
               {subtext && (
                 <p
-                  className={`font-sans text-[14px] md:max-w-[84ch] leading-[160%] lg:text-[16px] font-light mt-2 ${isDark ? 'opacity-80' : 'text-text-muted'}`}
+                  className={`font-sans text-[14px] md:max-w-[84ch] leading-[160%] lg:text-[16px]  mt-2 ${isDark ? 'opacity-80' : 'text-text-muted'}`}
                 >
                   {subtext}
                 </p>

@@ -78,7 +78,7 @@ export default function ContentColumns({block}: ContentColumnsProps) {
                     </h3>
                   )}
                   {col.body && (
-                    <div className="font-sans text-[16px] lg:text-[18px] font-light leading-[150%] text-text-muted mb-4 prose prose-p:mb-3">
+                    <div className="font-sans text-[16px] lg:text-[18px] leading-[150%] text-text-muted mb-4 prose prose-p:mb-3">
                       <PortableText value={col.body} />
                     </div>
                   )}

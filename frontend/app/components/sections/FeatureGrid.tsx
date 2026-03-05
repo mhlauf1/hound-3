@@ -125,7 +125,7 @@ export default function FeatureGrid({block}: FeatureGridProps) {
                   )}
                   {item.description && (
                     <p
-                      className={`font-sans text-[14px] md:text-[16px] font-light leading-[150%] ${colors.muted}`}
+                      className={`font-sans text-[14px] md:text-[16px] leading-[150%] ${colors.muted}`}
                     >
                       {item.description}
                     </p>

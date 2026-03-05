@@ -63,7 +63,7 @@ function AccordionItem({
         className={`overflow-hidden transition-all duration-300 ${isOpen ? 'max-h-96 pb-6' : 'max-h-0'}`}
       >
         {faq.answer && (
-          <div className="px-6 font-sans text-[15px] md:text-[16px] font-light leading-[170%] text-charcoal/75 prose prose-p:mb-3">
+          <div className="px-6 font-sans text-[15px] md:text-[16px] leading-[170%] text-charcoal/75 prose prose-p:mb-3">
             <PortableText value={faq.answer} />
           </div>
         )}

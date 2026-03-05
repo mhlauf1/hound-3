@@ -50,7 +50,7 @@ export default function ProcessSteps({block}: ProcessStepsProps) {
             )}
             {description && (
               <p
-                className={`font-sans text-[16px] lg:text-[18px] font-light leading-[150%] ${isDark ? 'text-text-muted-dark' : 'text-text-muted'}`}
+                className={`font-sans text-[16px] lg:text-[18px] leading-[150%] ${isDark ? 'text-text-muted-dark' : 'text-text-muted'}`}
               >
                 {description}
               </p>
@@ -88,7 +88,7 @@ export default function ProcessSteps({block}: ProcessStepsProps) {
                       {!step.badge && step.title && <div className="mb-1" />}
                       {step.description && (
                         <p
-                          className={`font-sans text-[14px] font-light leading-[150%] w-[90%] ${isDark ? 'text-text-muted-dark' : 'text-text-muted'}`}
+                          className={`font-sans text-[14px]  leading-[150%] w-[90%] ${isDark ? 'text-text-muted-dark' : 'text-text-muted'}`}
                         >
                           {step.description}
                         </p>

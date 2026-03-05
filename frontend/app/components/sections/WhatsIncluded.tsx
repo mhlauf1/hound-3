@@ -93,7 +93,7 @@ export default function WhatsIncluded({block}: WhatsIncludedProps) {
             )}
             {description && (
               <p
-                className={`font-sans text-[16px] lg:text-[18px] font-light leading-[150%] ${colors.muted} mt-4 md:mt-6`}
+                className={`font-sans text-[16px] lg:text-[18px]  leading-[150%] ${colors.muted} mt-4 md:mt-6`}
               >
                 {description}
               </p>
@@ -125,7 +125,7 @@ export default function WhatsIncluded({block}: WhatsIncludedProps) {
                     )}
                     {item.description && (
                       <p
-                        className={`font-sans text-[14px] md:text-[16px] font-light leading-[150%] ${colors.muted}`}
+                        className={`font-sans text-[14px] md:text-[16px]  leading-[150%] ${colors.muted}`}
                       >
                         {item.description}
                       </p>
@@ -150,7 +150,7 @@ export default function WhatsIncluded({block}: WhatsIncludedProps) {
                       )}
                       {item.description && (
                         <p
-                          className={`font-sans text-[14px] md:text-[16px] font-light leading-[150%] ${colors.muted}`}
+                          className={`font-sans text-[14px] md:text-[16px]  leading-[150%] ${colors.muted}`}
                         >
                           {item.description}
                         </p>

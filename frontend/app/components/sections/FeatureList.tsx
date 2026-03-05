@@ -72,7 +72,7 @@ export default function FeatureList({block}: FeatureListProps) {
                         </h3>
                       )}
                       {feature.body && (
-                        <div className="font-sans text-[16px] lg:text-[18px] font-light leading-[150%] text-text-muted mb-6 prose prose-p:mb-3">
+                        <div className="font-sans text-[16px] lg:text-[18px] leading-[150%] text-text-muted mb-6 prose prose-p:mb-3">
                           <PortableText value={feature.body} />
                         </div>
                       )}

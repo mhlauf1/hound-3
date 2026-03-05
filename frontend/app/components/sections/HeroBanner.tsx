@@ -75,7 +75,7 @@ export default function HeroBanner({block}: HeroBannerProps) {
         )}
         {subtext && (
           <FadeIn delay={0.2}>
-            <p className="font-sans text-[16px] lg:text-[18px] font-light leading-[150%] text-white/80 mb-8 max-w-2xl mx-auto">
+            <p className="font-sans text-[16px] lg:text-[18px]  leading-[150%] text-white/80 mb-8 max-w-2xl mx-auto">
               {subtext}
             </p>
           </FadeIn>

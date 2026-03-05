@@ -52,7 +52,7 @@ export default function RequirementsList({block}: RequirementsListProps) {
 
             {description && (
               <FadeIn delay={0.1}>
-                <p className="text-[16px] lg:text-[18px] md:w-[90%] font-light leading-[160%] opacity-80 mb-8">
+                <p className="text-[16px] lg:text-[18px] md:w-[90%]  leading-[160%] opacity-80 mb-8">
                   {description}
                 </p>
               </FadeIn>

@@ -65,7 +65,7 @@ export default function ServiceTabs({block}: ServiceTabsProps) {
               <button
                 key={tab._id}
                 onClick={() => setActiveTab(i)}
-                className={`relative flex-1 min-w-[120px] p-2 md:p-4 font-heading text-start text-[16px] md:text-2xl tracking-tight font-light lg:text-3xl transition-colors ${
+                className={`relative flex-1 min-w-[120px] p-2 md:p-4 font-heading text-start text-[16px] md:text-2xl tracking-tight  lg:text-3xl transition-colors ${
                   i === activeTab ? 'text-forest' : 'text-text-muted hover:text-forest'
                 }`}
               >

@@ -26,7 +26,11 @@ function linkifyLine(line: string): ReactNode {
   if (/\b[A-Z]{2}\s+\d{5}/.test(trimmed)) {
     const query = encodeURIComponent(trimmed)
     return (
-      <a href={`https://www.google.com/maps/search/${query}`} target="_blank" rel="noopener noreferrer">
+      <a
+        href={`https://www.google.com/maps/search/${query}`}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
         {trimmed}
       </a>
     )
@@ -39,10 +43,13 @@ function RichDescription({description, isDark}: {description: string; isDark: bo
   const cleaned = stegaClean(description)
   const lines = cleaned.split('\n').filter((l) => l.trim())
 
-  const linkClass = 'underline decoration-current/30 hover:text-terracotta hover:decoration-terracotta transition-colors'
+  const linkClass =
+    'underline decoration-current/30 hover:text-terracotta hover:decoration-terracotta transition-colors'
 
   return (
-    <div className={`font-sans text-[15px] font-light leading-[150%] space-y-1 ${isDark ? 'text-text-muted-dark' : 'text-text-muted'}`}>
+    <div
+      className={`font-sans text-[15px]  leading-[150%] space-y-1 ${isDark ? 'text-text-muted-dark' : 'text-text-muted'}`}
+    >
       {lines.map((line, i) => {
         const node = linkifyLine(line)
         return (
@@ -107,7 +114,7 @@ export default function IconGrid({block}: IconGridProps) {
             )}
             {description && (
               <p
-                className={`font-sans text-[16px] lg:text-[18px] font-light leading-[150%] max-w-2xl ${isDark ? 'text-text-muted-dark' : 'text-text-muted'}`}
+                className={`font-sans text-[16px] lg:text-[18px] leading-[150%] max-w-2xl ${isDark ? 'text-text-muted-dark' : 'text-text-muted'}`}
               >
                 {description}
               </p>

@@ -81,7 +81,7 @@ export default function FullWidthMedia({block}: FullWidthMediaProps) {
           )}
           {subtext && (
             <FadeIn delay={0.1}>
-              <p className="font-sans text-[16px] lg:text-[18px] font-light leading-[150%] text-white/80 mb-8">
+              <p className="font-sans text-[16px] lg:text-[18px] leading-[150%] text-white/80 mb-8">
                 {subtext}
               </p>
             </FadeIn>

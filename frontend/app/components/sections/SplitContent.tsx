@@ -53,7 +53,7 @@ export default function SplitContent({block}: SplitContentProps) {
             {body && (
               <FadeIn delay={0.1}>
                 <div
-                  className={`font-sans text-[16px] lg:text-[18px] font-light leading-[150%] opacity-80 mb-6 prose prose-p:mb-3 ${isDark ? 'prose-invert' : ''}`}
+                  className={`font-sans text-[16px] lg:text-[18px]  leading-[150%] opacity-80 mb-6 prose prose-p:mb-3 ${isDark ? 'prose-invert' : ''}`}
                 >
                   <PortableText value={body} />
                 </div>

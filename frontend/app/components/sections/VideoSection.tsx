@@ -109,7 +109,7 @@ export default function VideoSection({block}: VideoSectionProps) {
               {description && (
                 <FadeIn delay={0.1}>
                   <p
-                    className={`font-sans text-[16px] lg:text-[18px] font-light leading-[150%] ${isDark ? 'text-text-muted-dark' : 'text-text-muted'}`}
+                    className={`font-sans text-[16px] lg:text-[18px]  leading-[150%] ${isDark ? 'text-text-muted-dark' : 'text-text-muted'}`}
                   >
                     {description}
                   </p>
@@ -137,7 +137,7 @@ export default function VideoSection({block}: VideoSectionProps) {
               )}
               {description && (
                 <p
-                  className={`font-sans text-[16px] lg:text-[18px] font-light leading-[150%] ${isDark ? 'text-text-muted-dark' : 'text-text-muted'}`}
+                  className={`font-sans text-[16px] lg:text-[18px]  leading-[150%] ${isDark ? 'text-text-muted-dark' : 'text-text-muted'}`}
                 >
                   {description}
                 </p>

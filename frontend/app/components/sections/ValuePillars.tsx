@@ -86,7 +86,7 @@ export default function ValuePillars({block}: ValuePillarsProps) {
             )}
             {description && (
               <p
-                className={`font-sans text-[16px] lg:text-[18px] font-light leading-[150%] ${colors.muted} mt-4 md:mt-6`}
+                className={`font-sans text-[16px] lg:text-[18px]  leading-[150%] ${colors.muted} mt-4 md:mt-6`}
               >
                 {description}
               </p>
@@ -103,7 +103,7 @@ export default function ValuePillars({block}: ValuePillarsProps) {
                 >
                   {pillar.metric && (
                     <p
-                      className={`font-heading text-[40px] md:text-[48px] lg:text-[56px] font-light tracking-tight leading-[100%] ${colors.metric} mb-3`}
+                      className={`font-heading text-[40px] md:text-[48px] lg:text-[56px]  tracking-tight leading-[100%] ${colors.metric} mb-3`}
                     >
                       {pillar.metric}
                     </p>
@@ -117,7 +117,7 @@ export default function ValuePillars({block}: ValuePillarsProps) {
                   )}
                   {pillar.description && (
                     <p
-                      className={`font-sans text-[14px] md:text-[16px] font-light leading-[150%] ${colors.muted}`}
+                      className={`font-sans text-[14px] md:text-[16px]  leading-[150%] ${colors.muted}`}
                     >
                       {pillar.description}
                     </p>
