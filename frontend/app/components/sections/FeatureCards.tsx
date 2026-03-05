@@ -44,7 +44,7 @@ export default function FeatureCards({block}: FeatureCardsProps) {
                   id={stickerLeft.asset._ref}
                   alt=""
                   width={160}
-                  className="w-[100px] lg:w-[160px] h-auto"
+                  className="w-[100px] lg:w-[161px] h-auto"
                 />
               )}
               {stickerRight?.asset?._ref && (
@@ -52,7 +52,7 @@ export default function FeatureCards({block}: FeatureCardsProps) {
                   id={stickerRight.asset._ref}
                   alt=""
                   width={160}
-                  className="w-[100px] lg:w-[160px] h-auto"
+                  className="w-[100px] lg:w-[161px] h-auto"
                 />
               )}
             </div>
