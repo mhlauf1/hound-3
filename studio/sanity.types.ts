@@ -95,6 +95,7 @@ export type ValuePillars = {
     media?: unknown
     hotspot?: SanityImageHotspot
     crop?: SanityImageCrop
+    alt?: string
     _type: 'image'
   }
   backgroundColor?: 'cream' | 'sand' | 'forest'
@@ -178,6 +179,7 @@ export type RequirementsList = {
     media?: unknown
     hotspot?: SanityImageHotspot
     crop?: SanityImageCrop
+    alt?: string
     _type: 'image'
   }
   imagePosition?: 'left' | 'right'
@@ -355,6 +357,7 @@ export type IconGrid = {
     media?: unknown
     hotspot?: SanityImageHotspot
     crop?: SanityImageCrop
+    alt?: string
     _type: 'image'
   }
   backgroundColor?: 'cream' | 'sand' | 'forest'
@@ -463,6 +466,7 @@ export type HeroSplit = {
     media?: unknown
     hotspot?: SanityImageHotspot
     crop?: SanityImageCrop
+    alt?: string
     _type: 'image'
   }
   stickerImage?: {
@@ -470,6 +474,7 @@ export type HeroSplit = {
     media?: unknown
     hotspot?: SanityImageHotspot
     crop?: SanityImageCrop
+    alt?: string
     _type: 'image'
   }
   imagePosition?: 'left' | 'right'
@@ -505,6 +510,7 @@ export type ContactForm = {
     media?: unknown
     hotspot?: SanityImageHotspot
     crop?: SanityImageCrop
+    alt?: string
     _type: 'image'
   }
   address?: string
@@ -533,6 +539,7 @@ export type GalleryGrid = {
     media?: unknown
     hotspot?: SanityImageHotspot
     crop?: SanityImageCrop
+    alt?: string
     _type: 'image'
   }
   backgroundColor?: 'cream' | 'sand' | 'forest'
@@ -597,6 +604,7 @@ export type SplitContent = {
     media?: unknown
     hotspot?: SanityImageHotspot
     crop?: SanityImageCrop
+    alt?: string
     _type: 'image'
   }
   image?: {
@@ -604,6 +612,7 @@ export type SplitContent = {
     media?: unknown
     hotspot?: SanityImageHotspot
     crop?: SanityImageCrop
+    alt?: string
     _type: 'image'
   }
   stickerImage?: {
@@ -611,6 +620,7 @@ export type SplitContent = {
     media?: unknown
     hotspot?: SanityImageHotspot
     crop?: SanityImageCrop
+    alt?: string
     _type: 'image'
   }
   imagePosition?: 'left' | 'right'
@@ -624,6 +634,7 @@ export type CtaBanner = {
     media?: unknown
     hotspot?: SanityImageHotspot
     crop?: SanityImageCrop
+    alt?: string
     _type: 'image'
   }
   stickerImage?: {
@@ -631,6 +642,7 @@ export type CtaBanner = {
     media?: unknown
     hotspot?: SanityImageHotspot
     crop?: SanityImageCrop
+    alt?: string
     _type: 'image'
   }
   heading: string
@@ -639,6 +651,7 @@ export type CtaBanner = {
     media?: unknown
     hotspot?: SanityImageHotspot
     crop?: SanityImageCrop
+    alt?: string
     _type: 'image'
   }
   sideImage?: {
@@ -646,6 +659,7 @@ export type CtaBanner = {
     media?: unknown
     hotspot?: SanityImageHotspot
     crop?: SanityImageCrop
+    alt?: string
     _type: 'image'
   }
   cta?: Button
@@ -667,6 +681,7 @@ export type Testimonials = {
     media?: unknown
     hotspot?: SanityImageHotspot
     crop?: SanityImageCrop
+    alt?: string
     _type: 'image'
   }
   heading: string
@@ -731,6 +746,7 @@ export type FeatureCards = {
     media?: unknown
     hotspot?: SanityImageHotspot
     crop?: SanityImageCrop
+    alt?: string
     _type: 'image'
   }
   stickerRight?: {
@@ -738,6 +754,7 @@ export type FeatureCards = {
     media?: unknown
     hotspot?: SanityImageHotspot
     crop?: SanityImageCrop
+    alt?: string
     _type: 'image'
   }
   features?: Array<{
@@ -933,6 +950,7 @@ export type Service = {
     media?: unknown
     hotspot?: SanityImageHotspot
     crop?: SanityImageCrop
+    alt?: string
     _type: 'image'
   }
   shortDescription?: string
@@ -941,6 +959,7 @@ export type Service = {
     media?: unknown
     hotspot?: SanityImageHotspot
     crop?: SanityImageCrop
+    alt?: string
     _type: 'image'
   }
   tabCta?: Button
@@ -1123,6 +1142,7 @@ export type Settings = {
     media?: unknown
     hotspot?: SanityImageHotspot
     crop?: SanityImageCrop
+    alt?: string
     _type: 'image'
   }
   navItems?: Array<{
@@ -1142,6 +1162,7 @@ export type Settings = {
     media?: unknown
     hotspot?: SanityImageHotspot
     crop?: SanityImageCrop
+    alt?: string
     _type: 'image'
   }
   footerTagline?: string
