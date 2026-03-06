@@ -1,10 +1,7 @@
-import {preload} from 'react-dom'
-import {buildSrc} from 'sanity-image'
 import Badge from '@/app/components/ui/Badge'
 import Button from '@/app/components/ui/Button'
 import Image from '@/app/components/SanityImage'
 import {FadeIn} from '@/app/components/ui/FadeIn'
-import {dataset, projectId} from '@/sanity/lib/api'
 
 type HeroProps = {
   block: {
@@ -41,16 +38,6 @@ export default function Hero({block, index}: HeroProps) {
     ? ({children, className}: {children: React.ReactNode; className?: string; delay?: number; direction?: string}) => <div className={className}>{children}</div>
     : FadeIn
 
-  // Preload hero image in <head> so browser starts downloading immediately
-  if (isFirst && heroImage?.asset?._ref) {
-    const {src} = buildSrc({
-      baseUrl: `https://cdn.sanity.io/images/${projectId}/${dataset}/`,
-      id: heroImage.asset._ref,
-      width: 960,
-      ...(heroImage.crop && {crop: heroImage.crop}),
-    })
-    preload(src, {as: 'image', fetchPriority: 'high'})
-  }
 
   return (
     <section className="relative pb-8 md:pb-0 pt-18 bg-cream overflow-x-clip">
