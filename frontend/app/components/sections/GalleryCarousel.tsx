@@ -184,6 +184,7 @@ export default function GalleryCarousel({block}: GalleryCarouselProps) {
                             width={500}
                             crop={image.crop}
                             hotspot={image.hotspot}
+                            sizes="(max-width: 768px) 80vw, 300px"
                             className="rounded-lg aspect-[3/4] w-full object-cover transition-opacity group-hover:opacity-90"
                           />
                         </button>

@@ -1,8 +1,11 @@
+import {preload} from 'react-dom'
+import {buildSrc} from 'sanity-image'
 import Button from '@/app/components/ui/Button'
 import Image from '@/app/components/SanityImage'
 import {FadeIn} from '@/app/components/ui/FadeIn'
 import {stegaClean} from '@sanity/client/stega'
 import Badge from '../ui/Badge'
+import {dataset, projectId} from '@/sanity/lib/api'
 
 type HeroBannerProps = {
   block: {
@@ -49,6 +52,17 @@ export default function HeroBanner({block, index}: HeroBannerProps) {
   const Wrap = isFirst
     ? ({children, className}: {children: React.ReactNode; className?: string; delay?: number}) => <div className={className}>{children}</div>
     : FadeIn
+
+  if (isFirst && hasImage) {
+    const {src} = buildSrc({
+      baseUrl: `https://cdn.sanity.io/images/${projectId}/${dataset}/`,
+      id: backgroundImage!.asset!._ref,
+      width: 1400,
+      ...(backgroundImage!.crop && {crop: backgroundImage!.crop}),
+      ...(backgroundImage!.hotspot && {hotspot: backgroundImage!.hotspot}),
+    })
+    preload(src, {as: 'image', fetchPriority: 'high'})
+  }
 
   return (
     <section

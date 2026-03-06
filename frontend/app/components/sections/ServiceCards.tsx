@@ -72,6 +72,7 @@ export default function ServiceCards({block}: ServiceCardsProps) {
                       width={400}
                       crop={card.image.crop}
                       hotspot={card.image.hotspot}
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                       className="aspect-[4/3] w-full object-cover"
                     />
                   )}

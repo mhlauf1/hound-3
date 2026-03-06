@@ -1,8 +1,11 @@
+import {preload} from 'react-dom'
+import {buildSrc} from 'sanity-image'
 import Button from '@/app/components/ui/Button'
 import Image from '@/app/components/SanityImage'
 import {FadeIn} from '@/app/components/ui/FadeIn'
 import {stegaClean} from '@sanity/client/stega'
 import Badge from '../ui/Badge'
+import {dataset, projectId} from '@/sanity/lib/api'
 
 type HeroSplitProps = {
   block: {
@@ -46,6 +49,17 @@ export default function HeroSplit({block, index}: HeroSplitProps) {
   const Wrap = isFirst
     ? ({children, className}: {children: React.ReactNode; className?: string; delay?: number; direction?: string}) => <div className={className}>{children}</div>
     : FadeIn
+
+  if (isFirst && image?.asset?._ref) {
+    const {src} = buildSrc({
+      baseUrl: `https://cdn.sanity.io/images/${projectId}/${dataset}/`,
+      id: image.asset._ref,
+      width: 600,
+      ...(image.crop && {crop: image.crop}),
+      ...(image.hotspot && {hotspot: image.hotspot}),
+    })
+    preload(src, {as: 'image', fetchPriority: 'high'})
+  }
 
   return (
     <section className={` pt-18 ${bg}`}>
