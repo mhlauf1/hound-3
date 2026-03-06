@@ -86,10 +86,11 @@ export default function GalleryGrid({block}: GalleryGridProps) {
                       type="button"
                       onClick={() => openLightbox(i)}
                       className="w-full cursor-zoom-in group"
+                      aria-label={image.alt || 'View image in lightbox'}
                     >
                       <Image
                         id={image.asset!._ref}
-                        alt={image.alt || ''}
+                        alt={image.alt || 'Gallery image'}
                         width={600}
                         crop={image.crop}
                         hotspot={image.hotspot}
@@ -99,7 +100,7 @@ export default function GalleryGrid({block}: GalleryGridProps) {
                   ) : (
                     <Image
                       id={image.asset!._ref}
-                      alt={image.alt || ''}
+                      alt={image.alt || 'Gallery image'}
                       width={600}
                       crop={image.crop}
                       hotspot={image.hotspot}
@@ -125,6 +126,8 @@ export default function GalleryGrid({block}: GalleryGridProps) {
               <Image
                 id={accentImage.asset._ref}
                 alt=""
+                aria-hidden="true"
+                role="presentation"
                 width={200}
                 className="w-[50px] lg:w-[60px]"
               />

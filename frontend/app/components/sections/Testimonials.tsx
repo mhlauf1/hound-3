@@ -102,6 +102,8 @@ export default function Testimonials({block}: TestimonialsProps) {
               <Image
                 id={icon.asset._ref}
                 alt=""
+                aria-hidden="true"
+                role="presentation"
                 width={120}
                 className="w-[100px] lg:w-[120px] h-auto"
               />

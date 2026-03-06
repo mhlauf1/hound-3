@@ -50,6 +50,8 @@ export default function CtaBanner({block, index}: CtaBannerProps) {
               <Image
                 id={backgroundImage.asset._ref}
                 alt=""
+                aria-hidden="true"
+                role="presentation"
                 width={1200}
                 crop={backgroundImage.crop}
                 mode="cover"
@@ -71,6 +73,8 @@ export default function CtaBanner({block, index}: CtaBannerProps) {
                     <Image
                       id={stickerImage.asset._ref}
                       alt=""
+                      aria-hidden="true"
+                      role="presentation"
                       width={200}
                       className="w-[40px] lg:w-[50px] aspect-square object-contain"
                     />
@@ -84,6 +88,8 @@ export default function CtaBanner({block, index}: CtaBannerProps) {
                     <Image
                       id={icon.asset._ref}
                       alt=""
+                      aria-hidden="true"
+                      role="presentation"
                       width={120}
                       className="w-[100px] lg:w-[120px] h-auto"
                     />
@@ -141,6 +147,8 @@ export default function CtaBanner({block, index}: CtaBannerProps) {
             <Image
               id={backgroundImage.asset._ref}
               alt=""
+              aria-hidden="true"
+              role="presentation"
               width={1200}
               crop={backgroundImage.crop}
               mode="cover"
@@ -160,6 +168,8 @@ export default function CtaBanner({block, index}: CtaBannerProps) {
                 <Image
                   id={stickerImage.asset._ref}
                   alt=""
+                  aria-hidden="true"
+                  role="presentation"
                   width={200}
                   className="w-[40px] lg:w-[50px] aspect-square object-contain"
                 />
@@ -173,6 +183,8 @@ export default function CtaBanner({block, index}: CtaBannerProps) {
                 <Image
                   id={icon.asset._ref}
                   alt=""
+                  aria-hidden="true"
+                  role="presentation"
                   width={120}
                   className="w-[100px] lg:w-[120px] h-auto mx-auto"
                 />

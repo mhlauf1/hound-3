@@ -3,6 +3,7 @@
 import {useState} from 'react'
 import {PortableText} from '@portabletext/react'
 import type {PortableTextBlock} from 'next-sanity'
+import {toPlainText} from 'next-sanity'
 import {FadeIn} from '@/app/components/ui/FadeIn'
 import Badge from '../ui/Badge'
 
@@ -36,6 +37,7 @@ function AccordionItem({
     >
       <button
         onClick={onToggle}
+        aria-expanded={isOpen}
         className="flex w-full items-center justify-between px-6 py-5 text-left"
       >
         <span className="font-sans text-[17px] md:text-[19px] font-medium text-forest pr-4">
@@ -50,6 +52,7 @@ function AccordionItem({
             viewBox="0 0 24 24"
             strokeWidth={2.5}
             stroke="currentColor"
+            aria-hidden="true"
           >
             {isOpen ? (
               <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14" />
@@ -76,8 +79,32 @@ export default function FaqAccordion({block}: FaqAccordionProps) {
   const {eyebrow, heading, faqs} = block
   const [openIndex, setOpenIndex] = useState<number | null>(null)
 
+  const faqJsonLd =
+    faqs && faqs.length > 0
+      ? {
+          '@context': 'https://schema.org',
+          '@type': 'FAQPage',
+          mainEntity: faqs
+            .filter((faq) => faq.question && faq.answer)
+            .map((faq) => ({
+              '@type': 'Question',
+              name: faq.question,
+              acceptedAnswer: {
+                '@type': 'Answer',
+                text: toPlainText(faq.answer!),
+              },
+            })),
+        }
+      : null
+
   return (
     <section className="bg-cream">
+      {faqJsonLd && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{__html: JSON.stringify(faqJsonLd)}}
+        />
+      )}
       <div className="px-6 md:px-24 py-16 lg:py-24">
         <FadeIn>
           <div className="max-w-3xl md:mb-4 flex items-start md:items-center flex-col mx-auto">

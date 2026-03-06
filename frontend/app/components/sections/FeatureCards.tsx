@@ -43,6 +43,8 @@ export default function FeatureCards({block}: FeatureCardsProps) {
                 <Image
                   id={stickerLeft.asset._ref}
                   alt=""
+                  aria-hidden="true"
+                  role="presentation"
                   width={160}
                   className="w-[100px] lg:w-[161px] h-auto"
                 />
@@ -51,6 +53,8 @@ export default function FeatureCards({block}: FeatureCardsProps) {
                 <Image
                   id={stickerRight.asset._ref}
                   alt=""
+                  aria-hidden="true"
+                  role="presentation"
                   width={160}
                   className="w-[100px] lg:w-[161px] h-auto"
                 />

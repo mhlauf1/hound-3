@@ -134,6 +134,8 @@ export default function ValuePillars({block}: ValuePillarsProps) {
               <Image
                 id={accentImage.asset._ref}
                 alt=""
+                aria-hidden="true"
+                role="presentation"
                 width={200}
                 className="w-[50px] lg:w-[60px]"
               />

@@ -880,6 +880,21 @@ export type Button = {
   link?: Link
 }
 
+export type Seo = {
+  _type: 'seo'
+  metaTitle?: string
+  metaDescription?: string
+  ogImage?: {
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    alt?: string
+    _type: 'image'
+  }
+  noIndex?: boolean
+}
+
 export type Webcam = {
   _id: string
   _type: 'webcam'
@@ -930,6 +945,7 @@ export type Service = {
   }
   tabCta?: Button
   heading?: string
+  seo?: Seo
   pageBuilder?: Array<
     | ({
         _key: string
@@ -1080,6 +1096,7 @@ export type Settings = {
   _updatedAt: string
   _rev: string
   title: string
+  tagline?: string
   description?: Array<{
     children?: Array<{
       marks?: Array<string>
@@ -1167,6 +1184,39 @@ export type Settings = {
     metadataBase?: string
     _type: 'image'
   }
+  favicon?: {
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    _type: 'image'
+  }
+  ga4MeasurementId?: string
+  gtmContainerId?: string
+  googleSiteVerification?: string
+  localBusiness?: {
+    businessName?: string
+    businessType?: string
+    address?: {
+      street?: string
+      city?: string
+      state?: string
+      zip?: string
+      country?: string
+    }
+    phone?: string
+    geoCoordinates?: {
+      latitude?: number
+      longitude?: number
+    }
+    businessHours?: Array<{
+      days?: string
+      open?: string
+      close?: string
+      _key: string
+    }>
+    priceRange?: string
+  }
 }
 
 export type Page = {
@@ -1177,8 +1227,7 @@ export type Page = {
   _rev: string
   name: string
   slug: Slug
-  heading: string
-  subheading?: string
+  seo?: Seo
   pageBuilder?: Array<
     | ({
         _key: string
@@ -1473,6 +1522,7 @@ export type SanityImageMetadata = {
   palette?: SanityImagePalette
   lqip?: string
   blurHash?: string
+  thumbHash?: string
   hasAlpha?: boolean
   isOpaque?: boolean
 }
@@ -1488,14 +1538,14 @@ export type SanityFileAsset = {
   title?: string
   description?: string
   altText?: string
-  sha1hash?: string
-  extension?: string
-  mimeType?: string
-  size?: number
-  assetId?: string
+  sha1hash: string
+  extension: string
+  mimeType: string
+  size: number
+  assetId: string
   uploadId?: string
-  path?: string
-  url?: string
+  path: string
+  url: string
   source?: SanityAssetSourceData
 }
 
@@ -1517,14 +1567,14 @@ export type SanityImageAsset = {
   title?: string
   description?: string
   altText?: string
-  sha1hash?: string
-  extension?: string
-  mimeType?: string
-  size?: number
-  assetId?: string
+  sha1hash: string
+  extension: string
+  mimeType: string
+  size: number
+  assetId: string
   uploadId?: string
-  path?: string
-  url?: string
+  path: string
+  url: string
   metadata?: SanityImageMetadata
   source?: SanityAssetSourceData
 }
@@ -1593,6 +1643,7 @@ export type AllSanitySchemaTypes =
   | BlockContentTextOnly
   | BlockContent
   | Button
+  | Seo
   | Webcam
   | Testimonial
   | Service

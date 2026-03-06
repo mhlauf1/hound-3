@@ -161,11 +161,47 @@ export default async function RootLayout({children}: {children: React.ReactNode}
     <html lang="en" className={`${poppins.variable} ${bricolage.variable} bg-cream text-forest`}>
       <head>
         <link rel="preconnect" href="https://cdn.sanity.io" />
+        <link rel="dns-prefetch" href="https://cdn.sanity.io" />
         <link rel="preconnect" href="https://api.iconify.design" />
+        <link rel="dns-prefetch" href="https://api.iconify.design" />
         {localBusinessJsonLd && (
           <script
             type="application/ld+json"
             dangerouslySetInnerHTML={{__html: JSON.stringify(localBusinessJsonLd)}}
+          />
+        )}
+        {settings?.title && (
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify({
+                '@context': 'https://schema.org',
+                '@type': 'Organization',
+                name: settings.title,
+                url: settings?.ogImage?.metadataBase || undefined,
+                ...(settings?.logo?.asset?._ref && {
+                  logo: settings.logo.asset._ref,
+                }),
+                sameAs: [
+                  settings?.socialLinks?.facebook,
+                  settings?.socialLinks?.instagram,
+                  settings?.socialLinks?.google,
+                ].filter(Boolean),
+              }),
+            }}
+          />
+        )}
+        {settings?.title && (
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify({
+                '@context': 'https://schema.org',
+                '@type': 'WebSite',
+                name: settings.title,
+                url: settings?.ogImage?.metadataBase || undefined,
+              }),
+            }}
           />
         )}
         {gtmId && (

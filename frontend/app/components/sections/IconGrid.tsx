@@ -166,6 +166,8 @@ export default function IconGrid({block}: IconGridProps) {
               <Image
                 id={accentImage.asset._ref}
                 alt=""
+                aria-hidden="true"
+                role="presentation"
                 width={200}
                 className="w-[50px] lg:w-[60px] aspect-square object-contain"
               />

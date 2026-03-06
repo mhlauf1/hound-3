@@ -34,6 +34,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
     description: seo?.metaDescription || undefined,
     ...(ogImage && {openGraph: {images: [ogImage]}}),
     ...(seo?.noIndex && {robots: {index: false, follow: true}}),
+    alternates: {canonical: `/${params.slug}`},
   } satisfies Metadata
 }
 

@@ -77,10 +77,11 @@ export default function GalleryPage({block}: GalleryPageProps) {
                     type="button"
                     onClick={() => openLightbox(i)}
                     className="w-full cursor-zoom-in group"
+                    aria-label={image.alt || 'View image in lightbox'}
                   >
                     <Image
                       id={image.asset!._ref}
-                      alt={image.alt || ''}
+                      alt={image.alt || 'Gallery image'}
                       width={500}
                       crop={image.crop}
                       hotspot={image.hotspot}
@@ -105,10 +106,11 @@ export default function GalleryPage({block}: GalleryPageProps) {
                   type="button"
                   onClick={() => openLightbox(i)}
                   className="w-full cursor-zoom-in group"
+                  aria-label={image.alt || 'View image in lightbox'}
                 >
                   <Image
                     id={image.asset!._ref}
-                    alt={image.alt || ''}
+                    alt={image.alt || 'Gallery image'}
                     width={1000}
                     crop={image.crop}
                     hotspot={image.hotspot}

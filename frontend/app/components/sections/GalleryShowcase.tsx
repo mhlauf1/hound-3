@@ -79,10 +79,11 @@ export default function GalleryShowcase({block}: GalleryShowcaseProps) {
                   type="button"
                   onClick={() => openLightbox(0)}
                   className="w-full cursor-zoom-in group"
+                  aria-label={heroImage.alt || 'View image in lightbox'}
                 >
                   <Image
                     id={heroImage.asset!._ref}
-                    alt={heroImage.alt || ''}
+                    alt={heroImage.alt || 'Gallery image'}
                     width={1200}
                     crop={heroImage.crop}
                     hotspot={heroImage.hotspot}
@@ -111,10 +112,11 @@ export default function GalleryShowcase({block}: GalleryShowcaseProps) {
                       type="button"
                       onClick={() => openLightbox(i + 1)}
                       className="w-full cursor-zoom-in group"
+                      aria-label={image.alt || 'View image in lightbox'}
                     >
                       <Image
                         id={image.asset!._ref}
-                        alt={image.alt || ''}
+                        alt={image.alt || 'Gallery image'}
                         width={400}
                         crop={image.crop}
                         hotspot={image.hotspot}
