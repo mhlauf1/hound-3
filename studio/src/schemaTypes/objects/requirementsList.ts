@@ -54,6 +54,14 @@ export const requirementsList = defineType({
       title: 'Image',
       type: 'image',
       options: {hotspot: true},
+      fields: [
+        defineField({
+          name: 'alt',
+          title: 'Alt Text',
+          type: 'string',
+          description: 'Describe this image for accessibility',
+        }),
+      ],
     }),
     defineField({
       name: 'imagePosition',

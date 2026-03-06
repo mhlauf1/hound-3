@@ -11,7 +11,7 @@ type RequirementsListProps = {
     description?: string
     items?: {_key: string; text?: string}[]
     link?: {label?: string; link?: any}
-    image?: {asset?: {_ref: string}; crop?: any}
+    image?: {asset?: {_ref: string}; crop?: any; alt?: string}
     imagePosition?: 'left' | 'right'
     backgroundColor?: 'cream' | 'sand'
   }
@@ -120,7 +120,7 @@ export default function RequirementsList({block}: RequirementsListProps) {
               <FadeIn delay={0.1}>
                 <Image
                   id={image.asset._ref}
-                  alt={heading || 'Requirements image'}
+                  alt={image.alt || heading || 'Requirements image'}
                   width={600}
                   crop={image.crop}
                   className="rounded-lg aspect-[4/3] w-full object-cover"

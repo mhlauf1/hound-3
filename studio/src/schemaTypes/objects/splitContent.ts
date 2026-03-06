@@ -32,18 +32,42 @@ export const splitContent = defineType({
       title: 'Badge Image',
       type: 'image',
       description: 'Optional badge/logo (e.g. Embark logo)',
+      fields: [
+        defineField({
+          name: 'alt',
+          title: 'Alt Text',
+          type: 'string',
+          description: 'Describe this image for accessibility',
+        }),
+      ],
     }),
     defineField({
       name: 'image',
       title: 'Image',
       type: 'image',
       options: {hotspot: true},
+      fields: [
+        defineField({
+          name: 'alt',
+          title: 'Alt Text',
+          type: 'string',
+          description: 'Describe this image for accessibility',
+        }),
+      ],
     }),
     defineField({
       name: 'stickerImage',
       title: 'Sticker Image',
       type: 'image',
       description: 'Optional fun illustration/sticker that overlaps the image edge',
+      fields: [
+        defineField({
+          name: 'alt',
+          title: 'Alt Text',
+          type: 'string',
+          description: 'Describe this image for accessibility',
+        }),
+      ],
     }),
     defineField({
       name: 'imagePosition',

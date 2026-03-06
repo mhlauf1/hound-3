@@ -17,7 +17,7 @@ type ValuePillarsProps = {
       description?: string
     }>
     columns?: number
-    accentImage?: {asset?: {_ref: string}}
+    accentImage?: {asset?: {_ref: string}; alt?: string}
     backgroundColor?: 'cream' | 'sand' | 'forest'
   }
   index: number
@@ -133,9 +133,7 @@ export default function ValuePillars({block}: ValuePillarsProps) {
             <div className="flex justify-center mt-8 lg:mt-12">
               <Image
                 id={accentImage.asset._ref}
-                alt=""
-                aria-hidden="true"
-                role="presentation"
+                alt={accentImage.alt || ''}
                 width={200}
                 className="w-[50px] lg:w-[60px]"
               />

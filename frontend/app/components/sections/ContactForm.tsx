@@ -226,7 +226,7 @@ export default function ContactForm({block}: ContactFormProps) {
                   <div className="rounded-lg overflow-hidden">
                     <Image
                       id={image.asset._ref}
-                      alt={heading || 'Contact'}
+                      alt={(image as any).alt || heading || 'Contact'}
                       width={700}
                       crop={image.crop}
                       hotspot={image.hotspot}

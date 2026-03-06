@@ -27,9 +27,9 @@ type FooterProps = {
   footerText?: string
   footerTextLink?: {label?: string; href?: string}
   bottomLinks?: FooterBottomLink[]
-  logo?: {asset?: {_ref: string}}
+  logo?: {asset?: {_ref: string}; alt?: string}
   socialLinks?: {facebook?: string; instagram?: string; google?: string}
-  footerSticker?: {asset?: {_ref: string}}
+  footerSticker?: {asset?: {_ref: string}; alt?: string}
 }
 
 export default function Footer({
@@ -57,7 +57,7 @@ export default function Footer({
                 {logo?.asset?._ref ? (
                   <Image
                     id={logo.asset._ref}
-                    alt="Hound Around Resort"
+                    alt={logo.alt || 'Hound Around Resort'}
                     width={160}
                     className="w-[140px] h-auto"
                   />
@@ -117,7 +117,7 @@ export default function Footer({
             {footerSticker?.asset?._ref && (
               <Image
                 id={footerSticker.asset._ref}
-                alt=""
+                alt={footerSticker.alt || ''}
                 width={80}
                 className="w-[56px] md:w-[72px] h-auto mt-6 hidden lg:block"
               />

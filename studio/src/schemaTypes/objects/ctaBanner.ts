@@ -12,12 +12,28 @@ export const ctaBanner = defineType({
       title: 'Icon',
       type: 'image',
       description: 'Optional icon/illustration displayed above the heading',
+      fields: [
+        defineField({
+          name: 'alt',
+          title: 'Alt Text',
+          type: 'string',
+          description: 'Describe this image for accessibility',
+        }),
+      ],
     }),
     defineField({
       name: 'stickerImage',
       title: 'Sticker Image',
       type: 'image',
       description: 'Optional small image displayed in a white circle above the heading',
+      fields: [
+        defineField({
+          name: 'alt',
+          title: 'Alt Text',
+          type: 'string',
+          description: 'Describe this image for accessibility',
+        }),
+      ],
     }),
     defineField({
       name: 'heading',
@@ -30,6 +46,14 @@ export const ctaBanner = defineType({
       title: 'Background Image',
       type: 'image',
       options: {hotspot: true},
+      fields: [
+        defineField({
+          name: 'alt',
+          title: 'Alt Text',
+          type: 'string',
+          description: 'Describe this image for accessibility',
+        }),
+      ],
     }),
     defineField({
       name: 'sideImage',
@@ -38,6 +62,14 @@ export const ctaBanner = defineType({
       options: {hotspot: true},
       description:
         'Optional: adds a square photo on the right in a 2-column layout. Leave empty to use the full-width background image mode.',
+      fields: [
+        defineField({
+          name: 'alt',
+          title: 'Alt Text',
+          type: 'string',
+          description: 'Describe this image for accessibility',
+        }),
+      ],
     }),
     defineField({
       name: 'cta',

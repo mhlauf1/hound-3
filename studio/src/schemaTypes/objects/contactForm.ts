@@ -141,6 +141,14 @@ export const contactForm = defineType({
       type: 'image',
       description: 'Photo displayed above the contact info on the right side',
       options: {hotspot: true},
+      fields: [
+        defineField({
+          name: 'alt',
+          title: 'Alt Text',
+          type: 'string',
+          description: 'Describe this image for accessibility',
+        }),
+      ],
     }),
     defineField({
       name: 'address',

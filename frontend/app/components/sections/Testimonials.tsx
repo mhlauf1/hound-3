@@ -14,7 +14,7 @@ type Review = {
 
 type TestimonialsProps = {
   block: {
-    icon?: {asset?: {_ref: string}}
+    icon?: {asset?: {_ref: string}; alt?: string}
     heading?: string
     reviews?: Review[]
     googleRating?: string
@@ -101,9 +101,7 @@ export default function Testimonials({block}: TestimonialsProps) {
             <div className="flex justify-center mb-6">
               <Image
                 id={icon.asset._ref}
-                alt=""
-                aria-hidden="true"
-                role="presentation"
+                alt={icon.alt || ''}
                 width={120}
                 className="w-[100px] lg:w-[120px] h-auto"
               />

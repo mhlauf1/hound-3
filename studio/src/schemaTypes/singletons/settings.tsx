@@ -101,6 +101,14 @@ export const settings = defineType({
       title: 'Logo',
       type: 'image',
       description: 'Site logo image',
+      fields: [
+        defineField({
+          name: 'alt',
+          title: 'Alt Text',
+          type: 'string',
+          description: 'Describe this image for accessibility',
+        }),
+      ],
     }),
     defineField({
       name: 'navItems',
@@ -150,6 +158,14 @@ export const settings = defineType({
       title: 'Footer Sticker',
       type: 'image',
       description: 'Small dog illustration shown at the bottom of the brand column in the footer',
+      fields: [
+        defineField({
+          name: 'alt',
+          title: 'Alt Text',
+          type: 'string',
+          description: 'Describe this image for accessibility',
+        }),
+      ],
     }),
     defineField({
       name: 'footerTagline',

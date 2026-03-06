@@ -10,9 +10,9 @@ type ServiceTab = {
   _id: string
   title?: string
   slug?: {current?: string}
-  sticker?: {asset?: {_ref: string}}
+  sticker?: {asset?: {_ref: string}; alt?: string}
   shortDescription?: string
-  tabImage?: {asset?: {_ref: string}; crop?: any}
+  tabImage?: {asset?: {_ref: string}; crop?: any; alt?: string}
   tabCta?: {buttonText?: string; link?: any}
 }
 
@@ -91,7 +91,7 @@ export default function ServiceTabs({block}: ServiceTabsProps) {
               {activeService.sticker?.asset?._ref && (
                 <Image
                   id={activeService.sticker.asset._ref}
-                  alt=""
+                  alt={activeService.sticker.alt || ''}
                   width={80}
                   className="w-[42px] md:w-[54px] mb-8  h-auto"
                 />
@@ -117,7 +117,7 @@ export default function ServiceTabs({block}: ServiceTabsProps) {
               <div>
                 <Image
                   id={activeService.tabImage.asset._ref}
-                  alt={activeService.title || 'Service image'}
+                  alt={activeService.tabImage?.alt || activeService.title || 'Service image'}
                   width={600}
                   crop={activeService.tabImage.crop}
                   className="rounded-lg w-full object-cover aspect-[4/3]"

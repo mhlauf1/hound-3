@@ -7,8 +7,8 @@ type FeatureCardsProps = {
   block: {
     heading?: string
     subheading?: string
-    stickerLeft?: {asset?: {_ref: string}}
-    stickerRight?: {asset?: {_ref: string}}
+    stickerLeft?: {asset?: {_ref: string}; alt?: string}
+    stickerRight?: {asset?: {_ref: string}; alt?: string}
     features?: Array<{
       _key: string
       icon?: string
@@ -42,9 +42,7 @@ export default function FeatureCards({block}: FeatureCardsProps) {
               {stickerLeft?.asset?._ref && (
                 <Image
                   id={stickerLeft.asset._ref}
-                  alt=""
-                  aria-hidden="true"
-                  role="presentation"
+                  alt={stickerLeft.alt || ''}
                   width={160}
                   className="w-[100px] lg:w-[161px] h-auto"
                 />
@@ -52,9 +50,7 @@ export default function FeatureCards({block}: FeatureCardsProps) {
               {stickerRight?.asset?._ref && (
                 <Image
                   id={stickerRight.asset._ref}
-                  alt=""
-                  aria-hidden="true"
-                  role="presentation"
+                  alt={stickerRight.alt || ''}
                   width={160}
                   className="w-[100px] lg:w-[161px] h-auto"
                 />

@@ -10,9 +10,9 @@ type SplitContentProps = {
     heading?: string
     body?: PortableTextBlock[]
     link?: {label?: string; link?: any}
-    badge?: {asset?: {_ref: string}}
-    image?: {asset?: {_ref: string}; crop?: any}
-    stickerImage?: {asset?: {_ref: string}}
+    badge?: {asset?: {_ref: string}; alt?: string}
+    image?: {asset?: {_ref: string}; crop?: any; alt?: string}
+    stickerImage?: {asset?: {_ref: string}; alt?: string}
     imagePosition?: 'left' | 'right'
     backgroundColor?: 'cream' | 'sand' | 'forest' | 'tan' | 'lavender' | 'dark'
   }
@@ -70,7 +70,7 @@ export default function SplitContent({block}: SplitContentProps) {
 
             {badge?.asset?._ref && (
               <FadeIn delay={0.2}>
-                <Image id={badge.asset._ref} alt="Badge" width={80} className="h-36 w-auto" />
+                <Image id={badge.asset._ref} alt={badge.alt || 'Badge'} width={80} className="h-36 w-auto" />
               </FadeIn>
             )}
           </div>
@@ -81,7 +81,7 @@ export default function SplitContent({block}: SplitContentProps) {
               <FadeIn delay={0.1} className="relative">
                 <Image
                   id={image.asset._ref}
-                  alt={heading || 'Section image'}
+                  alt={image.alt || heading || 'Section image'}
                   width={600}
                   crop={image.crop}
                   className="rounded-lg aspect-[4/3] w-full object-cover"
@@ -90,7 +90,7 @@ export default function SplitContent({block}: SplitContentProps) {
                   <div className="absolute bottom-4 left-4  lg:bottom-6 lg:left-6 bg-white rounded-full p-2.5 pointer-events-none z-10">
                     <Image
                       id={stickerImage.asset._ref}
-                      alt=""
+                      alt={stickerImage.alt || ''}
                       width={200}
                       className="w-[50px] lg:w-[65px] aspect-square object-contain"
                     />

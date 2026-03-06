@@ -24,7 +24,7 @@ type GalleryGridProps = {
     images?: GalleryImage[]
     columns?: number
     enableLightbox?: boolean
-    accentImage?: {asset?: {_ref: string}}
+    accentImage?: {asset?: {_ref: string}; alt?: string}
     backgroundColor?: string
   }
   index: number
@@ -125,9 +125,7 @@ export default function GalleryGrid({block}: GalleryGridProps) {
             <div className="flex justify-center mt-8 lg:mt-12">
               <Image
                 id={accentImage.asset._ref}
-                alt=""
-                aria-hidden="true"
-                role="presentation"
+                alt={accentImage.alt || ''}
                 width={200}
                 className="w-[50px] lg:w-[60px]"
               />

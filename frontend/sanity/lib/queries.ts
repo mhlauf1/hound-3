@@ -91,9 +91,9 @@ const pageBuilderExpansion = /* groq */ `
         _id,
         title,
         slug,
-        sticker,
+        sticker{asset, alt},
         shortDescription,
-        tabImage,
+        tabImage{asset, crop, hotspot, alt},
         tabCta ${buttonFields}
       }
     },

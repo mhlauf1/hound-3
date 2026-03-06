@@ -75,6 +75,14 @@ export const iconGrid = defineType({
       title: 'Accent Image',
       type: 'image',
       description: 'Optional small image (e.g. paw icon) displayed centered below the grid',
+      fields: [
+        defineField({
+          name: 'alt',
+          title: 'Alt Text',
+          type: 'string',
+          description: 'Describe this image for accessibility',
+        }),
+      ],
     }),
     defineField({
       name: 'backgroundColor',

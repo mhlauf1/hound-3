@@ -6,10 +6,10 @@ import {FadeIn} from '@/app/components/ui/FadeIn'
 type CtaBannerProps = {
   block: {
     heading?: string
-    icon?: {asset?: {_ref: string}}
-    stickerImage?: {asset?: {_ref: string}}
-    backgroundImage?: {asset?: {_ref: string}; crop?: any}
-    sideImage?: {asset?: {_ref: string}; crop?: any}
+    icon?: {asset?: {_ref: string}; alt?: string}
+    stickerImage?: {asset?: {_ref: string}; alt?: string}
+    backgroundImage?: {asset?: {_ref: string}; crop?: any; alt?: string}
+    sideImage?: {asset?: {_ref: string}; crop?: any; alt?: string}
     cta?: {buttonText?: string; link?: any}
     showRating?: boolean
     ratingText?: string
@@ -49,9 +49,7 @@ export default function CtaBanner({block, index}: CtaBannerProps) {
             <div className="absolute inset-0">
               <Image
                 id={backgroundImage.asset._ref}
-                alt=""
-                aria-hidden="true"
-                role="presentation"
+                alt={backgroundImage.alt || ''}
                 width={1200}
                 crop={backgroundImage.crop}
                 mode="cover"
@@ -72,9 +70,7 @@ export default function CtaBanner({block, index}: CtaBannerProps) {
                   <div className="bg-white rounded-full p-3 w-fit mb-6">
                     <Image
                       id={stickerImage.asset._ref}
-                      alt=""
-                      aria-hidden="true"
-                      role="presentation"
+                      alt={stickerImage.alt || ''}
                       width={200}
                       className="w-[40px] lg:w-[50px] aspect-square object-contain"
                     />
@@ -87,9 +83,7 @@ export default function CtaBanner({block, index}: CtaBannerProps) {
                   <div className="mb-8">
                     <Image
                       id={icon.asset._ref}
-                      alt=""
-                      aria-hidden="true"
-                      role="presentation"
+                      alt={icon.alt || ''}
                       width={120}
                       className="w-[100px] lg:w-[120px] h-auto"
                     />
@@ -125,7 +119,7 @@ export default function CtaBanner({block, index}: CtaBannerProps) {
               <div className="hidden lg:block h-full">
                 <Image
                   id={sideImage.asset!._ref}
-                  alt={heading || ''}
+                  alt={sideImage.alt || heading || ''}
                   width={700}
                   crop={sideImage.crop}
                   className="w-full h-full object-cover aspect-square"
@@ -146,9 +140,7 @@ export default function CtaBanner({block, index}: CtaBannerProps) {
           <div className="absolute inset-0">
             <Image
               id={backgroundImage.asset._ref}
-              alt=""
-              aria-hidden="true"
-              role="presentation"
+              alt={backgroundImage.alt || ''}
               width={1200}
               crop={backgroundImage.crop}
               mode="cover"
@@ -167,9 +159,7 @@ export default function CtaBanner({block, index}: CtaBannerProps) {
               <div className="bg-white rounded-full p-3 w-fit mb-6">
                 <Image
                   id={stickerImage.asset._ref}
-                  alt=""
-                  aria-hidden="true"
-                  role="presentation"
+                  alt={stickerImage.alt || ''}
                   width={200}
                   className="w-[40px] lg:w-[50px] aspect-square object-contain"
                 />
@@ -182,9 +172,7 @@ export default function CtaBanner({block, index}: CtaBannerProps) {
               <div className="mb-8">
                 <Image
                   id={icon.asset._ref}
-                  alt=""
-                  aria-hidden="true"
-                  role="presentation"
+                  alt={icon.alt || ''}
                   width={120}
                   className="w-[100px] lg:w-[120px] h-auto mx-auto"
                 />

@@ -11,8 +11,8 @@ type HeroSplitProps = {
     body?: string
     primaryCta?: {buttonText?: string; link?: any}
     secondaryCta?: {buttonText?: string; link?: any}
-    image?: {asset?: {_ref: string}; crop?: any; hotspot?: any}
-    stickerImage?: {asset?: {_ref: string}}
+    image?: {asset?: {_ref: string}; crop?: any; hotspot?: any; alt?: string}
+    stickerImage?: {asset?: {_ref: string}; alt?: string}
     imagePosition?: 'left' | 'right'
     backgroundColor?: 'cream' | 'sand' | 'forest'
   }
@@ -97,7 +97,7 @@ export default function HeroSplit({block, index}: HeroSplitProps) {
               <Wrap delay={0.1} className="relative">
                 <Image
                   id={image.asset._ref}
-                  alt={heading || 'Hero image'}
+                  alt={image.alt || heading || 'Hero image'}
                   width={600}
                   crop={image.crop}
                   hotspot={image.hotspot}
@@ -109,7 +109,7 @@ export default function HeroSplit({block, index}: HeroSplitProps) {
                   <div className="absolute top-4 left-4  lg:top-6 lg:left-6 bg-white rounded-full p-3 pointer-events-none z-10">
                     <Image
                       id={stickerImage.asset._ref}
-                      alt=""
+                      alt={stickerImage.alt || ''}
                       width={200}
                       className="w-[40px] lg:w-[50px] aspect-square object-contain"
                     />

@@ -12,6 +12,14 @@ export const testimonials = defineType({
       title: 'Icon',
       type: 'image',
       description: 'Optional icon/illustration displayed above the heading',
+      fields: [
+        defineField({
+          name: 'alt',
+          title: 'Alt Text',
+          type: 'string',
+          description: 'Describe this image for accessibility',
+        }),
+      ],
     }),
     defineField({
       name: 'heading',

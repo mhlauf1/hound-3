@@ -66,6 +66,14 @@ export const galleryGrid = defineType({
       title: 'Accent Image',
       type: 'image',
       description: 'Optional small image (e.g. paw icon) displayed centered below the gallery',
+      fields: [
+        defineField({
+          name: 'alt',
+          title: 'Alt Text',
+          type: 'string',
+          description: 'Describe this image for accessibility',
+        }),
+      ],
     }),
     defineField({
       name: 'backgroundColor',

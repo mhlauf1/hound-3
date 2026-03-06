@@ -40,12 +40,28 @@ export const heroSplit = defineType({
       type: 'image',
       options: {hotspot: true},
       validation: (Rule) => Rule.required(),
+      fields: [
+        defineField({
+          name: 'alt',
+          title: 'Alt Text',
+          type: 'string',
+          description: 'Describe this image for accessibility',
+        }),
+      ],
     }),
     defineField({
       name: 'stickerImage',
       title: 'Sticker Image',
       type: 'image',
       description: 'Optional fun illustration/sticker that overlaps the hero image edge',
+      fields: [
+        defineField({
+          name: 'alt',
+          title: 'Alt Text',
+          type: 'string',
+          description: 'Describe this image for accessibility',
+        }),
+      ],
     }),
     defineField({
       name: 'imagePosition',

@@ -24,12 +24,28 @@ export const featureCards = defineType({
       title: 'Left Sticker',
       type: 'image',
       description: 'Dog sticker displayed to the left of the heading',
+      fields: [
+        defineField({
+          name: 'alt',
+          title: 'Alt Text',
+          type: 'string',
+          description: 'Describe this image for accessibility',
+        }),
+      ],
     }),
     defineField({
       name: 'stickerRight',
       title: 'Right Sticker',
       type: 'image',
       description: 'Dog sticker displayed to the right of the heading',
+      fields: [
+        defineField({
+          name: 'alt',
+          title: 'Alt Text',
+          type: 'string',
+          description: 'Describe this image for accessibility',
+        }),
+      ],
     }),
     defineField({
       name: 'features',

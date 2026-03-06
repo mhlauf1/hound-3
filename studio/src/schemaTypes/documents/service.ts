@@ -24,6 +24,14 @@ export const service = defineType({
       title: 'Sticker Image',
       type: 'image',
       description: 'Small dog illustration shown above the title in the service tab',
+      fields: [
+        defineField({
+          name: 'alt',
+          title: 'Alt Text',
+          type: 'string',
+          description: 'Describe this image for accessibility',
+        }),
+      ],
     }),
     defineField({
       name: 'shortDescription',
@@ -36,6 +44,14 @@ export const service = defineType({
       title: 'Tab Image',
       type: 'image',
       options: {hotspot: true},
+      fields: [
+        defineField({
+          name: 'alt',
+          title: 'Alt Text',
+          type: 'string',
+          description: 'Describe this image for accessibility',
+        }),
+      ],
     }),
     defineField({
       name: 'tabCta',
