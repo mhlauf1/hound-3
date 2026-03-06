@@ -3220,6 +3220,27 @@
             ]
           },
           "optional": true
+        },
+        "backgroundColor": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "union",
+            "of": [
+              {
+                "type": "string",
+                "value": "cream"
+              },
+              {
+                "type": "string",
+                "value": "sand"
+              },
+              {
+                "type": "string",
+                "value": "forest"
+              }
+            ]
+          },
+          "optional": true
         }
       }
     }

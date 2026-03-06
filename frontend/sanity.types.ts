@@ -448,6 +448,7 @@ export type HeroBanner = {
   }
   overlayOpacity?: 'light' | 'medium' | 'heavy'
   minHeight?: 'standard' | 'tall' | 'fullscreen'
+  backgroundColor?: 'cream' | 'sand' | 'forest'
 }
 
 export type HeroSplit = {
@@ -2352,6 +2353,7 @@ export type GetPageQueryResult = {
         }
         overlayOpacity?: 'heavy' | 'light' | 'medium'
         minHeight?: 'fullscreen' | 'standard' | 'tall'
+        backgroundColor?: 'cream' | 'forest' | 'sand'
       }
     | {
         _key: string
@@ -3499,6 +3501,7 @@ export type HomepageQueryResult = {
         }
         overlayOpacity?: 'heavy' | 'light' | 'medium'
         minHeight?: 'fullscreen' | 'standard' | 'tall'
+        backgroundColor?: 'cream' | 'forest' | 'sand'
       }
     | {
         _key: string
@@ -4644,6 +4647,7 @@ export type GetServiceQueryResult = {
         }
         overlayOpacity?: 'heavy' | 'light' | 'medium'
         minHeight?: 'fullscreen' | 'standard' | 'tall'
+        backgroundColor?: 'cream' | 'forest' | 'sand'
       }
     | {
         _key: string

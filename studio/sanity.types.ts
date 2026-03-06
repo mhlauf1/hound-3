@@ -90,6 +90,13 @@ export type ValuePillars = {
     _key: string
   }>
   columns?: 2 | 3 | 4
+  accentImage?: {
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    _type: 'image'
+  }
   backgroundColor?: 'cream' | 'sand' | 'forest'
 }
 
@@ -196,7 +203,8 @@ export type WhatsIncluded = {
 
 export type PricingCalculator = {
   _type: 'pricingCalculator'
-  calculatorType: 'daycare' | 'boarding' | 'grooming'
+  displayMode?: 'single' | 'tabbed'
+  calculatorType?: 'daycare' | 'boarding' | 'grooming'
   eyebrow?: string
   heading: string
   subheading?: string
@@ -342,6 +350,13 @@ export type IconGrid = {
     _key: string
   }>
   columns?: 2 | 3 | 4
+  accentImage?: {
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    _type: 'image'
+  }
   backgroundColor?: 'cream' | 'sand' | 'forest'
 }
 
@@ -433,6 +448,7 @@ export type HeroBanner = {
   }
   overlayOpacity?: 'light' | 'medium' | 'heavy'
   minHeight?: 'standard' | 'tall' | 'fullscreen'
+  backgroundColor?: 'cream' | 'sand' | 'forest'
 }
 
 export type HeroSplit = {
@@ -443,6 +459,13 @@ export type HeroSplit = {
   primaryCta?: Button
   secondaryCta?: Button
   image: {
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    _type: 'image'
+  }
+  stickerImage?: {
     asset?: SanityImageAssetReference
     media?: unknown
     hotspot?: SanityImageHotspot
@@ -505,6 +528,13 @@ export type GalleryGrid = {
   }>
   columns?: 2 | 3 | 4
   enableLightbox?: boolean
+  accentImage?: {
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    _type: 'image'
+  }
   backgroundColor?: 'cream' | 'sand' | 'forest'
 }
 
@@ -576,6 +606,13 @@ export type SplitContent = {
     crop?: SanityImageCrop
     _type: 'image'
   }
+  stickerImage?: {
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    _type: 'image'
+  }
   imagePosition?: 'left' | 'right'
   backgroundColor?: 'cream' | 'sand' | 'forest'
 }
@@ -583,6 +620,13 @@ export type SplitContent = {
 export type CtaBanner = {
   _type: 'ctaBanner'
   icon?: {
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    _type: 'image'
+  }
+  stickerImage?: {
     asset?: SanityImageAssetReference
     media?: unknown
     hotspot?: SanityImageHotspot
