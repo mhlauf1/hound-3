@@ -33,6 +33,11 @@ export default function Hero({block, index}: HeroProps) {
     heroImage,
   } = block
 
+  const isFirst = index === 0
+  const Wrap = isFirst
+    ? ({children, className}: {children: React.ReactNode; className?: string; delay?: number; direction?: string}) => <div className={className}>{children}</div>
+    : FadeIn
+
   return (
     <section className="relative pb-8 md:pb-0 pt-18 bg-cream overflow-x-clip">
       {/* Left dog illustration */}
@@ -40,6 +45,7 @@ export default function Hero({block, index}: HeroProps) {
         src="/illustrations/hero-left-dog.png"
         alt=""
         aria-hidden="true"
+        loading="lazy"
         className="absolute left-1/12 top-1/3 w-[80px] lg:w-section-lg pointer-events-none hidden lg:block"
       />
 
@@ -48,34 +54,35 @@ export default function Hero({block, index}: HeroProps) {
         src="/illustrations/hero-right-image.png"
         alt=""
         aria-hidden="true"
+        loading="lazy"
         className="absolute right-1/8 bottom-1/4 w-15 lg:w-[80px] pointer-events-none hidden lg:block"
       />
 
       <div className="container relative z-10 pt-20 pb-4 lg:pt-[12vh] lg:pb-12">
         <div className="flex flex-col items-center text-center max-w-4xl mx-auto">
           {eyebrow && (
-            <FadeIn>
+            <Wrap>
               <Badge className="mb-5 md:mb-6">{eyebrow}</Badge>
-            </FadeIn>
+            </Wrap>
           )}
 
           {heading && (
-            <FadeIn delay={0.1}>
+            <Wrap delay={0.1}>
               <h1 className="text-[48px] md:text-[56px] lg:text-[84px] leading-[104%] tracking-tight font-semibold mb-6">
                 {heading}
               </h1>
-            </FadeIn>
+            </Wrap>
           )}
 
           {subtext && (
-            <FadeIn delay={0.2}>
+            <Wrap delay={0.2}>
               <p className="font-sans md:text-base lg:text-lg text-text-muted leading-[150%] max-w-xl mb-8">
                 {subtext}
               </p>
-            </FadeIn>
+            </Wrap>
           )}
 
-          <FadeIn className="w-full md:w-auto" delay={0.3}>
+          <Wrap className="w-full md:w-auto" delay={0.3}>
             <div className="flex flex-col w-full md:flex-row items-center gap-2 md:gap-3 mb-3 md:mb-4">
               {primaryCta?.buttonText && (
                 <Button variant="primary" link={primaryCta.link}>
@@ -88,10 +95,10 @@ export default function Hero({block, index}: HeroProps) {
                 </Button>
               )}
             </div>
-          </FadeIn>
+          </Wrap>
 
           {reviewRating && (
-            <FadeIn delay={0.35}>
+            <Wrap delay={0.35}>
               <div className="flex flex-col mt-3 items-center gap-1">
                 <div className="flex items-center gap-2">
                   <div className="flex gap-0.5">
@@ -110,12 +117,12 @@ export default function Hero({block, index}: HeroProps) {
                 </div>
                 {trustLine && <p className="font-sans text-xs text-text-muted">{trustLine}</p>}
               </div>
-            </FadeIn>
+            </Wrap>
           )}
         </div>
 
         {heroImage?.asset?._ref && (
-          index === 0 ? (
+          isFirst ? (
             <div className="mt-10 lg:mt-16 max-w-4xl mx-auto">
               <Image
                 id={heroImage.asset._ref}
@@ -123,6 +130,7 @@ export default function Hero({block, index}: HeroProps) {
                 width={960}
                 crop={heroImage.crop}
                 className="rounded-xl w-full object-cover"
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 960px"
                 loading="eager"
                 fetchPriority="high"
               />
@@ -136,6 +144,7 @@ export default function Hero({block, index}: HeroProps) {
                   width={960}
                   crop={heroImage.crop}
                   className="rounded-xl w-full object-cover"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 960px"
                 />
               </div>
             </FadeIn>

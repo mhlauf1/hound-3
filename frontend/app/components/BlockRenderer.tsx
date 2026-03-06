@@ -1,45 +1,48 @@
-import React, {Suspense} from 'react'
+import React, {Suspense, lazy} from 'react'
 
-import Cta from '@/app/components/Cta'
-import Info from '@/app/components/InfoSection'
+// Above-fold components loaded eagerly
 import Hero from '@/app/components/sections/Hero'
-import ImageRow from '@/app/components/sections/ImageRow'
-import FeatureCards from '@/app/components/sections/FeatureCards'
-import ServiceTabs from '@/app/components/sections/ServiceTabs'
-import StatsBar from '@/app/components/sections/StatsBar'
-import WebcamPreview from '@/app/components/sections/WebcamPreview'
-import Testimonials from '@/app/components/sections/Testimonials'
-import CtaBanner from '@/app/components/sections/CtaBanner'
-import SplitContent from '@/app/components/sections/SplitContent'
-import FaqAccordion from '@/app/components/sections/FaqAccordion'
-import PricingTable from '@/app/components/sections/PricingTable'
-import TeamGrid from '@/app/components/sections/TeamGrid'
-import GalleryGrid from '@/app/components/sections/GalleryGrid'
-import ContactFormComponent from '@/app/components/sections/ContactForm'
 import HeroSplit from '@/app/components/sections/HeroSplit'
 import HeroBanner from '@/app/components/sections/HeroBanner'
 import HeroMinimal from '@/app/components/sections/HeroMinimal'
-import ServiceCards from '@/app/components/sections/ServiceCards'
-import FeatureList from '@/app/components/sections/FeatureList'
-import ProcessSteps from '@/app/components/sections/ProcessSteps'
-import ContentColumns from '@/app/components/sections/ContentColumns'
-import IconGrid from '@/app/components/sections/IconGrid'
-import VideoSection from '@/app/components/sections/VideoSection'
-import FullWidthMedia from '@/app/components/sections/FullWidthMedia'
-import CtaStrip from '@/app/components/sections/CtaStrip'
-import LogoBar from '@/app/components/sections/LogoBar'
-import PricingMatrix from '@/app/components/sections/PricingMatrix'
-import PricingList from '@/app/components/sections/PricingList'
-import PolicyNotes from '@/app/components/sections/PolicyNotes'
-import FeatureGrid from '@/app/components/sections/FeatureGrid'
-import PricingCalculator from '@/app/components/sections/PricingCalculator'
-import WhatsIncluded from '@/app/components/sections/WhatsIncluded'
-import RequirementsList from '@/app/components/sections/RequirementsList'
-import WebcamGrid from '@/app/components/sections/WebcamGrid'
-import GalleryCarousel from '@/app/components/sections/GalleryCarousel'
-import GalleryShowcase from '@/app/components/sections/GalleryShowcase'
-import GalleryPage from '@/app/components/sections/GalleryPage'
-import ValuePillars from '@/app/components/sections/ValuePillars'
+import CtaBanner from '@/app/components/sections/CtaBanner'
+
+// Below-fold components loaded on demand
+const Cta = lazy(() => import('@/app/components/Cta'))
+const Info = lazy(() => import('@/app/components/InfoSection'))
+const ImageRow = lazy(() => import('@/app/components/sections/ImageRow'))
+const FeatureCards = lazy(() => import('@/app/components/sections/FeatureCards'))
+const ServiceTabs = lazy(() => import('@/app/components/sections/ServiceTabs'))
+const StatsBar = lazy(() => import('@/app/components/sections/StatsBar'))
+const WebcamPreview = lazy(() => import('@/app/components/sections/WebcamPreview'))
+const Testimonials = lazy(() => import('@/app/components/sections/Testimonials'))
+const SplitContent = lazy(() => import('@/app/components/sections/SplitContent'))
+const FaqAccordion = lazy(() => import('@/app/components/sections/FaqAccordion'))
+const PricingTable = lazy(() => import('@/app/components/sections/PricingTable'))
+const TeamGrid = lazy(() => import('@/app/components/sections/TeamGrid'))
+const GalleryGrid = lazy(() => import('@/app/components/sections/GalleryGrid'))
+const ContactFormComponent = lazy(() => import('@/app/components/sections/ContactForm'))
+const ServiceCards = lazy(() => import('@/app/components/sections/ServiceCards'))
+const FeatureList = lazy(() => import('@/app/components/sections/FeatureList'))
+const ProcessSteps = lazy(() => import('@/app/components/sections/ProcessSteps'))
+const ContentColumns = lazy(() => import('@/app/components/sections/ContentColumns'))
+const IconGrid = lazy(() => import('@/app/components/sections/IconGrid'))
+const VideoSection = lazy(() => import('@/app/components/sections/VideoSection'))
+const FullWidthMedia = lazy(() => import('@/app/components/sections/FullWidthMedia'))
+const CtaStrip = lazy(() => import('@/app/components/sections/CtaStrip'))
+const LogoBar = lazy(() => import('@/app/components/sections/LogoBar'))
+const PricingMatrix = lazy(() => import('@/app/components/sections/PricingMatrix'))
+const PricingList = lazy(() => import('@/app/components/sections/PricingList'))
+const PolicyNotes = lazy(() => import('@/app/components/sections/PolicyNotes'))
+const FeatureGrid = lazy(() => import('@/app/components/sections/FeatureGrid'))
+const PricingCalculator = lazy(() => import('@/app/components/sections/PricingCalculator'))
+const WhatsIncluded = lazy(() => import('@/app/components/sections/WhatsIncluded'))
+const RequirementsList = lazy(() => import('@/app/components/sections/RequirementsList'))
+const WebcamGrid = lazy(() => import('@/app/components/sections/WebcamGrid'))
+const GalleryCarousel = lazy(() => import('@/app/components/sections/GalleryCarousel'))
+const GalleryShowcase = lazy(() => import('@/app/components/sections/GalleryShowcase'))
+const GalleryPage = lazy(() => import('@/app/components/sections/GalleryPage'))
+const ValuePillars = lazy(() => import('@/app/components/sections/ValuePillars'))
 import {dataAttr} from '@/sanity/lib/utils'
 import {PageBuilderSection} from '@/sanity/lib/types'
 
@@ -53,10 +56,13 @@ type BlockProps = {
 function ContactForm(props: BlockProps) {
   return (
     <Suspense>
-      <ContactFormComponent {...(props as React.ComponentProps<typeof ContactFormComponent>)} />
+      <ContactFormComponent {...(props as any)} />
     </Suspense>
   )
 }
+
+// Hero types are eagerly loaded, everything else is lazy
+const eagerTypes = new Set(['hero', 'heroSplit', 'heroBanner', 'heroMinimal', 'ctaBanner'])
 
 type BlocksType = {
   [key: string]: React.FC<BlockProps>
@@ -107,6 +113,13 @@ const Blocks = {
 
 export default function BlockRenderer({block, index, pageId, pageType}: BlockProps) {
   if (typeof Blocks[block._type] !== 'undefined') {
+    const content = React.createElement(Blocks[block._type], {
+      key: block._key,
+      block: block,
+      index: index,
+      pageId: pageId,
+      pageType: pageType,
+    })
     return (
       <div
         key={block._key}
@@ -116,13 +129,7 @@ export default function BlockRenderer({block, index, pageId, pageType}: BlockPro
           path: `pageBuilder[_key=="${block._key}"]`,
         }).toString()}
       >
-        {React.createElement(Blocks[block._type], {
-          key: block._key,
-          block: block,
-          index: index,
-          pageId: pageId,
-          pageType: pageType,
-        })}
+        {eagerTypes.has(block._type) ? content : <Suspense>{content}</Suspense>}
       </div>
     )
   }

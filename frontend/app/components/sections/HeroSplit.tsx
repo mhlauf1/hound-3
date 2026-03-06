@@ -42,6 +42,10 @@ export default function HeroSplit({block, index}: HeroSplitProps) {
   const isImageLeft = stegaClean(imagePosition) === 'left'
   const bg = bgColors[stegaClean(backgroundColor) || 'cream'] || bgColors.cream
   const isDark = stegaClean(backgroundColor) === 'forest'
+  const isFirst = index === 0
+  const Wrap = isFirst
+    ? ({children, className}: {children: React.ReactNode; className?: string; delay?: number; direction?: string}) => <div className={className}>{children}</div>
+    : FadeIn
 
   return (
     <section className={` pt-18 ${bg}`}>
@@ -50,27 +54,27 @@ export default function HeroSplit({block, index}: HeroSplitProps) {
           {/* Text side */}
           <div className={`${isImageLeft ? 'lg:order-2' : 'lg:order-1'} flex-1`}>
             {eyebrow && (
-              <FadeIn>
+              <Wrap>
                 <Badge className="mb-3">{eyebrow}</Badge>
-              </FadeIn>
+              </Wrap>
             )}
             {heading && (
-              <FadeIn delay={0.05}>
+              <Wrap delay={0.05}>
                 <h1 className="text-[48px] tracking-tight md:text-[56px] md:max-w-[15ch] font-semibold lg:text-[84px] leading-[104%] mb-6">
                   {heading}
                 </h1>
-              </FadeIn>
+              </Wrap>
             )}
             {body && (
-              <FadeIn delay={0.1}>
+              <Wrap delay={0.1}>
                 <p
                   className={`font-sans text-[16px] lg:text-[18px] md:max-w-[64ch]  leading-[150%] mb-8 ${isDark ? 'text-text-muted-dark' : 'text-text-muted'}`}
                 >
                   {body}
                 </p>
-              </FadeIn>
+              </Wrap>
             )}
-            <FadeIn delay={0.15}>
+            <Wrap delay={0.15}>
               <div className="flex flex-row items-center gap-2 md:gap-3">
                 {primaryCta?.buttonText && (
                   <Button variant="primary" link={primaryCta.link}>
@@ -83,13 +87,13 @@ export default function HeroSplit({block, index}: HeroSplitProps) {
                   </Button>
                 )}
               </div>
-            </FadeIn>
+            </Wrap>
           </div>
 
           {/* Image side */}
           <div className={`${isImageLeft ? 'lg:order-1' : 'lg:order-2'} flex justify-end flex-1`}>
             {image?.asset?._ref && (
-              <FadeIn delay={0.1} className="relative">
+              <Wrap delay={0.1} className="relative">
                 <Image
                   id={image.asset._ref}
                   alt={heading || 'Hero image'}
@@ -97,7 +101,8 @@ export default function HeroSplit({block, index}: HeroSplitProps) {
                   crop={image.crop}
                   hotspot={image.hotspot}
                   className="rounded-lg md:w-[600px] aspect-square w-full object-cover"
-                  {...(index === 0 && {loading: 'eager' as const, fetchPriority: 'high' as const})}
+                  sizes="(max-width: 768px) 100vw, 600px"
+                  {...(isFirst && {loading: 'eager' as const, fetchPriority: 'high' as const})}
                 />
                 {stickerImage?.asset?._ref && (
                   <div className="absolute top-4 left-4  lg:top-6 lg:left-6 bg-white rounded-full p-3 pointer-events-none z-10">
@@ -109,7 +114,7 @@ export default function HeroSplit({block, index}: HeroSplitProps) {
                     />
                   </div>
                 )}
-              </FadeIn>
+              </Wrap>
             )}
           </div>
         </div>

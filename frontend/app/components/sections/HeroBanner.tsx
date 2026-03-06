@@ -45,6 +45,10 @@ export default function HeroBanner({block, index}: HeroBannerProps) {
   const hasImage = !!backgroundImage?.asset?._ref
   const colorKey = stegaClean(backgroundColor) || 'cream'
   const colors = bgColors[colorKey] || bgColors.cream
+  const isFirst = index === 0
+  const Wrap = isFirst
+    ? ({children, className}: {children: React.ReactNode; className?: string; delay?: number}) => <div className={className}>{children}</div>
+    : FadeIn
 
   return (
     <section
@@ -61,7 +65,8 @@ export default function HeroBanner({block, index}: HeroBannerProps) {
             hotspot={backgroundImage!.hotspot}
             mode="cover"
             className="w-full h-full object-cover"
-            {...(index === 0 && {loading: 'eager' as const, fetchPriority: 'high' as const})}
+            sizes="100vw"
+            {...(isFirst && {loading: 'eager' as const, fetchPriority: 'high' as const})}
           />
           <div className={`absolute inset-0 bg-gradient-to-t ${overlay}`} />
         </div>
@@ -70,30 +75,30 @@ export default function HeroBanner({block, index}: HeroBannerProps) {
       {/* Content */}
       <div className="relative z-10 text-center px-6 py-16 lg:py-24 max-w-4xl mx-auto">
         {eyebrow && (
-          <FadeIn>
+          <Wrap>
             <Badge className="mb-3">{eyebrow}</Badge>
-          </FadeIn>
+          </Wrap>
         )}
         {heading && (
-          <FadeIn delay={0.1}>
+          <Wrap delay={0.1}>
             <h1 className={`text-[48px] tracking-tight font-semibold md:text-[56px] lg:text-[80px] leading-[104%] mb-6 ${hasImage ? 'text-white' : colors.text}`}>
               {heading}
             </h1>
-          </FadeIn>
+          </Wrap>
         )}
         {subtext && (
-          <FadeIn delay={0.2}>
+          <Wrap delay={0.2}>
             <p className={`font-sans text-[16px] lg:text-[18px]  leading-[150%] mb-8 max-w-2xl mx-auto ${hasImage ? 'text-white/80' : colors.subtext}`}>
               {subtext}
             </p>
-          </FadeIn>
+          </Wrap>
         )}
         {primaryCta?.buttonText && (
-          <FadeIn delay={0.3}>
+          <Wrap delay={0.3}>
             <Button variant="primary" link={primaryCta.link}>
               {primaryCta.buttonText}
             </Button>
-          </FadeIn>
+          </Wrap>
         )}
       </div>
     </section>

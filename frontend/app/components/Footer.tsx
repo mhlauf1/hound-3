@@ -179,7 +179,7 @@ export default function Footer({
             </p>
             <p className="font-sans text-[14px] text-text-muted">
               Designed and developed by{' '}
-              <Link href="https://www.lauf.co/" target="_blank" className="font-bold">
+              <Link href="https://www.lauf.co/" target="_blank" className="font-semibold">
                 Lauf.
               </Link>{' '}
             </p>
