@@ -42,6 +42,7 @@ import {galleryCarousel} from './objects/galleryCarousel'
 import {galleryShowcase} from './objects/galleryShowcase'
 import {galleryPage} from './objects/galleryPage'
 import {valuePillars} from './objects/valuePillars'
+import {seo} from './objects/seo'
 import {settings} from './singletons/settings'
 import {link} from './objects/link'
 import {blockContent} from './objects/blockContent'
@@ -57,6 +58,7 @@ export const schemaTypes = [
   testimonial,
   webcam,
   // Objects
+  seo,
   button,
   blockContent,
   blockContentTextOnly,

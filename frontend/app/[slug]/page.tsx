@@ -3,6 +3,7 @@ import type {Metadata} from 'next'
 import PageBuilderPage from '@/app/components/PageBuilder'
 import {sanityFetch} from '@/sanity/lib/live'
 import {getPageQuery, pagesSlugs} from '@/sanity/lib/queries'
+import {resolveOpenGraphImage} from '@/sanity/lib/utils'
 
 type Props = {
   params: Promise<{slug: string}>
@@ -25,9 +26,14 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
     stega: false,
   })
 
+  const seo = page?.seo
+  const ogImage = resolveOpenGraphImage(seo?.ogImage)
+
   return {
-    title: page?.name,
-    description: page?.heading,
+    title: seo?.metaTitle || page?.name,
+    description: seo?.metaDescription || undefined,
+    ...(ogImage && {openGraph: {images: [ogImage]}}),
+    ...(seo?.noIndex && {robots: {index: false, follow: true}}),
   } satisfies Metadata
 }
 

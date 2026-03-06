@@ -24,15 +24,9 @@ export const page = defineType({
       },
     }),
     defineField({
-      name: 'heading',
-      title: 'Heading',
-      type: 'string',
-      validation: (Rule) => Rule.required(),
-    }),
-    defineField({
-      name: 'subheading',
-      title: 'Subheading',
-      type: 'string',
+      name: 'seo',
+      title: 'SEO & Metadata',
+      type: 'seo',
     }),
     defineField({
       name: 'pageBuilder',

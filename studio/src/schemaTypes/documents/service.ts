@@ -49,6 +49,11 @@ export const service = defineType({
       description: 'Heading shown on the individual service detail page',
     }),
     defineField({
+      name: 'seo',
+      title: 'SEO & Metadata',
+      type: 'seo',
+    }),
+    defineField({
       name: 'pageBuilder',
       title: 'Page builder',
       type: 'array',

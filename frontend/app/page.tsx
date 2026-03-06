@@ -1,6 +1,28 @@
+import type {Metadata} from 'next'
+
 import PageBuilder from '@/app/components/PageBuilder'
 import {homepageQuery} from '@/sanity/lib/queries'
 import {sanityFetch} from '@/sanity/lib/live'
+import {resolveOpenGraphImage} from '@/sanity/lib/utils'
+
+export async function generateMetadata(): Promise<Metadata> {
+  const {data: page} = await sanityFetch({
+    query: homepageQuery,
+    stega: false,
+  })
+
+  const seo = page?.seo
+  if (!seo) return {}
+
+  const ogImage = resolveOpenGraphImage(seo.ogImage)
+
+  return {
+    ...(seo.metaTitle && {title: seo.metaTitle}),
+    ...(seo.metaDescription && {description: seo.metaDescription}),
+    ...(ogImage && {openGraph: {images: [ogImage]}}),
+    ...(seo.noIndex && {robots: {index: false, follow: true}}),
+  }
+}
 
 export default async function Page() {
   const {data: page} = await sanityFetch({

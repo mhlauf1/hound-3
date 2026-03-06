@@ -9,9 +9,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   })
   const headersList = await headers()
   const sitemap: MetadataRoute.Sitemap = []
-  const domain: string = headersList.get('host') as string
+  const host = headersList.get('host') as string
+  const domain = host.startsWith('http') ? host : `https://${host}`
   sitemap.push({
-    url: domain as string,
+    url: domain,
     lastModified: new Date(),
     priority: 1,
     changeFrequency: 'monthly',
@@ -19,10 +20,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   if (allPages != null && allPages.data.length != 0) {
     for (const p of allPages.data) {
+      if (p.noIndex) continue
+
+      const prefix = p._type === 'service' ? '/services' : ''
       sitemap.push({
-        url: `${domain}/${p.slug}`,
+        url: `${domain}${prefix}/${p.slug}`,
         lastModified: p._updatedAt || new Date(),
-        priority: 0.8,
+        priority: p._type === 'service' ? 0.7 : 0.8,
         changeFrequency: 'monthly',
       })
     }

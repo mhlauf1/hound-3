@@ -45,7 +45,12 @@ export const settingsQuery = defineQuery(`*[_type == "settings"][0]{
   },
   logo,
   yearEstablished,
-  socialLinks
+  socialLinks,
+  "faviconUrl": favicon.asset->url,
+  ga4MeasurementId,
+  gtmContainerId,
+  googleSiteVerification,
+  localBusiness
 }`)
 
 const buttonFields = /* groq */ `
@@ -268,8 +273,7 @@ export const getPageQuery = defineQuery(`
     _type,
     name,
     slug,
-    heading,
-    subheading,
+    seo,
     ${pageBuilderExpansion},
   }
 `)
@@ -280,17 +284,17 @@ export const homepageQuery = defineQuery(`
     _type,
     name,
     slug,
-    heading,
-    subheading,
+    seo,
     ${pageBuilderExpansion},
   }
 `)
 
 export const sitemapData = defineQuery(`
-  *[_type == "page" && defined(slug.current)] | order(_type asc) {
+  *[_type in ["page", "service"] && defined(slug.current)] | order(_type asc) {
     "slug": slug.current,
     _type,
     _updatedAt,
+    "noIndex": seo.noIndex,
   }
 `)
 
@@ -307,6 +311,7 @@ export const getServiceQuery = defineQuery(`
     slug,
     heading,
     shortDescription,
+    seo,
     ${pageBuilderExpansion},
   }
 `)

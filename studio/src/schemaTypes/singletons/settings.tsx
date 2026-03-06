@@ -17,6 +17,12 @@ export const settings = defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
+      name: 'tagline',
+      title: 'Tagline',
+      type: 'string',
+      description: 'Short tagline used in site branding',
+    }),
+    defineField({
       name: 'description',
       description: 'Used for SEO meta description',
       title: 'Description',
@@ -276,6 +282,114 @@ export const settings = defineType({
               More information
             </a>
           ),
+        }),
+      ],
+    }),
+    defineField({
+      name: 'favicon',
+      title: 'Favicon',
+      type: 'image',
+      description: 'Site favicon (recommended: 512x512 PNG)',
+    }),
+    defineField({
+      name: 'ga4MeasurementId',
+      title: 'GA4 Measurement ID',
+      type: 'string',
+      description: 'Google Analytics 4 Measurement ID (e.g. G-XXXXXXXXXX)',
+      validation: (Rule) =>
+        Rule.warning().custom((value) => {
+          if (value && !/^G-[A-Z0-9]+$/.test(value)) {
+            return 'Should match format G-XXXXXXXXXX'
+          }
+          return true
+        }),
+    }),
+    defineField({
+      name: 'gtmContainerId',
+      title: 'GTM Container ID',
+      type: 'string',
+      description: 'Google Tag Manager Container ID (e.g. GTM-XXXXXXX)',
+      validation: (Rule) =>
+        Rule.warning().custom((value) => {
+          if (value && !/^GTM-[A-Z0-9]+$/.test(value)) {
+            return 'Should match format GTM-XXXXXXX'
+          }
+          return true
+        }),
+    }),
+    defineField({
+      name: 'googleSiteVerification',
+      title: 'Google Site Verification',
+      type: 'string',
+      description: 'Google Search Console verification meta tag content',
+    }),
+    defineField({
+      name: 'localBusiness',
+      title: 'Local Business (Structured Data)',
+      type: 'object',
+      options: {collapsible: true, collapsed: true},
+      fields: [
+        defineField({name: 'businessName', title: 'Business Name', type: 'string'}),
+        defineField({
+          name: 'businessType',
+          title: 'Business Type',
+          type: 'string',
+          description: 'Schema.org type (e.g. LocalBusiness, Kennel, PetStore)',
+          initialValue: 'LocalBusiness',
+        }),
+        defineField({
+          name: 'address',
+          title: 'Address',
+          type: 'object',
+          fields: [
+            defineField({name: 'street', title: 'Street', type: 'string'}),
+            defineField({name: 'city', title: 'City', type: 'string'}),
+            defineField({name: 'state', title: 'State', type: 'string'}),
+            defineField({name: 'zip', title: 'ZIP', type: 'string'}),
+            defineField({name: 'country', title: 'Country', type: 'string', initialValue: 'US'}),
+          ],
+        }),
+        defineField({name: 'phone', title: 'Phone', type: 'string'}),
+        defineField({
+          name: 'geoCoordinates',
+          title: 'Geo Coordinates',
+          type: 'object',
+          fields: [
+            defineField({name: 'latitude', title: 'Latitude', type: 'number'}),
+            defineField({name: 'longitude', title: 'Longitude', type: 'number'}),
+          ],
+        }),
+        defineField({
+          name: 'businessHours',
+          title: 'Business Hours',
+          type: 'array',
+          of: [
+            defineArrayMember({
+              type: 'object',
+              fields: [
+                defineField({
+                  name: 'days',
+                  title: 'Days',
+                  type: 'string',
+                  description: 'e.g. Mo-Fr, Sa, Su',
+                }),
+                defineField({name: 'open', title: 'Open', type: 'string', description: 'e.g. 06:00'}),
+                defineField({name: 'close', title: 'Close', type: 'string', description: 'e.g. 19:00'}),
+              ],
+              preview: {
+                select: {days: 'days', open: 'open', close: 'close'},
+                prepare({days, open, close}) {
+                  return {title: `${days}: ${open} – ${close}`}
+                },
+              },
+            }),
+          ],
+        }),
+        defineField({
+          name: 'priceRange',
+          title: 'Price Range',
+          type: 'string',
+          description: 'e.g. $$',
         }),
       ],
     }),
