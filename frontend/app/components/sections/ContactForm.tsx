@@ -84,7 +84,7 @@ export default function ContactForm({block}: ContactFormProps) {
   return (
     <section className="bg-cream pt-8">
       <div className="px-6 md:px-24 py-16 lg:py-24">
-        <FadeIn>
+        <FadeIn immediate>
           <div className="mb-10 lg:mb-14">
             {eyebrow && (
               <FadeIn>
@@ -108,7 +108,7 @@ export default function ContactForm({block}: ContactFormProps) {
           className={`grid grid-cols-1 ${hasContactInfo ? 'lg:grid-cols-2' : ''} gap-10 lg:gap-16`}
         >
           {/* Form */}
-          <FadeIn>
+          <FadeIn immediate>
             {status === 'success' ? (
               <div className="bg-forest/5 rounded-lg p-8 text-center">
                 <svg
@@ -194,7 +194,7 @@ export default function ContactForm({block}: ContactFormProps) {
 
           {/* Next steps */}
           {nextSteps && nextSteps.length > 0 && !hasContactInfo && (
-            <FadeIn delay={0.1}>
+            <FadeIn delay={0.1} immediate>
               <div className="space-y-4">
                 <h3 className="font-heading text-[24px] font-semibold text-forest mb-2">
                   What happens next?
@@ -220,7 +220,7 @@ export default function ContactForm({block}: ContactFormProps) {
 
           {/* Contact info + map */}
           {hasContactInfo && (
-            <FadeIn delay={0.1}>
+            <FadeIn delay={0.1} immediate>
               <div className="space-y-6">
                 {image?.asset?._ref && (
                   <div className="rounded-lg overflow-hidden">

@@ -6,6 +6,7 @@ import HeroSplit from '@/app/components/sections/HeroSplit'
 import HeroBanner from '@/app/components/sections/HeroBanner'
 import HeroMinimal from '@/app/components/sections/HeroMinimal'
 import CtaBanner from '@/app/components/sections/CtaBanner'
+import ContactFormComponent from '@/app/components/sections/ContactForm'
 
 // Below-fold components loaded on demand
 const Cta = lazy(() => import('@/app/components/Cta'))
@@ -21,7 +22,6 @@ const FaqAccordion = lazy(() => import('@/app/components/sections/FaqAccordion')
 const PricingTable = lazy(() => import('@/app/components/sections/PricingTable'))
 const TeamGrid = lazy(() => import('@/app/components/sections/TeamGrid'))
 const GalleryGrid = lazy(() => import('@/app/components/sections/GalleryGrid'))
-const ContactFormComponent = lazy(() => import('@/app/components/sections/ContactForm'))
 const ServiceCards = lazy(() => import('@/app/components/sections/ServiceCards'))
 const FeatureList = lazy(() => import('@/app/components/sections/FeatureList'))
 const ProcessSteps = lazy(() => import('@/app/components/sections/ProcessSteps'))
@@ -63,7 +63,7 @@ function ContactForm(props: BlockProps) {
 }
 
 // Hero types are eagerly loaded, everything else is lazy
-const eagerTypes = new Set(['hero', 'heroSplit', 'heroBanner', 'heroMinimal', 'ctaBanner', 'galleryPage', 'pricingPageTabs'])
+const eagerTypes = new Set(['hero', 'heroSplit', 'heroBanner', 'heroMinimal', 'ctaBanner', 'galleryPage', 'pricingPageTabs', 'contactForm'])
 
 type BlocksType = {
   [key: string]: React.FC<BlockProps>
