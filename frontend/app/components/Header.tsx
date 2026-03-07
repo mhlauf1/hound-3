@@ -162,7 +162,7 @@ export default function Header({navItems, ctaButton, logo}: HeaderProps) {
               animate={{opacity: 1}}
               exit={{opacity: 0}}
               transition={{duration: 0.3}}
-              className="fixed inset-0 bg-forest/40 z-40 md:hidden"
+              className="fixed inset-0 bg-forest/40 z-40 lg:hidden"
               onClick={() => setMobileOpen(false)}
             />
 
@@ -172,7 +172,7 @@ export default function Header({navItems, ctaButton, logo}: HeaderProps) {
               animate={{x: 0}}
               exit={{x: '100%'}}
               transition={{type: 'spring', damping: 30, stiffness: 300}}
-              className="fixed top-0 right-0 bottom-0 w-[85%] max-w-[360px] bg-cream z-50 md:hidden flex flex-col shadow-xl"
+              className="fixed top-0 right-0 bottom-0 w-[85%] max-w-[360px] bg-cream z-50 lg:hidden flex flex-col shadow-xl"
             >
               {/* Close button */}
               <div className="flex justify-end p-5">

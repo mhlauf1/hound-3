@@ -85,7 +85,7 @@ export default function GalleryPage({block}: GalleryPageProps) {
                       width={500}
                       crop={image.crop}
                       hotspot={image.hotspot}
-                      className="rounded-lg max-h-[600px] w-full object-cover transition-opacity group-hover:opacity-90"
+                      className="rounded-lg aspect-[3/4] w-full object-cover transition-opacity group-hover:opacity-90"
                     />
                   </button>
                   {image.caption && (
@@ -114,7 +114,7 @@ export default function GalleryPage({block}: GalleryPageProps) {
                     width={1000}
                     crop={image.crop}
                     hotspot={image.hotspot}
-                    className="rounded-lg w-full object-cover transition-opacity group-hover:opacity-90"
+                    className="rounded-lg aspect-[3/4] w-full object-cover transition-opacity group-hover:opacity-90"
                   />
                   {image.caption && (
                     <p className="mt-2 text-[14px] text-forest/60 text-center">{image.caption}</p>

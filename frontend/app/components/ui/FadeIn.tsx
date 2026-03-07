@@ -7,6 +7,7 @@ interface FadeInProps {
   direction?: 'up' | 'down' | 'left' | 'right' | 'none'
   duration?: number
   className?: string
+  immediate?: boolean
 }
 
 const directionTransform = {
@@ -23,12 +24,22 @@ export function FadeIn({
   direction = 'up',
   duration = 0.5,
   className,
+  immediate = false,
 }: FadeInProps) {
   const ref = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const el = ref.current
     if (!el) return
+
+    if (immediate) {
+      const timer = setTimeout(() => {
+        el.style.transitionDelay = `${delay}s`
+        el.style.opacity = '1'
+        el.style.transform = 'translate(0, 0)'
+      }, 10)
+      return () => clearTimeout(timer)
+    }
 
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -44,7 +55,7 @@ export function FadeIn({
 
     observer.observe(el)
     return () => observer.disconnect()
-  }, [delay])
+  }, [delay, immediate])
 
   return (
     <div

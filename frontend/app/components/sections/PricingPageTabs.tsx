@@ -136,7 +136,7 @@ export default function PricingPageTabs({block}: PricingPageTabsProps) {
         </FadeIn>
 
         {/* Pricing Display */}
-        <FadeIn delay={0.1} key={activeTab}>
+        <FadeIn delay={0.15} key={activeTab} immediate>
           <div className="mb-12">
             {activeService?.pricingDisplay === 'matrix' && activeService.matrixData ? (
               <>
