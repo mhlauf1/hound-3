@@ -94,7 +94,7 @@ export default function GalleryGrid({block}: GalleryGridProps) {
                         width={600}
                         crop={image.crop}
                         hotspot={image.hotspot}
-                        className="rounded-lg max-h-[500px] w-full object-cover transition-opacity group-hover:opacity-90"
+                        className="rounded-lg aspect-[4/3] w-full object-cover transition-opacity group-hover:opacity-90"
                       />
                     </button>
                   ) : (
