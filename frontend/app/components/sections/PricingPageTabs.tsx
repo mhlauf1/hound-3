@@ -112,7 +112,7 @@ export default function PricingPageTabs({block}: PricingPageTabsProps) {
     <section className="bg-cream">
       <div className="px-6 md:px-24 py-16  lg:py-24">
         {/* Header */}
-        <FadeIn>
+        <FadeIn immediate>
           <div className="text-center  pt-20 max-w-2xl mx-auto mb-8 lg:mb-10">
             {eyebrow && <Badge className="mb-3">{eyebrow}</Badge>}
             {heading && (
@@ -129,7 +129,7 @@ export default function PricingPageTabs({block}: PricingPageTabsProps) {
         </FadeIn>
 
         {/* Service Toggle */}
-        <FadeIn delay={0.05}>
+        <FadeIn delay={0.05} immediate>
           <div className="flex justify-center mb-10 lg:mb-14">
             <ServiceToggle activeService={activeTab} onChange={handleTabChange} />
           </div>

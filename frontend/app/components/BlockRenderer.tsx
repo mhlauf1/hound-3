@@ -63,7 +63,7 @@ function ContactForm(props: BlockProps) {
 }
 
 // Hero types are eagerly loaded, everything else is lazy
-const eagerTypes = new Set(['hero', 'heroSplit', 'heroBanner', 'heroMinimal', 'ctaBanner', 'galleryPage', 'pricingTable', 'pricingMatrix', 'pricingCalculator', 'valuePillars'])
+const eagerTypes = new Set(['hero', 'heroSplit', 'heroBanner', 'heroMinimal', 'ctaBanner', 'galleryPage', 'pricingPageTabs'])
 
 type BlocksType = {
   [key: string]: React.FC<BlockProps>
