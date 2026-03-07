@@ -52,7 +52,7 @@ export default function Header({navItems, ctaButton, logo}: HeaderProps) {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 transition-colors duration-300">
       <div className="px-2 lg:px-20">
-        <div className="flex border  bg-cream/95 backdrop-blur-sm border-forest/20 rounded-md mt-4 pl-4 md:pl-12 pr-2 md:pr-6 items-center justify-between py-3">
+        <div className="flex border bg-cream/95 backdrop-blur-sm border-forest/20 rounded-md mt-4 pl-4 md:pl-12 pr-2 md:pr-6 items-center justify-between py-3">
           {/* Logo */}
           <Link href="/" className="flex items-center">
             {logo?.asset?._ref ? (
@@ -68,7 +68,7 @@ export default function Header({navItems, ctaButton, logo}: HeaderProps) {
           </Link>
 
           {/* Desktop Nav */}
-          <nav className="hidden lg:flex items-center gap-7">
+          <nav className="hidden lg:flex flex-1 items-center justify-center gap-7">
             {navItems?.map((item) => (
               <div
                 key={item._key}
@@ -125,7 +125,7 @@ export default function Header({navItems, ctaButton, logo}: HeaderProps) {
           </nav>
 
           {/* Desktop CTA */}
-          <div className="hidden lg:block">
+          <div className="hidden lg:block shrink-0">
             {ctaButton?.buttonText && (
               <Button variant="primary" link={ctaButton.link}>
                 {ctaButton.buttonText}
