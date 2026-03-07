@@ -110,10 +110,10 @@ export default function PricingPageTabs({block}: PricingPageTabsProps) {
 
   return (
     <section className="bg-cream">
-      <div className="px-6 md:px-24 py-16 lg:py-24">
+      <div className="px-6 md:px-24 py-16  lg:py-24">
         {/* Header */}
         <FadeIn>
-          <div className="text-center max-w-2xl mx-auto mb-8 lg:mb-10">
+          <div className="text-center  pt-20 max-w-2xl mx-auto mb-8 lg:mb-10">
             {eyebrow && <Badge className="mb-3">{eyebrow}</Badge>}
             {heading && (
               <h2 className="text-[36px] md:text-[48px] lg:text-[56px] font-semibold tracking-tight leading-[105%] text-forest mb-4">
