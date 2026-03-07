@@ -129,7 +129,7 @@ export default function PricingPageTabs({block}: PricingPageTabsProps) {
         </FadeIn>
 
         {/* Service Toggle */}
-        <FadeIn delay={0.05} immediate>
+        <FadeIn delay={0.05}>
           <div className="flex justify-center mb-10 lg:mb-14">
             <ServiceToggle activeService={activeTab} onChange={handleTabChange} />
           </div>
@@ -141,7 +141,7 @@ export default function PricingPageTabs({block}: PricingPageTabsProps) {
             {activeService?.pricingDisplay === 'matrix' && activeService.matrixData ? (
               <>
                 {activeService.matrixData.description && (
-                  <p className="font-sans text-[16px] md:text-[18px] leading-[150%] text-charcoal/80 text-center max-w-2xl mx-auto mb-10">
+                  <p className="font-sans text-[14px] md:text-[16px] leading-[150%] text-charcoal/80 text-center max-w-2xl mx-auto mb-10">
                     {activeService.matrixData.description}
                   </p>
                 )}
@@ -153,7 +153,7 @@ export default function PricingPageTabs({block}: PricingPageTabsProps) {
             ) : activeService?.tableData ? (
               <>
                 {activeService.tableData.description && (
-                  <p className="font-sans text-[16px] md:text-[18px] leading-[150%] text-charcoal/80 text-center max-w-2xl mx-auto mb-10">
+                  <p className="font-sans text-[14px] md:text-[16px] leading-[150%] text-charcoal/80 text-center max-w-2xl mx-auto mb-10">
                     {activeService.tableData.description}
                   </p>
                 )}

@@ -27,7 +27,7 @@ export default function PricingMatrixDisplay({tables, footnotes}: PricingMatrixD
   return (
     <>
       {tables.map((table, ti) => (
-        <FadeIn key={table._key} delay={0.1 * ti} className={ti < (tables.length - 1) ? 'mb-20' : ''}>
+        <FadeIn key={table._key} delay={0.1 * ti} className={ti < tables.length - 1 ? 'mb-20' : ''}>
           <div>
             {table.tableName && (
               <h3 className="text-[24px] md:text-[32px] leading-[120%] text-forest mb-2">
