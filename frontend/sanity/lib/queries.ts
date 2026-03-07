@@ -258,6 +258,13 @@ const pageBuilderExpansion = /* groq */ `
     _type == "galleryPage" => {
       ...
     },
+    _type == "pricingPageTabs" => {
+      ...,
+      ctaLink {
+        ...,
+        ${linkReference}
+      }
+    },
     _type == "webcamGrid" => {
       ...,
       "webcams": *[_type == "webcam" && enabled == true] | order(group asc, sortOrder asc) {

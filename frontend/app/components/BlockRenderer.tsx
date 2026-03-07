@@ -43,6 +43,7 @@ const GalleryCarousel = lazy(() => import('@/app/components/sections/GalleryCaro
 const GalleryShowcase = lazy(() => import('@/app/components/sections/GalleryShowcase'))
 const GalleryPage = lazy(() => import('@/app/components/sections/GalleryPage'))
 const ValuePillars = lazy(() => import('@/app/components/sections/ValuePillars'))
+const PricingPageTabs = lazy(() => import('@/app/components/sections/PricingPageTabs'))
 import {dataAttr} from '@/sanity/lib/utils'
 import {PageBuilderSection} from '@/sanity/lib/types'
 
@@ -109,6 +110,7 @@ const Blocks = {
   galleryShowcase: GalleryShowcase,
   galleryPage: GalleryPage,
   valuePillars: ValuePillars,
+  pricingPageTabs: PricingPageTabs,
 } as BlocksType
 
 export default function BlockRenderer({block, index, pageId, pageType}: BlockProps) {

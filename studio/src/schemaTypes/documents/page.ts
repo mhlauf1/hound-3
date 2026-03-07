@@ -73,6 +73,7 @@ export const page = defineType({
         {type: 'galleryShowcase'},
         {type: 'galleryPage'},
         {type: 'valuePillars'},
+        {type: 'pricingPageTabs'},
       ],
       options: {
         insertMenu: {
