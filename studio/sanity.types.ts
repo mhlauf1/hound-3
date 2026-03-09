@@ -78,6 +78,66 @@ export type ItemsObjectImage = {
   _type: 'image'
 }
 
+export type TableData = {
+  categories?: Array<{
+    categoryName?: string
+    tiers?: Array<{
+      name?: string
+      price?: string
+      description?: string
+      features?: Array<string>
+      highlighted?: boolean
+      _type: 'pricingTier'
+      _key: string
+    }>
+    _type: 'pricingCategory'
+    _key: string
+  }>
+  description?: string
+}
+
+export type MatrixData = {
+  description?: string
+  tables?: Array<{
+    tableName?: string
+    tableDescription?: string
+    columnHeaders?: Array<string>
+    rows?: Array<{
+      rowLabel?: string
+      cells?: Array<{
+        value?: string
+        note?: string
+        _type: 'matrixCell'
+        _key: string
+      }>
+      _type: 'matrixRow'
+      _key: string
+    }>
+    _type: 'matrixTable'
+    _key: string
+  }>
+  footnotes?: Array<string>
+}
+
+export type PricingPageTabs = {
+  _type: 'pricingPageTabs'
+  eyebrow?: string
+  heading: string
+  description?: string
+  defaultTab?: 'daycare' | 'boarding' | 'grooming'
+  services?: Array<{
+    serviceKey: 'daycare' | 'boarding' | 'grooming'
+    pricingDisplay?: 'table' | 'matrix'
+    tableData?: TableData
+    matrixData?: MatrixData
+    showCalculator?: boolean
+    _key: string
+  }>
+  ctaText?: string
+  ctaLink?: Link
+  taxNote?: string
+}
+
 export type ValuePillars = {
   _type: 'valuePillars'
   eyebrow?: string
@@ -1370,6 +1430,9 @@ export type Page = {
     | ({
         _key: string
       } & ValuePillars)
+    | ({
+        _key: string
+      } & PricingPageTabs)
   >
 }
 
@@ -1617,6 +1680,9 @@ export type AllSanitySchemaTypes =
   | ColumnsObjectImage
   | LogosObjectImage
   | ItemsObjectImage
+  | TableData
+  | MatrixData
+  | PricingPageTabs
   | ValuePillars
   | GalleryPage
   | GalleryShowcase
