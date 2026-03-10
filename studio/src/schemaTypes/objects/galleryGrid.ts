@@ -55,6 +55,19 @@ export const galleryGrid = defineType({
       initialValue: 3,
     }),
     defineField({
+      name: 'displayStyle',
+      title: 'Display Style',
+      type: 'string',
+      options: {
+        list: [
+          {title: 'Grid', value: 'grid'},
+          {title: 'Circles', value: 'circles'},
+        ],
+        layout: 'radio',
+      },
+      initialValue: 'grid',
+    }),
+    defineField({
       name: 'enableLightbox',
       title: 'Enable Lightbox',
       type: 'boolean',

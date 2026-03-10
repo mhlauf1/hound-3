@@ -593,6 +593,7 @@ export type GalleryGrid = {
     _key: string
   }>
   columns?: 2 | 3 | 4
+  displayStyle?: 'grid' | 'circles'
   enableLightbox?: boolean
   accentImage?: {
     asset?: SanityImageAssetReference

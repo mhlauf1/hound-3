@@ -42,8 +42,8 @@ export default function CtaBanner({block, index}: CtaBannerProps) {
 
   if (hasSideImage) {
     return (
-      <section className="bg-cream px-4 lg:px-8">
-        <div className="relative rounded-lg overflow-hidden">
+      <section className="bg-cream">
+        <div className="relative overflow-hidden">
           {/* Background image if provided, otherwise forest */}
           {backgroundImage?.asset?._ref ? (
             <div className="absolute inset-0">

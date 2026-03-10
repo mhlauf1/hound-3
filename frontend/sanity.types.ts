@@ -593,6 +593,7 @@ export type GalleryGrid = {
     _key: string
   }>
   columns?: 2 | 3 | 4
+  displayStyle?: 'grid' | 'circles'
   enableLightbox?: boolean
   accentImage?: {
     asset?: SanityImageAssetReference
@@ -2417,6 +2418,7 @@ export type GetPageQueryResult = {
           _key: string
         }>
         columns?: 2 | 3 | 4
+        displayStyle?: 'circles' | 'grid'
         enableLightbox?: boolean
         accentImage?: {
           asset?: SanityImageAssetReference
@@ -3604,6 +3606,7 @@ export type HomepageQueryResult = {
           _key: string
         }>
         columns?: 2 | 3 | 4
+        displayStyle?: 'circles' | 'grid'
         enableLightbox?: boolean
         accentImage?: {
           asset?: SanityImageAssetReference
@@ -4818,6 +4821,7 @@ export type GetServiceQueryResult = {
           _key: string
         }>
         columns?: 2 | 3 | 4
+        displayStyle?: 'circles' | 'grid'
         enableLightbox?: boolean
         accentImage?: {
           asset?: SanityImageAssetReference

@@ -23,6 +23,7 @@ type GalleryGridProps = {
     heading?: string
     images?: GalleryImage[]
     columns?: number
+    displayStyle?: string
     enableLightbox?: boolean
     accentImage?: {asset?: {_ref: string}; alt?: string}
     backgroundColor?: string
@@ -45,14 +46,24 @@ const bgClasses: Record<string, string> = {
 }
 
 export default function GalleryGrid({block}: GalleryGridProps) {
-  const {eyebrow, heading, images, columns, enableLightbox, accentImage, backgroundColor} = block
+  const {
+    eyebrow,
+    heading,
+    images,
+    columns,
+    displayStyle,
+    enableLightbox,
+    accentImage,
+    backgroundColor,
+  } = block
   const {isOpen, currentIndex, openLightbox, closeLightbox} = useLightbox()
 
   const cols = stegaClean(columns) || 3
   const gridClass = columnClasses[cols] || columnClasses[3]
   const bgColor = stegaClean(backgroundColor) || 'cream'
   const isDark = bgColor === 'forest'
-  const lightboxEnabled = enableLightbox !== false
+  const isCircles = stegaClean(displayStyle) === 'circles'
+  const lightboxEnabled = !isCircles && enableLightbox !== false
 
   const validImages = (images || []).filter((img) => img.asset?._ref)
 
@@ -64,7 +75,7 @@ export default function GalleryGrid({block}: GalleryGridProps) {
     <section className={bgClasses[bgColor] || 'bg-cream'}>
       <div className="px-6 md:px-24 py-16 lg:py-24">
         <FadeIn>
-          <div className="mb-8 lg:mb-10">
+          <div className={`mb-8 lg:mb-10 ${isCircles ? 'text-center' : ''}`}>
             {eyebrow && <Badge className="mb-3">{eyebrow}</Badge>}
             {heading && (
               <h2
@@ -77,11 +88,21 @@ export default function GalleryGrid({block}: GalleryGridProps) {
         </FadeIn>
 
         {validImages.length > 0 && (
-          <div className={`grid ${gridClass} mb-8 md:mb-12 gap-4`}>
+          <div
+            className={`grid ${gridClass} mb-8 md:mb-12 gap-4 ${isCircles ? 'justify-items-center gap-8 md:gap-12' : ''}`}
+          >
             {validImages.map((image, i) => (
               <FadeIn key={image._key} delay={0.05 * i}>
-                <div>
-                  {lightboxEnabled ? (
+                <div className={isCircles ? 'flex flex-col items-center' : ''}>
+                  {isCircles ? (
+                    <Image
+                      id={image.asset!._ref}
+                      alt={image.alt || 'Gallery image'}
+                      crop={image.crop}
+                      hotspot={image.hotspot}
+                      className="rounded-full aspect-square w-full object-cover"
+                    />
+                  ) : lightboxEnabled ? (
                     <button
                       type="button"
                       onClick={() => openLightbox(i)}
@@ -94,7 +115,7 @@ export default function GalleryGrid({block}: GalleryGridProps) {
                         width={600}
                         crop={image.crop}
                         hotspot={image.hotspot}
-                        className="rounded-lg aspect-[4/3] w-full object-cover transition-opacity group-hover:opacity-90"
+                        className="rounded-lg aspect-[3/4] w-full object-cover transition-opacity group-hover:opacity-90"
                       />
                     </button>
                   ) : (

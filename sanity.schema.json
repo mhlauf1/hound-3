@@ -4309,6 +4309,23 @@
           },
           "optional": true
         },
+        "displayStyle": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "union",
+            "of": [
+              {
+                "type": "string",
+                "value": "grid"
+              },
+              {
+                "type": "string",
+                "value": "circles"
+              }
+            ]
+          },
+          "optional": true
+        },
         "enableLightbox": {
           "type": "objectAttribute",
           "value": {
