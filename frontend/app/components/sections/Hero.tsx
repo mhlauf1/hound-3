@@ -84,13 +84,31 @@ export default function Hero({block, index}: HeroProps) {
 
           {subtext && (
             <Wrap delay={0.2}>
-              <p className="font-sans md:text-base lg:text-lg text-text-muted leading-[150%] max-w-xl mb-8">
+              <p className="font-sans md:text-base lg:text-lg text-text-muted leading-[150%] max-w-xl mb-6">
                 {subtext}
               </p>
             </Wrap>
           )}
 
-          <Wrap className="w-full md:w-auto" delay={0.3}>
+          <Wrap delay={0.25}>
+            <div className="flex items-center justify-center gap-2 md:gap-3 mb-6">
+              {[
+                {label: 'Boarding', href: '/services/boarding'},
+                {label: 'Daycare', href: '/services/daycare'},
+                {label: 'Grooming', href: '/services/grooming'},
+              ].map((service) => (
+                <a
+                  key={service.label}
+                  href={service.href}
+                  className="bg-forest text-white font-sans text-[13px] md:text-[14px] font-medium tracking-wide px-5 py-2.5 rounded-lg hover:bg-forest/90 transition-colors"
+                >
+                  {service.label}
+                </a>
+              ))}
+            </div>
+          </Wrap>
+
+          <Wrap className="w-full md:w-auto" delay={0.35}>
             <div className="flex flex-col w-full md:flex-row items-center gap-2 md:gap-3 mb-3 md:mb-4">
               {primaryCta?.buttonText && (
                 <Button variant="primary" link={primaryCta.link}>
@@ -102,17 +120,6 @@ export default function Hero({block, index}: HeroProps) {
                   {secondaryCta.buttonText}
                 </Button>
               )}
-            </div>
-          </Wrap>
-          <Wrap delay={0.25}>
-            <div className="flex items-center mt-2 justify-center mb-3">
-              <span className="inline-flex items-center gap-2 md:gap-3 border border-terracotta/20 bg-white rounded-full px-4 py-1.5 text-[12px] md:text-[14px] font-medium text-terracotta">
-                <span>Boarding</span>
-                <span className="w-1 h-1 rounded-full bg-terracotta/70" aria-hidden="true" />
-                <span>Daycare</span>
-                <span className="w-1 h-1 rounded-full bg-terracotta/70" aria-hidden="true" />
-                <span>Grooming</span>
-              </span>
             </div>
           </Wrap>
 
