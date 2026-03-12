@@ -83,7 +83,7 @@ export default function Header({navItems, ctaButton, logo}: HeaderProps) {
                 {item.children && item.children.length > 0 ? (
                   <button
                     type="button"
-                    className="flex items-center gap-1 font-sans text-[14px] text-forest hover:text-forest/70 transition-colors cursor-default"
+                    className="flex items-center gap-1 font-sans text-[14px] text-forest hover:text-forest/70 transition-colors cursor-default whitespace-nowrap"
                   >
                     {item.label}
                     <svg width="12" height="12" viewBox="0 0 12 12" fill="none" className="mt-0.5">
@@ -98,7 +98,7 @@ export default function Header({navItems, ctaButton, logo}: HeaderProps) {
                 ) : (
                   <Link
                     href={resolveNavLink(item.link) || '#'}
-                    className="font-sans text-[14px] text-forest hover:text-forest/70 transition-colors"
+                    className="font-sans text-[14px] text-forest hover:text-forest/70 transition-colors whitespace-nowrap"
                   >
                     {item.label}
                   </Link>
