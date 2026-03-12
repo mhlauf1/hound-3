@@ -22,11 +22,20 @@ export async function POST(request: Request) {
       return NextResponse.json({error: 'Invalid request body'}, {status: 400})
     }
 
+    const fieldLabels: Record<string, string> = {
+      name: 'Name',
+      email: 'Email',
+      phone: 'Phone',
+      service: 'Service',
+      petName: 'Pet Name',
+      message: 'Message',
+    }
+
     const lines = Object.entries(body)
       .filter(([, value]) => typeof value === 'string' && value.trim())
       .map(
         ([key, value]) =>
-          `<p><strong>${escapeHtml(key)}:</strong> ${escapeHtml(value as string)}</p>`,
+          `<p><strong>${escapeHtml(fieldLabels[key] || key)}:</strong> ${escapeHtml(value as string)}</p>`,
       )
       .join('\n')
 
