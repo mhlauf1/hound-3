@@ -35,9 +35,16 @@ export default function Hero({block, index}: HeroProps) {
 
   const isFirst = index === 0
   const Wrap = isFirst
-    ? ({children, className}: {children: React.ReactNode; className?: string; delay?: number; direction?: string}) => <div className={className}>{children}</div>
+    ? ({
+        children,
+        className,
+      }: {
+        children: React.ReactNode
+        className?: string
+        delay?: number
+        direction?: string
+      }) => <div className={className}>{children}</div>
     : FadeIn
-
 
   return (
     <section className="relative pb-8 md:pb-0 pt-18 bg-cream overflow-x-clip">
@@ -69,7 +76,7 @@ export default function Hero({block, index}: HeroProps) {
 
           {heading && (
             <Wrap delay={0.1}>
-              <h1 className="text-[48px] md:text-[56px] lg:text-[84px] leading-[104%] tracking-tight font-semibold mb-6">
+              <h1 className="text-[48px] md:text-[56px] lg:text-[84px] leading-[104%] tracking-tight font-semibold mb-5">
                 {heading}
               </h1>
             </Wrap>
@@ -97,6 +104,17 @@ export default function Hero({block, index}: HeroProps) {
               )}
             </div>
           </Wrap>
+          <Wrap delay={0.25}>
+            <div className="flex items-center mt-2 justify-center mb-3">
+              <span className="inline-flex items-center gap-2 md:gap-3 border border-terracotta/20 bg-white rounded-full px-4 py-1.5 text-[12px] md:text-[14px] font-medium text-terracotta">
+                <span>Boarding</span>
+                <span className="w-1 h-1 rounded-full bg-terracotta/70" aria-hidden="true" />
+                <span>Daycare</span>
+                <span className="w-1 h-1 rounded-full bg-terracotta/70" aria-hidden="true" />
+                <span>Grooming</span>
+              </span>
+            </div>
+          </Wrap>
 
           {reviewRating && (
             <Wrap delay={0.35}>
@@ -122,8 +140,8 @@ export default function Hero({block, index}: HeroProps) {
           )}
         </div>
 
-        {heroImage?.asset?._ref && (
-          isFirst ? (
+        {heroImage?.asset?._ref &&
+          (isFirst ? (
             <div className="mt-10 lg:mt-16 max-w-4xl mx-auto">
               <Image
                 id={heroImage.asset._ref}
@@ -149,8 +167,7 @@ export default function Hero({block, index}: HeroProps) {
                 />
               </div>
             </FadeIn>
-          )
-        )}
+          ))}
       </div>
     </section>
   )
