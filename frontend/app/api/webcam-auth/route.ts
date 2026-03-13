@@ -9,7 +9,32 @@ function hashPassword(password: string): string {
   return crypto.createHmac('sha256', 'houndaround-webcam').update(password).digest('hex')
 }
 
+function parseTime(timeStr: string): {hour: number; minute: number} {
+  const [h, m] = timeStr.split(':').map(Number)
+  return {hour: h, minute: m ?? 0}
+}
+
+function isWithinOperatingHours(): boolean {
+  const openStr = process.env.WEBCAM_OPEN_HOUR || '8:30'
+  const closeStr = process.env.WEBCAM_CLOSE_HOUR || '16:30'
+  const open = parseTime(openStr)
+  const close = parseTime(closeStr)
+
+  const now = new Date(
+    new Date().toLocaleString('en-US', {timeZone: 'America/Chicago'}),
+  )
+  const currentMinutes = now.getHours() * 60 + now.getMinutes()
+  const openMinutes = open.hour * 60 + open.minute
+  const closeMinutes = close.hour * 60 + close.minute
+
+  return currentMinutes >= openMinutes && currentMinutes < closeMinutes
+}
+
 export async function GET() {
+  if (!isWithinOperatingHours()) {
+    return NextResponse.json({authenticated: false, outsideHours: true})
+  }
+
   const password = process.env.WEBCAM_PASSWORD
   if (!password) {
     return NextResponse.json({authenticated: true})
@@ -24,6 +49,10 @@ export async function GET() {
 }
 
 export async function POST(request: Request) {
+  if (!isWithinOperatingHours()) {
+    return NextResponse.json({success: false, outsideHours: true}, {status: 403})
+  }
+
   const password = process.env.WEBCAM_PASSWORD
   if (!password) {
     return NextResponse.json({success: true, authenticated: true})

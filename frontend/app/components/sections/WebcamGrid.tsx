@@ -28,9 +28,9 @@ type WebcamGridProps = {
 export default function WebcamGrid({block}: WebcamGridProps) {
   const {heading, subtext, trustMessage, showGroupHeaders = true, webcams = []} = block
 
-  const [authStatus, setAuthStatus] = useState<'loading' | 'authenticated' | 'unauthenticated'>(
-    'loading',
-  )
+  const [authStatus, setAuthStatus] = useState<
+    'loading' | 'authenticated' | 'unauthenticated' | 'outsideHours'
+  >('loading')
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
   const [submitting, setSubmitting] = useState(false)
@@ -38,7 +38,13 @@ export default function WebcamGrid({block}: WebcamGridProps) {
   useEffect(() => {
     fetch('/api/webcam-auth')
       .then((res) => res.json())
-      .then((data) => setAuthStatus(data.authenticated ? 'authenticated' : 'unauthenticated'))
+      .then((data) => {
+        if (data.outsideHours) {
+          setAuthStatus('outsideHours')
+        } else {
+          setAuthStatus(data.authenticated ? 'authenticated' : 'unauthenticated')
+        }
+      })
       .catch(() => setAuthStatus('unauthenticated'))
   }, [])
 
@@ -55,7 +61,9 @@ export default function WebcamGrid({block}: WebcamGridProps) {
       })
       const data = await res.json()
 
-      if (data.authenticated) {
+      if (data.outsideHours) {
+        setAuthStatus('outsideHours')
+      } else if (data.authenticated) {
         setAuthStatus('authenticated')
       } else {
         setError(data.error || 'Invalid password')
@@ -78,6 +86,29 @@ export default function WebcamGrid({block}: WebcamGridProps) {
           <div className="text-center">
             <div className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-forest/20 border-t-forest" />
           </div>
+        </div>
+      </section>
+    )
+  }
+
+  // Outside operating hours
+  if (authStatus === 'outsideHours') {
+    return (
+      <section className="bg-cream">
+        <div className="max-w-[1600px] mx-auto px-6 lg:px-10 py-[80px] lg:py-[120px]">
+          <FadeIn>
+            <div className="max-w-md mx-auto text-center">
+              {heading && (
+                <h2 className="text-forest text-[36px] md:text-[48px] lg:text-[56px] font-semibold tracking-tight leading-[95%] mb-4">
+                  {heading}
+                </h2>
+              )}
+              <p className="text-charcoal/70 text-[16px] md:text-[18px] leading-relaxed">
+                Our webcams are available daily from 8:30 AM to 4:30 PM. Please check back during
+                operating hours.
+              </p>
+            </div>
+          </FadeIn>
         </div>
       </section>
     )
