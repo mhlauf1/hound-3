@@ -88,7 +88,6 @@ export default function Footer({
                   {socialLinks.instagram && (
                     <a
                       href={socialLinks.instagram}
-                      target="_blank"
                       rel="noopener noreferrer"
                       aria-label="Instagram"
                       className="text-forest/50 hover:text-forest transition-colors"
