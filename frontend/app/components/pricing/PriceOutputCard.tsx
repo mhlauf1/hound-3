@@ -92,7 +92,7 @@ export default function PriceOutputCard({
             <div key={i} className="flex items-start justify-between gap-4">
               <span className="font-sans text-[14px] text-charcoal/70">{item.label}</span>
               <span className="font-sans text-[14px]  text-forest tabular-nums shrink-0">
-                ${formatPrice(item.amount)}
+                {item.displayPrice ?? `$${formatPrice(item.amount)}`}
               </span>
             </div>
           ))}

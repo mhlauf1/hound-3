@@ -9,8 +9,9 @@ import {
   getAvailableSizes,
   isHairTypeRelevant,
   groomingAddOnOptions,
-  sizeLabels,
   serviceLabels,
+  FACE_FEET_SANI_TRIM_LABEL,
+  FACE_FEET_SANI_TRIM_RANGE,
 } from '@/app/data/pricingData'
 import type {
   GroomingService,
@@ -38,9 +39,11 @@ export default function GroomingCalculator({ctaText, ctaLink, taxNote}: Grooming
   const [dogs, setDogs] = useState<DogConfig[]>(() => [createDog()])
   const [service, setService] = useState<GroomingService>('fullBath')
   const [selectedItems, setSelectedItems] = useState<GroomingAddOn[]>([])
+  const [bathAddTrim, setBathAddTrim] = useState(false)
 
   const availableSizes = useMemo(() => getAvailableSizes(service), [service])
   const showHairType = isHairTypeRelevant(service)
+  const showBathTrimOption = service === 'fullBath'
 
   const handleServiceChange = useCallback(
     (v: string) => {
@@ -75,8 +78,8 @@ export default function GroomingCalculator({ctaText, ctaLink, taxNote}: Grooming
   }, [])
 
   const fullServiceResult = useMemo(
-    () => calculateGroomingFullService({service, dogs}),
-    [service, dogs],
+    () => calculateGroomingFullService({service, dogs, addFaceFeetSaniTrim: bathAddTrim && showBathTrimOption}),
+    [service, dogs, bathAddTrim, showBathTrimOption],
   )
 
   const alaCarteResult = useMemo(
@@ -120,7 +123,7 @@ export default function GroomingCalculator({ctaText, ctaLink, taxNote}: Grooming
               index={i}
               total={dogs.length}
               showHairType={isFullService ? showHairType : false}
-              availableSizes={isFullService ? availableSizes : (['xs', 's', 'm', 'l', 'xl'] as DogSize[])}
+              availableSizes={isFullService ? availableSizes : (['s', 'm', 'l', 'xl'] as DogSize[])}
               onUpdate={(updated) => handleUpdateDog(i, updated)}
               onRemove={() => handleRemoveDog(i)}
             />
@@ -128,15 +131,28 @@ export default function GroomingCalculator({ctaText, ctaLink, taxNote}: Grooming
           {dogs.length < 3 && <AddDogButton onClick={handleAddDog} />}
         </div>
 
+        {isFullService && showBathTrimOption && (
+          <CheckboxGroup
+            label="Bath Add-On"
+            options={[
+              {
+                id: 'faceFeetSani',
+                label: FACE_FEET_SANI_TRIM_LABEL,
+                detail: `$${FACE_FEET_SANI_TRIM_RANGE[0]}–$${FACE_FEET_SANI_TRIM_RANGE[1]} (varies)`,
+              },
+            ]}
+            selected={bathAddTrim ? ['faceFeetSani'] : []}
+            onChange={(selected) => setBathAddTrim(selected.includes('faceFeetSani'))}
+          />
+        )}
+
         {!isFullService && (
           <CheckboxGroup
             label="Services"
             options={groomingAddOnOptions.map((a) => {
-              const hasLargeDog = dogs.some((d) => d.size === 'l' || d.size === 'xl')
-              const price = hasLargeDog && a.priceL ? `$${a.priceL}` : `$${a.price}`
-              const allSameSize = dogs.every((d) => d.size === dogs[0].size)
-              const showRange = !allSameSize && a.priceL
-              const priceStr = showRange ? `$${a.price}–$${a.priceL}` : price
+              const priceStr = a.priceRange
+                ? `$${a.priceRange[0]}–$${a.priceRange[1]}`
+                : `$${a.price}`
               const detail = a.note ? `${priceStr} (${a.note})` : priceStr
               return {
                 id: a.id,
