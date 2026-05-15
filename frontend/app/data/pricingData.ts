@@ -270,8 +270,8 @@ const groomingRates: Record<GroomingService, Partial<Record<DogSize, Partial<Rec
   fullGroom: {
     s: {short: 80, long: 80},
     m: {short: 95, long: 95},
-    l: {short: 120, long: 120},
-    xl: {short: 140, long: 140},
+    l: {short: 130, long: 130},
+    xl: {short: 145, long: 145},
   },
 }
 
@@ -283,13 +283,13 @@ type GroomingAddOnInfo = {
 }
 
 const groomingAddOns: Record<GroomingAddOn, GroomingAddOnInfo> = {
-  nailTrim: {label: 'Nail Trim', price: 17},
-  nailTrimGrind: {label: 'Nail Trim & Grind', price: 22},
+  nailTrim: {label: 'Nail Trim', price: 20},
+  nailTrimGrind: {label: 'Nail Trim & Grind', price: 25},
   teethBrushing: {label: 'Teeth Brushing', price: 15},
   earCleaning: {label: 'Ear Cleaning', price: 12},
   glandExpression: {label: 'Gland Expression', price: 17, note: 'External'},
   deShed: {label: 'De-Shed Services', priceRange: [20, 30]},
-  mattingFee: {label: 'Matting Fee', price: 15, note: 'Starting at'},
+  mattingFee: {label: 'Matting Fee', priceRange: [15, 45]},
   handlingFee: {label: 'Handling Fee', price: 10, note: 'Starting at'},
   scissoringFee: {label: 'Scissoring Fee', priceRange: [10, 30], note: 'Long, breed, or styled trims'},
   lateFee: {label: 'Late Fee', price: 1, note: 'Per minute, after 15-min grace'},
