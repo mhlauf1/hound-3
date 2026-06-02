@@ -1,38 +1,25 @@
 // ─── Daycare ────────────────────────────────────────────────
 export type DayType = 'full' | 'half'
-export type DaycarePackage = 'single' | '5-day' | '10-day' | '20-day'
+export type DaycarePackage = 'single' | '10-day' | '20-day' | '30-day'
 
-const daycareRates: Record<DaycarePackage, Record<DayType, {first: number; additional: number}>> = {
-  single: {
-    full: {first: 35, additional: 30},
-    half: {first: 27, additional: 25},
-  },
-  '5-day': {
-    full: {first: 33, additional: 28},
-    half: {first: 33, additional: 28},
-  },
-  '10-day': {
-    full: {first: 32, additional: 27},
-    half: {first: 32, additional: 27},
-  },
-  '20-day': {
-    full: {first: 31, additional: 26},
-    half: {first: 31, additional: 26},
-  },
+// Flat single-day rates, charged per dog (no multi-dog discount on daycare).
+const daycareSingleRates: Record<DayType, number> = {
+  full: 39,
+  half: 29,
+}
+
+// Full-day-only package bundles — fixed total price per dog.
+const daycarePackagePrices: Record<Exclude<DaycarePackage, 'single'>, number> = {
+  '10-day': 350,
+  '20-day': 660,
+  '30-day': 935,
 }
 
 const packageDays: Record<DaycarePackage, number | null> = {
   single: null,
-  '5-day': 5,
   '10-day': 10,
   '20-day': 20,
-}
-
-export type DaycareInput = {
-  dogs: number
-  dayType: DayType
-  pkg: DaycarePackage
-  days: number // only used when pkg === 'single'
+  '30-day': 30,
 }
 
 export type DaycareDogConfig = {
@@ -43,40 +30,6 @@ export type DaycareDogConfig = {
 }
 
 export type LineItem = {label: string; amount: number; displayPrice?: string}
-
-export type DaycareResult = {
-  total: number
-  lineItems: LineItem[]
-  savings: number | null
-  perDayRate: number
-}
-
-export function calculateDaycare(input: DaycareInput): DaycareResult {
-  const {dogs, dayType, pkg, days} = input
-  const rate = daycareRates[pkg][dayType]
-  const numDays = packageDays[pkg] ?? days
-  const perDay = rate.first + Math.max(0, dogs - 1) * rate.additional
-  const total = perDay * numDays
-
-  const lineItems: LineItem[] = [
-    {label: `1st dog × ${numDays} day${numDays > 1 ? 's' : ''}`, amount: rate.first * numDays},
-  ]
-  if (dogs > 1) {
-    lineItems.push({
-      label: `${dogs - 1} additional dog${dogs > 2 ? 's' : ''} × ${numDays} day${numDays > 1 ? 's' : ''}`,
-      amount: rate.additional * (dogs - 1) * numDays,
-    })
-  }
-
-  let savings: number | null = null
-  if (pkg !== 'single') {
-    const singleRate = daycareRates.single[dayType]
-    const singleTotal = (singleRate.first + Math.max(0, dogs - 1) * singleRate.additional) * numDays
-    savings = singleTotal - total
-  }
-
-  return {total, lineItems, savings, perDayRate: rate.first}
-}
 
 export type DaycarePerDogResult = {
   total: number
@@ -93,25 +46,30 @@ export function calculateDaycarePerDog(input: {dogs: DaycareDogConfig[]}): Dayca
 
   for (let i = 0; i < dogs.length; i++) {
     const dog = dogs[i]
-    const rate = daycareRates[dog.pkg][dog.dayType]
-    const perDay = i === 0 ? rate.first : rate.additional
-    const numDays = packageDays[dog.pkg] ?? dog.days
-    const cost = perDay * numDays
-
-    const pkgLabel = dog.pkg === 'single' ? '' : `, ${dog.pkg.replace('-', '-Day ')}Pkg`
-    const dayTypeLabel = dog.dayType === 'full' ? 'Full Day' : 'Half Day'
     const dogLabel = dogs.length > 1 ? `Dog ${i + 1}` : 'Your dog'
-    lineItems.push({
-      label: `${dogLabel} — ${dayTypeLabel}${pkgLabel} (${numDays} day${numDays > 1 ? 's' : ''} @ $${perDay})`,
-      amount: cost,
-    })
 
-    total += cost
+    if (dog.pkg === 'single') {
+      const perDay = daycareSingleRates[dog.dayType]
+      const cost = perDay * dog.days
+      const dayTypeLabel = dog.dayType === 'full' ? 'Full Day' : 'Half Day'
+      lineItems.push({
+        label: `${dogLabel} — ${dayTypeLabel} (${dog.days} day${dog.days > 1 ? 's' : ''} @ $${perDay})`,
+        amount: cost,
+      })
+      total += cost
+    } else {
+      // Packages are full-day only, priced as a fixed bundle total.
+      const cost = daycarePackagePrices[dog.pkg]
+      const numDays = packageDays[dog.pkg] ?? 0
+      const pkgLabel = dog.pkg.replace('-day', '-Day')
+      lineItems.push({
+        label: `${dogLabel} — Full Day, ${pkgLabel} Pkg (${numDays} days)`,
+        amount: cost,
+      })
+      total += cost
 
-    if (dog.pkg !== 'single') {
-      const singleRate = daycareRates.single[dog.dayType]
-      const singlePerDay = i === 0 ? singleRate.first : singleRate.additional
-      totalSavings += singlePerDay * numDays - cost
+      // Savings vs. paying the full-day single rate for the same number of days.
+      totalSavings += daycareSingleRates.full * numDays - cost
       hasSavings = true
     }
   }
@@ -135,69 +93,19 @@ export const boardingAddOnOptions = Object.entries(boardingAddOns).map(([key, va
   perDay: val.perDay,
 }))
 
-export type BoardingInput = {
-  dogs: number
-  nights: number
-  addOns: BoardingAddOn[]
-}
-
 export type BoardingDogConfig = {
   id: string
   nights: number
   addOns: BoardingAddOn[]
 }
 
-export type BoardingResult = {
-  total: number
-  lineItems: LineItem[]
-  isExtendedStay: boolean
-  nightlyRate: number
-  includes: string[]
-}
-
-export function calculateBoarding(input: BoardingInput): BoardingResult {
-  const {dogs, nights, addOns} = input
-  const isExtendedStay = nights >= 10
-  const firstDogRate = isExtendedStay ? 50 : 55
-  const additionalDogRate = isExtendedStay ? 45 : 50
-
-  const firstDogTotal = firstDogRate * nights
-  const additionalTotal = Math.max(0, dogs - 1) * additionalDogRate * nights
-
-  const lineItems: LineItem[] = [
-    {label: `1st dog × ${nights} night${nights > 1 ? 's' : ''} @ $${firstDogRate}/night`, amount: firstDogTotal},
-  ]
-  if (dogs > 1) {
-    lineItems.push({
-      label: `${dogs - 1} additional dog${dogs > 2 ? 's' : ''} × ${nights} night${nights > 1 ? 's' : ''} @ $${additionalDogRate}/night`,
-      amount: additionalTotal,
-    })
-  }
-
-  let addOnTotal = 0
-  for (const addOn of addOns) {
-    const info = boardingAddOns[addOn]
-    const cost = info.perDay * nights * dogs
-    addOnTotal += cost
-    lineItems.push({
-      label: `${info.label} ($${info.perDay}/day × ${dogs} dog${dogs > 1 ? 's' : ''})`,
-      amount: cost,
-    })
-  }
-
-  return {
-    total: firstDogTotal + additionalTotal + addOnTotal,
-    lineItems,
-    isExtendedStay,
-    nightlyRate: firstDogRate,
-    includes: ['Indoor/outdoor play', 'Supervised group play', 'Feeding (your food)', 'Bedding provided'],
-  }
-}
+// Flat standard nightly rate; each additional dog gets the second-dog discount.
+const BOARDING_NIGHTLY_RATE = 59
+const SECOND_DOG_DISCOUNT = 0.15
 
 export type BoardingPerDogResult = {
   total: number
   lineItems: LineItem[]
-  isExtendedStay: boolean
   includes: string[]
 }
 
@@ -205,20 +113,16 @@ export function calculateBoardingPerDog(input: {dogs: BoardingDogConfig[]}): Boa
   const {dogs} = input
   const lineItems: LineItem[] = []
   let total = 0
-  let anyExtended = false
 
   for (let i = 0; i < dogs.length; i++) {
     const dog = dogs[i]
-    const isExtended = dog.nights >= 10
-    if (isExtended) anyExtended = true
-    const rate = i === 0
-      ? (isExtended ? 50 : 55)
-      : (isExtended ? 45 : 50)
+    const rate = i === 0 ? BOARDING_NIGHTLY_RATE : BOARDING_NIGHTLY_RATE * (1 - SECOND_DOG_DISCOUNT)
     const cost = rate * dog.nights
 
     const dogLabel = dogs.length > 1 ? `Dog ${i + 1}` : 'Your dog'
+    const discountNote = i === 0 ? '' : ' (15% off)'
     lineItems.push({
-      label: `${dogLabel} — ${dog.nights} night${dog.nights > 1 ? 's' : ''} @ $${rate}/night`,
+      label: `${dogLabel} — ${dog.nights} night${dog.nights > 1 ? 's' : ''} @ $${rate}/night${discountNote}`,
       amount: cost,
     })
     total += cost
@@ -237,7 +141,6 @@ export function calculateBoardingPerDog(input: {dogs: BoardingDogConfig[]}): Boa
   return {
     total,
     lineItems,
-    isExtendedStay: anyExtended,
     includes: ['Indoor/outdoor play', 'Supervised group play', 'Feeding (your food)', 'Bedding provided'],
   }
 }

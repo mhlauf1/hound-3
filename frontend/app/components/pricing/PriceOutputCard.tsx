@@ -22,10 +22,11 @@ type PriceOutputCardProps = {
 }
 
 function formatPrice(amount: number): string {
-  if (amount >= 1000) {
-    return amount.toLocaleString('en-US', {minimumFractionDigits: 0, maximumFractionDigits: 0})
-  }
-  return String(Math.round(amount))
+  const rounded = Math.round(amount * 100) / 100
+  return rounded.toLocaleString('en-US', {
+    minimumFractionDigits: Number.isInteger(rounded) ? 0 : 2,
+    maximumFractionDigits: 2,
+  })
 }
 
 export default function PriceOutputCard({

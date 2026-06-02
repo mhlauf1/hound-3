@@ -125,35 +125,41 @@ function DaycareDogCard({dog, index, total, onUpdate, onRemove}: DaycareDogCardP
       </div>
 
       <RadioGroup
-        label="Day Type"
-        options={[
-          {label: 'Full Day', value: 'full'},
-          {label: 'Half Day (4 hrs)', value: 'half'},
-        ]}
-        value={dog.dayType}
-        onChange={(v) => onUpdate({dayType: v as DayType})}
-      />
-
-      <RadioGroup
         label="Package"
         options={[
           {label: 'Single Days', value: 'single'},
-          {label: '5-Day Package', value: '5-day'},
           {label: '10-Day Package', value: '10-day'},
           {label: '20-Day Package', value: '20-day'},
+          {label: '30-Day Package', value: '30-day'},
         ]}
         value={dog.pkg}
-        onChange={(v) => onUpdate({pkg: v as DaycarePackage})}
+        onChange={(v) => {
+          const pkg = v as DaycarePackage
+          // Packages are full-day only.
+          onUpdate(pkg === 'single' ? {pkg} : {pkg, dayType: 'full'})
+        }}
       />
 
       {dog.pkg === 'single' && (
-        <NumberStepper
-          label="Number of Days"
-          value={dog.days}
-          min={1}
-          max={30}
-          onChange={(v) => onUpdate({days: v})}
-        />
+        <>
+          <RadioGroup
+            label="Day Type"
+            options={[
+              {label: 'Full Day', value: 'full'},
+              {label: 'Half Day (4 hrs)', value: 'half'},
+            ]}
+            value={dog.dayType}
+            onChange={(v) => onUpdate({dayType: v as DayType})}
+          />
+
+          <NumberStepper
+            label="Number of Days"
+            value={dog.days}
+            min={1}
+            max={30}
+            onChange={(v) => onUpdate({days: v})}
+          />
+        </>
       )}
     </div>
   )

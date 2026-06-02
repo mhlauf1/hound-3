@@ -91,7 +91,6 @@ export default function BoardingCalculator({ctaText, ctaLink, taxNote}: Boarding
         ctaLink={ctaLink}
         taxNote={taxNote}
         includes={result.includes}
-        badge={result.isExtendedStay ? 'Extended Stay' : null}
       />
     </div>
   )
@@ -107,8 +106,6 @@ type BoardingDogCardProps = {
 }
 
 function BoardingDogCard({dog, index, total, onUpdate, onRemove}: BoardingDogCardProps) {
-  const isExtended = dog.nights >= 10
-
   return (
     <div className="bg-forest-card border border-border-dark rounded-lg p-4 space-y-4">
       <div className="flex items-center justify-between">
@@ -132,7 +129,6 @@ function BoardingDogCard({dog, index, total, onUpdate, onRemove}: BoardingDogCar
         min={1}
         max={30}
         onChange={(v) => onUpdate({nights: v})}
-        badge={isExtended ? 'Extended stay rate!' : null}
       />
 
       <CheckboxGroup
