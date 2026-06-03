@@ -12,7 +12,7 @@ export default function Error({reset}: {error: Error & {digest?: string}; reset:
       <div className="flex gap-4">
         <button
           onClick={reset}
-          className="inline-flex items-center gap-2 rounded-[--radius-xl] bg-terracotta px-8 py-3 text-button font-medium text-white transition-colors hover:bg-terracotta-dark"
+          className="inline-flex items-center gap-2 rounded-[--radius-xl] bg-terracotta px-8 py-4 text-button font-medium text-white transition-colors hover:bg-terracotta-dark"
         >
           Try Again
         </button>
