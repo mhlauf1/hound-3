@@ -334,6 +334,13 @@ export const settings = defineType({
         }),
     }),
     defineField({
+      name: 'ctmScriptUrl',
+      title: 'CallTrackingMetrics Script URL',
+      type: 'string',
+      description:
+        'CallTrackingMetrics tracking script URL (e.g. //598466.tctm.co/t.js). Loaded on every page for dynamic number insertion.',
+    }),
+    defineField({
       name: 'googleSiteVerification',
       title: 'Google Site Verification',
       type: 'string',
