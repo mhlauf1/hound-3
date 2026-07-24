@@ -21,6 +21,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   if (allPages != null && allPages.data.length != 0) {
     for (const p of allPages.data) {
       if (p.noIndex) continue
+      // The homepage doc (slug "homepage") is already listed as the root URL
+      if (p.slug === 'homepage') continue
 
       const prefix = p._type === 'service' ? '/services' : ''
       sitemap.push({

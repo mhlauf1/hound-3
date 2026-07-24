@@ -8,6 +8,17 @@ const nextConfig: NextConfig = {
   images: {
     remotePatterns: [new URL('https://cdn.sanity.io/**')],
   },
+  async redirects() {
+    return [
+      {
+        // The homepage document lives at slug "homepage" but is served at "/" —
+        // redirect the duplicate route so search engines only see one homepage.
+        source: '/homepage',
+        destination: '/',
+        permanent: true,
+      },
+    ]
+  },
   transpilePackages: ['studio'],
 }
 

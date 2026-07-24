@@ -12,15 +12,13 @@ export async function generateMetadata(): Promise<Metadata> {
   })
 
   const seo = page?.seo
-  if (!seo) return {}
-
-  const ogImage = resolveOpenGraphImage(seo.ogImage)
+  const ogImage = resolveOpenGraphImage(seo?.ogImage)
 
   return {
-    ...(seo.metaTitle && {title: seo.metaTitle}),
-    ...(seo.metaDescription && {description: seo.metaDescription}),
+    ...(seo?.metaTitle && {title: seo.metaTitle}),
+    ...(seo?.metaDescription && {description: seo.metaDescription}),
     ...(ogImage && {openGraph: {images: [ogImage]}}),
-    ...(seo.noIndex && {robots: {index: false, follow: true}}),
+    ...(seo?.noIndex && {robots: {index: false, follow: true}}),
     alternates: {canonical: '/'},
   }
 }

@@ -29,10 +29,40 @@ import Header from '@/app/components/Header'
 import TrackingRouteEvents from '@/app/components/TrackingRouteEvents'
 import {sanityFetch, SanityLive} from '@/sanity/lib/live'
 import {settingsQuery, servicesNavQuery} from '@/sanity/lib/queries'
-import {resolveOpenGraphImage} from '@/sanity/lib/utils'
+import {resolveOpenGraphImage, urlForImage} from '@/sanity/lib/utils'
 import Script from 'next/script'
 import {GoogleTagManager} from '@next/third-parties/google'
 import {handleError} from '@/app/client-utils'
+
+const SITE_URL = 'https://houndaroundresort.com'
+
+// Expand short day codes ("Mo-Fr", "Sa") into schema.org day names for OpeningHoursSpecification
+const DAY_NAMES: Record<string, string> = {
+  Mo: 'Monday',
+  Tu: 'Tuesday',
+  We: 'Wednesday',
+  Th: 'Thursday',
+  Fr: 'Friday',
+  Sa: 'Saturday',
+  Su: 'Sunday',
+}
+
+function expandDays(days?: string): string[] | undefined {
+  if (!days) return undefined
+  const order = Object.keys(DAY_NAMES)
+  const out: string[] = []
+  for (const part of days.split(',').map((s) => s.trim())) {
+    const [start, end] = part.split(/[-–]/).map((s) => s.trim())
+    if (start && end && order.includes(start) && order.includes(end)) {
+      for (let i = order.indexOf(start); i <= order.indexOf(end); i++) {
+        out.push(DAY_NAMES[order[i]])
+      }
+    } else {
+      out.push(DAY_NAMES[part] || part)
+    }
+  }
+  return out
+}
 
 function buildLocalBusinessJsonLd(settings: any) {
   const lb = settings?.localBusiness
@@ -47,7 +77,9 @@ function buildLocalBusinessJsonLd(settings: any) {
   const jsonLd: Record<string, unknown> = {
     '@context': 'https://schema.org',
     '@type': lb.businessType || 'LocalBusiness',
+    '@id': `${SITE_URL}/#localbusiness`,
     name: lb.businessName,
+    url: SITE_URL,
     telephone: lb.phone,
     priceRange: lb.priceRange,
     ...(sameAs.length > 0 && {sameAs}),
@@ -76,18 +108,15 @@ function buildLocalBusinessJsonLd(settings: any) {
     jsonLd.openingHoursSpecification = lb.businessHours.map(
       (h: {days?: string; open?: string; close?: string}) => ({
         '@type': 'OpeningHoursSpecification',
-        dayOfWeek: h.days,
+        dayOfWeek: expandDays(h.days),
         opens: h.open,
         closes: h.close,
       }),
     )
   }
 
-  if (settings?.ogImage?.asset?._ref) {
-    const logoUrl = settings?.logo?.asset?._ref
-    if (logoUrl) {
-      jsonLd.image = logoUrl
-    }
+  if (settings?.logo?.asset) {
+    jsonLd.image = urlForImage(settings.logo).width(600).url()
   }
 
   return jsonLd
@@ -102,11 +131,11 @@ export async function generateMetadata(): Promise<Metadata> {
   const description = settings?.description
 
   const ogImage = resolveOpenGraphImage(settings?.ogImage)
-  let metadataBase: URL | undefined = undefined
+  let metadataBase = new URL(SITE_URL)
   try {
     metadataBase = settings?.ogImage?.metadataBase
       ? new URL(settings.ogImage.metadataBase)
-      : undefined
+      : new URL(SITE_URL)
   } catch {
     // ignore
   }
@@ -182,9 +211,9 @@ export default async function RootLayout({children}: {children: React.ReactNode}
                 '@context': 'https://schema.org',
                 '@type': 'Organization',
                 name: settings.title,
-                url: settings?.ogImage?.metadataBase || undefined,
-                ...(settings?.logo?.asset?._ref && {
-                  logo: settings.logo.asset._ref,
+                url: SITE_URL,
+                ...(settings?.logo?.asset && {
+                  logo: urlForImage(settings.logo).width(600).url(),
                 }),
                 sameAs: [
                   settings?.socialLinks?.facebook,
@@ -203,7 +232,7 @@ export default async function RootLayout({children}: {children: React.ReactNode}
                 '@context': 'https://schema.org',
                 '@type': 'WebSite',
                 name: settings.title,
-                url: settings?.ogImage?.metadataBase || undefined,
+                url: SITE_URL,
               }),
             }}
           />
