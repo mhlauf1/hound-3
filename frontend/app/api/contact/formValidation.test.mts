@@ -33,27 +33,31 @@ test('accepts the published Hound Around form contract', () => {
   assert.equal(contactFormSchema.safeParse(validPayload).success, true)
 })
 
-test('requires service and accepts all published service choices', () => {
-  assert.equal(contactFormSchema.safeParse({...validPayload, service: undefined}).success, false)
-  for (const service of ['Daycare', 'Boarding', 'Grooming', 'General Inquiry']) {
+test('accepts any CMS-defined service value, including none', () => {
+  assert.equal(contactFormSchema.safeParse({...validPayload, service: undefined}).success, true)
+  for (const service of ['Daycare', 'Boarding', 'Grooming', 'General Inquiry', 'Training']) {
     assert.equal(contactFormSchema.safeParse({...validPayload, service}).success, true)
   }
 })
 
-test('rejects unknown fields and recipient manipulation', () => {
+test('accepts editor-added string fields but rejects non-string values', () => {
   assert.equal(
-    contactFormSchema.safeParse({...validPayload, _recipientEmail: 'attacker@example.com'}).success,
+    contactFormSchema.safeParse({...validPayload, preferredDate: 'Next Tuesday'}).success,
+    true,
+  )
+  assert.equal(
+    contactFormSchema.safeParse({...validPayload, preferredDate: {nested: 'object'}}).success,
     false,
   )
 })
 
-test('rejects invalid service choices and oversized messages', () => {
+test('rejects oversized messages and oversized extra fields', () => {
   assert.equal(
-    contactFormSchema.safeParse({...validPayload, service: 'Not a real service'}).success,
+    contactFormSchema.safeParse({...validPayload, message: 'x'.repeat(5001)}).success,
     false,
   )
   assert.equal(
-    contactFormSchema.safeParse({...validPayload, message: 'x'.repeat(5001)}).success,
+    contactFormSchema.safeParse({...validPayload, extraField: 'x'.repeat(5001)}).success,
     false,
   )
 })

@@ -29,18 +29,6 @@ declare global {
 }
 
 const RECAPTCHA_SITE_KEY = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY
-const SUPPORTED_CONTACT_FIELD_NAMES = new Set([
-  'name',
-  'email',
-  'phone',
-  'service',
-  'petName',
-  'message',
-])
-
-function isSupportedContactFieldName(fieldName: string): boolean {
-  return SUPPORTED_CONTACT_FIELD_NAMES.has(fieldName)
-}
 
 async function getRecaptchaToken(): Promise<string | null> {
   if (!RECAPTCHA_SITE_KEY || !window.grecaptcha) return null
@@ -107,12 +95,7 @@ export default function ContactForm({block}: ContactFormProps) {
 
     try {
       const recaptchaToken = await getRecaptchaToken()
-      const payload = Object.fromEntries(
-        Object.entries(formData).filter(
-          ([fieldName]) =>
-            fieldName === 'companyWebsite' || isSupportedContactFieldName(fieldName),
-        ),
-      )
+      const payload = formData
       const res = await fetch('/api/contact', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
@@ -180,7 +163,7 @@ export default function ContactForm({block}: ContactFormProps) {
                   const fieldName = stegaClean(field.fieldName) || ''
                   const fieldType = stegaClean(field.type) || 'text'
 
-                  if (!isSupportedContactFieldName(fieldName)) return null
+                  if (!fieldName) return null
 
                   return (
                     <div key={field._key}>
