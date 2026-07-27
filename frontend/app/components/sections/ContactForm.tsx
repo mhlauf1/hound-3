@@ -163,7 +163,7 @@ export default function ContactForm({block}: ContactFormProps) {
           {/* Form */}
           <FadeIn immediate>
             <form onSubmit={handleSubmit} className="space-y-5">
-              <div className="absolute left-[-9999px]" aria-hidden="true">
+              <div className="sr-only" aria-hidden="true">
                 <label htmlFor="company-website">Company website</label>
                 <input
                   id="company-website"
