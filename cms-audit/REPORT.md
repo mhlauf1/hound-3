@@ -1,5 +1,7 @@
 # CMS Audit — Hound Around Resort (`hound-3`)
 
+> **SNAPSHOT — captured July 2026.** This audit reflects the codebase and dataset at the time it was written and is NOT kept up to date. Verify any finding against the current code before acting on it.
+
 **Audited:** 2026-07-10 · **Model:** claude-fable-5 · **Companion file:** `cms-audit/schema-inventory.json`
 
 ## Executive Summary

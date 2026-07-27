@@ -29,13 +29,15 @@ export const contactFormSchema = z
       )
       .optional()
       .default(''),
-    service: z.enum(['Daycare', 'Boarding', 'Grooming', 'General Inquiry']),
+    // Service options and any additional fields are defined by editors in the
+    // CMS contactForm block — validate shape and length only, never a fixed list.
+    service: z.string().trim().max(200).optional().default(''),
     petName: z.string().trim().max(100).optional().default(''),
     message: z.string().trim().min(1).max(5000),
     companyWebsite: z.string().max(200).optional().default(''),
     recaptchaToken: z.string().max(4096).optional(),
   })
-  .strict()
+  .catchall(z.string().max(5000))
 
 type ReadContactBodyResult =
   | {status: 'valid'; value: unknown}
