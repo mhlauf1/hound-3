@@ -1276,6 +1276,7 @@ export type Settings = {
   ga4MeasurementId?: string
   gtmContainerId?: string
   ctmScriptUrl?: string
+  embedReachScriptUrl?: string
   googleSiteVerification?: string
   localBusiness?: {
     businessName?: string
@@ -1919,6 +1920,7 @@ export type SettingsQueryResult = {
   ga4MeasurementId: string | null
   gtmContainerId: string | null
   ctmScriptUrl?: string
+  embedReachScriptUrl?: string
   googleSiteVerification: string | null
   localBusiness: {
     businessName?: string

@@ -341,6 +341,14 @@ export const settings = defineType({
         'CallTrackingMetrics tracking script URL (e.g. //598466.tctm.co/t.js). Loaded on every page for dynamic number insertion.',
     }),
     defineField({
+      name: 'embedReachScriptUrl',
+      title: 'Goose Tracking Pixel (EmbedReach) Script URL',
+      type: 'url',
+      description:
+        'Goose/EmbedReach tracking pixel script src (e.g. https://public.embedreach.com/scripts/.../analytics.js). Loaded on every page to attribute bookings to ads.',
+      validation: (Rule) => Rule.uri({scheme: ['https']}),
+    }),
+    defineField({
       name: 'googleSiteVerification',
       title: 'Google Site Verification',
       type: 'string',
