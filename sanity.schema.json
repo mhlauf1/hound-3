@@ -8667,6 +8667,13 @@
         },
         "optional": true
       },
+      "embedReachScriptUrl": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
+      },
       "googleSiteVerification": {
         "type": "objectAttribute",
         "value": {
